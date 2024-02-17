@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="ADD INITAL PROJECT">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +66,7 @@
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
     "Application.SetMovTest (1).executor": "Run",
-    "Application.SetMovTest.executor": "Debug",
+    "Application.SetMovTest.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JPA.DatabaseSchemaImportDialog": "2d44b0dd-5ea6-46fc-91e1-5308f5b5139d",
     "Repository.Attach.Annotations": "false",
@@ -64,9 +74,9 @@
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "tick-31-39",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/marcperwak/IdeaProjects/prog3-Filmverleih/src/main/java",
+    "last_opened_file_path": "/Users/marcperwak/IdeaProjects/prog3-Filmverleih/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,6 +91,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -93,8 +105,11 @@
       <recent name="com.example.javafxtutorial.entity" />
       <recent name="" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.filmverleih.filmverleih" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.SetMovTest">
     <configuration name="SetMovTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.javafxtutorial.SetMovTest" />
       <module name="JavaFX-Tutorial" />
@@ -108,8 +123,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SetMovTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.SetMovTest" />
+      <module name="JavaFX-Tutorial" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SetMovTest" />
         <item itemvalue="Application.SetMovTest (1)" />
       </list>
     </recent_temporary>
@@ -136,7 +165,7 @@
       <workItem from="1707907081015" duration="17447000" />
       <workItem from="1708089956426" duration="1125000" />
       <workItem from="1708091097824" duration="24353000" />
-      <workItem from="1708183718769" duration="2810000" />
+      <workItem from="1708183718769" duration="3969000" />
     </task>
     <task id="LOCAL-00001" summary="DEL TEST PROJECT FOR AKTUEL PROJEKT">
       <option name="closed" value="true" />
@@ -146,7 +175,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708185792601</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ADD INITAL PROJECT">
+      <option name="closed" value="true" />
+      <created>1708186569177</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708186569177</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +191,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
-    <option name="LAST_COMMIT_MESSAGE" value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
+    <MESSAGE value="ADD INITAL PROJECT" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD INITAL PROJECT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
