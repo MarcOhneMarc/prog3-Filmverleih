@@ -6,6 +6,13 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+/**
+ * controller class for the settings frame of the application
+ * where movies can be added by typing in all
+ * necessary details or deleted by giving the movieID
+ *
+ * @author Hannes
+ */
 public class SettingsController {
 
     @FXML
@@ -78,13 +85,21 @@ public class SettingsController {
     boolean blueRay;
 
 
-
+    /**
+     * test method to link the add button to the controller
+     * which prints a small verification message in the console
+     * that the add button has been clicked
+     */
     @FXML
-    public void addMovie(ActionEvent event) {
+    public void addMovie() {
         System.out.println("console test: add movie button was clicked");
     }
 
-
+    /**
+     * test method to link the delete button to the controller
+     * which prints a small verification message in the console
+     * that the delete button has been clicked
+     */
     @FXML
     public void deleteMovie() {
         System.out.println("console test: delete movie button was clicked");
