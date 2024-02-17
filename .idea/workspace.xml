@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="DEL TEST PROJECT FOR AKTUEL PROJEKT">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Navbar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/profil.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/testcover/beemovie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/hello-view.fxml" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,9 +82,10 @@
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "tick-28-40",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/marcperwak/IdeaProjects/prog3-Filmverleih/src/main/java",
+    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git/src/main/resources/com/filmverleih/filmverleih",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,26 +100,33 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
+      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.filmverleih.filmverleih" />
       <recent name="com.example.javafxtutorial" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="com.example.javafxtutorial.entity" />
       <recent name="" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.filmverleih.filmverleih" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="SetMovTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.javafxtutorial.SetMovTest" />
-      <module name="JavaFX-Tutorial" />
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
+      <module name="Filmverleih" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.javafxtutorial.*" />
+          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -110,7 +136,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SetMovTest (1)" />
+        <item itemvalue="Application.MainApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -151,6 +177,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
