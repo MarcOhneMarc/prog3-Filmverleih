@@ -7,8 +7,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
+/**
+ * Main Application Class to start the program
+ * Extends the JavaFX Application class
+ * @author Hannes
+ */
 public class HelloApplication extends Application {
+
+    /**
+     * start method which is called by the launch method out of the main method
+     * creating and setting a scene and stage title
+     * linking the application icon, css stylesheet, fxml scene
+     * @param stage primary application stage
+     */
     @Override
     public void start(Stage stage) {
 
@@ -26,11 +37,7 @@ public class HelloApplication extends Application {
             stage.setTitle("Quantum-Vortex");
             stage.setScene(scene);
             stage.setMaximized(true);
-            //stage.setResizable(false);
             stage.show();
-
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +46,11 @@ public class HelloApplication extends Application {
     }
 
 
-
+    /**
+     * main method of the application which launches the JavaFX application
+     * using the launch() method
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         launch();
     }
