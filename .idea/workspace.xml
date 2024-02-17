@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="FEAT-added SettingsController settings-view.fxml application.css logo.png (everything from &quot;old project&quot;)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/application.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/application.css" afterDir="false" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="FEAT-added comments to HelloApplication class">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +127,7 @@
       <workItem from="1708188162691" duration="898000" />
       <workItem from="1708189101034" duration="405000" />
       <workItem from="1708200747201" duration="7000" />
-      <workItem from="1708208896849" duration="478000" />
+      <workItem from="1708208896849" duration="709000" />
     </task>
     <task id="LOCAL-00001" summary="DEL TEST PROJECT FOR AKTUEL PROJEKT">
       <option name="closed" value="true" />
@@ -147,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708188988625</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="FEAT-added comments to HelloApplication class">
+      <option name="closed" value="true" />
+      <created>1708209495900</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708209495900</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +173,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
     <MESSAGE value="FEAT-added SettingsController settings-view.fxml application.css logo.png (everything from &quot;old project&quot;)" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-added SettingsController settings-view.fxml application.css logo.png (everything from &quot;old project&quot;)" />
+    <MESSAGE value="FEAT-added comments to HelloApplication class" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-added comments to HelloApplication class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
