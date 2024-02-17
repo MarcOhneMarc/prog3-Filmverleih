@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="BUG-Hello World Classen entfernt">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Hello.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Hello.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -64,8 +69,9 @@
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git",
+    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git/src/main/java/com/filmverleih/filmverleih",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -92,26 +98,6 @@
       <recent name="com.example.javafxtutorial.entity" />
       <recent name="" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="SetMovTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.javafxtutorial.SetMovTest" />
-      <module name="JavaFX-Tutorial" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.javafxtutorial.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.SetMovTest (1)" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -145,15 +131,35 @@
       <option name="project" value="LOCAL" />
       <updated>1708185792601</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="BUG-Hello World Classen entfernt">
+      <option name="closed" value="true" />
+      <created>1708188977102</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708188977102</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
-    <option name="LAST_COMMIT_MESSAGE" value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
+    <MESSAGE value="BUG-Hello World Classen entfernt" />
+    <option name="LAST_COMMIT_MESSAGE" value="BUG-Hello World Classen entfernt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
