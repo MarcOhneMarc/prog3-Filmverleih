@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane prefHeight="90.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.NavbarController">
    <right>
       <HBox id="header" alignment="CENTER" prefHeight="90.0" prefWidth="352.0" spacing="20.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
@@ -33,12 +34,12 @@
    <center>
       <HBox id="header" alignment="CENTER_LEFT" prefHeight="90.0" spacing="20.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToBibliothek" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Bibliothek" textAlignment="CENTER">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToLibrary" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Bibliothek" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToVerleih" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Verleih" textAlignment="CENTER">
+            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToRental" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Verleih" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
