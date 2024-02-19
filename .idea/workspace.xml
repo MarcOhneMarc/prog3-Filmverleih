@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="FEAT-added comments to HelloApplication class">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" afterDir="false" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="FEAT-added comments to SettingsController class">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +15,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -68,6 +69,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Hannes/git/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
@@ -92,8 +95,14 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.javafxtutorial" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.filmverleih.filmverleih" />
     </key>
     <key name="ImportMappingsDialog.RecentPackages">
       <recent name="com.example.javafxtutorial.entity" />
@@ -127,7 +136,8 @@
       <workItem from="1708188162691" duration="898000" />
       <workItem from="1708189101034" duration="405000" />
       <workItem from="1708200747201" duration="7000" />
-      <workItem from="1708208896849" duration="709000" />
+      <workItem from="1708208896849" duration="1453000" />
+      <workItem from="1708342229764" duration="629000" />
     </task>
     <task id="LOCAL-00001" summary="DEL TEST PROJECT FOR AKTUEL PROJEKT">
       <option name="closed" value="true" />
@@ -153,7 +163,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708209495900</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="FEAT-added comments to HelloController class">
+      <option name="closed" value="true" />
+      <created>1708209637893</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708209637893</updated>
+    </task>
+    <task id="LOCAL-00005" summary="FEAT-added comments to SettingsController class">
+      <option name="closed" value="true" />
+      <created>1708209891958</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708209891958</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +200,9 @@
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
     <MESSAGE value="FEAT-added SettingsController settings-view.fxml application.css logo.png (everything from &quot;old project&quot;)" />
     <MESSAGE value="FEAT-added comments to HelloApplication class" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-added comments to HelloApplication class" />
+    <MESSAGE value="FEAT-added comments to HelloController class" />
+    <MESSAGE value="FEAT-added comments to SettingsController class" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-added comments to SettingsController class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

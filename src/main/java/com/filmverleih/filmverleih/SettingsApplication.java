@@ -8,11 +8,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * Main Application Class to start the program
+ * SettingsApplication Class to start the program
  * Extends the JavaFX Application class
  * @author Hannes
  */
-public class HelloApplication extends Application {
+public class SettingsApplication extends Application {
 
     /**
      * start method which is called by the launch method out of the main method
@@ -31,7 +31,7 @@ public class HelloApplication extends Application {
             Image icon = new Image(getClass().getResourceAsStream("logo.png"));
             stage.getIcons().add(icon);
 
-            String css = this.getClass().getResource("application.css").toExternalForm();
+            String css = this.getClass().getResource("stylesheet.css").toExternalForm();
             scene.getStylesheets().add(css);
 
             stage.setTitle("Quantum-Vortex");
