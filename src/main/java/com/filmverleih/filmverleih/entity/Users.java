@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Entitiy class for Users
+ */
 @Entity
 @Table(name = "users", schema = "public", catalog = "filmverleih")
 public class Users implements Serializable {
@@ -54,6 +57,12 @@ public class Users implements Serializable {
         this.isadmin = isadmin;
     }
 
+    /**
+     * Compares this instance with the specified object and indicates if they are equal.
+     *
+     * @param o Object to be compared for equality
+     * @return true if the specified object is equal to this object; false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,8 +71,8 @@ public class Users implements Serializable {
         return userid == users.userid && Objects.equals(name, users.name) && Objects.equals(password, users.password) && Objects.equals(isadmin, users.isadmin);
     }
 
-    @Override
+/*    @Override
     public int hashCode() {
         return Objects.hash(userid, name, password, isadmin);
-    }
+    }*/
 }

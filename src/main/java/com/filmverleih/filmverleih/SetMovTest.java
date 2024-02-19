@@ -10,6 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+/**
+ *  SetMovTest
+ *  This class is used to test the database Curd Operations with the entity Movies
+ *  19.02.2024
+ *  Copyright by Torvalds
+ */
 public class SetMovTest {
 
     public static void main(String[] args) {

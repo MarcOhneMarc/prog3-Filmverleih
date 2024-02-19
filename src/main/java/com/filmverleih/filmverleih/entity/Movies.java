@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+
+/**
+ *  Entitiy class for Movies
+ */
 @Entity
 public class Movies {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -162,6 +166,12 @@ public class Movies {
         this.fsk = fsk;
     }
 
+    /**
+     * Checks if this Movies object is equal to another object.
+     *
+     * @param  o    the object to compare to
+     * @return      true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -187,24 +197,10 @@ public class Movies {
         return true;
     }
 
-    @Override
-    public int hashCode() {
-        int result = movieid;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + year;
-        result = 31 * result + (genre != null ? genre.hashCode() : 0);
-        result = 31 * result + length;
-        result = 31 * result + (rating != null ? rating.hashCode() : 0);
-        result = 31 * result + count;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (cover != null ? cover.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
-        result = 31 * result + (directors != null ? directors.hashCode() : 0);
-        result = 31 * result + (studio != null ? studio.hashCode() : 0);
-        result = 31 * result + (actors != null ? actors.hashCode() : 0);
-        result = 31 * result + fsk;
-        return result;
-    }
+    /**
+     * Classic toString Method to return the Movies object.
+     * @return String with all the values
+     */
     public String toSting() {
         return "Movie { " +
                 "movieid=" + movieid +
@@ -224,4 +220,22 @@ public class Movies {
                 '}';
     }
 
+/*    @Override
+    public int hashCode() {
+        int result = movieid;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + year;
+        result = 31 * result + (genre != null ? genre.hashCode() : 0);
+        result = 31 * result + length;
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + count;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (cover != null ? cover.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        result = 31 * result + (directors != null ? directors.hashCode() : 0);
+        result = 31 * result + (studio != null ? studio.hashCode() : 0);
+        result = 31 * result + (actors != null ? actors.hashCode() : 0);
+        result = 31 * result + fsk;
+        return result;
+    }*/
 }

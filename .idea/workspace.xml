@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="ADD INITAL PROJECT">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +71,7 @@
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "tick-31-39",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/marcperwak/IdeaProjects/prog3-Filmverleih/src/main/resources",
@@ -165,7 +163,8 @@
       <workItem from="1707907081015" duration="17447000" />
       <workItem from="1708089956426" duration="1125000" />
       <workItem from="1708091097824" duration="24353000" />
-      <workItem from="1708183718769" duration="3969000" />
+      <workItem from="1708183718769" duration="5471000" />
+      <workItem from="1708334395594" duration="1619000" />
     </task>
     <task id="LOCAL-00001" summary="DEL TEST PROJECT FOR AKTUEL PROJEKT">
       <option name="closed" value="true" />
