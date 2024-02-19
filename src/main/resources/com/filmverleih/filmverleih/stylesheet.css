@@ -1,0 +1,74 @@
+
+
+#btnHello {
+    -fx-background-color: #fff476;
+}
+
+#hbx_navBar {
+    -fx-background-color: #5C5C5C;
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+#txf_searchBar {
+    -fx-background-radius: 12;
+    -fx-font-size: 32;
+}
+
+.anp_class_settingTabs {
+    -fx-background-color: #393939;
+}
+
+.btn_class_navBarBtns {
+    -fx-background-color: #FFFF8D;
+    -fx-background-radius: 12;
+    -fx-font-size: 32;
+
+
+
+
+    /*
+    //dont know how to make the border fit the button
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+     */
+
+}
+
+#btn_settings {
+    -fx-border-radius: 50;
+}
+
+.lbl_class_SettingsLabel {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 32;
+}
+
+#vbx_movieParamGrid {
+    -fx-background-color: #393939;
+
+}
+
+#btn_addMovie {
+    -fx-background-color: #518E21;
+
+}
+
+#btn_deleteMovie {
+    -fx-background-color: #FF4040;
+
+}
+
+#hbx_dvdOrBlueRayCheckBoxes {
+    -fx-spacing: 15;
+}
+
+#grp_movieParamSelect {
+
+}
+
+
+
+
