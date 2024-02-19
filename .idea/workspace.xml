@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="BUG-Hello World Classen entfernt">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Hello.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Hello.fxml" afterDir="false" />
+    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="ADD INITAL PROJECT">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Movies.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Users.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +64,7 @@
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
     "Application.SetMovTest (1).executor": "Run",
-    "Application.SetMovTest.executor": "Debug",
+    "Application.SetMovTest.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JPA.DatabaseSchemaImportDialog": "2d44b0dd-5ea6-46fc-91e1-5308f5b5139d",
     "Repository.Attach.Annotations": "false",
@@ -69,9 +72,10 @@
     "Repository.Attach.Sources": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "tick-31-39",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git/src/main/java/com/filmverleih/filmverleih",
+    "last_opened_file_path": "/Users/marcperwak/IdeaProjects/prog3-Filmverleih/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,6 +90,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih" />
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -98,6 +104,43 @@
       <recent name="com.example.javafxtutorial.entity" />
       <recent name="" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.filmverleih.filmverleih" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.SetMovTest">
+    <configuration name="SetMovTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.javafxtutorial.SetMovTest" />
+      <module name="JavaFX-Tutorial" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.javafxtutorial.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SetMovTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.SetMovTest" />
+      <module name="JavaFX-Tutorial" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SetMovTest" />
+        <item itemvalue="Application.SetMovTest (1)" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -121,7 +164,8 @@
       <workItem from="1707907081015" duration="17447000" />
       <workItem from="1708089956426" duration="1125000" />
       <workItem from="1708091097824" duration="24353000" />
-      <workItem from="1708183718769" duration="2810000" />
+      <workItem from="1708183718769" duration="5471000" />
+      <workItem from="1708334395594" duration="1619000" />
     </task>
     <task id="LOCAL-00001" summary="DEL TEST PROJECT FOR AKTUEL PROJEKT">
       <option name="closed" value="true" />
@@ -131,13 +175,13 @@
       <option name="project" value="LOCAL" />
       <updated>1708185792601</updated>
     </task>
-    <task id="LOCAL-00002" summary="BUG-Hello World Classen entfernt">
+    <task id="LOCAL-00002" summary="ADD INITAL PROJECT">
       <option name="closed" value="true" />
-      <created>1708188977102</created>
+      <created>1708186569177</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1708188977102</updated>
+      <updated>1708186569177</updated>
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
@@ -158,8 +202,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DEL TEST PROJECT FOR AKTUEL PROJEKT" />
-    <MESSAGE value="BUG-Hello World Classen entfernt" />
-    <option name="LAST_COMMIT_MESSAGE" value="BUG-Hello World Classen entfernt" />
+    <MESSAGE value="ADD INITAL PROJECT" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADD INITAL PROJECT" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
