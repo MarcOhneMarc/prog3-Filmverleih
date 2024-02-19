@@ -1,0 +1,112 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"b023063d-c4fd-4704-82e5-712063768009\" name=\"Changes\" comment=\"FEAT-Filme anzeigen (Library.fxml)&#10;FEAT-Filme responsiv anzeigen (LibraryController.java)&#10;FEAT-Navbar anzeigen (Navbar.fxml)&#10;FEAT-Über Navbar navigieren (MainApplication.java NavbarController.java)\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;MarcOhneMarc&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"241ab000-fc50-4030-bd15-c6a753a5ae37\" />\r\n        <option name=\"url\" value=\"https://github.com/MarcOhneMarc/prog3-Filmverleih.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2blCPxIWtINrc6hrLrYrMG63w8m\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.HelloApplication.executor\": \"Run\",\r\n    \"Application.SetMovTest (1).executor\": \"Run\",\r\n    \"Application.SetMovTest.executor\": \"Debug\",\r\n    \"Downloaded.Files.Path.Enabled\": \"false\",\r\n    \"JPA.DatabaseSchemaImportDialog\": \"2d44b0dd-5ea6-46fc-91e1-5308f5b5139d\",\r\n    \"Repository.Attach.Annotations\": \"false\",\r\n    \"Repository.Attach.JavaDocs\": \"true\",\r\n    \"Repository.Attach.Sources\": \"true\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"tick-28-40\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/Jonas/Desktop/Git/src/main/resources/com/filmverleih/filmverleih\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.4862069\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Jonas\\Desktop\\Git\\src\\main\\resources\\com\\filmverleih\\filmverleih\" />\r\n      <recent name=\"C:\\Users\\Jonas\\Desktop\\Git\\src\\main\\resources\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/java\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Jonas\\Desktop\\Git\\src\\main\\resources\\com\\filmverleih\\filmverleih\" />\r\n      <recent name=\"$PROJECT_DIR$/src/main/resources\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"com.filmverleih.filmverleih\" />\r\n      <recent name=\"com.example.javafxtutorial\" />\r\n    </key>\r\n    <key name=\"ImportMappingsDialog.RecentPackages\">\r\n      <recent name=\"com.example.javafxtutorial.entity\" />\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.filmverleih.filmverleih\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"MainApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.filmverleih.filmverleih.MainApplication\" />\r\n      <module name=\"Filmverleih\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.filmverleih.filmverleih.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.MainApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"b023063d-c4fd-4704-82e5-712063768009\" name=\"Changes\" comment=\"\" />\r\n      <created>1706780259149</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1706780259149</updated>\r\n      <workItem from=\"1706780260843\" duration=\"2088000\" />\r\n      <workItem from=\"1707384600386\" duration=\"639000\" />\r\n      <workItem from=\"1707385245838\" duration=\"651000\" />\r\n      <workItem from=\"1707750809585\" duration=\"4453000\" />\r\n      <workItem from=\"1707907081015\" duration=\"17447000\" />\r\n      <workItem from=\"1708089956426\" duration=\"1125000\" />\r\n      <workItem from=\"1708091097824\" duration=\"24353000\" />\r\n      <workItem from=\"1708183718769\" duration=\"2810000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"DEL TEST PROJECT FOR AKTUEL PROJEKT\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1708185792601</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1708185792601</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"FEAT-Filme anzeigen (Library.fxml)&#10;FEAT-Filme responsiv anzeigen (LibraryController.java)&#10;FEAT-Navbar anzeigen (Navbar.fxml)&#10;FEAT-Über Navbar navigieren (MainApplication.java NavbarController.java)\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1708188607558</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1708188607558</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"DEL TEST PROJECT FOR AKTUEL PROJEKT\" />\r\n    <MESSAGE value=\"FEAT-Filme anzeigen (Library.fxml)&#10;FEAT-Filme responsiv anzeigen (LibraryController.java)&#10;FEAT-Navbar anzeigen (Navbar.fxml)&#10;FEAT-Über Navbar navigieren (MainApplication.java NavbarController.java)\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"FEAT-Filme anzeigen (Library.fxml)&#10;FEAT-Filme responsiv anzeigen (LibraryController.java)&#10;FEAT-Navbar anzeigen (Navbar.fxml)&#10;FEAT-Über Navbar navigieren (MainApplication.java NavbarController.java)\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.IllegalArgumentException\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"2\" />\r\n        </breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,10 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="FEAT-Filme anzeigen (Library.fxml)&#10;FEAT-Filme responsiv anzeigen (LibraryController.java)&#10;FEAT-Navbar anzeigen (Navbar.fxml)&#10;FEAT-Über Navbar navigieren (MainApplication.java NavbarController.java)">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" afterDir="false" />
++    <list default="true" id="b023063d-c4fd-4704-82e5-712063768009" name="Changes" comment="BUG-Hello Klasse und fxml damit man die Ordner sieht">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -42,6 +41,9 @@
+         <option name="url" value="https://github.com/MarcOhneMarc/prog3-Filmverleih.git" />
+       </UrlAndAccount>
+     </option>
++  </component>
++  <component name="HighlightingSettingsPerFile">
++    <setting file="jar://$USER_HOME$/.jdks/openjdk-21.0.2/lib/src.zip!/java.base/java/lang/Integer.java" root0="SKIP_INSPECTION" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -56,34 +58,34 @@
+     <option name="showLibraryContents" value="true" />
+     <option name="showVisibilityIcons" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.HelloApplication.executor": "Run",
+-    "Application.SetMovTest (1).executor": "Run",
+-    "Application.SetMovTest.executor": "Debug",
+-    "Downloaded.Files.Path.Enabled": "false",
+-    "JPA.DatabaseSchemaImportDialog": "2d44b0dd-5ea6-46fc-91e1-5308f5b5139d",
+-    "Repository.Attach.Annotations": "false",
+-    "Repository.Attach.JavaDocs": "true",
+-    "Repository.Attach.Sources": "true",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "tick-28-40",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git/src/main/resources/com/filmverleih/filmverleih",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Libraries",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.4862069",
+-    "settings.editor.selected.configurable": "preferences.pluginManager",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
++    &quot;Application.SetMovTest (1).executor&quot;: &quot;Run&quot;,
++    &quot;Application.SetMovTest.executor&quot;: &quot;Debug&quot;,
++    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
++    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;2d44b0dd-5ea6-46fc-91e1-5308f5b5139d&quot;,
++    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
++    &quot;Repository.Attach.JavaDocs&quot;: &quot;true&quot;,
++    &quot;Repository.Attach.Sources&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;tick-28-40&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/Jonas/Desktop/JavaFX-Project/JavaFX-Project&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.4862069&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
+Index: src/main/java/com/filmverleih/filmverleih/MainApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.filmverleih.filmverleih;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.layout.BorderPane;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class MainApplication extends Application {\r\n\r\n    public static BorderPane borderPane;\r\n    public static FXMLLoader fxmlLoader;\r\n\r\n    @Override\r\n    public void start(Stage stage) throws IOException {\r\n\r\n        borderPane = new BorderPane();\r\n\r\n        Parent fxmlContent = loadFxml(\"Navbar.fxml\");\r\n        borderPane.setTop(fxmlContent);\r\n\r\n        loadCenter(\"Libary.fxml\");\r\n        loadRightSidebar(\"Filter.fxml\");\r\n\r\n        Scene scene = new Scene(borderPane);\r\n        stage.setScene(scene);\r\n        stage.setMaximized(true);\r\n        stage.show();\r\n    }\r\n\r\n    public static Parent loadFxml(String fxml) throws IOException {\r\n        fxmlLoader = new FXMLLoader(MainApplication.class.getResource(fxml));\r\n        return fxmlLoader.load();\r\n    }\r\n\r\n    public static void loadCenter(String fxml) throws IOException {\r\n        Parent fxmlContent = loadFxml(fxml);\r\n        borderPane.setCenter(fxmlContent);\r\n    }\r\n\r\n    public static void loadRightSidebar(String fxml) throws IOException {\r\n        if (fxml.equals(\"\")) {\r\n            borderPane.setRight(null);\r\n        }\r\n        Parent fxmlContent = loadFxml(fxml);\r\n        borderPane.setRight(fxmlContent);\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        launch();\r\n    }\r\n}
+===================================================================
+diff --git a/src/main/java/com/filmverleih/filmverleih/MainApplication.java b/src/main/java/com/filmverleih/filmverleih/MainApplication.java
+--- a/src/main/java/com/filmverleih/filmverleih/MainApplication.java	
++++ b/src/main/java/com/filmverleih/filmverleih/MainApplication.java	
+@@ -22,7 +22,7 @@
+         Parent fxmlContent = loadFxml("Navbar.fxml");
+         borderPane.setTop(fxmlContent);
+ 
+-        loadCenter("Libary.fxml");
++        loadCenter("Library.fxml");
+         loadRightSidebar("Filter.fxml");
+ 
+         Scene scene = new Scene(borderPane);

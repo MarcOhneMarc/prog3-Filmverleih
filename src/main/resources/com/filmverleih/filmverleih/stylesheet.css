@@ -1,4 +1,30 @@
+#mainWindow {
+    -fx-background-color: #191919;
 
+}
+
+#header {
+    -fx-background-color: #5C5C5C;
+}
+
+#filter {
+    -fx-background-color: #393939;
+}
+
+.headerButton {
+    -fx-background-color: #FFFF3D;
+    -fx-background-radius: 12px;
+    -fx-text-fill: #000;
+    -fx-font-size: 28;
+    -fx-font-family: inter;
+    -fx-font-weight: regular;
+
+}
+
+#headerSearchbar {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+}
 
 #btnHello {
     -fx-background-color: #fff476;
@@ -24,10 +50,8 @@
     -fx-background-radius: 12;
     -fx-font-size: 32;
 
-
-
-
     /*
+
     //dont know how to make the border fit the button
     -fx-border-style: solid;
     -fx-border-color: black;
@@ -58,17 +82,13 @@
 
 #btn_deleteMovie {
     -fx-background-color: #FF4040;
-
 }
 
 #hbx_dvdOrBlueRayCheckBoxes {
     -fx-spacing: 15;
+
 }
 
 #grp_movieParamSelect {
 
 }
-
-
-
-

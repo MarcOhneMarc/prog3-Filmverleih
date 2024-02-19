@@ -48,6 +48,10 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.jdks/openjdk-21.0.2/lib/src.zip!/java.base/java/lang/Integer.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/21-ea+5/javafx-graphics-21-ea+5-win.jar!/javafx/application/Application.class" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -96,12 +100,14 @@
       <recent name="$PROJECT_DIR$/src/main/java" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.filmverleih.filmverleih" />
       <recent name="com.example.javafxtutorial" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -121,7 +127,7 @@
       <module name="JavaFX-Tutorial" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.javafxtutorial.*" />
+          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
