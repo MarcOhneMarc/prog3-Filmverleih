@@ -33,4 +33,14 @@ public class NavbarController {
         MainApplication.loadCenter("Rental.fxml");
         MainApplication.loadRightSidebar("Filter.fxml");
     }
+
+    /**
+     * Loads the Info Page for a Movie to the Center Frame
+     * @throws IOException
+     */
+    @FXML
+    public void changeToMovie() throws IOException{
+        MainApplication.loadCenter("Movie");
+        MainApplication.loadRightSidebar("");
+    }
 }
