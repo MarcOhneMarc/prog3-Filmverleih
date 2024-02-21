@@ -3,10 +3,13 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -52,6 +55,7 @@ public class LibraryController {
             imgUrl = AllMovies.get(i).getCover();
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
+
                 Label lbl = new Label();
                 lbl.setAlignment(Pos.CENTER);
                 lbl.setMinHeight(300);
@@ -61,14 +65,24 @@ public class LibraryController {
                 lbl.setText(AllMovies.get(i).getName());
                 gridPane.add(lbl,i%4,i/4);
             }
-            else {                              //put the Cover in the library
+            else {//put the Cover in the library
+                Button imageButton = new Button();
                 ImageView imageView = new ImageView();
                 imageView.setPreserveRatio(true);
                 imageView.setImage(new Image(imgUrl));
-                imageView.setFitWidth(200);     //Make sure height and with
-                imageView.setFitHeight(300);    //stay in range for big covers
-                gridPane.add(imageView, i % 4, i / 4);
-                GridPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
+                imageButton.setGraphic(imageView);
+                imageButton.setMinHeight(300);
+                imageButton.setMaxHeight(300);
+                imageButton.setMinWidth(200);
+                imageButton.setMaxWidth(200);
+                imageButton.setOnAction(printMovie(AllMovies.get(i)));
+                imageView.setFitWidth(200);
+                imageView.setFitHeight(300);
+                //imageButton.setOnAction();
+                //imageView.setFitWidth(200);     //Make sure height and with
+                //imageView.setFitHeight(300);    //stay in range for big covers
+                gridPane.add(imageButton, i % 4, i / 4);
+                GridPane.setMargin(imageButton, new Insets(20, 0, 0, 20)); // margin of the covers
             }
             // TODO: Create onMouseClick-Listener in this loop to make sure it persists, when library is done
         }
@@ -97,5 +111,10 @@ public class LibraryController {
                 row++;
             }
         }
+    }
+    private EventHandler<ActionEvent> printMovie(Movies movie)
+    {
+        System.out.println(movie.toSting());
+        return null;
     }
 }
