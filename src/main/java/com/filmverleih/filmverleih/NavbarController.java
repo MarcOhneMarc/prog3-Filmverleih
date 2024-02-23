@@ -9,7 +9,12 @@ import java.io.IOException;
  * It handles user interactions related to navigation between different views.
  */
 public class NavbarController {
-
+    //Instantiate Controller-Connector for Navbar-Library-Connection
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+    //setter, for later use
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
+        this.connector = connector;
+    }
     /**
      * Handles the user's request to switch to the library view.
      * It loads the Library view into the center of the application frame and the Filter view into the right sidebar.
@@ -18,8 +23,8 @@ public class NavbarController {
      */
     @FXML
     public void changeToLibrary() throws IOException {
-        MainApplication.loadCenter("Library.fxml");
-        MainApplication.loadRightSidebar("Filter.fxml");
+        LibraryController libraryController = connector.getLibraryController();
+        MainApplication.borderPane.setCenter(libraryController.getOuterPane());
     }
 
     /**
@@ -30,17 +35,7 @@ public class NavbarController {
      */
     @FXML
     public void changeToRental() throws IOException {
-        MainApplication.loadCenter("Rental.fxml");
-        MainApplication.loadRightSidebar("Filter.fxml");
-    }
-
-    /**
-     * Loads the Info Page for a Movie to the Center Frame
-     * @throws IOException
-     */
-    @FXML
-    public void changeToMovie() throws IOException{
-        MainApplication.loadCenter("Movie");
-        MainApplication.loadRightSidebar("");
+        RentalController rentalController = connector.getRentalController();
+        MainApplication.borderPane.setCenter(rentalController.getOuterPane());
     }
 }

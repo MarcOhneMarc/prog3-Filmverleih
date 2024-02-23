@@ -14,6 +14,10 @@ import javafx.scene.control.TextField;
  * @author Hannes
  */
 public class SettingsController {
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
+        this.connector = connector;
+    }
 
     @FXML
     private TextField txf_movieID;

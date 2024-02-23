@@ -3,6 +3,9 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,6 +23,14 @@ import java.util.Scanner;
 public class Utility {
     // Database Utilities
 
+    //Loading/Instantiating
+    public static FXMLLoader loadFXML(String str)
+    {       FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource(str));
+            return loader;
+    }
+
+    //
     public static List<Movies> getFullMovieList() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {

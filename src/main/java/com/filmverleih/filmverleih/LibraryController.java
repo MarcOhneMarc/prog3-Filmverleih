@@ -3,19 +3,16 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,6 +20,12 @@ import java.util.List;
  * It manages the behavior and appearance of the library interface, including the display of movie covers.
  */
 public class LibraryController {
+
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
+        this.connector = connector;
+    }
 
     @FXML
     private ScrollPane scrollPane; // pane to scroll in the grid (Child = gridPane)
@@ -39,7 +42,6 @@ public class LibraryController {
         // Set behavior of scrollPane
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-
         // Listener for change of window size
         scrollPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -52,39 +54,47 @@ public class LibraryController {
         String imgUrl = "";
         List<Movies> AllMovies = Utility.getFullMovieList(); //get all Movies From DB
         for (int i = 0; i < AllMovies.size(); i++) {
+            int finalI = i;
             imgUrl = AllMovies.get(i).getCover();
+            Button imageButton = new Button();
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
-
-                Label lbl = new Label();
-                lbl.setAlignment(Pos.CENTER);
-                lbl.setMinHeight(300);
-                lbl.setMaxHeight(300);
-                lbl.setMinWidth(200);
-                lbl.setMaxWidth(200);
-                lbl.setText(AllMovies.get(i).getName());
-                gridPane.add(lbl,i%4,i/4);
+                imageButton.setMinWidth(200);
+                imageButton.setMaxWidth(200);
+                imageButton.setMinHeight(300);
+                imageButton.setMaxHeight(300);
+                imageButton.setText(AllMovies.get(i).getName());
+                imageButton.setOnAction(event ->{
+                    try {
+                        goToMovie(AllMovies.get(finalI));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }); //lambda
+                gridPane.add(imageButton,i%4,i/4);
             }
             else {//put the Cover in the library
-                Button imageButton = new Button();
                 ImageView imageView = new ImageView();
                 imageView.setPreserveRatio(true);
                 imageView.setImage(new Image(imgUrl));
+                imageView.setFitWidth(200);
+                imageView.setFitHeight(300);
                 imageButton.setGraphic(imageView);
                 imageButton.setMinHeight(300);
                 imageButton.setMaxHeight(300);
                 imageButton.setMinWidth(200);
                 imageButton.setMaxWidth(200);
-                imageButton.setOnAction(printMovie(AllMovies.get(i)));
-                imageView.setFitWidth(200);
-                imageView.setFitHeight(300);
-                //imageButton.setOnAction();
-                //imageView.setFitWidth(200);     //Make sure height and with
-                //imageView.setFitHeight(300);    //stay in range for big covers
+                imageButton.setOnAction(event ->{
+                    try {
+                        goToMovie(AllMovies.get(finalI));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }); //lambda
+                
                 gridPane.add(imageButton, i % 4, i / 4);
                 GridPane.setMargin(imageButton, new Insets(20, 0, 0, 20)); // margin of the covers
             }
-            // TODO: Create onMouseClick-Listener in this loop to make sure it persists, when library is done
         }
         // Initialize the count of columns
         adjustColumnCount(scrollPane.getWidth());
@@ -112,9 +122,17 @@ public class LibraryController {
             }
         }
     }
-    private EventHandler<ActionEvent> printMovie(Movies movie)
-    {
-        System.out.println(movie.toSting());
-        return null;
+    //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
+    public void goToMovie(Movies movie) throws IOException {
+        MovieController movieController = connector.getMovieController();
+        MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        movieController.fillPage(movie);
+
+        //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
+    public ScrollPane getOuterPane()
+    {
+        return scrollPane;
+    }
+    
 }
