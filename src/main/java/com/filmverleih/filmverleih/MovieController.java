@@ -12,10 +12,15 @@ import java.math.BigDecimal;
 
 public class MovieController {
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
-
+    /**
+     * sets NWayControllerConnector as active connector for this controller, called from MainApplication
+     * @param connector the controller passed by MainApplication
+     */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
         this.connector = connector;
     }
+
+    //Attributes
     @FXML
     private ImageView ivw_Cover;
     @FXML
@@ -50,7 +55,11 @@ public class MovieController {
     private Label lbl_actors;
     @FXML
     private Label lbl_fsk;
-    //generates The Labels for Movie.fxml to Show on that particular movie
+
+    /**
+     * displays the Movie details in Center of application
+     * @param movie the movie passed by the LibraryController via NWayControllerConnector
+     */
     public void fillPage(Movies movie)
     {
         int id = movie.getMovieid();
@@ -83,9 +92,11 @@ public class MovieController {
         ta_comment.setText(comment);
         if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
         else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
-
     }
-    //getter to pass to Library Controller, so runtime-instance of stage stays active
+
+    /**
+     * @return passes the main frame if the scene to the Controller it is called from
+     */
     public SplitPane getOuterPane()
     {
         return sp_Movie;

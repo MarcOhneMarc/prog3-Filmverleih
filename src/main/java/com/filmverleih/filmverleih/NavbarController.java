@@ -11,7 +11,10 @@ import java.io.IOException;
 public class NavbarController {
     //Instantiate Controller-Connector for Navbar-Library-Connection
     private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
-    //setter, for later use
+    /**
+     * sets NWayControllerConnector as active connector for this controller, called from MainApplication
+     * @param connector the controller passed by MainApplication
+     */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
         this.connector = connector;
     }

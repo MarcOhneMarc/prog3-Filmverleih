@@ -16,6 +16,7 @@ import java.io.IOException;
  * It also provides methods to change the center and left sidebar content.
  */
 public class MainApplication extends Application {
+    //Attributes
     private Parent navbarRoot;
     private NavbarController navbarController;
     private Parent libraryRoot;
@@ -29,11 +30,12 @@ public class MainApplication extends Application {
     private Parent filterRoot;
     private FilterController filterController;
     private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
-        this.connector = connector;
-    }
     public static BorderPane borderPane; // the main frame of the application
 
+    /**
+     * Loads the fxml and pairs it with its respective controller
+     *
+     */
     private void loadRootsAndControllers() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -59,6 +61,10 @@ public class MainApplication extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * connects existing controllers to the NWayController
+     */
     private void connectControllers(){
         connector =
                 new NWayControllerConnector<>
@@ -80,7 +86,6 @@ public class MainApplication extends Application {
     //fire-up all the scene related stuff
 
     /**
-
      * This method initializes and starts the main application frame.
      * It loads the navigation bar and the library initially, and sets up the main frame of the application.
      *
@@ -100,52 +105,6 @@ public class MainApplication extends Application {
         stage.setMaximized(true);
         stage.show();
     }
-
-    /**
-     *  * Loads an FXML file and returns the root node of the FXML file.
-     *  *
-     *  * @param fxml the path to the FXML file to be loaded as a String
-     *  * @return the root node of the loaded scene graph as a Parent
-     *  * @throws IOException if an error occurs during loading of the FXML file
-    */
-    //TODO:must be reworked, see LibraryController
-    public static Parent loadFxml(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(fxml));
-        return fxmlLoader.load();
-    }
-    /**
-     * Loads an FXML file and sets its content as the center of the main application frame.
-     *
-     * @param fxml the path to the FXML file to be loaded
-     * @throws IOException if an error occurs during loading of the FXML file
-     */
-    //TODO:must be reworked, see LibraryController
-    public static void loadCenter(String fxml) throws IOException {
-        Parent fxmlContent = loadFxml(fxml); // loads the specified FXML file as Parent
-        borderPane.setCenter(fxmlContent); // sets the loaded content as the center of the main application frame
-    }
-
-
-    /**
-     * Loads an FXML file and sets its content as the right sidebar of the main application frame.
-     * If the provided FXML path is empty, it removes the right sidebar.
-     *
-     * @param fxml the path to the FXML file to be loaded, or an empty string to remove the right sidebar
-     * @throws IOException if an error occurs during loading of the FXML file
-     */
-    //TODO:must be reworked, see LibraryController
-    public static void loadRightSidebar(String fxml) throws IOException {
-        if (fxml.equals("")) {
-            // If the provided FXML path is empty, removes the right sidebar
-            borderPane.setRight(null);
-        } else {
-            // Otherwise, loads the specified FXML file as Parent
-            Parent fxmlContent = loadFxml(fxml);
-            // Sets the loaded content as the right sidebar of the main application frame
-            borderPane.setRight(fxmlContent);
-        }
-    }
-
     /**
      * The main entry point of the application.
      * It launches the JavaFX application by calling the launch method provided by Application class.
