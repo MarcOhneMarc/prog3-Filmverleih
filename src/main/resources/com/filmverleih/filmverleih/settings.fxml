@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane prefHeight="990.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" tabClosingPolicy="UNAVAILABLE" fx:controller="com.filmverleih.filmverleih.SettingsController" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
     <tabs>
-        <Tab fx:id="tbp_settingsTabView" styleClass="tbs_settingsTabs" text="Bibliothek">
+        <Tab styleClass="tbs_settingsTabs" text="Bibliothek">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="919.0" prefWidth="1920.0" styleClass="anp_class_settingTabs">
                     <children>
@@ -58,8 +58,8 @@
                                         <TextField fx:id="txf_movieDirector2" promptText="Director 2" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                         <TextField fx:id="txf_movieDirector3" promptText="Director 3" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                         <TextField fx:id="txf_movieCount" promptText="Anzahl" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                        <TextField fx:id="txf_movieUndefined1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <TextField fx:id="txf_movieUndefined2" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                        <TextField fx:id="txf_movieStudio" promptText="Studio" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                        <TextField fx:id="txf_movieActors" promptText="Actors" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                         <TextField fx:id="txf_movieUndefined3" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                                         <TextField fx:id="txf_movieUndefined4" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                         <TextField fx:id="txf_movieUndefined5" GridPane.columnIndex="2" GridPane.rowIndex="6" />
@@ -67,7 +67,7 @@
                                         <TextArea fx:id="txa_movieComment" prefHeight="51.0" prefWidth="228.0" promptText="Comment" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="5" />
                                         <Button fx:id="btn_addMovie" mnemonicParsing="false" onAction="#addMovie" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="8" />
                                         <Label styleClass="lbl_class_SettingsLabel" text="Film löschen" GridPane.rowIndex="10" />
-                                        <TextField promptText="ID" GridPane.rowIndex="11" />
+                                        <TextField fx:id="txf_deleteMovieId" promptText="ID" GridPane.rowIndex="11" />
                                         <Button fx:id="btn_deleteMovie" mnemonicParsing="false" onAction="#deleteMovie" text="Löschen" textFill="WHITE" GridPane.rowIndex="12" />
                                         <Label prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_SettingsLabel" text="Film hinzufügen" />
                                         <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
