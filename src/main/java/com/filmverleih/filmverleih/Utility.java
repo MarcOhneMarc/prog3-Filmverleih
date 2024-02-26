@@ -1,54 +1,37 @@
 package com.filmverleih.filmverleih;
+
 import com.filmverleih.filmverleih.entity.Movies;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.event.spi.EventSource;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+public class Utility {
+    // Database Utilities
 
-/**
- *  SetMovTest
- *  This class is used to test the database Curd Operations with the entity Movies
- *  19.02.2024
- *  Copyright by Torvalds
- */
-public class SetMovTest {
-
-    public static void main(String[] args) {
-        SetMovTest test = new SetMovTest();
-        boolean menue = true;
-        Scanner scanner = new Scanner(System.in);
-        while (menue){
-            System.out.println("Was willste machen: 1 Liste Ausgeben  2 Test Film Hinzufügen 3 Delete 4 Update  5 Exit");
-            int inp = scanner.nextInt();
-            if (inp == 1){
-                List<Movies> movieList = test.getFullMovieList();
-                for (Movies movie : movieList) {
-                    System.out.println(movie.toSting());
-                }
-            } else if (inp == 2) {
-                test.newMovieInDB();
-            } else if (inp == 3) {
-                System.out.println("Was soll gelöscht werden? ");
-                int delID = scanner.nextInt();
-                test.DeleteMovieInDB(delID);
-            } else if (inp == 4) {
-                System.out.println("Was soll aktualisiert werden? ");
-                int upID = scanner.nextInt();
-                test.UpdateMovieInDB(upID);
-            } else if (inp == 5) {
-                menue = false;
-            }
-        }
+    //Loading/Instantiating
+    public static FXMLLoader loadFXML(String str)
+    {       FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApplication.class.getResource(str));
+            return loader;
     }
 
-
-     public List<Movies> getFullMovieList() {
+    //
+    public static List<Movies> getFullMovieList() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -142,6 +125,39 @@ public class SetMovTest {
         }
         return new ArrayList<Movies>();
     }
-
+    Movies getMovieByUrl(String url)
+    {
+        Movies ret = new Movies();
+        for(Movies movie:getFullMovieList())
+        {
+            if (movie.getCover().equals(url)) ret = movie;
+        }
+        return ret;
+    }
+    Movies getMovieByName(String name)
+    {
+        Movies ret = new Movies();
+        for(Movies movie:getFullMovieList())
+        {
+            if (movie.getName().equals(name)) ret = movie;
+        }
+        return ret;
+    }
+    EventHandler mouseHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            Movies mov = new Movies();
+            if (mouseEvent.getSource() instanceof ImageView)
+            {
+                ImageView source = (ImageView) mouseEvent.getSource();
+                mov = getMovieByUrl(source.getImage().getUrl());
+            }
+            else
+            {
+               Label source  = (Label) mouseEvent.getSource();
+               mov = getMovieByName(source.getText());
+            }
+        }
+    };
 
 }
