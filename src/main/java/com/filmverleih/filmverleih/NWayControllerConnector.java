@@ -111,9 +111,7 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
     /**
      * @return returns ninth controller (if present) currently unused
      */
-    public Optional<Y> getController9() {
-        return controller9;
-    }
+    public Optional<Y> getController9() { return controller9; }
 
     /**
      * @return returns tenth controller (if present) currently unused
@@ -121,5 +119,4 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
     public Optional<Z> getController10() {
         return controller10;
     }
-
 }

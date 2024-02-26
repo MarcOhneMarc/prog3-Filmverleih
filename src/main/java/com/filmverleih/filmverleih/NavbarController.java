@@ -27,7 +27,9 @@ public class NavbarController {
     @FXML
     public void changeToLibrary() throws IOException {
         LibraryController libraryController = connector.getLibraryController();
+        FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setCenter(libraryController.getOuterPane());
+        MainApplication.borderPane.setRight(filterController.getOuterPane());
     }
 
     /**

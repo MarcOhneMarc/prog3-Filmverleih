@@ -132,6 +132,4 @@ public class SettingsController {
     {
         return tbp_settingsTabView;
     }
-
-
 }

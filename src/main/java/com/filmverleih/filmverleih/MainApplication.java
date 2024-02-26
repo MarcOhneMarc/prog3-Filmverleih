@@ -81,6 +81,7 @@ public class MainApplication extends Application {
         settingsController.setConnector(connector);
         filterController.setConnector(connector);
     }
+
     public MainApplication() throws IOException {
     }
     //fire-up all the scene related stuff

@@ -30,6 +30,17 @@
     -fx-background-color: #fff476;
 }
 
+
+.backgroundLibrary{
+    -fx-background-color: #191919;
+}
+
+.movieLabelLibrary{
+    -fx-background-color: #393939;
+    -fx-text-fill: white;
+}
+
+
 #hbx_navBar {
     -fx-background-color: #5C5C5C;
     -fx-alignment: center;
