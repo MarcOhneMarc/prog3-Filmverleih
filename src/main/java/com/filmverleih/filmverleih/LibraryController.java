@@ -5,8 +5,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,12 +23,30 @@ import java.util.List;
  */
 public class LibraryController {
 
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+    private NWayControllerConnector<NavbarController,
+                                    LibraryController,
+                                    MovieController,
+                                    RentalController,
+                                    SettingsController,
+                                    FilterController,
+                                    Integer,
+                                    Integer,
+                                    Integer,
+                                    Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,
+                            LibraryController,
+                            MovieController,
+                            RentalController,
+                            SettingsController,
+                            FilterController,
+                            Integer,
+                            Integer,
+                            Integer,
+                            Integer> connector) {
         this.connector = connector;
     }
 
@@ -59,35 +79,39 @@ public class LibraryController {
         for (int i = 0; i < AllMovies.size(); i++) {
             int finalI = i;
             imgUrl = AllMovies.get(i).getCover();
-            Button imageButton = new Button();
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
-                imageButton.setMinWidth(200);
-                imageButton.setMaxWidth(200);
-                imageButton.setMinHeight(300);
-                imageButton.setMaxHeight(300);
-                imageButton.setText(AllMovies.get(i).getName());
-                imageButton.setOnAction(event ->{
+
+                Label label = new Label(AllMovies.get(i).getName());
+
+                label.setWrapText(true); // Enable text wrapping
+                label.setAlignment(Pos.CENTER); // Center align the text
+                label.setMaxWidth(200); // Set maximum width for wrapping
+
+                // Set the size of the StackPane
+                label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
+                label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
+                label.getStyleClass().add("movieLabelLibrary");
+
+                label.setOnMouseClicked(event ->{
                     try {
                         goToMovie(AllMovies.get(finalI));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }); //lambda
-                gridPane.add(imageButton,i%4,i/4);
+                gridPane.add(label,i % 4,i / 4);
+                GridPane.setMargin(label, new Insets(20, 0, 0, 20)); // margin of the covers*/
             }
             else {//put the Cover in the library
                 ImageView imageView = new ImageView();
-                imageView.setPreserveRatio(true);
+                imageView.setPreserveRatio(false);
                 imageView.setImage(new Image(imgUrl));
+
                 imageView.setFitWidth(200);
                 imageView.setFitHeight(300);
-                imageButton.setGraphic(imageView);
-                imageButton.setMinHeight(300);
-                imageButton.setMaxHeight(300);
-                imageButton.setMinWidth(200);
-                imageButton.setMaxWidth(200);
-                imageButton.setOnAction(event ->{
+
+                imageView.setOnMouseClicked(event ->{
                     try {
                         goToMovie(AllMovies.get(finalI));
                     } catch (IOException e) {
@@ -95,8 +119,8 @@ public class LibraryController {
                     }
                 }); //lambda
                 
-                gridPane.add(imageButton, i % 4, i / 4);
-                GridPane.setMargin(imageButton, new Insets(20, 0, 0, 20)); // margin of the covers
+                gridPane.add(imageView, i % 4, i / 4);
+                GridPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
             }
         }
         // Initialize the count of columns

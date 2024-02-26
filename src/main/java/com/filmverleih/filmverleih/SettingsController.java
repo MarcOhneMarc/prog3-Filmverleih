@@ -112,6 +112,4 @@ public class SettingsController {
     public void deleteMovie() {
         System.out.println("console test: delete movie button was clicked");
     }
-
-
 }

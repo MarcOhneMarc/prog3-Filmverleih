@@ -51,7 +51,7 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
-            loader = Utility.loadFXML("settings-view.fxml");
+            loader = Utility.loadFXML("Settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
             loader = Utility.loadFXML("Filter.fxml");
@@ -81,6 +81,7 @@ public class MainApplication extends Application {
         settingsController.setConnector(connector);
         filterController.setConnector(connector);
     }
+
     public MainApplication() throws IOException {
     }
     //fire-up all the scene related stuff

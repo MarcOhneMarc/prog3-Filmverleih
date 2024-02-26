@@ -1,6 +1,11 @@
 package com.filmverleih.filmverleih;
 
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+
 public class FilterController {
+
+    AnchorPane anchorPane;
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
 
     /**
@@ -9,5 +14,10 @@ public class FilterController {
      */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
         this.connector = connector;
+    }
+
+    public AnchorPane getOuterPane()
+    {
+        return anchorPane;
     }
 }
