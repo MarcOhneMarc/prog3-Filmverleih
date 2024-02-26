@@ -43,4 +43,10 @@ public class NavbarController {
         RentalController rentalController = connector.getRentalController();
         MainApplication.borderPane.setCenter(rentalController.getOuterPane());
     }
+
+    @FXML
+    public void changeToSettings() throws IOException {
+        SettingsController settingsController = connector.getSettingsController();
+        MainApplication.borderPane.setCenter(settingsController.getOuterPane());
+    }
 }

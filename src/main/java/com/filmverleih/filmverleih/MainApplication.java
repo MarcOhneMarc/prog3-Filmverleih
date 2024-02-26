@@ -51,7 +51,7 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
-            loader = Utility.loadFXML("Settings.fxml");
+            loader = Utility.loadFXML("settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
             loader = Utility.loadFXML("Filter.fxml");

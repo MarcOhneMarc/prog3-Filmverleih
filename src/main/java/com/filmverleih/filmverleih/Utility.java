@@ -50,7 +50,7 @@ public class Utility {
         return new ArrayList<Movies>();
     }
 
-    public List<Movies> newMovieInDB() {
+    public Boolean newMovieInDB(String name, int year, String genre, int length, BigDecimal rating, int count, String type, String cover, String comment, String directors, String studio, String actors, int fsk, String movieType) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -58,35 +58,37 @@ public class Utility {
                 transaction = session.beginTransaction();
 
                 Movies newMovie = new Movies();
-                newMovie.setName("Titanische Künste");
-                newMovie.setYear(1997);
-                newMovie.setGenre("Romance, Drama");
-                newMovie.setLength(195);
-                newMovie.setRating(BigDecimal.valueOf(7.5));
-                newMovie.setCount(1);
-                newMovie.setType("DVD");
-                newMovie.setCover("titanic.jpg");
-                newMovie.setComment("A classic romantic drama film.");
-                newMovie.setDirectors("James Cameron");
-                newMovie.setStudio("20th Century Fox");
-                newMovie.setActors("Leonardo DiCaprio, Kate Winslet");
-                newMovie.setFsk(16);
+                newMovie.setName(name);
+                newMovie.setYear(year);
+                newMovie.setGenre(genre);
+                newMovie.setLength(length);
+                newMovie.setRating(rating);
+                newMovie.setCount(count);
+                newMovie.setType(type);
+                newMovie.setCover(cover);
+                newMovie.setComment(comment);
+                newMovie.setDirectors(directors);
+                newMovie.setStudio(studio);
+                newMovie.setActors(actors);
+                newMovie.setFsk(fsk);
+                newMovie.setType(movieType);
 
                 // Film zur Datenbank hinzufügen
                 session.save(newMovie);
-
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
+            return false;
         }
-        return new ArrayList<Movies>();
+        return true;
     }
 
-    public List<Movies> DeleteMovieInDB(int movDelID) {
+    public Boolean DeleteMovieInDB(int movDelID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -99,14 +101,16 @@ public class Utility {
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
+            return false;
         }
-        return new ArrayList<Movies>();
+        return true;
     }
 
-    public List<Movies> UpdateMovieInDB(int movUpID) {
+    public Boolean UpdateMovieInDB(int movUpID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -123,7 +127,7 @@ public class Utility {
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
         }
-        return new ArrayList<Movies>();
+        return true;
     }
     Movies getMovieByUrl(String url)
     {

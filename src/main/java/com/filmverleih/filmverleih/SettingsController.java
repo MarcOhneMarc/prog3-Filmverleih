@@ -1,10 +1,11 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Movies;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import java.math.BigDecimal;
 
 /**
  * controller class for the settings frame of the application
@@ -14,6 +15,9 @@ import javafx.scene.control.TextField;
  * @author Hannes
  */
 public class SettingsController {
+
+    @FXML
+    private TabPane tbp_settingsTabView;
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -50,9 +54,9 @@ public class SettingsController {
     @FXML
     private TextField txf_movieCount;
     @FXML
-    private TextField txf_movieUndefined1;
+    private TextField txf_movieStudio;
     @FXML
-    private TextField txf_movieUndefined2;
+    private TextField txf_movieActors;
     @FXML
     private TextField txf_movieUndefined3;
     @FXML
@@ -67,6 +71,8 @@ public class SettingsController {
     private CheckBox cbx_selDVD;
     @FXML
     private CheckBox cbx_selBlueRay;
+    @FXML
+    private TextField txf_deleteMovieId;
 
 
     int movieID;
@@ -74,7 +80,7 @@ public class SettingsController {
     int movieYear;
     int movieLength;
     int movieFSK;
-    double movieRating;
+    BigDecimal movieRating;
     String movieGenre1;
     String movieGenre2;
     String movieGenre3;
@@ -82,8 +88,8 @@ public class SettingsController {
     String movieDirector2;
     String movieDirector3;
     int movieCount;
-    String movieUndefined1;
-    String movieUndefined2;
+    String movieStudio;
+    String movieActors;
     String movieUndefined3;
     String movieUndefined4;
     String movieUndefined5;
@@ -100,7 +106,14 @@ public class SettingsController {
      */
     @FXML
     public void addMovie() {
+        String movieType = "DVD";
+        Utility utility = new Utility();
         System.out.println("console test: add movie button was clicked");
+        if (cbx_selBlueRay.isSelected()) {
+             movieType = "BlueRay";
+        };
+        utility.newMovieInDB(txf_movieName.getText(), Integer.parseInt(txf_movieYear.getText()), txf_movieGenre1.getText() + ", " + txf_movieGenre2.getText() + ", " + txf_movieGenre3.getText(), Integer.parseInt(txf_movieLength.getText()), BigDecimal.valueOf(Double.parseDouble(txf_movieRating.getText())), Integer.parseInt(txf_movieCount.getText()), txf_movieCount.getText(), txf_movieLinkToCover.getText(), txa_movieComment.getText(), txf_movieDirector1.getText() + ", " + txf_movieDirector2.getText() + ", " + txf_movieDirector3.getText(), txf_movieStudio.getText(), txf_movieActors.getText(), Integer.parseInt(txf_movieFSK.getText()), movieType);
+
     }
 
     /**
@@ -111,5 +124,12 @@ public class SettingsController {
     @FXML
     public void deleteMovie() {
         System.out.println("console test: delete movie button was clicked");
+        Utility utility = new Utility();
+        utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
+    }
+
+    public TabPane getOuterPane()
+    {
+        return tbp_settingsTabView;
     }
 }
