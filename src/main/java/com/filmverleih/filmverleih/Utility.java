@@ -27,16 +27,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Utility {
-    // Database Utilities
-
-    //Loading/Instantiating
-    public static FXMLLoader loadFXML(String str)
-    {       FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource(str));
-            return loader;
+    //<editor-fold desc = "FXML-Freakshow">
+    public static FXMLLoader loadFXML(String str) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApplication.class.getResource(str));
+        return loader;
     }
-
-    //
+    //</editor-fold>
+    //<editor-fold desc = "Database-Doolaroos">
     public static List<Movies> getFullMovieList() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -62,7 +60,6 @@ public class Utility {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-
                 Movies newMovie = new Movies();
                 newMovie.setName(name);
                 newMovie.setYear(year);
@@ -78,17 +75,15 @@ public class Utility {
                 newMovie.setActors(actors);
                 newMovie.setFsk(fsk);
                 newMovie.setType(movieType);
-
-                // Film zur Datenbank hinzufügen
                 session.save(newMovie);
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                e.printStackTrace();
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -106,11 +101,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                e.printStackTrace();
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            e.printStackTrace();
             return false;
         }
         return true;
@@ -122,37 +117,63 @@ public class Utility {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
-
-                session.createQuery("UPDATE Movies SET " + column +" = "+ columnValue +" WHERE movieid = " + movUpID).executeUpdate();
-
+                Movies movieToUpdate = session.get(Movies.class, movUpID);
+                if (movieToUpdate != null){
+                    switch (column){
+                        case "name":
+                            movieToUpdate.setName(columnValue);
+                            break;
+                        case "year":
+                            movieToUpdate.setYear(Integer.parseInt(columnValue));
+                            break;
+                        case "genre":
+                            movieToUpdate.setGenre(columnValue);
+                            break;
+                        case "length":
+                            movieToUpdate.setLength(Integer.parseInt(columnValue));
+                            break;
+                        case "rating":
+                            movieToUpdate.setRating(BigDecimal.valueOf(Long.parseLong(columnValue)));
+                            break;
+                        case "count":
+                            movieToUpdate.setCount(Integer.parseInt(columnValue));
+                            break;
+                        case "type":
+                            movieToUpdate.setType(columnValue);
+                            break;
+                        case "cover":
+                            movieToUpdate.setCover(columnValue);
+                            break;
+                        case "directors":
+                            movieToUpdate.setDirectors(columnValue);
+                            break;
+                        case "studio":
+                            movieToUpdate.setStudio(columnValue);
+                            break;
+                        case "actors":
+                            movieToUpdate.setActors(columnValue);
+                            break;
+                        case "fsk":
+                            movieToUpdate.setFsk(Integer.parseInt(columnValue));
+                            break;
+                        case "comment":
+                            movieToUpdate.setComment(columnValue);
+                            break;
+                    }
+                    session.update(movieToUpdate);
+                }
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                e.printStackTrace();
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            e.printStackTrace();
         }
         return true;
     }
-    Movies getMovieByUrl(String url)
-    {
-        Movies ret = new Movies();
-        for(Movies movie:getFullMovieList())
-        {
-            if (movie.getCover().equals(url)) ret = movie;
-        }
-        return ret;
-    }
-    Movies getMovieByName(String name)
-    {
-        Movies ret = new Movies();
-        for(Movies movie:getFullMovieList())
-        {
-            if (movie.getName().equals(name)) ret = movie;
-        }
-        return ret;
-    }
+    //</editor-fold>
+    //<editor-fold desc = "Node-Nookies">
     public static String findColumnByRow(int row){
         switch (row){
             case 1: return "name";
@@ -171,10 +192,13 @@ public class Utility {
         }
         return "";
     }
+    //</editor-fold>
+    //<editor-fold desc = "File-FlicFlacs">
     public static String getAbsolutePath (String resourceName) throws URISyntaxException {
         URL res = MainApplication.class.getResource(resourceName);
         File file = Paths.get(res.toURI()).toFile();
         String absolutePath = file.getAbsolutePath();
         return absolutePath;
     }
+    //</editor-fold>
 }

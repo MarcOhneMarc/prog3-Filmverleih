@@ -16,7 +16,7 @@ import java.io.IOException;
  * It also provides methods to change the center and left sidebar content.
  */
 public class MainApplication extends Application {
-    //Attributes
+    //<editor-fold desc = "Attribute-Armageddon">
     private Parent navbarRoot;
     private NavbarController navbarController;
     private Parent libraryRoot;
@@ -31,10 +31,10 @@ public class MainApplication extends Application {
     private FilterController filterController;
     private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
     public static BorderPane borderPane; // the main frame of the application
-
+    //</editor-fold>
+    //<editor-fold desc = "Launch-Limbo">
     /**
      * Loads the fxml and pairs it with its respective controller
-     *
      */
     private void loadRootsAndControllers() {
         try {
@@ -115,5 +115,9 @@ public class MainApplication extends Application {
      */
     public static void main(String[] args) {
         launch();
+    }
+    //</editor-fold>
+    public void reload(){
+
     }
 }

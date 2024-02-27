@@ -81,18 +81,14 @@ public class LibraryController {
             imgUrl = AllMovies.get(i).getCover();
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
-
                 Label label = new Label(AllMovies.get(i).getName());
-
                 label.setWrapText(true); // Enable text wrapping
                 label.setAlignment(Pos.CENTER); // Center align the text
                 label.setMaxWidth(200); // Set maximum width for wrapping
-
                 // Set the size of the StackPane
                 label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
                 label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
                 label.getStyleClass().add("movieLabelLibrary");
-
                 label.setOnMouseClicked(event ->{
                     try {
                         goToMovie(AllMovies.get(finalI));
@@ -107,18 +103,15 @@ public class LibraryController {
                 ImageView imageView = new ImageView();
                 imageView.setPreserveRatio(false);
                 imageView.setImage(new Image(imgUrl));
-
                 imageView.setFitWidth(200);
                 imageView.setFitHeight(300);
-
                 imageView.setOnMouseClicked(event ->{
                     try {
                         goToMovie(AllMovies.get(finalI));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }); //lambda
-                
+                });
                 gridPane.add(imageView, i % 4, i / 4);
                 GridPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
             }
@@ -136,7 +129,6 @@ public class LibraryController {
     private void adjustColumnCount(double windowWidth) {
         double imageWidth = 200 + 40; // Width of images plus margin
         int numColumns = Math.max(1, (int) (windowWidth / imageWidth)); // Count of columns from windowWidth
-
         int row = 0;
         int column = 0;
         for (Node child : gridPane.getChildren()) {
@@ -155,7 +147,6 @@ public class LibraryController {
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(movie);
         movieController.setEditImage();
-        //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
 
     /**

@@ -3,16 +3,13 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
-
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
 
@@ -25,7 +22,7 @@ public class MovieController {
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
         this.connector = connector;
     }
-
+    //<editor-fold desc = "Attribute-Armageddon">
     //Attributes
     @FXML
     private ImageView ivw_Cover;
@@ -89,6 +86,9 @@ public class MovieController {
     private ImageView iv_fsk;
     @FXML
     private ImageView iv_comment;
+    private boolean isEditing = false;
+    //</editor-fold>
+    //<editor-fold desc = "PageCreation-Poolparty">
     /**
      * displays the Movie details in Center of application
      * @param movie the movie passed by the LibraryController via NWayControllerConnector
@@ -132,15 +132,6 @@ public class MovieController {
             }
         }
     }
-
-    /**
-     * @return passes the main frame if the scene to the Controller it is called from
-     */
-    public SplitPane getOuterPane()
-    {
-        return sp_Movie;
-    }
-
     /**
      * Makes sure, every Label filled by fillPage() gets an edit-icon next to it
      * and adds replace(e) logic to the icons
@@ -181,15 +172,16 @@ public class MovieController {
             throw new RuntimeException(e);
         }
     }
-
+    //</editor-fold>
+    //<editor-fold desc = "Method-Mayhem">
     /**
      * replaces the edit button with an accapt and a cancel button, makes the corresponding label
      * a textfield to fill in whatever you want to change
-     * TODO: add auto-cancel when pressing 2 edit buttons in a row.
      * @param event the Mouse Event that fired the method, needed to get the target
      *              NOTE: somehow, the UI sometimes does not register clickEvents, might be my slow-ass machine...
      */
     public void replace(MouseEvent event){
+        if (isEditing) return;
         ImageView target = (ImageView)event.getTarget();
         ImageView iv_yes = new ImageView();
         ImageView iv_no = new ImageView();
@@ -284,11 +276,13 @@ public class MovieController {
         int finalRow = row;
         Label lblFinal = lbl;
         ImageView targetFinal = target;
+        String textFinal = text;
         gp_Table.add(iv_yesFinal,1,row);
         GridPane.setHalignment(iv_yesFinal, HPos.RIGHT);
         gp_Table.getChildren().remove(target);
         gp_Table.add(iv_noFinal,2,row);
-        iv_yesFinal.setOnMouseClicked(e -> accept(lblFinal,col,finalRow,iv_noFinal,iv_yesFinal,target,edit,edit.getText()));
+        isEditing = true;
+        iv_yesFinal.setOnMouseClicked(e -> accept(lblFinal,col,finalRow,iv_noFinal,iv_yesFinal,target,edit,edit.getText(),textFinal));
         iv_noFinal.setOnMouseClicked(e->cancel(lblFinal,col,finalRow,iv_noFinal,iv_yesFinal,target,edit));
     }
 
@@ -312,6 +306,7 @@ public class MovieController {
         gp_Table.add(lbl, col,row);
         gp_Table.add(iv_prev,col+1,row);
         setEditImage();
+        isEditing = false;
     }
 
     /**
@@ -327,15 +322,28 @@ public class MovieController {
      * @param newValue the new value taken from the TextField of the edit-event
      *                 NOTE: UpdateMovieInDB not yet modified/tested, handle with caution!
      */
-    public void accept(Label lbl, int col, int row, ImageView iv_no, ImageView iv_yes, ImageView iv_prev, TextField edit, String newValue){
-        gp_Table.getChildren().remove(iv_yes);
-        gp_Table.getChildren().remove(iv_no);
-        gp_Table.getChildren().remove(edit);
-        lbl.setText(newValue);
-        gp_Table.add(lbl, col,row);
-        gp_Table.add(iv_prev,col+1,row);
-        Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()),Utility.findColumnByRow(row),newValue);
+    public void accept(Label lbl, int col, int row, ImageView iv_no, ImageView iv_yes, ImageView iv_prev, TextField edit, String newValue, String oldValue){System.out.println(newValue+oldValue);
+        if (!newValue.equals(oldValue)) {
+            gp_Table.getChildren().remove(iv_yes);
+            gp_Table.getChildren().remove(iv_no);
+            gp_Table.getChildren().remove(edit);
+            lbl.setText(newValue);
+            gp_Table.add(lbl, col, row);
+            gp_Table.add(iv_prev, col + 1, row);
+            Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()), Utility.findColumnByRow(row), newValue);
+            isEditing = false;
+        }
+        else cancel(lbl,col,row,iv_no,iv_yes,iv_prev,edit);
     }
-
+    //</editor-fold>
+    //<editor-fold desc = "getter-setter-sweater">
+    /**
+     * @return passes the main frame if the scene to the Controller it is called from
+     */
+    public SplitPane getOuterPane()
+    {
+        return sp_Movie;
+    }
+    //</editor-fold>
     // credits for the edit-icon : <a href="https://www.flaticon.com/free-icons/register" title="register icons">Register icons created by Irfansusanto20 - Flaticon</a>
 }

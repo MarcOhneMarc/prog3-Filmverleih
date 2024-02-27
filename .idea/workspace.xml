@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-42&#10;Added: &#10;- ControllerConnector&#10;- Loading routine for Roots, Controllers, Connector&#10;- Missing Controllers&#10;&#10;Movies ins Library are now Clickable and open the movie with its details in the center pane">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="FEAT-tick-47" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -138,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708647357888</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D">
+      <created>1709025497840</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709025497840</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,7 +158,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="tick-42_testConnector" />
+                        <option value="FEAT-tick-47" />
                       </list>
                     </value>
                   </entry>
@@ -167,17 +173,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FEAT-Library loads DB&#10;Added: &#10;- Utility Class&#10;- Methods in LibraryController&#10;- Methods in NavBarController&#10;- MouseEventListener&#10;(For clicking movies to see details)" />
     <MESSAGE value="FEAT-tick-42&#10;Added: &#10;- ControllerConnector&#10;- Loading routine for Roots, Controllers, Connector&#10;- Missing Controllers&#10;&#10;Movies ins Library are now Clickable and open the movie with its details in the center pane" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-42&#10;Added: &#10;- ControllerConnector&#10;- Loading routine for Roots, Controllers, Connector&#10;- Missing Controllers&#10;&#10;Movies ins Library are now Clickable and open the movie with its details in the center pane" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D" />
   </component>
 </project>
