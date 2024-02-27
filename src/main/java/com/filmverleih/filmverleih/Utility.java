@@ -5,17 +5,23 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.event.spi.EventSource;
 
+import java.io.File;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -110,14 +116,14 @@ public class Utility {
         return true;
     }
 
-    public Boolean UpdateMovieInDB(int movUpID) {
+    public static Boolean UpdateMovieInDB(int movUpID, String column, String columnValue) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
+                session.createQuery("UPDATE Movies SET " + column +" = "+ columnValue +" WHERE movieid = " + movUpID).executeUpdate();
 
                 transaction.commit();
             } catch (Exception e) {
@@ -147,21 +153,28 @@ public class Utility {
         }
         return ret;
     }
-    EventHandler mouseHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent mouseEvent) {
-            Movies mov = new Movies();
-            if (mouseEvent.getSource() instanceof ImageView)
-            {
-                ImageView source = (ImageView) mouseEvent.getSource();
-                mov = getMovieByUrl(source.getImage().getUrl());
-            }
-            else
-            {
-               Label source  = (Label) mouseEvent.getSource();
-               mov = getMovieByName(source.getText());
-            }
+    public static String findColumnByRow(int row){
+        switch (row){
+            case 1: return "name";
+            case 2: return "year";
+            case 3: return "genre";
+            case 4: return "length";
+            case 5: return "rating";
+            case 6: return "count";
+            case 7: return "type";
+            case 8: return "cover";
+            case 9: return "directors";
+            case 10: return "studio";
+            case 11: return "actors";
+            case 12: return "fsk";
+            case 0 : return "comment";
         }
-    };
-
+        return "";
+    }
+    public static String getAbsolutePath (String resourceName) throws URISyntaxException {
+        URL res = MainApplication.class.getResource(resourceName);
+        File file = Paths.get(res.toURI()).toFile();
+        String absolutePath = file.getAbsolutePath();
+        return absolutePath;
+    }
 }

@@ -12,8 +12,9 @@
                <children>
                   <GridPane fx:id="gp_Table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.00000762939453" minWidth="10.0" prefWidth="143.00000762939453" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="195.99999237060547" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="25.0" prefWidth="25.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -33,7 +34,6 @@
                      <children>
                         <Label text="Movie ID :" />
                         <Label text="Name :" GridPane.rowIndex="1" />
-                        <Label fx:id="lbl_idDyn" GridPane.columnIndex="1" />
                         <Label text="Year :" GridPane.rowIndex="2" />
                         <Label text="Genre :" GridPane.rowIndex="3" />
                         <Label text="Length :" GridPane.rowIndex="4" />
@@ -58,13 +58,26 @@
                         <Label fx:id="lbl_studio" text=" " GridPane.columnIndex="1" GridPane.rowIndex="10" />
                         <Label fx:id="lbl_actors" text=" " GridPane.columnIndex="1" GridPane.rowIndex="11" />
                         <Label fx:id="lbl_fsk" text=" " GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <ImageView id="iv_name" fx:id="iv_name" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <ImageView id="iv_year" fx:id="iv_year" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <ImageView id="iv_genre" fx:id="iv_genre" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <ImageView id="iv_length" fx:id="iv_length" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <ImageView id="iv_rating" fx:id="iv_rating" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <ImageView id="iv_count" fx:id="iv_count" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <ImageView id="iv_type" fx:id="iv_type" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                        <ImageView id="iv_cover" fx:id="iv_cover" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                        <ImageView id="iv_directors" fx:id="iv_directors" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <ImageView id="iv_studio" fx:id="iv_studio" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                        <ImageView id="iv_actors" fx:id="iv_actors" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                        <ImageView id="iv_fsk" fx:id="iv_fsk" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
                      </children>
                   </GridPane>
                </children></AnchorPane>
           <AnchorPane fx:id="ap_rightFrame" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <ImageView fx:id="ivw_Cover" fitHeight="300.0" fitWidth="200.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <TextArea fx:id="ta_comment" layoutY="199.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0" />
+                  <ImageView fx:id="iv_comment" fitHeight="20.0" fitWidth="20.0" layoutX="78.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100.0" AnchorPane.rightAnchor="0.0" />
+                  <Label id="lbl_comment" fx:id="lbl_comment" layoutX="80.0" layoutY="342.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

@@ -154,7 +154,7 @@ public class LibraryController {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(movie);
-
+        movieController.setEditImage();
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
 
