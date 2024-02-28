@@ -129,46 +129,20 @@ public class Utility {
                 transaction = session.beginTransaction();
                 Movies movieToUpdate = session.get(Movies.class, movUpID);
                 if (movieToUpdate != null){
-                    switch (column){
-                        case "name":
-                            movieToUpdate.setName(columnValue);
-                            break;
-                        case "year":
-                            movieToUpdate.setYear(Integer.parseInt(columnValue));
-                            break;
-                        case "genre":
-                            movieToUpdate.setGenre(columnValue);
-                            break;
-                        case "length":
-                            movieToUpdate.setLength(Integer.parseInt(columnValue));
-                            break;
-                        case "rating":
-                            movieToUpdate.setRating(BigDecimal.valueOf(Long.parseLong(columnValue)));
-                            break;
-                        case "count":
-                            movieToUpdate.setCount(Integer.parseInt(columnValue));
-                            break;
-                        case "type":
-                            movieToUpdate.setType(columnValue);
-                            break;
-                        case "cover":
-                            movieToUpdate.setCover(columnValue);
-                            break;
-                        case "directors":
-                            movieToUpdate.setDirectors(columnValue);
-                            break;
-                        case "studio":
-                            movieToUpdate.setStudio(columnValue);
-                            break;
-                        case "actors":
-                            movieToUpdate.setActors(columnValue);
-                            break;
-                        case "fsk":
-                            movieToUpdate.setFsk(Integer.parseInt(columnValue));
-                            break;
-                        case "comment":
-                            movieToUpdate.setComment(columnValue);
-                            break;
+                    switch (column) {
+                        case "name" -> movieToUpdate.setName(columnValue);
+                        case "year" -> movieToUpdate.setYear(Integer.parseInt(columnValue));
+                        case "genre" -> movieToUpdate.setGenre(columnValue);
+                        case "length" -> movieToUpdate.setLength(Integer.parseInt(columnValue));
+                        case "rating" -> movieToUpdate.setRating(BigDecimal.valueOf(Long.parseLong(columnValue)));
+                        case "count" -> movieToUpdate.setCount(Integer.parseInt(columnValue));
+                        case "type" -> movieToUpdate.setType(columnValue);
+                        case "cover" -> movieToUpdate.setCover(columnValue);
+                        case "directors" -> movieToUpdate.setDirectors(columnValue);
+                        case "studio" -> movieToUpdate.setStudio(columnValue);
+                        case "actors" -> movieToUpdate.setActors(columnValue);
+                        case "fsk" -> movieToUpdate.setFsk(Integer.parseInt(columnValue));
+                        case "comment" -> movieToUpdate.setComment(columnValue);
                     }
                     session.update(movieToUpdate);
                 }
@@ -188,22 +162,22 @@ public class Utility {
     //</editor-fold>
     //<editor-fold desc = "Node-Nookies">
     public static String findColumnByRow(int row){
-        switch (row){
-            case 1: return "name";
-            case 2: return "year";
-            case 3: return "genre";
-            case 4: return "length";
-            case 5: return "rating";
-            case 6: return "count";
-            case 7: return "type";
-            case 8: return "cover";
-            case 9: return "directors";
-            case 10: return "studio";
-            case 11: return "actors";
-            case 12: return "fsk";
-            case 0 : return "comment";
-        }
-        return "";
+        return switch (row) {
+            case 1 -> "name";
+            case 2 -> "year";
+            case 3 -> "genre";
+            case 4 -> "length";
+            case 5 -> "rating";
+            case 6 -> "count";
+            case 7 -> "type";
+            case 8 -> "cover";
+            case 9 -> "directors";
+            case 10 -> "studio";
+            case 11 -> "actors";
+            case 12 -> "fsk";
+            case 0 -> "comment";
+            default -> throw new IllegalArgumentException("Wrong Column");
+        };
     }
     //</editor-fold>
     //<editor-fold desc = "File-FlicFlacs">

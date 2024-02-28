@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-47&#10;Implemented:&#10;- editing bool (checks if already editing another value and prevents firing a second edit event)&#10;- no database access if old = new value&#10;Can now edit movies via Library/MovieView&#10;refactored Utility.UpdateMovieInDB to not post a String query, but use Entity-Logic instead.">
+    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709071588023</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints">
+      <created>1709156438060</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1709156438060</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -186,16 +187,12 @@
     <MESSAGE value="FEAT-tick-42&#10;Added: &#10;- ControllerConnector&#10;- Loading routine for Roots, Controllers, Connector&#10;- Missing Controllers&#10;&#10;Movies ins Library are now Clickable and open the movie with its details in the center pane" />
     <MESSAGE value="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D" />
     <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;- editing bool (checks if already editing another value and prevents firing a second edit event)&#10;- no database access if old = new value&#10;Can now edit movies via Library/MovieView&#10;refactored Utility.UpdateMovieInDB to not post a String query, but use Entity-Logic instead." />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-47&#10;Implemented:&#10;- editing bool (checks if already editing another value and prevents firing a second edit event)&#10;- no database access if old = new value&#10;Can now edit movies via Library/MovieView&#10;refactored Utility.UpdateMovieInDB to not post a String query, but use Entity-Logic instead." />
+    <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java</url>
-          <line>332</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java</url>
           <line>166</line>
