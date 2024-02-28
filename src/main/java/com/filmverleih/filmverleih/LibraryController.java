@@ -62,6 +62,42 @@ public class LibraryController {
      * Also, it initializes the view with test movie covers for development purposes.
      */
     public void initialize() {
+        load();
+    }
+    public void refresh(){
+        gridPane.getChildren().clear();
+        load();
+    }
+
+    /**
+     * Adjusts the number of columns in the grid based on the width of the window.
+     * It ensures that the movie covers are displayed appropriately depending on the window size.
+     *
+     * @param windowWidth the width of the window
+     */
+    private void adjustColumnCount(double windowWidth) {
+        double imageWidth = 200 + 40; // Width of images plus margin
+        int numColumns = Math.max(1, (int) (windowWidth / imageWidth)); // Count of columns from windowWidth
+        int row = 0;
+        int column = 0;
+        for (Node child : gridPane.getChildren()) {
+            GridPane.setRowIndex(child, row);
+            GridPane.setColumnIndex(child, column);
+            column++;
+            if (column == numColumns) {
+                column = 0;
+                row++;
+            }
+        }
+    }
+    //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
+    public void goToMovie(Movies movie) throws IOException {
+        MovieController movieController = connector.getMovieController();
+        MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        movieController.fillPage(movie);
+        movieController.setEditImage();
+    }
+    public void load(){
         // Set behavior of scrollPane
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -118,37 +154,8 @@ public class LibraryController {
         }
         // Initialize the count of columns
         adjustColumnCount(scrollPane.getWidth());
-    }
 
-    /**
-     * Adjusts the number of columns in the grid based on the width of the window.
-     * It ensures that the movie covers are displayed appropriately depending on the window size.
-     *
-     * @param windowWidth the width of the window
-     */
-    private void adjustColumnCount(double windowWidth) {
-        double imageWidth = 200 + 40; // Width of images plus margin
-        int numColumns = Math.max(1, (int) (windowWidth / imageWidth)); // Count of columns from windowWidth
-        int row = 0;
-        int column = 0;
-        for (Node child : gridPane.getChildren()) {
-            GridPane.setRowIndex(child, row);
-            GridPane.setColumnIndex(child, column);
-            column++;
-            if (column == numColumns) {
-                column = 0;
-                row++;
-            }
-        }
     }
-    //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
-    public void goToMovie(Movies movie) throws IOException {
-        MovieController movieController = connector.getMovieController();
-        MainApplication.borderPane.setCenter(movieController.getOuterPane());
-        movieController.fillPage(movie);
-        movieController.setEditImage();
-    }
-
     /**
      * @return returns main frame of the scene to the connector the method is called from
      */

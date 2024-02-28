@@ -8,8 +8,6 @@
         <property name="hibernate.connection.username">admin</property>
         <property name="hibernate.connection.password">U7JEfPHMAhuQKuuD7CDF</property>
         <property name="show_sql">true</property>
-
-
         <!-- Mapping files or annotated classes -->
         <mapping class="com.filmverleih.filmverleih.entity.Movies"/>
         <mapping class="com.filmverleih.filmverleih.entity.Users"/>

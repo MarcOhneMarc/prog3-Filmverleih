@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
 import java.math.BigDecimal;
@@ -30,6 +32,8 @@ public class MovieController {
     private SplitPane sp_Movie;
     @FXML
     private GridPane gp_Table;
+    @FXML
+    private AnchorPane ap_rightFrame;
 
     //Labels that need to be filled
     @FXML
@@ -125,11 +129,7 @@ public class MovieController {
         lbl_comment.setText(comment);
         if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
         else {
-            try{
-                ivw_Cover.setImage(new Image(Utility.getAbsolutePath("testcover/beemovie.png")));
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            }
+            ivw_Cover.setImage(new Image(Utility.getAbsolutePath("testcover/beemovie.png")));
         }
     }
     /**
@@ -138,39 +138,34 @@ public class MovieController {
      */
     public void setEditImage(){
         Image edit;
-        try {
-            edit = new Image(Utility.getAbsolutePath("icons/edit.png"));
-            iv_name.setImage(edit);
-            iv_name.setOnMouseClicked(e -> replace(e));
-            iv_year.setImage(edit);
-            iv_year.setOnMouseClicked(e -> replace(e));
-            iv_genre.setImage(edit);
-            iv_genre.setOnMouseClicked(e -> replace(e));
-            iv_length.setImage(edit);
-            iv_length.setOnMouseClicked(e -> replace(e));
-            iv_rating.setImage(edit);
-            iv_rating.setOnMouseClicked(e -> replace(e));
-            iv_count.setImage(edit);
-            iv_count.setOnMouseClicked(e -> replace(e));
-            iv_type.setImage(edit);
-            iv_type.setOnMouseClicked(e -> replace(e));
-            iv_cover.setImage(edit);
-            iv_cover.setOnMouseClicked(e -> replace(e));
-            iv_directors.setImage(edit);
-            iv_directors.setOnMouseClicked(e -> replace(e));
-            iv_studio.setImage(edit);
-            iv_studio.setOnMouseClicked(e -> replace(e));
-            iv_actors.setImage(edit);
-            iv_actors.setOnMouseClicked(e -> replace(e));
-            iv_fsk.setImage(edit);
-            iv_fsk.setOnMouseClicked(e -> replace(e));
-            iv_comment.setImage(edit);
-            /* must be handled seperatly due to not being in the GridPane
-            iv_comment.setOnMouseClicked(e -> replace(e));
-            */
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        edit = new Image(Utility.getAbsolutePath("icons/edit.png"));
+        iv_name.setImage(edit);
+        iv_name.setOnMouseClicked(e -> replace(e));
+        iv_year.setImage(edit);
+        iv_year.setOnMouseClicked(e -> replace(e));
+        iv_genre.setImage(edit);
+        iv_genre.setOnMouseClicked(e -> replace(e));
+        iv_length.setImage(edit);
+        iv_length.setOnMouseClicked(e -> replace(e));
+        iv_rating.setImage(edit);
+        iv_rating.setOnMouseClicked(e -> replace(e));
+        iv_count.setImage(edit);
+        iv_count.setOnMouseClicked(e -> replace(e));
+        iv_type.setImage(edit);
+        iv_type.setOnMouseClicked(e -> replace(e));
+        iv_cover.setImage(edit);
+        iv_cover.setOnMouseClicked(e -> replace(e));
+        iv_directors.setImage(edit);
+        iv_directors.setOnMouseClicked(e -> replace(e));
+        iv_studio.setImage(edit);
+        iv_studio.setOnMouseClicked(e -> replace(e));
+        iv_actors.setImage(edit);
+        iv_actors.setOnMouseClicked(e -> replace(e));
+        iv_fsk.setImage(edit);
+        iv_fsk.setOnMouseClicked(e -> replace(e));
+        iv_comment.setImage(edit);
+        iv_comment.setOnMouseClicked(e -> editComment(e));
+
     }
     //</editor-fold>
     //<editor-fold desc = "Method-Mayhem">
@@ -261,14 +256,10 @@ public class MovieController {
         gp_Table.getChildren().remove(lbl);
         gp_Table.add(edit,col,row);
         gp_Table.getChildren().remove(target);
-        try {
-            iv_yes = new ImageView(new Image(Utility.getAbsolutePath("icons/yes.png")));
-            iv_yes.setFitHeight(20);
-            iv_yes.setFitWidth(20);
-            iv_no = new ImageView(new Image(Utility.getAbsolutePath("icons/no.png")));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+        iv_yes = new ImageView(new Image(Utility.getAbsolutePath("icons/yes.png")));
+        iv_yes.setFitHeight(20);
+        iv_yes.setFitWidth(20);
+        iv_no = new ImageView(new Image(Utility.getAbsolutePath("icons/no.png")));
         iv_no.setFitHeight(20);
         iv_no.setFitWidth(20);
         ImageView iv_noFinal = iv_no;
@@ -331,9 +322,69 @@ public class MovieController {
             gp_Table.add(lbl, col, row);
             gp_Table.add(iv_prev, col + 1, row);
             Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()), Utility.findColumnByRow(row), newValue);
+            connector.getLibraryController().refresh();
             isEditing = false;
         }
         else cancel(lbl,col,row,iv_no,iv_yes,iv_prev,edit);
+    }
+    private void editComment(MouseEvent event){
+        if (isEditing)return;
+        isEditing=true;
+        ImageView target = (ImageView)event.getSource();
+        String oldValue = lbl_comment.getText();
+        ap_rightFrame.getChildren().remove(lbl_comment);
+        TextArea edit = new TextArea(oldValue);
+        edit.setMinSize(200,150);
+        edit.setMaxSize(200,150);
+        ap_rightFrame.getChildren().add(edit);
+        AnchorPane.setBottomAnchor(edit, 0.0);
+        AnchorPane.setLeftAnchor(edit,0.0);
+        AnchorPane.setRightAnchor(edit, 0.0);
+        ap_rightFrame.getChildren().remove(target);
+        Label accept = new Label();
+        ImageView iv_yes = new ImageView();
+        iv_yes.setFitWidth(20);
+        iv_yes.setFitHeight(20);
+        iv_yes.setImage(new Image(Utility.getAbsolutePath("icons/yes.png")));
+        accept.setGraphic(iv_yes);
+        Label cancel = new Label();
+        ImageView iv_no = new ImageView();
+        iv_no.setFitHeight(20);
+        iv_no.setFitWidth(20);
+        iv_no.setImage(new Image(Utility.getAbsolutePath("icons/no.png")));
+        cancel.setGraphic(iv_no);
+        ap_rightFrame.getChildren().add(accept);
+        ap_rightFrame.getChildren().add(cancel);
+        AnchorPane.setRightAnchor(cancel,0.0);
+        AnchorPane.setBottomAnchor(cancel,150.0);
+        AnchorPane.setRightAnchor(accept,20.0);
+        AnchorPane.setBottomAnchor(accept,150.0);
+        cancel.setOnMouseClicked(e -> cancelComment(accept,cancel,edit));
+        accept.setOnMouseClicked(e -> acceptComment(accept,cancel,edit,oldValue));
+    }
+
+    private void cancelComment(Label accept, Label cancel,TextArea edit){
+        ap_rightFrame.getChildren().remove(accept);
+        ap_rightFrame.getChildren().remove(cancel);
+        ap_rightFrame.getChildren().remove(edit);
+        ap_rightFrame.getChildren().add(lbl_comment);
+        ap_rightFrame.getChildren().add(iv_comment);
+        isEditing = false;
+    }
+    private void acceptComment(Label accept, Label cancel,TextArea edit, String oldValue){
+        String newValue = edit.getText();
+        if (newValue.equals(oldValue)) cancelComment(accept,cancel,edit);
+        else {
+            ap_rightFrame.getChildren().remove(accept);
+            ap_rightFrame.getChildren().remove(cancel);
+            ap_rightFrame.getChildren().remove(edit);
+            ap_rightFrame.getChildren().add(lbl_comment);
+            ap_rightFrame.getChildren().add(iv_comment);
+            lbl_comment.setText(newValue);
+            Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()),Utility.findColumnByRow(0),newValue);
+            connector.getLibraryController().refresh();
+            isEditing = false;
+        }
     }
     //</editor-fold>
     //<editor-fold desc = "getter-setter-sweater">

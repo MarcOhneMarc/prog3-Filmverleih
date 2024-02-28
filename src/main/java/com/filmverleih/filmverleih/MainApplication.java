@@ -102,6 +102,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
         borderPane.setTop(navbarRoot);
         borderPane.setCenter(libraryRoot);
+        borderPane.setRight(filterRoot);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

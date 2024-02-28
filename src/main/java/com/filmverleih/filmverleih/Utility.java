@@ -40,6 +40,7 @@ public class Utility {
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
+                session.clear();
                 transaction = session.beginTransaction();
                 List<Movies> movies = session.createQuery("FROM Movies ", Movies.class).getResultList();
                 transaction.commit();
@@ -47,6 +48,9 @@ public class Utility {
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
+            }
+            finally{
+                session.close();
             }
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
@@ -82,6 +86,9 @@ public class Utility {
                 e.printStackTrace();
                 return false;
             }
+            finally{
+                session.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -94,15 +101,17 @@ public class Utility {
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
+                session.clear();
                 transaction = session.beginTransaction();
-
                 session.createQuery("DELETE FROM Movies WHERE movieid = " + movDelID).executeUpdate();
-
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace();
                 return false;
+            }
+            finally{
+                session.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,6 +125,7 @@ public class Utility {
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
+                session.clear();
                 transaction = session.beginTransaction();
                 Movies movieToUpdate = session.get(Movies.class, movUpID);
                 if (movieToUpdate != null){
@@ -167,6 +177,9 @@ public class Utility {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace();
             }
+            finally{
+                session.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -194,11 +207,15 @@ public class Utility {
     }
     //</editor-fold>
     //<editor-fold desc = "File-FlicFlacs">
-    public static String getAbsolutePath (String resourceName) throws URISyntaxException {
+    public static String getAbsolutePath (String resourceName) {
+        try{
         URL res = MainApplication.class.getResource(resourceName);
         File file = Paths.get(res.toURI()).toFile();
         String absolutePath = file.getAbsolutePath();
         return absolutePath;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
     //</editor-fold>
 }
