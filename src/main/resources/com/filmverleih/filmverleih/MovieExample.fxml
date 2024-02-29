@@ -22,7 +22,7 @@
                      <children>
                         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="596.0">
                            <children>
-                              <Label id="lbl_name" alignment="TOP_LEFT" layoutX="-5.0" layoutY="-15.0" prefHeight="99.0" prefWidth="596.0" styleClass="font, whiteText" wrapText="true">
+                              <Label id="lbl_name" alignment="TOP_LEFT" layoutX="-5.0" layoutY="-15.0" prefHeight="99.0" prefWidth="596.0" styleClass="font, whiteText" text="Bee Movie" wrapText="true">
                                  <font>
                                     <Font size="96.0" />
                                  </font>
@@ -33,7 +33,7 @@
                            <children>
                               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label id="lbl_year" layoutY="4.0" prefHeight="47.0" prefWidth="145.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_year" layoutY="4.0" prefHeight="47.0" prefWidth="145.0" styleClass="font, whiteText" text="2007" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -42,7 +42,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="213.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label id="lbl_fsk" alignment="CENTER" layoutX="6.0" layoutY="4.0" prefHeight="47.0" prefWidth="158.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_fsk" alignment="CENTER" layoutX="6.0" layoutY="4.0" prefHeight="47.0" prefWidth="158.0" styleClass="font, whiteText" text="FSK 0" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -51,7 +51,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="438.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label id="lbl_length" alignment="CENTER_RIGHT" layoutY="2.0" prefHeight="47.0" prefWidth="158.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_length" alignment="CENTER_RIGHT" layoutY="2.0" prefHeight="47.0" prefWidth="158.0" styleClass="font, whiteText" text="91min" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -69,7 +69,7 @@
                               </Label>
                               <AnchorPane layoutX="131.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="465.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                  <children>
-                                    <Label id="lbl_directors" alignment="TOP_LEFT" layoutX="11.0" prefHeight="172.0" prefWidth="454.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_directors" alignment="TOP_LEFT" layoutX="11.0" prefHeight="172.0" prefWidth="454.0" styleClass="font, whiteText" text="Simon J. Smith,  Steve Hickner" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -87,7 +87,7 @@
                               </Label>
                               <AnchorPane layoutX="131.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="465.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                  <children>
-                                    <Label id="lbl_actors" alignment="TOP_LEFT" layoutX="11.0" prefHeight="144.0" prefWidth="454.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_actors" alignment="TOP_LEFT" layoutX="11.0" prefHeight="144.0" prefWidth="454.0" styleClass="font, whiteText" text="Jerry Seinfeld, Renée Zellweger, Matthew Broderick, Patrick Warburton, Chris Rock" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -100,7 +100,7 @@
                            <children>
                               <AnchorPane layoutX="131.0" layoutY="5.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="111.0" prefWidth="465.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
                                  <children>
-                                    <Label id="lbl_studio" alignment="TOP_LEFT" layoutX="11.0" prefHeight="37.0" prefWidth="454.0" styleClass="font, whiteText" wrapText="true">
+                                    <Label id="lbl_studio" alignment="TOP_LEFT" layoutX="11.0" prefHeight="37.0" prefWidth="454.0" styleClass="font, whiteText" text="Dreamworks" wrapText="true">
                                        <font>
                                           <Font size="32.0" />
                                        </font>
@@ -118,7 +118,7 @@
                   </VBox>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="300.0">
                      <children>
-                        <Label id="lbl_cover" alignment="CENTER" prefHeight="450.0" prefWidth="300.0">
+                        <Label id="lbl_cover" alignment="CENTER" prefHeight="450.0" prefWidth="300.0" text="Label">
                            <font>
                               <Font size="96.0" />
                            </font>
@@ -138,7 +138,7 @@
                         </ImageView>
                         <AnchorPane layoutX="40.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="53.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Label id="lbl_rating" layoutX="4.0" layoutY="-5.0" maxHeight="37.0" minHeight="37.0" prefHeight="37.0" prefWidth="45.0">
+                              <Label id="lbl_rating" layoutX="4.0" layoutY="-5.0" maxHeight="37.0" minHeight="37.0" prefHeight="37.0" prefWidth="45.0" text="6.1">
                                  <styleClass>
                                     <String fx:value="font" />
                                     <String fx:value="whiteText" />
@@ -159,6 +159,26 @@
                   <AnchorPane minHeight="-Infinity" prefHeight="34.0" prefWidth="765.0">
                      <children>
                         <HBox id="hb_genre" layoutX="-1.0" layoutY="1.0" prefHeight="37.0" prefWidth="765.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="37.0" prefWidth="157.0" text="Animation">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="whiteText" />
+                                    <String fx:value="genreButton" />
+                                 </styleClass>
+                              </Label>
+                              <Label prefHeight="37.0" prefWidth="65.0" text="Fun">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="whiteText" />
+                                    <String fx:value="genreButton" />
+                                 </styleClass>
+                              </Label>
+                           </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -174,7 +194,7 @@
                <children>
                   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="923.0">
                      <children>
-                        <Label id="lbl_comment" alignment="TOP_LEFT" prefHeight="333.0" prefWidth="923.0" styleClass="font" textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label id="lbl_comment" alignment="TOP_LEFT" prefHeight="333.0" prefWidth="923.0" styleClass="font" text="Barry B. Benson, a bee just graduated from college, is disillusioned at his lone career choice: making honey. On a special trip outside the hive, Barry's life is saved by Vanessa, a florist in New York City. As their relationship blossoms, he discovers humans actually eat honey and subsequently decides to sue them." textFill="WHITE" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <font>
                               <Font size="32.0" />
                            </font>
@@ -207,7 +227,7 @@
                   </Label>
                   <AnchorPane layoutX="102.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="170.0">
                      <children>
-                        <Label id="lbl_type" alignment="TOP_LEFT" layoutX="13.0" prefHeight="47.0" prefWidth="145.0" styleClass="font" textFill="WHITE" wrapText="true">
+                        <Label id="lbl_type" alignment="TOP_LEFT" layoutX="13.0" prefHeight="47.0" prefWidth="145.0" styleClass="font" text="CD" textFill="WHITE" wrapText="true">
                            <font>
                               <Font size="32.0" />
                            </font>
@@ -221,7 +241,7 @@
                   </Label>
                   <AnchorPane layoutX="114.0" layoutY="47.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="170.0">
                      <children>
-                        <Label id="lbl_count" alignment="TOP_LEFT" layoutX="14.0" prefHeight="47.0" prefWidth="145.0" styleClass="font" textFill="WHITE" wrapText="true">
+                        <Label id="lbl_count" alignment="TOP_LEFT" layoutX="14.0" prefHeight="47.0" prefWidth="145.0" styleClass="font" text="5" textFill="WHITE" wrapText="true">
                            <font>
                               <Font size="32.0" />
                            </font>

@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -76,7 +77,8 @@ public class LibraryController {
      * @param windowWidth the width of the window
      */
     private void adjustColumnCount(double windowWidth) {
-        double imageWidth = 200 + 40; // Width of images plus margin
+        double imageWidth = 200 + 20; // Width of images plus margin
+        windowWidth -= 20;
         int numColumns = Math.max(1, (int) (windowWidth / imageWidth)); // Count of columns from windowWidth
         int row = 0;
         int column = 0;
@@ -89,6 +91,7 @@ public class LibraryController {
                 row++;
             }
         }
+        AnchorPane.setRightAnchor(scrollPane, 0.0);
     }
     //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
     public void goToMovie(Movies movie) throws IOException {
