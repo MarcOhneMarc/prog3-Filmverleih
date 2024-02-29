@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/MovieExample.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/reviewStar.png" afterDir="false" />
+    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-Movie.fxml neues design erstellt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709156438060</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="FEAT-Movie.fxml neues design erstellt">
+      <option name="closed" value="true" />
+      <created>1709211151937</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709211151937</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,6 +202,7 @@
     <MESSAGE value="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D" />
     <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;- editing bool (checks if already editing another value and prevents firing a second edit event)&#10;- no database access if old = new value&#10;Can now edit movies via Library/MovieView&#10;refactored Utility.UpdateMovieInDB to not post a String query, but use Entity-Logic instead." />
     <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints" />
+    <MESSAGE value="FEAT-Movie.fxml neues design erstellt" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Movie.fxml neues design erstellt" />
   </component>
 </project>
