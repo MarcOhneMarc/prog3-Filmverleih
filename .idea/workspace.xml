@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-Movie.fxml neues design erstellt">
+    <list default="true" id="6587e751-cf81-4853-8bc3-8e9a77f30311" name="Changes" comment="FEAT-tick-47&#10;Code-CleanUp:&#10;Replaced Switches with enhanced Switches to get rid of some effectively Final vars&#10;replaced redundant calls&#10;added some more editor-folds">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/MovieExample.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="FEAT-tick-47" />
+        <entry key="$PROJECT_DIR$" value="FEAT-tick-47_design" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,24 +54,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "FEAT-tick-47__design",
-    "last_directory_selection": "C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih",
-    "last_opened_file_path": "C:/Users/Jonas/Desktop/Git/src/main/resources/com/filmverleih/filmverleih",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "copyright"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;FEAT-tick-47__design&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/resources/com/filmverleih/filmverleih&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
-      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih\icons" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih\icons" />
+      <recent name="C:\Users\juk3b0x\Documents\BFD\3. Semester\Programmierung 3\workspace\prog3-Filmverleih\src\main\resources\com\filmverleih\filmverleih" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.filmverleih.filmverleih" />
@@ -162,13 +164,12 @@
       <option name="project" value="LOCAL" />
       <updated>1709156438060</updated>
     </task>
-    <task id="LOCAL-00008" summary="FEAT-Movie.fxml neues design erstellt">
-      <option name="closed" value="true" />
-      <created>1709211151937</created>
+    <task id="LOCAL-00008" summary="FEAT-tick-47&#10;Code-CleanUp:&#10;Replaced Switches with enhanced Switches to get rid of some effectively Final vars&#10;replaced redundant calls&#10;added some more editor-folds">
+      <created>1709158868956</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1709211151937</updated>
+      <updated>1709158868956</updated>
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
@@ -202,7 +203,28 @@
     <MESSAGE value="FEAT-tick-47&#10;- Added edit icons&#10;- Added edit functionality&#10;- Icons can be changed, just placeholders for now&#10;- please be careful with accept button, functionality not tested yet!!&#10;Note: Sometimes klick events dont fire, maybe its my computer, just click more than once and youll be fine :D" />
     <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;- editing bool (checks if already editing another value and prevents firing a second edit event)&#10;- no database access if old = new value&#10;Can now edit movies via Library/MovieView&#10;refactored Utility.UpdateMovieInDB to not post a String query, but use Entity-Logic instead." />
     <MESSAGE value="FEAT-tick-47&#10;Implemented:&#10;all editing functionalities are implemented&#10;library refresh working&#10;&#10;TODO: Code-CleanUp, adjust DB Constraints" />
-    <MESSAGE value="FEAT-Movie.fxml neues design erstellt" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Movie.fxml neues design erstellt" />
+    <MESSAGE value="FEAT-tick-47&#10;Code-CleanUp:&#10;Replaced Switches with enhanced Switches to get rid of some effectively Final vars&#10;replaced redundant calls&#10;added some more editor-folds" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-47&#10;Code-CleanUp:&#10;Replaced Switches with enhanced Switches to get rid of some effectively Final vars&#10;replaced redundant calls&#10;added some more editor-folds" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

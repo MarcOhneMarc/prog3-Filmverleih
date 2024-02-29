@@ -2,18 +2,14 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
 
 public class MovieController {
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
@@ -26,24 +22,18 @@ public class MovieController {
     }
     //<editor-fold desc = "Attribute-Armageddon">
     //Attributes
+    Movies movie;
     @FXML
-    private ImageView ivw_Cover;
-    @FXML
-    private SplitPane sp_Movie;
-    @FXML
-    private GridPane gp_Table;
-    @FXML
-    private AnchorPane ap_rightFrame;
+    private AnchorPane ap_Movie;
 
     //Labels that need to be filled
-    @FXML
-    private Label lbl_id;
+
     @FXML
     private Label lbl_name;
     @FXML
     private Label lbl_year;
     @FXML
-    private Label lbl_genre;
+    private HBox hbx_genre;
     @FXML
     private Label lbl_length;
     @FXML
@@ -64,32 +54,8 @@ public class MovieController {
     private Label lbl_fsk;
     @FXML
     private Label lbl_comment;
-    @FXML
-    private ImageView iv_name;
-    @FXML
-    private ImageView iv_year;
-    @FXML
-    private ImageView iv_genre;
-    @FXML
-    private ImageView iv_length;
-    @FXML
-    private ImageView iv_rating;
-    @FXML
-    private ImageView iv_count;
-    @FXML
-    private ImageView iv_type;
-    @FXML
-    private ImageView iv_cover;
-    @FXML
-    private ImageView iv_directors;
-    @FXML
-    private ImageView iv_studio;
-    @FXML
-    private ImageView iv_actors;
-    @FXML
-    private ImageView iv_fsk;
-    @FXML
-    private ImageView iv_comment;
+
+
     private boolean isEditing = false;
     //</editor-fold>
     //<editor-fold desc = "PageCreation-Poolparty">
@@ -99,7 +65,7 @@ public class MovieController {
      */
     public void fillPage(Movies movie)
     {
-        int id = movie.getMovieid();
+        this.movie = movie;
         String name = movie.getName();
         int year = movie.getYear();
         String genre = movie.getGenre();
@@ -113,10 +79,12 @@ public class MovieController {
         String actors = movie.getActors();
         String comment = movie.getComment();
         int fsk = movie.getFsk();
-        lbl_id.setText(String.valueOf(id));
+        ImageView iv_cover = new ImageView();
+        iv_cover.setFitHeight(450);
+        iv_cover.setFitWidth(300);
         lbl_name.setText(name);
         lbl_year.setText(String.valueOf(year));
-        lbl_genre.setText(genre);
+        fillHBox(hbx_genre,Utility.getLabelsFromString(genre));
         lbl_length.setText(String.valueOf(length));
         lbl_rating.setText(String.valueOf(rating));
         lbl_count.setText(String.valueOf(count));
@@ -127,45 +95,34 @@ public class MovieController {
         lbl_actors.setText(actors);
         lbl_fsk.setText(String.valueOf(fsk));
         lbl_comment.setText(comment);
-        if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
+        if (!cover.isBlank()||!cover.isEmpty()) {
+            iv_cover.setImage(new Image(cover));
+            lbl_cover.setGraphic(iv_cover);
+        }
         else {
-            ivw_Cover.setImage(new Image(Utility.getAbsolutePath("testcover/beemovie.png")));
+            iv_cover.setImage(new Image(Utility.getAbsolutePath("testcover/beemovie.png")));
+            lbl_cover.setGraphic(iv_cover);
         }
     }
     /**
      * Makes sure, every Label filled by fillPage() gets an edit-icon next to it
      * and adds replace(e) logic to the icons
      */
-    public void setEditImage(){
+    public void setEditable(){
         Image edit;
         edit = new Image(Utility.getAbsolutePath("icons/edit.png"));
-        iv_name.setImage(edit);
-        iv_name.setOnMouseClicked(e -> replace(e));
-        iv_year.setImage(edit);
-        iv_year.setOnMouseClicked(e -> replace(e));
-        iv_genre.setImage(edit);
-        iv_genre.setOnMouseClicked(e -> replace(e));
-        iv_length.setImage(edit);
-        iv_length.setOnMouseClicked(e -> replace(e));
-        iv_rating.setImage(edit);
-        iv_rating.setOnMouseClicked(e -> replace(e));
-        iv_count.setImage(edit);
-        iv_count.setOnMouseClicked(e -> replace(e));
-        iv_type.setImage(edit);
-        iv_type.setOnMouseClicked(e -> replace(e));
-        iv_cover.setImage(edit);
-        iv_cover.setOnMouseClicked(e -> replace(e));
-        iv_directors.setImage(edit);
-        iv_directors.setOnMouseClicked(e -> replace(e));
-        iv_studio.setImage(edit);
-        iv_studio.setOnMouseClicked(e -> replace(e));
-        iv_actors.setImage(edit);
-        iv_actors.setOnMouseClicked(e -> replace(e));
-        iv_fsk.setImage(edit);
-        iv_fsk.setOnMouseClicked(e -> replace(e));
-        iv_comment.setImage(edit);
-        iv_comment.setOnMouseClicked(e -> editComment());
-
+        lbl_name.setOnMouseClicked(e -> replace(e, movie));;
+        lbl_year.setOnMouseClicked(e -> replace(e,movie));
+        lbl_length.setOnMouseClicked(e -> replace(e,movie));
+        lbl_rating.setOnMouseClicked(e -> replace(e,movie));
+        lbl_count.setOnMouseClicked(e -> replace(e,movie));
+        lbl_type.setOnMouseClicked(e -> replace(e,movie));
+        lbl_cover.setOnMouseClicked(e -> replace(e,movie));
+        lbl_directors.setOnMouseClicked(e -> replace(e,movie));
+        lbl_studio.setOnMouseClicked(e -> replace(e,movie));
+        lbl_actors.setOnMouseClicked(e -> replace(e,movie));
+        lbl_fsk.setOnMouseClicked(e -> replace(e,movie));
+        lbl_comment.setOnMouseClicked(e -> replace(e,movie));
     }
     //</editor-fold>
     //<editor-fold desc = "Method-Mayhem">
@@ -175,215 +132,156 @@ public class MovieController {
      * @param event the Mouse Event that fired the method, needed to get the target
      *              NOTE: somehow, the UI sometimes does not register clickEvents, might be my slow-ass machine...
      */
-    public void replace(MouseEvent event){
+
+    public void replace(MouseEvent event, Movies movie){
         if (isEditing) return;
-        ImageView target = (ImageView)event.getTarget();
-        String id = target.getId();
-        String text = "";
-        int col = 1;
-        Label lbl = new Label();
-        int row = switch (id) {
-            case "iv_name" -> {
-                text = lbl_name.getText();
-                lbl = lbl_name;
-                yield 1;
+        isEditing = true;
+        Label source = (Label)event.getSource();
+        String fxid = source.getId();
+        String oldValue="";
+
+        double[] sizes = Utility.getLabelSizes(source);
+        AnchorPane anchorPane = switch (fxid){
+            case "lbl_name" ->{
+                oldValue = movie.getName();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_year" -> {
-                text = lbl_year.getText();
-                lbl = lbl_year;
-                yield 2;
+            case "lbl_year" -> {
+                oldValue = String.valueOf(movie.getYear());
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_genre" -> {
-                text = lbl_genre.getText();
-                lbl = lbl_genre;
-                yield 3;
+            case "lbl_fsk" ->{
+                oldValue = String.valueOf(movie.getFsk());
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_length" -> {
-                text = lbl_length.getText();
-                lbl = lbl_length;
-                yield 4;
+            case "lbl_length" -> {
+                oldValue = String.valueOf(movie.getLength());
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_rating" -> {
-                text = lbl_rating.getText();
-                lbl = lbl_rating;
-                yield 5;
+            case "lbl_rating" -> {
+                oldValue = String.valueOf(movie.getRating());
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_count" -> {
-                text = lbl_count.getText();
-                lbl = lbl_count;
-                yield 6;
+            case "lbl_directors" -> {
+                oldValue = movie.getDirectors();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_type" -> {
-                text = lbl_type.getText();
-                lbl = lbl_type;
-                yield 7;
+            case "lbl_actors" -> {
+                oldValue = movie.getActors();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_cover" -> {
-                text = lbl_cover.getText();
-                lbl = lbl_cover;
-                yield 8;
+            case "lbl_studio" -> {
+                oldValue = movie.getStudio();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_directors" -> {
-                text = lbl_cover.getText();
-                lbl = lbl_directors;
-                yield 9;
+            case "lbl_cover" -> {
+                oldValue = movie.getCover();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_studio" -> {
-                text = lbl_studio.getText();
-                lbl = lbl_studio;
-                yield 10;
+            case "lbl_count" -> {
+                oldValue = String.valueOf(movie.getCount());
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_actors" -> {
-                text = lbl_actors.getText();
-                lbl = lbl_actors;
-                yield 11;
+            case "lbl_type" -> {
+                oldValue = movie.getType();
+                yield (AnchorPane)source.getParent();
             }
-            case "iv_fsk" -> {
-                text = lbl_fsk.getText();
-                lbl = lbl_fsk;
-                yield 12;
+            case "lbl_comment" -> {
+                oldValue = movie.getComment();
+                yield (AnchorPane)source.getParent();
             }
-            default ->{
-                yield 0;
+            default -> {
+                if (fxid.matches("lbl_genre\\d+")){
+                    oldValue = movie.getGenre();
+                    sizes[0] = 631;
+                    sizes[1] = 37;
+                    yield  (AnchorPane) hbx_genre.getParent();
+                }
+                else yield null;
             }
         };
-        TextField edit = new TextField(text);
-        gp_Table.getChildren().remove(lbl);
-        gp_Table.add(edit,col,row);
-        gp_Table.getChildren().remove(target);
-        ImageView iv_yes = new ImageView(new Image(Utility.getAbsolutePath("icons/yes.png")));
-        iv_yes.setFitHeight(20);
-        iv_yes.setFitWidth(20);
-        ImageView iv_no = new ImageView(new Image(Utility.getAbsolutePath("icons/no.png")));
-        iv_no.setFitHeight(20);
-        iv_no.setFitWidth(20);
-        Label lblFinal = lbl;
-        String textFinal = text;
-        gp_Table.add(iv_yes,1,row);
-        GridPane.setHalignment(iv_yes, HPos.RIGHT);
-        gp_Table.getChildren().remove(target);
-        gp_Table.add(iv_no,2,row);
-        isEditing = true;
-        iv_yes.setOnMouseClicked(e -> accept(lblFinal,col,row,iv_no,iv_yes,target,edit,edit.getText(),textFinal));
-        iv_no.setOnMouseClicked(e->cancel(lblFinal,col,row,iv_no,iv_yes,target,edit));
-    }
-
-    /**
-     * cancels a previous edit event
-     * TODO: try to reduce the code a bit
-     * @param lbl the original label, that was replaced
-     * @param col the column the original label was in
-     * @param row the row the label was in (always 1 in this case)
-     * @param iv_no the cancel-icon
-     * @param iv_yes the accept icon
-     * @param iv_prev the previous edit-icon
-     * @param edit the edit field that was created
-     *             NOTE: while those fields are not necessarily needed, they make code more readable
-     *             NOTE: somehow, the UI sometimes does not register clickEvents, might be my slow-ass machine...
-     */
-    public void cancel(Label lbl, int col, int row, ImageView iv_no, ImageView iv_yes, ImageView iv_prev, TextField edit){
-        gp_Table.getChildren().remove(iv_yes);
-        gp_Table.getChildren().remove(iv_no);
-        gp_Table.getChildren().remove(edit);
-        gp_Table.add(lbl, col,row);
-        gp_Table.add(iv_prev,col+1,row);
-        setEditImage();
-        isEditing = false;
-    }
-
-    /**
-     * accepts a change made in an edit event
-     * TODO: check if text is the same, fire cancel then
-     * @param lbl the original label, that was replaced
-     * @param col the column the original label was in
-     * @param row the row the label was in (always 1 in this case)
-     * @param iv_no the cancel-icon
-     * @param iv_yes the accept icon
-     * @param iv_prev the previous edit-icon
-     * @param edit the edit field that was created
-     * @param newValue the new value taken from the TextField of the edit-event
-     *                 NOTE: UpdateMovieInDB not yet modified/tested, handle with caution!
-     */
-    public void accept(Label lbl, int col, int row, ImageView iv_no, ImageView iv_yes, ImageView iv_prev, TextField edit, String newValue, String oldValue){
-        if (!newValue.equals(oldValue)) {
-            gp_Table.getChildren().remove(iv_yes);
-            gp_Table.getChildren().remove(iv_no);
-            gp_Table.getChildren().remove(edit);
-            lbl.setText(newValue);
-            gp_Table.add(lbl, col, row);
-            gp_Table.add(iv_prev, col + 1, row);
-            Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()), Utility.findColumnByRow(row), newValue);
-            connector.getLibraryController().refresh();
-            isEditing = false;
-        }
-        else cancel(lbl,col,row,iv_no,iv_yes,iv_prev,edit);
-    }
-    private void editComment(){
-        if (isEditing)return;
-        isEditing=true;
-        String oldValue = lbl_comment.getText();
-        ap_rightFrame.getChildren().remove(lbl_comment);
-        TextArea edit = new TextArea(oldValue);
-        edit.setMinSize(200,150);
-        edit.setMaxSize(200,150);
-        ap_rightFrame.getChildren().add(edit);
-        AnchorPane.setBottomAnchor(edit, 0.0);
-        AnchorPane.setLeftAnchor(edit,0.0);
-        AnchorPane.setRightAnchor(edit, 0.0);
-        ap_rightFrame.getChildren().remove(iv_comment);
+        //anchorPane.getChildren().remove(source);
+        anchorPane.getChildren().clear();
+        TextField replacement = new TextField();
+        Utility.setTextFieldSizes(replacement,sizes);
+        replacement.setText(oldValue);
+        anchorPane.getChildren().add(replacement);
         Label accept = new Label();
         ImageView iv_yes = new ImageView();
-        iv_yes.setFitWidth(20);
-        iv_yes.setFitHeight(20);
+        iv_yes.setFitWidth(37);
+        iv_yes.setFitHeight(37);
         iv_yes.setImage(new Image(Utility.getAbsolutePath("icons/yes.png")));
         accept.setGraphic(iv_yes);
+        anchorPane.getChildren().add(accept);
+        Utility.setRightAndTopAnchor(accept,42,0);
         Label cancel = new Label();
         ImageView iv_no = new ImageView();
-        iv_no.setFitHeight(20);
-        iv_no.setFitWidth(20);
+        iv_no.setFitWidth(37);
+        iv_no.setFitHeight(37);
         iv_no.setImage(new Image(Utility.getAbsolutePath("icons/no.png")));
         cancel.setGraphic(iv_no);
-        ap_rightFrame.getChildren().add(accept);
-        ap_rightFrame.getChildren().add(cancel);
-        AnchorPane.setRightAnchor(cancel,0.0);
-        AnchorPane.setBottomAnchor(cancel,150.0);
-        AnchorPane.setRightAnchor(accept,20.0);
-        AnchorPane.setBottomAnchor(accept,150.0);
-        cancel.setOnMouseClicked(e -> cancelComment(accept,cancel,edit));
-        accept.setOnMouseClicked(e -> acceptComment(accept,cancel,edit,oldValue));
+        String oldValueFinal = oldValue;
+        cancel.setOnMouseClicked(e -> cancel(source,anchorPane));
+        accept.setOnMouseClicked(e -> accept(source,anchorPane,replacement,oldValueFinal));
+        anchorPane.getChildren().add(cancel);
+        Utility.setRightAndTopAnchor(cancel,84,0);
     }
 
-    private void cancelComment(Label accept, Label cancel,TextArea edit){
-        ap_rightFrame.getChildren().remove(accept);
-        ap_rightFrame.getChildren().remove(cancel);
-        ap_rightFrame.getChildren().remove(edit);
-        ap_rightFrame.getChildren().add(lbl_comment);
-        ap_rightFrame.getChildren().add(iv_comment);
+    public void cancel(Label source, AnchorPane parent){
+        if (source.getId().matches("lbl_genre\\d+")){
+            hbx_genre.getChildren().clear();
+            parent.getChildren().clear();
+            fillHBox(hbx_genre, Utility.getLabelsFromString(movie.getGenre()));
+            parent.getChildren().add(hbx_genre);
+        }
+        else {
+            parent.getChildren().clear();
+            parent.getChildren().add(source);
+            setEditable();
+        }
         isEditing = false;
     }
-    private void acceptComment(Label accept, Label cancel,TextArea edit, String oldValue){
-        String newValue = edit.getText();
-        if (newValue.equals(oldValue)) cancelComment(accept,cancel,edit);
+
+    public void accept(Label source, AnchorPane parent, TextField replacement,String oldValue){
+        String newValue = replacement.getText();
+        if (newValue.equals(oldValue)) cancel(source,parent);
         else {
-            ap_rightFrame.getChildren().remove(accept);
-            ap_rightFrame.getChildren().remove(cancel);
-            ap_rightFrame.getChildren().remove(edit);
-            ap_rightFrame.getChildren().add(lbl_comment);
-            ap_rightFrame.getChildren().add(iv_comment);
-            lbl_comment.setText(newValue);
-            Utility.UpdateMovieInDB(Integer.parseInt(lbl_id.getText()),Utility.findColumnByRow(0),newValue);
+            if (source.getId().matches("lbl_genre\\d+")) {
+                hbx_genre.getChildren().clear();
+                parent.getChildren().clear();
+                fillHBox(hbx_genre, Utility.getLabelsFromString(newValue));
+                parent.getChildren().add(hbx_genre);
+
+            }
+            else{
+                parent.getChildren().clear();
+                source.setText(newValue);
+                parent.getChildren().add(source);
+            }
+            Utility.UpdateMovieInDB(movie.getMovieid(),Utility.findColumnByFXID(source.getId()),newValue);
             connector.getLibraryController().refresh();
             isEditing = false;
         }
     }
+    public void fillHBox(HBox hbox, String[] genres){
+        hbox.getChildren().clear();
+        Label temp;
+        for (int i = 0; i < genres.length; i++){
+            temp = new Label(genres[i]);
+            temp.setId("lbl_genre"+i);
+            temp.setOnMouseClicked(e -> replace(e,movie));
+            hbox.getChildren().add(temp);
+        }
+    }
+
     //</editor-fold>
     //<editor-fold desc = "getter-setter-sweater">
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public SplitPane getOuterPane()
+    public AnchorPane getOuterPane()
     {
-        return sp_Movie;
+        return ap_Movie;
     }
     //</editor-fold>
     // credits for the edit-icon : <a href="https://www.flaticon.com/free-icons/register" title="register icons">Register icons created by Irfansusanto20 - Flaticon</a>
