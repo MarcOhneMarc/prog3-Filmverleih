@@ -31,13 +31,49 @@
 }
 
 
-.backgroundLibrary{
+.backgroundLibrary {
+    -fx-background-color: #ff0000;
+}
+
+.backgroundLibraryAnchor{
     -fx-background-color: #191919;
 }
 
-.movieLabelLibrary{
+.backgroundLibraryScroll {
+    -fx-background-color: #0000ff;
+}
+
+.movieLabelLibrary {
     -fx-background-color: #393939;
     -fx-text-fill: white;
+}
+
+.font {
+    -fx-font-family: "Inter";
+}
+
+.whiteText {
+    -fx-text-fill: white;
+}
+
+.genreButton {
+    -fx-background-color: #575757;
+    -fx-background-radius: 12px;
+    -fx-padding: -5 5 -5 5;
+}
+
+.basicButton {
+    -fx-padding: 0 5 0 5;
+    -fx-focus-color: transparent;
+    -fx-font-size: 32px;
+}
+
+.deleteButton {
+    -fx-background-color: #FF4040;
+}
+
+.addToCartButton {
+    -fx-background-color: #518E21;
 }
 
 

@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane stylesheets="@stylesheet.css" prefHeight="990.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.LibraryController">
+<AnchorPane stylesheets="@stylesheet.css" styleClass="backgroundLibraryAnchor" prefHeight="990.0" prefWidth="1580.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.LibraryController">
     <children>
-        <ScrollPane stylesheets="@stylesheet.css" styleClass="backgroundLibrary"  fx:id="scrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane stylesheets="@stylesheet.css" styleClass="backgroundLibraryScroll"  fx:id="scrollPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
                 <GridPane stylesheets="@stylesheet.css" styleClass="backgroundLibrary" fx:id="gridPane" prefWidth="1580.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
 

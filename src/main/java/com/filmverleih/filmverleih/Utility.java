@@ -8,9 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -161,23 +165,31 @@ public class Utility {
     }
     //</editor-fold>
     //<editor-fold desc = "Node-Nookies">
-    public static String findColumnByRow(int row){
-        return switch (row) {
-            case 1 -> "name";
-            case 2 -> "year";
-            case 3 -> "genre";
-            case 4 -> "length";
-            case 5 -> "rating";
-            case 6 -> "count";
-            case 7 -> "type";
-            case 8 -> "cover";
-            case 9 -> "directors";
-            case 10 -> "studio";
-            case 11 -> "actors";
-            case 12 -> "fsk";
-            case 0 -> "comment";
-            default -> throw new IllegalArgumentException("Wrong Column");
+    public static String findColumnByFXID(String fxid){
+        return switch (fxid) {
+            case "lbl_name" -> "name";
+            case "lbl_year" -> "year";
+            case "lbl_genre" -> "genre";
+            case "lbl_length" -> "length";
+            case "lbl_rating" -> "rating";
+            case "lbl_count" -> "count";
+            case "lbl_type" -> "type";
+            case "lbl_cover" -> "cover";
+            case "lbl_directors" -> "directors";
+            case "lbl_studio" -> "studio";
+            case "lbl_actors" -> "actors";
+            case "lbl_fsk" -> "fsk";
+            case "lbl_comment" -> "comment";
+            default -> {
+                if (fxid.matches("lbl_genre\\d+")) yield "genre";
+                yield null;
+            }
         };
+    }
+
+    public static String[] getLabelsFromString(String input){
+        String[] split = input.split(",");
+        return split;
     }
     //</editor-fold>
     //<editor-fold desc = "File-FlicFlacs">
@@ -190,6 +202,24 @@ public class Utility {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static double[] getLabelSizes(Label lbl){
+        double[] output = new double[2];
+        output[0] = lbl.getPrefWidth() -74;
+        output[1] = lbl.getPrefHeight();
+        return output;
+    }
+    public static void setTextFieldSizes(TextField tf, double[] sizes){
+        tf.setPrefSize(sizes[0],sizes[1]);
+        tf.setMaxWidth(Region.USE_PREF_SIZE);
+        tf.setMinWidth(Region.USE_PREF_SIZE);
+        tf.setMaxHeight(Region.USE_PREF_SIZE);
+        tf.setMinHeight(Region.USE_PREF_SIZE);
+    }
+    public static void setRightAndTopAnchor(Label lbl, double right, double top){
+        AnchorPane.setRightAnchor(lbl,right);
+        AnchorPane.setTopAnchor(lbl,top);
     }
     //</editor-fold>
 }
