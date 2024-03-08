@@ -35,8 +35,8 @@
                   <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
                   <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                     <columns>
-                      <TableColumn prefWidth="307.0" resizable="false" text="Film" />
-                      <TableColumn prefWidth="142.0" resizable="false" text="Preis" />
+                      <TableColumn fx:id="tbc_Movie" prefWidth="307.0" resizable="false" text="Film" />
+                      <TableColumn fx:id="tbc_Price" prefWidth="142.0" resizable="false" text="Preis" />
                     </columns>
                   </TableView>
                   <HBox fx:id="hbx_CartTotal" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" styleClass="hbx_class_CartValueHBoxes">
