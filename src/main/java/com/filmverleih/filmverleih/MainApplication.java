@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -102,6 +103,15 @@ public class MainApplication extends Application {
         Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
         borderPane.setTop(navbarRoot);
         borderPane.setCenter(libraryRoot);
+
+        String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        stage.setTitle("Quantum-Vortex");
+
+        Image icon = new Image(getClass().getResourceAsStream("logo.png"));
+        stage.getIcons().add(icon);
+
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
