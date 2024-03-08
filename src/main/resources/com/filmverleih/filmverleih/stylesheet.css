@@ -60,16 +60,6 @@
     -fx-background-color: #FFFF8D;
     -fx-background-radius: 12;
     -fx-font-size: 32;
-
-    /*
-
-    //dont know how to make the border fit the button
-    -fx-border-style: solid;
-    -fx-border-color: black;
-    -fx-border-radius: 12;
-    -fx-border-width: 2;
-     */
-
 }
 
 #btn_settings {

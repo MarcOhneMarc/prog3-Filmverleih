@@ -15,12 +15,12 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane fx:id="bdp_CartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="bdp_CartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
    <center>
       <SplitPane fx:id="spp_CartSplitPaneMiddle" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
          <items>
-            <ScrollPane fx:id="scp_Cart" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" />
-            <VBox fx:id="vbx_CartCustomerInfo" prefHeight="200.0" prefWidth="100.0">
+            <ScrollPane fx:id="scp_Cart" maxHeight="950.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" />
+            <VBox fx:id="vbx_CartCustomerInfo" maxHeight="950.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label fx:id="lbl_CartCustomerInformation" text="Kundeninformationen" textFill="WHITE">
                      <font>
@@ -87,7 +87,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
+                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>
