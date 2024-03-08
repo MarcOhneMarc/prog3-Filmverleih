@@ -131,3 +131,7 @@
 #vbx_CartCustomerInfo {
     -fx-spacing: 30;
 }
+
+#headerSearchbar {
+    -fx-text-fill: #000000;
+}
