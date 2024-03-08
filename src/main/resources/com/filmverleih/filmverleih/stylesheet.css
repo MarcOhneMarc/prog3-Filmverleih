@@ -103,3 +103,31 @@
 #grp_movieParamSelect {
 
 }
+
+
+#spp_CartSplitPaneMiddle {
+    -fx-background-color: #191919;
+}
+
+#btn_OrderCart {
+    -fx-background-color: #518E21;
+    -fx-background-radius: 12;
+}
+
+.txf_class_CartTextFields {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+.lbl_class_CartLabels {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 32;
+}
+
+.hbx_class_CartValueHBoxes {
+    -fx-spacing: 30;
+}
+
+#vbx_CartCustomerInfo {
+    -fx-spacing: 30;
+}

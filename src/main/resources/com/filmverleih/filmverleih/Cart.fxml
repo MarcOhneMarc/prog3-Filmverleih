@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane fx:id="bdp_CartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <SplitPane fx:id="spp_CartSplitPaneMiddle" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+         <items>
+            <ScrollPane fx:id="scp_Cart" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" />
+            <VBox fx:id="vbx_CartCustomerInfo" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="lbl_CartCustomerInformation" text="Kundeninformationen" textFill="WHITE">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txf_CartName" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
+                  <TextField fx:id="txf_CartSurname" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
+                  <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                  <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
+                    <columns>
+                      <TableColumn prefWidth="307.0" resizable="false" text="Film" />
+                      <TableColumn prefWidth="142.0" resizable="false" text="Preis" />
+                    </columns>
+                  </TableView>
+                  <HBox fx:id="hbx_CartTotal" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" styleClass="hbx_class_CartValueHBoxes">
+                     <children>
+                        <Label fx:id="lbl_CartTotal" text="Gesamt:">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_CartTotalValue" alignment="CENTER_RIGHT" text="value">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hbx_CartDate" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" styleClass="hbx_class_CartValueHBoxes">
+                     <children>
+                        <Label fx:id="lbl_Date" text="Datum:">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_DateValue" alignment="CENTER_RIGHT" text="value">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="hbx_CartReturnDate" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" styleClass="hbx_class_CartValueHBoxes">
+                     <children>
+                        <Label fx:id="lbl_ReturnDate" text="Rückgabe:">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_ReturnDateValue" alignment="CENTER_RIGHT" text="value">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+         </items>
+         <padding>
+            <Insets bottom="20.0" left="460.0" right="460.0" top="20.0" />
+         </padding>
+      </SplitPane>
+   </center>
+</BorderPane>
