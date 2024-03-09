@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import java.time.LocalDate;
+
 /**
  * controller class for the cart frame of the application
  * where the shopping cart can be seen with a list of
@@ -31,6 +33,8 @@ import java.util.Objects;
  * @author Hannes, Jannis
  */
 public class CartController {
+
+    private static final double FIXED_PRICE = 7.50;
 
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
 
@@ -100,12 +104,57 @@ public class CartController {
             fullMovieListObservable.add(movie);
         }
 
-        double fixedPrice = 7.50;
 
         tbv_CartItemsTable.setItems(fullMovieListObservable);
 
         tbc_Movie.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tbc_Price.setCellValueFactory(cellData -> new SimpleDoubleProperty(fixedPrice).asObject());
+        tbc_Price.setCellValueFactory(cellData -> new SimpleDoubleProperty(FIXED_PRICE).asObject());
+    }
+
+    /**
+     * This method calculates the total price for the items that
+     * are in the cart.
+     * TODO change from fullMovieList to an argument List (list of movies in the cart)
+     * @return total price of the cart
+     */
+    private double calculateTotalPrice() {
+        List<Movies> fullMovieList = Utility.getFullMovieList();
+        return fullMovieList.size() * FIXED_PRICE;
+    }
+
+    /**
+     * This method calculates the current Date using LocalDate
+     * from java.time.
+     * @return local / current Date
+     */
+    private LocalDate calculateCurrentDate() {
+        LocalDate localDate = LocalDate.now();
+        return localDate;
+    }
+
+    /**
+     * This method calculates the return Date using LocalDate
+     * from java.time. and adding two weeks
+     * @return local / current Date plus two weeks
+     *TODO determine how long movies are rented (here for example two weeks)
+     */
+    private LocalDate calculateReturnDate() {
+        LocalDate returnDate = LocalDate.now().plusWeeks(2);
+        return returnDate;
+    }
+
+
+    /**
+     * This method sets the text of the correspondent label to the different
+     * order information:
+     * -totalPrice
+     * -currentDate
+     * -returnDate
+     */
+    private void setOrderInformationLabels() {
+        lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
+        lbl_DateValue.setText(calculateCurrentDate().toString());
+        lbl_ReturnDateValue.setText(calculateReturnDate().toString());
     }
 
 
@@ -122,6 +171,7 @@ public class CartController {
     @FXML
     public void orderCart() throws IOException {
         fillTableView();
+        setOrderInformationLabels();
         fillMovieList();
         System.out.println("console test: order button has been clicked");
     }
