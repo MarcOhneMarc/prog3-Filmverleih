@@ -9,6 +9,8 @@ import static java.lang.String.valueOf;
 
 public class CartMovieController {
 
+    private CartController cartController;
+
     @FXML
     private HBox hbx_CartMovie;
     @FXML
@@ -24,6 +26,10 @@ public class CartMovieController {
     @FXML
     private Button btn_CartDeleteMovie;
 
+    public void setCartController(CartController cartController) {
+        this.cartController = cartController;
+    }
+
 
     /**
      * This method gets the movie information for the provided movie object and sets them to the according label
@@ -36,9 +42,13 @@ public class CartMovieController {
     }
 
     /**
-     * This method deletes the movie from cart
+     * This method removes the movie from cart
      */
-    public void deleteFromCart() {
-        System.out.println("console test: delete button has been clicked");
+    public void removeFromCart() {
+        System.out.println("console test: remove button has been clicked");
+
+        if (cartController != null) {
+            cartController.removeMovieCard(hbx_CartMovie);
+        }
     }
 }

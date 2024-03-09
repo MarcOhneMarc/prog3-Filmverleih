@@ -85,9 +85,16 @@ public class CartController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
             HBox movieCard = loader.load();
             CartMovieController controller = loader.getController();
+
+            controller.setCartController(this);
+
             vbx_CartMovieCardsVBox.getChildren().add(movieCard);
             controller.insertMovieInfo(movie);
         }
+    }
+
+    public void removeMovieCard(HBox movieCard) {
+        vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
     }
 
 
