@@ -39,6 +39,6 @@ public class CartMovieController {
      * This method deletes the movie from cart
      */
     public void deleteFromCart() {
-        System.out.println("Test der Knopf funktioniert");
+        System.out.println("console test: delete button has been clicked");
     }
 }

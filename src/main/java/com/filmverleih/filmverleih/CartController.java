@@ -51,11 +51,11 @@ public class CartController {
     @FXML
     private TextField txf_CartID;
     @FXML
-    private TableView<FilmForTest> tbv_CartItemsTable;
+    private TableView<Movies> tbv_CartItemsTable;
     @FXML
-    private TableColumn<FilmForTest, String> tbc_Movie;
+    private TableColumn<Movies, String> tbc_Movie;
     @FXML
-    private TableColumn<FilmForTest, Double> tbc_Price;
+    private TableColumn<Movies, Double> tbc_Price;
     @FXML
     private Label lbl_CartTotalValue;
     @FXML
@@ -84,44 +84,28 @@ public class CartController {
         }
     }
 
-    /**
-     *This inner Class is ONLY for Testing the Table view
-     * and creates simple Movie Objects with the Fields
-     * needed for the TableView Columns
-     * TODO Delete or update if Backend is connected
-     */
-    public static class FilmForTest {
-        private String title;
-        private double price;
-        public FilmForTest(String title, double price) {
-            this.title = title;
-            this.price = price;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-    }
 
     /**
-     * This method creates a testList with FilmForTest Objects
-     * to fill the TableView
-     * TODO Delete of update if Backend is connected
+     * This method fills the TableView with movies from a List
+     * which is copied into a ObservableList.
+     * It uses the name of the movie and its price.
+     * TODO determine price for movies (all the same?)
+     * TODO Delete or update if Backend is connected (use list as method argument)
      */
     public void fillTableView() {
-        ObservableList<FilmForTest> testList = FXCollections.observableArrayList();
-        for (int i = 0; i < 15; i++) {
-            testList.add(new FilmForTest("test" +i, 7.50));
+
+        List<Movies> fullMovieList = Utility.getFullMovieList();
+        ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
+        for (Movies movie : fullMovieList) {
+            fullMovieListObservable.add(movie);
         }
 
-        tbv_CartItemsTable.setItems(testList);
+        double fixedPrice = 7.50;
 
-        tbc_Movie.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
-        tbc_Price.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPrice()).asObject());
+        tbv_CartItemsTable.setItems(fullMovieListObservable);
+
+        tbc_Movie.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        tbc_Price.setCellValueFactory(cellData -> new SimpleDoubleProperty(fixedPrice).asObject());
     }
 
 
@@ -133,7 +117,7 @@ public class CartController {
      *
      * Also added a call for the fillTableView() Method in order
      * to test the TableView, after pressing the button once.
-     * TODO Delete of update if Backend is connected
+     * TODO Delete or update if Backend is connected
      */
     @FXML
     public void orderCart() throws IOException {
