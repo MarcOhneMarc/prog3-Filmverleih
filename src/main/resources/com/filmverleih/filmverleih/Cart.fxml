@@ -14,12 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane fx:id="bdp_CartBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
+<BorderPane fx:id="bdp_CartBorderPane" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
    <center>
       <SplitPane fx:id="spp_CartSplitPaneMiddle" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
          <items>
-            <ScrollPane fx:id="scp_Cart" maxHeight="950.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" />
+            <ScrollPane fx:id="scp_Cart" maxHeight="950.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" SplitPane.resizableWithParent="false">
+               <content>
+                  <VBox id="vbx_VBoxMovies" fx:id="vbx_CartMovieCardsVBox" alignment="TOP_RIGHT" maxHeight="950.0" prefWidth="450.0" />
+               </content></ScrollPane>
             <VBox fx:id="vbx_CartCustomerInfo" maxHeight="950.0" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label fx:id="lbl_CartCustomerInformation" text="Kundeninformationen" textFill="WHITE">
@@ -35,8 +37,8 @@
                   <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
                   <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                     <columns>
-                      <TableColumn fx:id="tbc_Movie" prefWidth="307.0" resizable="false" text="Film" />
-                      <TableColumn fx:id="tbc_Price" prefWidth="142.0" resizable="false" text="Preis" />
+                      <TableColumn fx:id="tbc_Movie" maxWidth="300.0" prefWidth="300.0" resizable="false" styleClass="tbc_class_TableColumns" text="Film" />
+                      <TableColumn fx:id="tbc_Price" maxWidth="135.0" prefWidth="135.0" resizable="false" styleClass="tbc_class_TableColumns" text="Preis" />
                     </columns>
                   </TableView>
                   <HBox fx:id="hbx_CartTotal" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" styleClass="hbx_class_CartValueHBoxes">

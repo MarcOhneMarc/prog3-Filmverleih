@@ -2,12 +2,21 @@ package com.filmverleih.filmverleih;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.ObservableList;
+import com.filmverleih.filmverleih.entity.Movies;
+import javafx.scene.layout.HBox;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * controller class for the cart frame of the application
@@ -15,7 +24,6 @@ import javafx.beans.property.SimpleDoubleProperty;
  * the selected movies, providing a price calculation
  * and displaying the rental and return date.
  *
- * TODO Movie Boxes on the left side of the splitPane
  * TODO Price calculation
  * TODO Date calculation
  * TODO connect Backend
@@ -56,6 +64,25 @@ public class CartController {
     private Label lbl_ReturnDateValue;
     @FXML
     private Button btn_OrderCart;
+    @FXML
+    private VBox vbx_CartMovieCardsVBox;
+    @FXML
+    private ScrollPane scp_Cart;
+
+    /**
+     *This method fills in the movie-cards to the movie list on the left
+     * TODO parameter List must be transferred to show the correct list of movies in cart
+     */
+    public void fillMovieList() throws IOException {
+        List<Movies> fullMovieList = Utility.getFullMovieList();
+        for(Movies movie : fullMovieList){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
+            HBox movieCard = loader.load();
+            CartMovieController controller = loader.getController();
+            vbx_CartMovieCardsVBox.getChildren().add(movieCard);
+            controller.insertMovieInfo(movie);
+        }
+    }
 
     /**
      *This inner Class is ONLY for Testing the Table view
@@ -109,8 +136,9 @@ public class CartController {
      * TODO Delete of update if Backend is connected
      */
     @FXML
-    public void orderCart() {
+    public void orderCart() throws IOException {
         fillTableView();
+        fillMovieList();
         System.out.println("console test: order button has been clicked");
     }
 
