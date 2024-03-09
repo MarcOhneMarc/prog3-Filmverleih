@@ -30,6 +30,8 @@ import java.time.LocalDate;
  * TODO Date calculation
  * TODO connect Backend
  *
+ * TODO if movie is removed from left scrollPane, also remove from TableView and make new price calculation (update button?)
+ *
  * TODO !!! determine if price, current / return date calculation is for Backend or here !!!
  *
  * @author Hannes, Jannis
