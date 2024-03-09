@@ -30,6 +30,8 @@ import java.time.LocalDate;
  * TODO Date calculation
  * TODO connect Backend
  *
+ * TODO !!! determine if price, current / return date calculation is for Backend or here !!!
+ *
  * @author Hannes, Jannis
  */
 public class CartController {
