@@ -190,3 +190,7 @@
 #igv_CartMovieImage {
     -fx-effect: dropshadow(gaussian, #191919, 10, 0.5, 2, 0);
 }
+
+#grp_orderInfoLabelGrid {
+    -fx-spacing: 30;
+}

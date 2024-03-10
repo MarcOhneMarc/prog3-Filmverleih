@@ -9,6 +9,13 @@ import javafx.scene.layout.HBox;
 
 import static java.lang.String.valueOf;
 
+/**
+ * controller class for the movie cards providing an option to
+ * remove a certain movie from the cart and displaying some
+ * movie information
+ *
+ * @author Jannis, Hannes
+ */
 public class CartMovieController {
 
     private CartController cartController;

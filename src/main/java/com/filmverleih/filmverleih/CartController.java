@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.collections.ObservableList;
@@ -11,7 +12,9 @@ import javafx.scene.layout.HBox;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +71,8 @@ public class CartController {
     @FXML
     private TableColumn<Movies, String> tbc_Price;
     @FXML
+    private HBox hbx_CartTotal;
+    @FXML
     private Label lbl_CartTotalValue;
     @FXML
     private Label lbl_DateValue;
@@ -95,6 +100,8 @@ public class CartController {
 
             vbx_CartMovieCardsVBox.getChildren().add(movieCard);
             controller.insertMovieInfo(movie);
+
+            vbx_CartMovieCardsVBox.setSpacing(20.0);
         }
     }
 
@@ -170,9 +177,13 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
+
         updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
         lbl_ReturnDateValue.setText(calculateReturnDate().toString());
+
+        lbl_DateValue.setAlignment(Pos.CENTER_RIGHT);
+        lbl_ReturnDateValue.setAlignment(Pos.CENTER_RIGHT);
     }
 
     /**
@@ -180,6 +191,7 @@ public class CartController {
      */
     private void updateTotalPrice() {
         lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
+        lbl_CartTotalValue.setAlignment(Pos.CENTER_RIGHT);
     }
 
     /**
