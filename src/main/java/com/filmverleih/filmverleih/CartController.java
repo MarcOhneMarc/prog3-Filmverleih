@@ -98,6 +98,11 @@ public class CartController {
         }
     }
 
+    /**
+     * This method removes a movie Card from the ScrollPane of the left SplitView side
+     * @param movieCard the movie card which will be removed
+     * @param movie the correspondent movie to the movie card which will be removed
+     */
     public void removeMovieCard(HBox movieCard, Movies movie) {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
@@ -170,10 +175,19 @@ public class CartController {
         lbl_ReturnDateValue.setText(calculateReturnDate().toString());
     }
 
+    /**
+     * This method updates the label of the total price
+     */
     private void updateTotalPrice() {
         lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
     }
 
+    /**
+     * This method adds a movie from the cart and initializes an update for
+     * the TableView as well as updating the total price
+     * @param movie the movie to add to the cart
+     * TODO exception?
+     */
     public void addMovieToCart(Movies movie) {
         if (movie == null) {
             throw new IllegalArgumentException("Error: movie is null");
@@ -185,6 +199,12 @@ public class CartController {
         }
     }
 
+    /**
+     * This method removes a movie from the cart and initializes an update for
+     * the TableView as well as updating the total price
+     * @param movie the movie to remove from cart
+     * TODO exception?
+     */
     public void removeMovieFromCart(Movies movie) {
         if (movie == null) {
             throw new IllegalArgumentException("Error: movie is null");
