@@ -186,3 +186,7 @@
 #vbx_CartMovieCardsVBox {
     -fx-spacing: 20;
 }
+
+#igv_CartMovieImage {
+    -fx-effect: dropshadow(gaussian, #191919, 10, 0.5, 2, 0);
+}

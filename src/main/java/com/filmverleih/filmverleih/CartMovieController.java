@@ -3,6 +3,8 @@ package com.filmverleih.filmverleih;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.filmverleih.filmverleih.entity.Movies;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import static java.lang.String.valueOf;
@@ -25,6 +27,8 @@ public class CartMovieController {
     private Label lbl_CartMovieYear;
     @FXML
     private Button btn_CartDeleteMovie;
+    @FXML
+    private ImageView igv_CartMovieImage;
 
     public void setCartController(CartController cartController) {
         this.cartController = cartController;
@@ -35,6 +39,10 @@ public class CartMovieController {
      * This method gets the movie information for the provided movie object and sets them to the according label
      */
     public void insertMovieInfo(Movies movie) {
+        String imageUrl = movie.getCover();
+        if(!imageUrl.isEmpty()) {
+            igv_CartMovieImage.setImage(new Image(movie.getCover()));
+        }
         lbl_CartMovieTitle.setText(movie.getName());
         lbl_CartMovieRating.setText(valueOf(movie.getRating() + "/10 ☆"));
         lbl_CartMovieDuration.setText(valueOf(movie.getLength()));
