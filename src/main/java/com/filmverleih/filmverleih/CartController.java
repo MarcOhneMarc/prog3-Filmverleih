@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 
 import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 /**
  * controller class for the cart frame of the application
@@ -39,6 +40,8 @@ import java.time.LocalDate;
 public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
+    private List<Movies> fullMovieList = Utility.getFullMovieList();
+    private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
 
@@ -63,7 +66,7 @@ public class CartController {
     @FXML
     private TableColumn<Movies, String> tbc_Movie;
     @FXML
-    private TableColumn<Movies, Double> tbc_Price;
+    private TableColumn<Movies, String> tbc_Price;
     @FXML
     private Label lbl_CartTotalValue;
     @FXML
@@ -82,7 +85,7 @@ public class CartController {
      * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
-        List<Movies> fullMovieList = Utility.getFullMovieList();
+        //List<Movies> fullMovieList = Utility.getFullMovieList();
         for(Movies movie : fullMovieList){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
             HBox movieCard = loader.load();
@@ -95,8 +98,9 @@ public class CartController {
         }
     }
 
-    public void removeMovieCard(HBox movieCard) {
+    public void removeMovieCard(HBox movieCard, Movies movie) {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
+        removeMovieFromCart(movie);
     }
 
 
@@ -108,8 +112,7 @@ public class CartController {
      * TODO Delete or update if Backend is connected (use list as method argument)
      */
     public void fillTableView() {
-
-        List<Movies> fullMovieList = Utility.getFullMovieList();
+        //List<Movies> fullMovieList = Utility.getFullMovieList();
         ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
         for (Movies movie : fullMovieList) {
             fullMovieListObservable.add(movie);
@@ -119,7 +122,7 @@ public class CartController {
         tbv_CartItemsTable.setItems(fullMovieListObservable);
 
         tbc_Movie.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tbc_Price.setCellValueFactory(cellData -> new SimpleDoubleProperty(FIXED_PRICE).asObject());
+        tbc_Price.setCellValueFactory(cellData -> new SimpleStringProperty(decimalFormat.format(FIXED_PRICE) + "€"));
     }
 
     /**
@@ -129,7 +132,6 @@ public class CartController {
      * @return total price of the cart
      */
     private double calculateTotalPrice() {
-        List<Movies> fullMovieList = Utility.getFullMovieList();
         return fullMovieList.size() * FIXED_PRICE;
     }
 
@@ -163,9 +165,35 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
-        lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
+        updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
         lbl_ReturnDateValue.setText(calculateReturnDate().toString());
+    }
+
+    private void updateTotalPrice() {
+        lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
+    }
+
+    public void addMovieToCart(Movies movie) {
+        if (movie == null) {
+            throw new IllegalArgumentException("Error: movie is null");
+        } else {
+            fullMovieList.add(movie);
+            tbv_CartItemsTable.getItems().clear();
+            fillTableView();
+            updateTotalPrice();
+        }
+    }
+
+    public void removeMovieFromCart(Movies movie) {
+        if (movie == null) {
+            throw new IllegalArgumentException("Error: movie is null");
+        } else {
+            fullMovieList.remove(movie);
+            tbv_CartItemsTable.getItems().clear();
+            fillTableView();
+            updateTotalPrice();
+        }
     }
 
 

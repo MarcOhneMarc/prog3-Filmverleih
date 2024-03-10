@@ -12,6 +12,7 @@ import static java.lang.String.valueOf;
 public class CartMovieController {
 
     private CartController cartController;
+    private Movies movie;
 
     @FXML
     private HBox hbx_CartMovie;
@@ -30,6 +31,7 @@ public class CartMovieController {
     @FXML
     private ImageView igv_CartMovieImage;
 
+
     public void setCartController(CartController cartController) {
         this.cartController = cartController;
     }
@@ -39,6 +41,7 @@ public class CartMovieController {
      * This method gets the movie information for the provided movie object and sets them to the according label
      */
     public void insertMovieInfo(Movies movie) {
+        this.movie = movie;
         String imageUrl = movie.getCover();
         if(!imageUrl.isEmpty()) {
             igv_CartMovieImage.setImage(new Image(movie.getCover()));
@@ -56,7 +59,7 @@ public class CartMovieController {
         System.out.println("console test: remove button has been clicked");
 
         if (cartController != null) {
-            cartController.removeMovieCard(hbx_CartMovie);
+            cartController.removeMovieCard(hbx_CartMovie, movie);
         }
     }
 }
