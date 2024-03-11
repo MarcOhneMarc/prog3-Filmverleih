@@ -30,21 +30,17 @@ import java.text.DecimalFormat;
  * the selected movies, providing a price calculation
  * and displaying the rental and return date.
  *
- * TODO Price calculation
- * TODO Date calculation
  * TODO connect Backend
- *
- * TODO if movie is removed from left scrollPane, also remove from TableView and make new price calculation (update button or declare List as attribute and then refresh?)
- *
- * TODO !!! determine if price, current / return date calculation is for Backend or here !!!
  *
  * @author Hannes, Jannis
  */
 public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
-    private List<Movies> fullMovieList = Utility.getFullMovieList();
+    private List<Movies> fullMovieList = Utility.getFullMovieList(); //List that must contain the movies in cart
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+    private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
 
@@ -90,7 +86,6 @@ public class CartController {
      * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
-        //List<Movies> fullMovieList = Utility.getFullMovieList();
         for(Movies movie : fullMovieList){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
             HBox movieCard = loader.load();
@@ -120,11 +115,8 @@ public class CartController {
      * This method fills the TableView with movies from a List
      * which is copied into a ObservableList.
      * It uses the name of the movie and its price.
-     * TODO determine price for movies (all the same?)
-     * TODO Delete or update if Backend is connected (use list as method argument)
      */
     public void fillTableView() {
-        //List<Movies> fullMovieList = Utility.getFullMovieList();
         ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
         for (Movies movie : fullMovieList) {
             fullMovieListObservable.add(movie);
@@ -140,7 +132,6 @@ public class CartController {
     /**
      * This method calculates the total price for the items that
      * are in the cart.
-     * TODO change from fullMovieList to an argument List (list of movies in the cart)
      * @return total price of the cart
      */
     private double calculateTotalPrice() {
@@ -159,12 +150,11 @@ public class CartController {
 
     /**
      * This method calculates the return Date using LocalDate
-     * from java.time. and adding two weeks
+     * from java.time. and adding one week
      * @return local / current Date plus two weeks
-     *TODO determine how long movies are rented (here for example two weeks)
      */
     private LocalDate calculateReturnDate() {
-        LocalDate returnDate = LocalDate.now().plusWeeks(2);
+        LocalDate returnDate = LocalDate.now().plusWeeks(1);
         return returnDate;
     }
 
@@ -198,11 +188,10 @@ public class CartController {
      * This method adds a movie from the cart and initializes an update for
      * the TableView as well as updating the total price
      * @param movie the movie to add to the cart
-     * TODO exception?
      */
     public void addMovieToCart(Movies movie) {
         if (movie == null) {
-            throw new IllegalArgumentException("Error: movie is null");
+            throw new IllegalArgumentException(ERR_MOVIE_NULL);
         } else {
             fullMovieList.add(movie);
             tbv_CartItemsTable.getItems().clear();
@@ -215,11 +204,10 @@ public class CartController {
      * This method removes a movie from the cart and initializes an update for
      * the TableView as well as updating the total price
      * @param movie the movie to remove from cart
-     * TODO exception?
      */
     public void removeMovieFromCart(Movies movie) {
         if (movie == null) {
-            throw new IllegalArgumentException("Error: movie is null");
+            throw new IllegalArgumentException(ERR_MOVIE_NULL);
         } else {
             fullMovieList.remove(movie);
             tbv_CartItemsTable.getItems().clear();
@@ -237,7 +225,6 @@ public class CartController {
      *
      * Also added a call for the fillTableView() Method in order
      * to test the TableView, after pressing the button once.
-     * TODO Delete or update if Backend is connected
      */
     @FXML
     public void orderCart() throws IOException {
