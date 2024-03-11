@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="bdp_CartBorderPane" prefHeight="990.0" prefWidth="1920.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
+   <center>
+      <SplitPane fx:id="spp_CartSplitPaneMiddle" dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+         <items>
+            <ScrollPane fx:id="scp_Cart" hbarPolicy="NEVER" maxHeight="950.0" minWidth="450.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" SplitPane.resizableWithParent="false">
+               <content>
+                  <VBox id="vbx_VBoxMovies" fx:id="vbx_CartMovieCardsVBox" alignment="CENTER_RIGHT" maxHeight="950.0" maxWidth="450.0" minWidth="450.0" prefWidth="450.0" />
+               </content></ScrollPane>
+            <VBox fx:id="vbx_CartCustomerInfo" alignment="CENTER_LEFT" maxHeight="950.0" minWidth="450.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label fx:id="lbl_CartCustomerInformation" text="Kundeninformationen" textFill="WHITE">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="txf_CartName" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
+                  <TextField fx:id="txf_CartSurname" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
+                  <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                  <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
+                    <columns>
+                      <TableColumn fx:id="tbc_Movie" maxWidth="300.0" prefWidth="300.0" resizable="false" styleClass="tbc_class_TableColumns" text="Film" />
+                      <TableColumn fx:id="tbc_Price" maxWidth="135.0" prefWidth="135.0" resizable="false" styleClass="tbc_class_TableColumns" text="Preis" />
+                    </columns>
+                  </TableView>
+                  <GridPane fx:id="grp_orderInfoLabelGrid" maxWidth="450.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="lbl_CartTotal" text="Gesamt:">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_CartTotalValue" alignment="CENTER_RIGHT" text="value" GridPane.columnIndex="1">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_Date" text="Datum:" GridPane.rowIndex="2">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_DateValue" alignment="CENTER_RIGHT" text="value" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_ReturnDate" text="Rückgabe:" GridPane.rowIndex="3">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxLeft" />
+                           </styleClass>
+                        </Label>
+                        <Label fx:id="lbl_ReturnDateValue" alignment="CENTER_RIGHT" text="value" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <styleClass>
+                              <String fx:value="lbl_class_CartLabels" />
+                              <String fx:value="lbl_class_HBoxRight" />
+                           </styleClass>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </VBox>
+         </items>
+         <padding>
+            <Insets bottom="20.0" left="460.0" right="460.0" top="20.0" />
+         </padding>
+      </SplitPane>
+   </center>
+</BorderPane>

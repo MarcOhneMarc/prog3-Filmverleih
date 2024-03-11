@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -29,7 +30,9 @@ public class MainApplication extends Application {
     private SettingsController settingsController;
     private Parent filterRoot;
     private FilterController filterController;
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+    private Parent cartRoot;
+    private CartController cartController;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     public static BorderPane borderPane; // the main frame of the application
 
     /**
@@ -57,6 +60,9 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Filter.fxml");
             filterRoot = loader.load();
             filterController = loader.getController();
+            loader = Utility.loadFXML("Cart.fxml");
+            cartRoot = loader.load();
+            cartController = loader.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -73,13 +79,15 @@ public class MainApplication extends Application {
                           movieController,
                           rentalController,
                           settingsController,
-                          filterController);
+                          filterController,
+                          cartController);
         navbarController.setConnector(connector);
         libraryController.setConnector(connector);
         movieController.setConnector(connector);
         rentalController.setConnector(connector);
         settingsController.setConnector(connector);
         filterController.setConnector(connector);
+        cartController.setConnector(connector);
     }
 
     public MainApplication() throws IOException {
@@ -102,10 +110,20 @@ public class MainApplication extends Application {
         Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
         borderPane.setTop(navbarRoot);
         borderPane.setCenter(libraryRoot);
+
+        String css = this.getClass().getResource("stylesheet.css").toExternalForm();
+        scene.getStylesheets().add(css);
+
+        stage.setTitle("Quantum-Vortex");
+
+        Image icon = new Image(getClass().getResourceAsStream("logo.png"));
+        stage.getIcons().add(icon);
+
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }
+
     /**
      * The main entry point of the application.
      * It launches the JavaFX application by calling the launch method provided by Application class.

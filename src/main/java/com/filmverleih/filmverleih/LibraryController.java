@@ -29,7 +29,7 @@ public class LibraryController {
                                     RentalController,
                                     SettingsController,
                                     FilterController,
-                                    Integer,
+                                    CartController,
                                     Integer,
                                     Integer,
                                     Integer> connector;
@@ -43,7 +43,7 @@ public class LibraryController {
                             RentalController,
                             SettingsController,
                             FilterController,
-                            Integer,
+                            CartController,
                             Integer,
                             Integer,
                             Integer> connector) {
