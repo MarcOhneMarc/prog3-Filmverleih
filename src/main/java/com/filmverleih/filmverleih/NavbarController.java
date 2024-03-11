@@ -10,12 +10,12 @@ import java.io.IOException;
  */
 public class NavbarController {
     //Instantiate Controller-Connector for Navbar-Library-Connection
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,Integer, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
         this.connector = connector;
     }
     /**
@@ -48,5 +48,11 @@ public class NavbarController {
     public void changeToSettings() throws IOException {
         SettingsController settingsController = connector.getSettingsController();
         MainApplication.borderPane.setCenter(settingsController.getOuterPane());
+    }
+
+    @FXML
+    public void changeToCart() throws IOException {
+        CartController cartController = connector.getCartController();
+        MainApplication.borderPane.setCenter(cartController.getOuterPane());
     }
 }

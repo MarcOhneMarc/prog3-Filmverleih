@@ -10,7 +10,7 @@ import java.util.Optional;
  * @param <T> the fourth controller, here: RentalController
  * @param <U> the fifth controller, here: SettingsController
  * @param <V> the sixth controller, here: FilterController
- * @param <W> currently unused, for future expansion
+ * @param <W> the seventh controller, here: CartController
  * @param <X> currently unused, for future expansion
  * @param <Y> currently unused, for future expansion
  * @param <Z> currently unused, for future expansion
@@ -23,18 +23,18 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
         private T rentalController;
         private U settingsController;
         private V filterController;
-        private Optional <W> controller7;
+        private W cartController;
         private Optional <X> controller8;
         private Optional <Y> controller9;
         private Optional <Z> controller10;
-        public NWayControllerConnector(Q controller1, R controller2, S controller3, T controller4, U controller5, V controller6) {
+        public NWayControllerConnector(Q controller1, R controller2, S controller3, T controller4, U controller5, V controller6, W controller7) {
             this.navbarController = controller1;
             this.libraryController = controller2;
             this.movieController = controller3;
             this.rentalController = controller4;
             this.settingsController = controller5;
             this.filterController = controller6;
-            this.controller7 = Optional.empty();
+            this.cartController = controller7;
             this.controller8 = Optional.empty();
             this.controller9 = Optional.empty();
             this.controller10 = Optional.empty();
@@ -46,7 +46,7 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
             this.rentalController = controller4;
             this.settingsController = controller5;
             this.filterController = controller6;
-            this.controller7 = Optional.ofNullable(controller7);
+            this.cartController = controller7;
             this.controller8 = Optional.ofNullable(controller8);
             this.controller9 = Optional.ofNullable(controller9);
             this.controller10 = Optional.ofNullable(controller10);
@@ -95,10 +95,10 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
     }
 
     /**
-     * @return returns seventh controller (if present), currently unused
+     * @return returns seventh controller, here : CartController
      */
-    public Optional<W> getController7() {
-        return controller7;
+    public W getCartController() {
+        return cartController;
     }
 
     /**

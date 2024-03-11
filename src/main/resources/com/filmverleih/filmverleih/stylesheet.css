@@ -60,16 +60,6 @@
     -fx-background-color: #FFFF8D;
     -fx-background-radius: 12;
     -fx-font-size: 32;
-
-    /*
-
-    //dont know how to make the border fit the button
-    -fx-border-style: solid;
-    -fx-border-color: black;
-    -fx-border-radius: 12;
-    -fx-border-width: 2;
-     */
-
 }
 
 #btn_settings {
@@ -103,6 +93,7 @@
 #grp_movieParamSelect {
 
 }
+
 
 .bib_textfield {
 -fx-background-color: #949494;
@@ -177,4 +168,101 @@
 
 .deleteButtonColor {
     -fx-background-color: #FF4040;
+
+
+#spp_CartSplitPaneMiddle {
+    -fx-background-color: #191919;
+}
+
+#btn_OrderCart {
+    -fx-background-color: #518E21;
+    -fx-background-radius: 12;
+}
+
+.txf_class_CartTextFields {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+.lbl_class_CartLabels {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 32;
+}
+
+.hbx_class_CartValueHBoxes {
+    -fx-spacing: 30;
+}
+
+#vbx_CartCustomerInfo {
+    -fx-spacing: 30;
+}
+
+#headerSearchbar {
+    -fx-text-fill: #000000;
+}
+
+#scp_Cart {
+    -fx-background: #191919;
+}
+
+#tbv_CartItemsTable {
+    -fx-background-color: transparent;
+}
+
+#tbv_CartItemsTable .column-header {
+    -fx-background-color: #191919;
+}
+
+#tbv_CartItemsTable .column-header .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.tbc_class_TableColumns {
+    -fx-cell: #191919;
+}
+
+#hbx_CartMovie {
+    -fx-background-color: #393939;
+}
+
+.lbl_class_CartMovieLabels {
+    -fx-text-fill: #FFFFFF;
+}
+#lbl_CartMovieTitle {
+    -fx-font-size: 32;
+}
+
+#hbx_CartMovieRatingDuration {
+    -fx-spacing: 10;
+}
+
+.lbl_class_CartMovieInfo{
+    -fx-font-size: 17;
+}
+
+#lbl_CartMovieRating {
+    -fx-background-color: #5C5C5C;
+}
+
+#btn_CartDeleteMovie {
+    -fx-background-color: #FF4040;
+    -fx-background-radius: 12;
+    -fx-font-size: 24;
+}
+
+#vbx_CartMovieRightVBox {
+    -fx-spacing: 5;
+}
+
+#vbx_CartMovieCardsVBox {
+    -fx-spacing: 20;
+}
+
+#igv_CartMovieImage {
+    -fx-effect: dropshadow(gaussian, #191919, 10, 0.5, 2, 0);
+}
+
+#grp_orderInfoLabelGrid {
+    -fx-spacing: 30;
+
 }
