@@ -95,6 +95,81 @@
 }
 
 
+.bib_textfield {
+-fx-background-color: #949494;
+-fx-background-radius: 12px;
+-fx-font-size: 22;
+-fx-text-fill: white;
+-fx-prompt-text-fill: white;
+
+}
+
+.bib_comment {
+    -fx-control-inner-background: #949494;/* Hintergrundfarbe */
+        -fx-text-fill: white; /* Textfarbe */
+        -fx-background-radius: 12px;
+        -fx-font-size: 22;
+        -fx-prompt-text-fill: white;
+}
+
+.bib-checkbox .box {
+    -fx-background-color: #949494;
+    -fx-background-radius: 50%;
+    -fx-font-size: 16;
+
+}
+
+.bib-checkbox .box:selected {
+    -fx-background-color: #949494;
+}
+
+.bib-checkbox .tick {
+    -fx-background-color: transparent;
+}
+
+.bib-checkbox:selected .tick {
+    -fx-background-color: white;
+}
+
+.bib-checkbox .text {
+    -fx-font-size: 24;
+}
+
+.bib-button {
+    -fx-background-color: black;
+    -fx-background-radius: 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-family: inter;
+    -fx-font-weight: regular;
+
+}
+
+.tab {
+    /* Ändern der Hintergrundfarbe der Registerkarte */
+    -fx-background-color: #393939;
+    -fx-font-size: 16;
+
+}
+
+.tab .tab-label {
+    /* Ändern der Schriftfarbe des Registerkartenlabels */
+    -fx-text-fill: white;
+}
+
+.tab .tab-pane {
+    /* Ändern der Hintergrundfarbe des Inhaltsbereichs der Registerkarte */
+    -fx-background-color: #393939;
+}
+
+.addButtonColor {
+    -fx-background-color: #518E21;
+}
+
+.deleteButtonColor {
+    -fx-background-color: #FF4040;
+
+
 #spp_CartSplitPaneMiddle {
     -fx-background-color: #191919;
 }
@@ -189,4 +264,5 @@
 
 #grp_orderInfoLabelGrid {
     -fx-spacing: 30;
+
 }
