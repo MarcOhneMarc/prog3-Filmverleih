@@ -145,30 +145,13 @@
 
 }
 
-.tab {
-    /* Ändern der Hintergrundfarbe der Registerkarte */
-    -fx-background-color: #393939;
-    -fx-font-size: 16;
-
-}
-
-.tab .tab-label {
-    /* Ändern der Schriftfarbe des Registerkartenlabels */
-    -fx-text-fill: white;
-}
-
-.tab .tab-pane {
-    /* Ändern der Hintergrundfarbe des Inhaltsbereichs der Registerkarte */
-    -fx-background-color: #393939;
-}
-
 .addButtonColor {
     -fx-background-color: #518E21;
 }
 
 .deleteButtonColor {
     -fx-background-color: #FF4040;
-
+}
 
 #spp_CartSplitPaneMiddle {
     -fx-background-color: #191919;
@@ -260,6 +243,10 @@
 
 #igv_CartMovieImage {
     -fx-effect: dropshadow(gaussian, #191919, 10, 0.5, 2, 0);
+}
+
+#grp_orderInfoLabelGrid {
+    -fx-spacing: 30;
 }
 
 #grp_orderInfoLabelGrid {

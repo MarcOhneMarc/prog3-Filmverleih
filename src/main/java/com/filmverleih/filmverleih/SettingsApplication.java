@@ -25,7 +25,7 @@ public class SettingsApplication extends Application {
 
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("settings.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
 
             Scene scene = new Scene(root);
 
