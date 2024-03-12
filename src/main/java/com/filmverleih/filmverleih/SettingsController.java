@@ -27,6 +27,7 @@ public class SettingsController {
         this.connector = connector;
     }
 
+    //components of the movie managing tab
     @FXML
     private TextField txf_movieID;
     @FXML
@@ -73,6 +74,27 @@ public class SettingsController {
     private CheckBox cbx_selBlueRay;
     @FXML
     private TextField txf_deleteMovieId;
+
+
+    //components of the employee managing tab
+    @FXML
+    TextField txf_employeeIdAdd;
+    @FXML
+    TextField txf_employeeFirstName;
+    @FXML
+    TextField txf_employeeSurname;
+    @FXML
+    TextField txf_employeeIdDelete;
+    @FXML
+    Label lbl_addEmployee;
+    @FXML
+    Button btn_addEmployee;
+    @FXML
+    Button btn_deleteEmployee;
+    @FXML
+    CheckBox cbx_selAdminEmployee;
+    @FXML
+    TableView tbv_employeeTable;
 
 
     int movieID;
