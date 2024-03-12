@@ -17,7 +17,7 @@
     -fx-text-fill: #000;
     -fx-font-size: 28;
     -fx-font-family: inter;
-    -fx-font-weight: regular;
+    -fx-font-weight: normal;
 
 }
 
@@ -141,7 +141,7 @@
     -fx-text-fill: white;
     -fx-font-size: 20px;
     -fx-font-family: inter;
-    -fx-font-weight: regular;
+    -fx-font-weight: normal;
 
 }
 
