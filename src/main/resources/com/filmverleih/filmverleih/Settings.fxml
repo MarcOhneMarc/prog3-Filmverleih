@@ -95,7 +95,7 @@
                     <children>
                         <VBox layoutX="881.0" layoutY="104.0" prefHeight="639.0" prefWidth="837.0">
                             <children>
-                                <GridPane fx:id="grp_employeeManagement" hgap="20.0" prefHeight="574.0" prefWidth="1110.0" vgap="20.0">
+                                <GridPane fx:id="grp_userManagement" hgap="20.0" prefHeight="574.0" prefWidth="1110.0" vgap="20.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
@@ -112,34 +112,34 @@
                                         <RowConstraints maxHeight="62.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <TextField fx:id="txf_employeeIdAdd" promptText="ID" styleClass="bib_textfield" GridPane.rowIndex="1" />
-                                        <TextField fx:id="txf_employeeFirstName" promptText="Name" styleClass="bib_textfield" GridPane.rowIndex="2" />
-                                        <TextField fx:id="txf_employeeSurname" promptText="Nachname" styleClass="bib_textfield" GridPane.rowIndex="3" />
-                                        <TextField fx:id="txf_employeeIdDelete" promptText="ID" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <Label fx:id="lbl_addEmployee" prefHeight="50.0" prefWidth="353.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter hinzufügen" />
-                                        <Label fx:id="lbl_deleteEmployee" prefHeight="50.0" prefWidth="330.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter löschen" GridPane.columnIndex="1" />
-                                        <Button fx:id="btn_addEmployee" mnemonicParsing="false" onAction="#addEmployee" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
+                                        <TextField fx:id="txf_userIdAdd" promptText="ID" styleClass="bib_textfield" GridPane.rowIndex="1" />
+                                        <TextField fx:id="txf_userFirstName" promptText="Name" styleClass="bib_textfield" GridPane.rowIndex="2" />
+                                        <TextField fx:id="txf_userSurname" promptText="Nachname" styleClass="bib_textfield" GridPane.rowIndex="3" />
+                                        <TextField fx:id="txf_userIdDelete" promptText="ID" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        <Label fx:id="lbl_addUser" prefHeight="50.0" prefWidth="353.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter hinzufügen" />
+                                        <Label fx:id="lbl_deleteUser" prefHeight="50.0" prefWidth="330.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter löschen" GridPane.columnIndex="1" />
+                                        <Button fx:id="btn_addUser" mnemonicParsing="false" onAction="#addUser" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
                                             <styleClass>
                                                 <String fx:value="addButtonColor" />
                                                 <String fx:value="bib-button" />
                                             </styleClass>
                                         </Button>
-                                        <Button fx:id="btn_deleteEmployee" mnemonicParsing="false" onAction="#deleteEmployee" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                        <Button fx:id="btn_deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                             <styleClass>
                                                 <String fx:value="bib-button" />
                                                 <String fx:value="deleteButtonColor" />
                                             </styleClass>
                                         </Button>
-                                        <CheckBox fx:id="cbx_selAdminEmployee" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Admin" textFill="WHITE" GridPane.rowIndex="4" />
+                                        <CheckBox fx:id="cbx_selAdminUser" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Admin" textFill="WHITE" GridPane.rowIndex="4" />
                                     </children>
                                 </GridPane>
                             </children>
                         </VBox>
-                        <TableView fx:id="tbv_employeeTable" layoutX="261.0" layoutY="104.0" prefHeight="496.0" prefWidth="510.0">
+                        <TableView fx:id="tbv_userTable" layoutX="261.0" layoutY="104.0" prefHeight="496.0" prefWidth="510.0">
                             <columns>
-                                <TableColumn fx:id="tbc_employeeID" prefWidth="120.0" text="ID" />
-                                <TableColumn fx:id="tbc_employeeName" prefWidth="274.0" text="Name" />
-                        <TableColumn fx:id="tbc_employeeIsAdmin" prefWidth="115.0" text="Admin" />
+                                <TableColumn fx:id="tbc_userID" prefWidth="120.0" text="ID" />
+                                <TableColumn fx:id="tbc_userName" prefWidth="274.0" text="Name" />
+                        <TableColumn fx:id="tbc_userIsAdmin" prefWidth="115.0" text="Admin" />
                             </columns>
                         </TableView>
                     </children></AnchorPane>

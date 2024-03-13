@@ -1,13 +1,11 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -22,7 +20,7 @@ import java.math.BigDecimal;
  */
 public class SettingsController {
 
-    private ObservableList<Users> employeeList = FXCollections.observableArrayList();
+    private ObservableList<Users> fullUserList = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
 
@@ -90,29 +88,29 @@ public class SettingsController {
 
     //components of the employee managing tab
     @FXML
-    TextField txf_employeeIdAdd;
+    TextField txf_userIdAdd;
     @FXML
-    TextField txf_employeeFirstName;
+    TextField txf_userFirstName;
     @FXML
-    TextField txf_employeeSurname;
+    TextField txf_userSurname;
     @FXML
-    TextField txf_employeeIdDelete;
+    TextField txf_userIdDelete;
     @FXML
-    Label lbl_addEmployee;
+    Label lbl_addUser;
     @FXML
-    Button btn_addEmployee;
+    Button btn_addUser;
     @FXML
-    Button btn_deleteEmployee;
+    Button btn_deleteUser;
     @FXML
-    CheckBox cbx_selAdminEmployee;
+    CheckBox cbx_selAdminUser;
     @FXML
-    TableView<Users> tbv_employeeTable;
+    TableView<Users> tbv_userTable;
     @FXML
-    TableColumn<Users, Integer> tbc_employeeID;
+    TableColumn<Users, Integer> tbc_userID;
     @FXML
-    TableColumn<Users, String> tbc_employeeName;
+    TableColumn<Users, String> tbc_userName;
     @FXML
-    TableColumn<Users, Boolean> tbc_employeeIsAdmin;
+    TableColumn<Users, Boolean> tbc_userIsAdmin;
 
 
 
@@ -170,62 +168,62 @@ public class SettingsController {
     }
 
     /**
-     * This method fills the TableView with users / employees from
-     * the observableList employeeList
+     * This method fills the TableView with users from
+     * the observableList fullUserList
      * It uses the id, name and isAdmin from Users.
      */
     public void fillTableView() {
-        tbv_employeeTable.setItems(employeeList);
+        tbv_userTable.setItems(fullUserList);
 
-        tbc_employeeID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
-        tbc_employeeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tbc_employeeIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
+        tbc_userID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
+        tbc_userName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        tbc_userIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
     }
 
     /**
-     * This method adds an employee / user to the employee management TableView
+     * This method adds a user to the user management TableView
      * @param user the user that will be added
      */
-    public void addEmployeeToTableView(Users user) {
+    public void addUserToTableView(Users user) {
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
-            employeeList.add(user);
-            tbv_employeeTable.refresh();
+            fullUserList.add(user);
+            tbv_userTable.refresh();
         }
     }
 
     /**
-     * This method removes an employee / user to the employee management TableView
+     * This method removes a user to the user management TableView
      * @param user the user that will be removed
      */
-    public void removeEmployeeToTableView(Users user) {
+    public void removeUserFromTableView(Users user) {
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
-            employeeList.remove(user);
-            tbv_employeeTable.refresh();
+            fullUserList.remove(user);
+            tbv_userTable.refresh();
         }
     }
 
     /**
-     * This method adds an employee / user and is linked to the add button of the
-     * employee management tab
+     * This method adds an user and is linked to the add button of the
+     * user management tab
      * TODO actually add user to db
      */
     @FXML
-    public void addEmployee() {
-        System.out.println("console test: add employee button has been clicked");
+    public void addUser() {
+        System.out.println("console test: add user button has been clicked");
     }
 
     /**
-     * This method removes an employee / user and is linked to the delete button of the
-     * employee management tab
+     * This method removes an user and is linked to the delete button of the
+     * user management tab
      * TODO actually delete user to db
      */
     @FXML
-    public void deleteEmployee() {
-        System.out.println("console test: delete employee button has been clicked");
+    public void deleteUser() {
+        System.out.println("console test: delete user button has been clicked");
     }
 
     public TabPane getOuterPane()
