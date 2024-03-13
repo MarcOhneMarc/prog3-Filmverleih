@@ -118,13 +118,13 @@
                                         <TextField fx:id="txf_employeeIdDelete" promptText="ID" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label fx:id="lbl_addEmployee" prefHeight="50.0" prefWidth="353.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter hinzufügen" />
                                         <Label fx:id="lbl_deleteEmployee" prefHeight="50.0" prefWidth="330.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter löschen" GridPane.columnIndex="1" />
-                                        <Button fx:id="btn_addEmployee" mnemonicParsing="false" onAction="#addMovie" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
+                                        <Button fx:id="btn_addEmployee" mnemonicParsing="false" onAction="#addEmployee" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
                                             <styleClass>
                                                 <String fx:value="addButtonColor" />
                                                 <String fx:value="bib-button" />
                                             </styleClass>
                                         </Button>
-                                        <Button fx:id="btn_deleteEmployee" mnemonicParsing="false" onAction="#addMovie" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                        <Button fx:id="btn_deleteEmployee" mnemonicParsing="false" onAction="#deleteEmployee" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                             <styleClass>
                                                 <String fx:value="bib-button" />
                                                 <String fx:value="deleteButtonColor" />

@@ -208,6 +208,26 @@ public class SettingsController {
         }
     }
 
+    /**
+     * This method adds an employee / user and is linked to the add button of the
+     * employee management tab
+     * TODO actually add user to db
+     */
+    @FXML
+    public void addEmployee() {
+        System.out.println("console test: add employee button has been clicked");
+    }
+
+    /**
+     * This method removes an employee / user and is linked to the delete button of the
+     * employee management tab
+     * TODO actually delete user to db
+     */
+    @FXML
+    public void deleteEmployee() {
+        System.out.println("console test: delete employee button has been clicked");
+    }
+
     public TabPane getOuterPane()
     {
         return tbp_settingsTabView;
