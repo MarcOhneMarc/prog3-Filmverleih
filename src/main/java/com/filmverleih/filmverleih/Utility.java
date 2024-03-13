@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Users;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -163,5 +164,29 @@ public class Utility {
             }
         }
     };
+
+
+    /**
+     * This method provides a List of all User from the Table Users
+     * @return a list with all users
+     */
+    public static List<Users> getFullUserList() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Users> users = session.createQuery("FROM Users ", Users.class).getResultList();
+                transaction.commit();
+                return users;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new ArrayList<Users>();
+    }
 
 }

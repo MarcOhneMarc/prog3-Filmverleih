@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * controller class for the settings frame of the application
@@ -20,7 +21,8 @@ import java.math.BigDecimal;
  */
 public class SettingsController {
 
-    private ObservableList<Users> fullUserList = FXCollections.observableArrayList();
+    private List<Users> fullUserList = Utility.getFullUserList();
+    private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
 
@@ -173,7 +175,11 @@ public class SettingsController {
      * It uses the id, name and isAdmin from Users.
      */
     public void fillTableView() {
-        tbv_userTable.setItems(fullUserList);
+        for (Users user : fullUserList) {
+            fullUserListObservable.add(user);
+        }
+
+        tbv_userTable.setItems(fullUserListObservable);
 
         tbc_userID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
         tbc_userName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -188,7 +194,7 @@ public class SettingsController {
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
-            fullUserList.add(user);
+            fullUserListObservable.add(user);
             tbv_userTable.refresh();
         }
     }
@@ -201,7 +207,7 @@ public class SettingsController {
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
-            fullUserList.remove(user);
+            fullUserListObservable.remove(user);
             tbv_userTable.refresh();
         }
     }
@@ -228,6 +234,7 @@ public class SettingsController {
 
     public TabPane getOuterPane()
     {
+        fillTableView();
         return tbp_settingsTabView;
     }
 }
