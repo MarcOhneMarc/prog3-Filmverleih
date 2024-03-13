@@ -137,8 +137,9 @@
                         </VBox>
                         <TableView fx:id="tbv_employeeTable" layoutX="261.0" layoutY="104.0" prefHeight="496.0" prefWidth="510.0">
                             <columns>
-                                <TableColumn prefWidth="75.0" text="C1" />
-                                <TableColumn prefWidth="75.0" text="C2" />
+                                <TableColumn fx:id="tbc_employeeID" prefWidth="120.0" text="ID" />
+                                <TableColumn fx:id="tbc_employeeName" prefWidth="274.0" text="Name" />
+                        <TableColumn fx:id="tbc_employeeIsAdmin" prefWidth="115.0" text="Admin" />
                             </columns>
                         </TableView>
                     </children></AnchorPane>

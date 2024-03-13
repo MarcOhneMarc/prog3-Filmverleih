@@ -1,6 +1,12 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Users;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,8 +22,9 @@ import java.math.BigDecimal;
  */
 public class SettingsController {
 
-    @FXML
-    private TabPane tbp_settingsTabView;
+    private ObservableList<Users> employeeList = FXCollections.observableArrayList();
+
+
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -26,6 +33,10 @@ public class SettingsController {
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
         this.connector = connector;
     }
+
+    //outer pane
+    @FXML
+    private TabPane tbp_settingsTabView;
 
     //components of the movie managing tab
     @FXML
@@ -94,7 +105,14 @@ public class SettingsController {
     @FXML
     CheckBox cbx_selAdminEmployee;
     @FXML
-    TableView tbv_employeeTable;
+    TableView<Users> tbv_employeeTable;
+    @FXML
+    TableColumn<Users, Integer> tbc_employeeID;
+    @FXML
+    TableColumn<Users, String> tbc_employeeName;
+    @FXML
+    TableColumn<Users, Boolean> tbc_employeeIsAdmin;
+
 
 
     int movieID;
@@ -148,6 +166,19 @@ public class SettingsController {
         System.out.println("console test: delete movie button was clicked");
         Utility utility = new Utility();
         utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
+    }
+
+    /**
+     * This method fills the TableView with users / employees from
+     * the observableList employeeList
+     * It uses the id, name and isAdmin from Users.
+     */
+    public void fillTableView() {
+        tbv_employeeTable.setItems(employeeList);
+
+        tbc_employeeID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
+        tbc_employeeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        tbc_employeeIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
     }
 
     public TabPane getOuterPane()
