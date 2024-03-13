@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 public class SettingsController {
 
     private ObservableList<Users> employeeList = FXCollections.observableArrayList();
+    private static final String ERR_USER_NULL = "Error: user is null";
 
 
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
@@ -179,6 +180,32 @@ public class SettingsController {
         tbc_employeeID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
         tbc_employeeName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         tbc_employeeIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
+    }
+
+    /**
+     * This method adds an employee / user to the employee management TableView
+     * @param user the user that will be added
+     */
+    public void addEmployeeToTableView(Users user) {
+        if (user == null) {
+            throw new IllegalArgumentException(ERR_USER_NULL);
+        } else {
+            employeeList.add(user);
+            tbv_employeeTable.refresh();
+        }
+    }
+
+    /**
+     * This method removes an employee / user to the employee management TableView
+     * @param user the user that will be removed
+     */
+    public void removeEmployeeToTableView(Users user) {
+        if (user == null) {
+            throw new IllegalArgumentException(ERR_USER_NULL);
+        } else {
+            employeeList.remove(user);
+            tbv_employeeTable.refresh();
+        }
     }
 
     public TabPane getOuterPane()
