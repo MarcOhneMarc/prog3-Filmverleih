@@ -14,8 +14,8 @@ import java.util.List;
 
 /**
  * controller class for the settings frame of the application
- * where movies can be added by typing in all
- * necessary details or deleted by giving the movieID
+ * Tab1: movies can be managed, added or deleted
+ * Tab2: user can be managed, added or removed and seen in a Table
  *
  * @author Hannes
  */
@@ -216,6 +216,7 @@ public class SettingsController {
      * This method adds an user and is linked to the add button of the
      * user management tab
      * TODO actually add user to db
+     * TODO add user to List and refresh TableView
      */
     @FXML
     public void addUser() {
@@ -226,12 +227,17 @@ public class SettingsController {
      * This method removes an user and is linked to the delete button of the
      * user management tab
      * TODO actually delete user to db
+     * TODO remove user from List and refresh TableView
      */
     @FXML
     public void deleteUser() {
         System.out.println("console test: delete user button has been clicked");
     }
 
+    /**
+     * TODO remove fillTableView() from here and find a better suiting place for its calling
+     * @return passes the main frame if the scene to the Controller it is called from
+     */
     public TabPane getOuterPane()
     {
         fillTableView();
