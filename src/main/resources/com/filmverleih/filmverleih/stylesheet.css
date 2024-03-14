@@ -193,12 +193,22 @@
     -fx-background-color: transparent;
 }
 
-#tbv_CartItemsTable .column-header {
+#tbv_CartItemsTable .column-header .label {
+    -fx-text-fill: #FFFFFF;
+}
+
+#tbv_CartItemsTable .column-header-background .filler {
     -fx-background-color: #191919;
 }
 
-#tbv_CartItemsTable .column-header .label {
-    -fx-text-fill: #FFFFFF;
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical,
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .track,
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .track-background {
+    -fx-background-color: #191919;
+}
+
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  #949494;
 }
 
 .tbc_class_TableColumns {
