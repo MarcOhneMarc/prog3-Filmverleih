@@ -103,7 +103,7 @@ public class LibraryController {
                     throw new RuntimeException(e);
                 }
             });
-            //button.setMaxSize(10, 10);
+
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
 
