@@ -152,8 +152,15 @@ public class LibraryController {
         StackPane.setMargin(button, new Insets(0, 7, 7, 0));
         stackPane.setAlignment(Pos.BOTTOM_RIGHT);
         button.setOpacity(0);
-        button.setOnMouseEntered(event ->{button.setOpacity(100);});
-        button.setOnMouseExited(event ->{button.setOpacity(0);});
+        button.setOnMouseEntered(event ->{
+            button.setOpacity(100);
+            button.setStyle("-fx-background-color: #518E21;");
+        });
+        button.setOnMouseExited(event ->{
+            button.setOpacity(0);
+            button.setStyle("-fx-background-color: #5C5C5C;");
+        });
+
         button.setOnAction(event ->{
             try {
                 cartController.addMovieToCart(AllMovies.get(finalI));
