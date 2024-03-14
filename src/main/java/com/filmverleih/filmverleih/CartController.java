@@ -86,19 +86,22 @@ public class CartController {
      * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
-        vbx_CartMovieCardsVBox.getChildren().clear();
         for(Movies movie : fullMovieList){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
-            HBox movieCard = loader.load();
-            CartMovieController controller = loader.getController();
-
-            controller.setCartController(this);
-
-            vbx_CartMovieCardsVBox.getChildren().add(movieCard);
-            controller.insertMovieInfo(movie);
-
-            vbx_CartMovieCardsVBox.setSpacing(20.0);
+            addMovieToMovieList(movie);
         }
+    }
+
+    private void addMovieToMovieList(Movies movie) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
+        HBox movieCard = loader.load();
+        CartMovieController controller = loader.getController();
+
+        controller.setCartController(this);
+
+        vbx_CartMovieCardsVBox.getChildren().add(movieCard);
+        controller.insertMovieInfo(movie);
+
+        vbx_CartMovieCardsVBox.setSpacing(20.0);
     }
 
     /**
@@ -196,7 +199,7 @@ public class CartController {
         } else {
             fullMovieList.add(movie);
             tbv_CartItemsTable.getItems().clear();
-            fillMovieList();
+            addMovieToMovieList(movie);
             fillTableView();
             updateTotalPrice();
         }

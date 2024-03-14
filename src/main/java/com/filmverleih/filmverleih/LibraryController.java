@@ -137,7 +137,7 @@ public class LibraryController {
                 imageView.setOnMouseExited(event ->{button.setOpacity(0);});
 
                 stackPane.getChildren().add(imageView);
-                //StackPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
+                StackPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
             }
             stackPane.getChildren().add(button);
         }
