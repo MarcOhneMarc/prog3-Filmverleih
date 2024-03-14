@@ -91,6 +91,13 @@ public class CartController {
         }
     }
 
+    /**
+     * This method adds one movie to the card view list
+     * The FXMLLoader lodes the needed fxml for the single cards
+     * which are then added to the vbox on the left
+     * @param movie
+     * @throws IOException
+     */
     private void addMovieToMovieList(Movies movie) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
         HBox movieCard = loader.load();

@@ -112,7 +112,23 @@ public class SettingsController {
         if (cbx_selBlueRay.isSelected()) {
              movieType = "BlueRay";
         };
-        utility.newMovieInDB(txf_movieName.getText(), Integer.parseInt(txf_movieYear.getText()), txf_movieGenre1.getText() + ", " + txf_movieGenre2.getText() + ", " + txf_movieGenre3.getText(), Integer.parseInt(txf_movieLength.getText()), BigDecimal.valueOf(Double.parseDouble(txf_movieRating.getText())), Integer.parseInt(txf_movieCount.getText()), txf_movieCount.getText(), txf_movieLinkToCover.getText(), txa_movieComment.getText(), txf_movieDirector1.getText() + ", " + txf_movieDirector2.getText() + ", " + txf_movieDirector3.getText(), txf_movieStudio.getText(), txf_movieActors.getText(), Integer.parseInt(txf_movieFSK.getText()), movieType);
+        utility.newMovieInDB(txf_movieName.getText(),
+                Integer.parseInt(txf_movieYear.getText()),
+                txf_movieGenre1.getText() + ", "
+                        + txf_movieGenre2.getText() + ", "
+                        + txf_movieGenre3.getText(),
+                Integer.parseInt(txf_movieLength.getText()),
+                BigDecimal.valueOf(Double.parseDouble(txf_movieRating.getText())),
+                Integer.parseInt(txf_movieCount.getText()),
+                txf_movieCount.getText(),
+                txf_movieLinkToCover.getText(),
+                txa_movieComment.getText(),
+                txf_movieDirector1.getText() + ", "
+                        + txf_movieDirector2.getText() + ", "
+                        + txf_movieDirector3.getText(),
+                txf_movieStudio.getText(),
+                txf_movieActors.getText(),
+                Integer.parseInt(txf_movieFSK.getText()), movieType);
 
     }
 

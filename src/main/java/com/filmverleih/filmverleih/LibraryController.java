@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class LibraryController {
             StackPane stackPane = new StackPane();
             gridPane.add(stackPane, i, i / 4);
 
-            Button button = createAddToCartButton(AllMovies, stackPane, finalI);
+            StackPane stackPaneViewAddToCart = createAddToCartButton(AllMovies, stackPane, finalI);
 
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
@@ -104,8 +105,8 @@ public class LibraryController {
                 label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
                 label.getStyleClass().add("movieLabelLibrary");
 
-                label.setOnMouseEntered(event ->{button.setOpacity(100);});
-                label.setOnMouseExited(event ->{button.setOpacity(0);});
+                label.setOnMouseEntered(event ->{stackPaneViewAddToCart.setOpacity(100);});
+                label.setOnMouseExited(event ->{stackPaneViewAddToCart.setOpacity(0);});
 
                 label.setOnMouseClicked(event ->{
                     try {
@@ -133,42 +134,65 @@ public class LibraryController {
                     }
                 }); //lambda
 
-                imageView.setOnMouseEntered(event ->{button.setOpacity(100);});
-                imageView.setOnMouseExited(event ->{button.setOpacity(0);});
+                imageView.setOnMouseEntered(event ->{stackPaneViewAddToCart.setOpacity(100);});
+                imageView.setOnMouseExited(event ->{stackPaneViewAddToCart.setOpacity(0);});
 
                 stackPane.getChildren().add(imageView);
                 StackPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
             }
-            stackPane.getChildren().add(button);
+            stackPane.getChildren().add(stackPaneViewAddToCart);
         }
         // Initialize the count of columns
         adjustColumnCount(scrollPane.getWidth());
     }
 
-    public Button createAddToCartButton(List<Movies> AllMovies, StackPane stackPane, int finalI){
-        Button button = new Button();
-        button.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
-        button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("shoppingcart.png"))));
-        StackPane.setMargin(button, new Insets(0, 7, 7, 0));
+    /**
+     * This method creates a StackPane that acts as a button to add a movie to cart
+     * the params are used to ensure the functionality of the button
+     * @param AllMovies
+     * @param stackPane
+     * @param finalI
+     * @return
+     */
+    public StackPane createAddToCartButton(List<Movies> AllMovies, StackPane stackPane, int finalI){
+        StackPane stackPaneViewAddToCart = new StackPane();
+        ImageView imageViewAddToCart = new ImageView();
+        stackPaneViewAddToCart.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
+        imageViewAddToCart.setImage(new Image(getClass().getResourceAsStream("shoppingcart.png")));
+        StackPane.setMargin(stackPaneViewAddToCart, new Insets(0, 10, 10, 0));
         stackPane.setAlignment(Pos.BOTTOM_RIGHT);
-        button.setOpacity(0);
-        button.setOnMouseEntered(event ->{
-            button.setOpacity(100);
-            button.setStyle("-fx-background-color: #518E21;");
+        stackPaneViewAddToCart.setAlignment(Pos.CENTER);
+        imageViewAddToCart.setPickOnBounds(true);
+        imageViewAddToCart.setFitWidth(30);
+        imageViewAddToCart.setFitHeight(30);
+        stackPaneViewAddToCart.setOpacity(0);
+        stackPaneViewAddToCart.setOnMouseEntered(event ->{//Button turns green when hovered over
+            stackPaneViewAddToCart.setOpacity(100);
+            stackPaneViewAddToCart.setStyle("-fx-background-color: #518E21;");
         });
-        button.setOnMouseExited(event ->{
-            button.setOpacity(0);
-            button.setStyle("-fx-background-color: #5C5C5C;");
+        stackPaneViewAddToCart.setOnMouseExited(event ->{//Button turns gray when not hovering over anymore
+            stackPaneViewAddToCart.setOpacity(0);
+            stackPaneViewAddToCart.setStyle("-fx-background-color: #5C5C5C;");
         });
 
-        button.setOnAction(event ->{
+        stackPaneViewAddToCart.setOnMouseClicked(event ->{//addMovieToCart method is being executed on click
             try {
                 cartController.addMovieToCart(AllMovies.get(finalI));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
-        return button;
+
+        //Button changes size on when clicked
+        stackPaneViewAddToCart.setOnMousePressed(event -> {stackPaneViewAddToCart.setMaxSize(39, 39);});
+        stackPaneViewAddToCart.setOnMouseReleased(event -> {stackPaneViewAddToCart.setMaxSize(40, 40);});
+
+        Pane pan_paneCartIconBackground = new Pane();
+        //pan_paneCartIconBackground.setPrefSize(35, 35);
+        stackPaneViewAddToCart.setMaxSize(40, 40);
+        stackPaneViewAddToCart.getChildren().addAll(pan_paneCartIconBackground, imageViewAddToCart);
+
+        return stackPaneViewAddToCart;
     }
 
     /**

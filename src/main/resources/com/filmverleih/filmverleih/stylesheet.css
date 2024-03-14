@@ -273,3 +273,7 @@
     -fx-border-width: 2;
     -fx-border-radius: 12;
 }
+
+#pan_paneCartIconBackground {
+    -fx-background-color: #518E21;
+}
