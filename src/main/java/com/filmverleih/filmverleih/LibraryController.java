@@ -88,21 +88,7 @@ public class LibraryController {
             StackPane stackPane = new StackPane();
             gridPane.add(stackPane, i, i / 4);
 
-            Button button = new Button();
-            button.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
-            button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("shoppingcart.png"))));
-            StackPane.setMargin(button, new Insets(0, 7, 7, 0));
-            stackPane.setAlignment(Pos.BOTTOM_RIGHT);
-            button.setOpacity(0);
-            button.setOnMouseEntered(event ->{button.setOpacity(100);});
-            button.setOnMouseExited(event ->{button.setOpacity(0);});
-            button.setOnAction(event ->{
-                try {
-                    cartController.addMovieToCart(AllMovies.get(finalI));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+            Button button = createAddToCartButton(AllMovies, stackPane, finalI);
 
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
@@ -157,6 +143,25 @@ public class LibraryController {
         }
         // Initialize the count of columns
         adjustColumnCount(scrollPane.getWidth());
+    }
+
+    public Button createAddToCartButton(List<Movies> AllMovies, StackPane stackPane, int finalI){
+        Button button = new Button();
+        button.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
+        button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("shoppingcart.png"))));
+        StackPane.setMargin(button, new Insets(0, 7, 7, 0));
+        stackPane.setAlignment(Pos.BOTTOM_RIGHT);
+        button.setOpacity(0);
+        button.setOnMouseEntered(event ->{button.setOpacity(100);});
+        button.setOnMouseExited(event ->{button.setOpacity(0);});
+        button.setOnAction(event ->{
+            try {
+                cartController.addMovieToCart(AllMovies.get(finalI));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        return button;
     }
 
     /**

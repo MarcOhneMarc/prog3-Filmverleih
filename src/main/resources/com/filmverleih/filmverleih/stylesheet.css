@@ -24,6 +24,7 @@
 #headerSearchbar {
     -fx-background-color: #949494;
     -fx-background-radius: 12px;
+    -fx-alignment: center;
 }
 
 #btnHello {
