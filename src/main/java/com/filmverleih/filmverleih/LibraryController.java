@@ -13,9 +13,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents the controller for the library view in the application.
@@ -48,6 +50,7 @@ public class LibraryController {
                             Integer,
                             Integer> connector) {
         this.connector = connector;
+        this.cartController = connector.getCartController();
     }
 
     @FXML
@@ -55,6 +58,8 @@ public class LibraryController {
 
     @FXML
     private GridPane gridPane; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
+
+    private CartController cartController;
 
     /**
      * Initializes the library view.
@@ -79,6 +84,26 @@ public class LibraryController {
         for (int i = 0; i < AllMovies.size(); i++) {
             int finalI = i;
             imgUrl = AllMovies.get(i).getCover();
+
+            StackPane stackPane = new StackPane();
+            gridPane.add(stackPane, i, i / 4);
+
+            Button button = new Button();
+            button.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
+            button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("shoppingcart.png"))));
+            StackPane.setMargin(button, new Insets(0, 7, 7, 0));
+            stackPane.setAlignment(Pos.BOTTOM_RIGHT);
+            button.setOpacity(0);
+            button.setOnMouseEntered(event ->{button.setOpacity(100);});
+            button.setOnMouseExited(event ->{button.setOpacity(0);});
+            button.setOnAction(event ->{
+                try {
+                    cartController.addMovieToCart(AllMovies.get(finalI));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            //button.setMaxSize(10, 10);
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
 
@@ -93,6 +118,9 @@ public class LibraryController {
                 label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
                 label.getStyleClass().add("movieLabelLibrary");
 
+                label.setOnMouseEntered(event ->{button.setOpacity(100);});
+                label.setOnMouseExited(event ->{button.setOpacity(0);});
+
                 label.setOnMouseClicked(event ->{
                     try {
                         goToMovie(AllMovies.get(finalI));
@@ -100,8 +128,8 @@ public class LibraryController {
                         throw new RuntimeException(e);
                     }
                 }); //lambda
-                gridPane.add(label,i % 4,i / 4);
-                GridPane.setMargin(label, new Insets(20, 0, 0, 20)); // margin of the covers*/
+                stackPane.getChildren().add(label);
+                StackPane.setMargin(label, new Insets(20, 0, 0, 20)); // margin of the covers*/
             }
             else {//put the Cover in the library
                 ImageView imageView = new ImageView();
@@ -118,10 +146,14 @@ public class LibraryController {
                         throw new RuntimeException(e);
                     }
                 }); //lambda
-                
-                gridPane.add(imageView, i % 4, i / 4);
-                GridPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
+
+                imageView.setOnMouseEntered(event ->{button.setOpacity(100);});
+                imageView.setOnMouseExited(event ->{button.setOpacity(0);});
+
+                stackPane.getChildren().add(imageView);
+                //StackPane.setMargin(imageView, new Insets(20, 0, 0, 20)); // margin of the covers
             }
+            stackPane.getChildren().add(button);
         }
         // Initialize the count of columns
         adjustColumnCount(scrollPane.getWidth());

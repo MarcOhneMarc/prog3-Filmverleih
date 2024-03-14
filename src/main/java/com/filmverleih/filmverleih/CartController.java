@@ -37,7 +37,7 @@ import java.text.DecimalFormat;
 public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
-    private List<Movies> fullMovieList = Utility.getFullMovieList(); //List that must contain the movies in cart
+    private List<Movies> fullMovieList = new ArrayList<>(); //List that must contain the movies in cart
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
@@ -86,6 +86,7 @@ public class CartController {
      * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
+        vbx_CartMovieCardsVBox.getChildren().clear();
         for(Movies movie : fullMovieList){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
             HBox movieCard = loader.load();
@@ -189,12 +190,13 @@ public class CartController {
      * the TableView as well as updating the total price
      * @param movie the movie to add to the cart
      */
-    public void addMovieToCart(Movies movie) {
+    public void addMovieToCart(Movies movie) throws IOException {
         if (movie == null) {
             throw new IllegalArgumentException(ERR_MOVIE_NULL);
         } else {
             fullMovieList.add(movie);
             tbv_CartItemsTable.getItems().clear();
+            fillMovieList();
             fillTableView();
             updateTotalPrice();
         }
@@ -228,9 +230,6 @@ public class CartController {
      */
     @FXML
     public void orderCart() throws IOException {
-        fillTableView();
-        setOrderInformationLabels();
-        fillMovieList();
         System.out.println("console test: order button has been clicked");
     }
 
@@ -238,6 +237,7 @@ public class CartController {
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public BorderPane getOuterPane() {
+        setOrderInformationLabels();
         return bdp_CartBorderPane;
     }
 }

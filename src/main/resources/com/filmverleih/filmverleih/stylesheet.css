@@ -251,5 +251,16 @@
 
 #grp_orderInfoLabelGrid {
     -fx-spacing: 30;
+}
 
+.btn_class_libraryAddMovieToCartButton {
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-text-fill: #191919;
+    -fx-background-color: #518E21;
+    -fx-background-radius: 12;
+    -fx-border-color: #191919;
+    -fx-border-insets: -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
 }
