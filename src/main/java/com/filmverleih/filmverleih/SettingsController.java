@@ -116,29 +116,6 @@ public class SettingsController {
 
 
 
-    int movieID;
-    String movieName;
-    int movieYear;
-    int movieLength;
-    int movieFSK;
-    BigDecimal movieRating;
-    String movieGenre1;
-    String movieGenre2;
-    String movieGenre3;
-    String movieDirector1;
-    String movieDirector2;
-    String movieDirector3;
-    int movieCount;
-    String movieStudio;
-    String movieActors;
-    String movieUndefined3;
-    String movieUndefined4;
-    String movieUndefined5;
-    String movieLinkToCover;
-    String movieComment;
-    boolean dvd;
-    boolean blueRay;
-
 
     /**
      * test method to link the add button to the controller
@@ -175,6 +152,8 @@ public class SettingsController {
      * It uses the id, name and isAdmin from Users.
      */
     public void fillTableView() {
+        fullUserListObservable.clear();
+
         for (Users user : fullUserList) {
             fullUserListObservable.add(user);
         }
