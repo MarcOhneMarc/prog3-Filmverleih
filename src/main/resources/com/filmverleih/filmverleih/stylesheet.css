@@ -202,7 +202,8 @@
 }
 
 .tbc_class_TableColumns {
-    -fx-cell: #191919;
+    -fx-background-color: #191919;
+    -fx-text-fill: #FFFFFF;
 }
 
 #hbx_CartMovie {
