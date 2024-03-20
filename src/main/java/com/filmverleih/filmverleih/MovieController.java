@@ -71,6 +71,7 @@ public class MovieController {
             igv_coverMovieScene.setImage(new Image(movie.getCover()));
         }
         lbl_nameMovieScene.setText(movie.getName());
+        lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
         lbl_yearMovieScene.setText(valueOf(movie.getYear()));
         lbl_fskMovieScene.setText(valueOf(movie.getFsk()));
         lbl_durationMovieScene.setText(valueOf(movie.getLength()));
