@@ -49,9 +49,11 @@ public class RentalMovieController {
 
 
 
-    public void setRentalController(CartController cartController) {
+    public void setRentalController(RentalController rentalController) {
         this.rentalController = rentalController;
     }
+
+
 
     /**
      * This method gets the movie information for the provided movie object and sets them to the according label
@@ -90,4 +92,6 @@ public class RentalMovieController {
 
          */
     }
+
+
 }
