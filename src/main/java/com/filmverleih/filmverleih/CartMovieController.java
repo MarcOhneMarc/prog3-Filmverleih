@@ -37,6 +37,8 @@ public class CartMovieController {
     private Button btn_CartDeleteMovie;
     @FXML
     private ImageView igv_CartMovieImage;
+    @FXML
+    private Label lbl_CartMovieCardFsk;
 
 
     public void setCartController(CartController cartController) {
@@ -57,6 +59,7 @@ public class CartMovieController {
         lbl_CartMovieRating.setText(valueOf(movie.getRating() + "/10 ☆"));
         lbl_CartMovieDuration.setText(valueOf(movie.getLength()) + " min");
         lbl_CartMovieYear.setText(valueOf(movie.getYear()));
+        lbl_CartMovieCardFsk.setText("FSK " + valueOf(movie.getFsk()));
     }
 
     /**
