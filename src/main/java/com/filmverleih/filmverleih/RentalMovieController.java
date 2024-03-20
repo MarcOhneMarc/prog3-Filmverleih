@@ -79,6 +79,7 @@ public class RentalMovieController {
 
     /**
      * This method gets the customer information for the rental and sets them to the according label
+     * /TODO actually get customer info from db as soon as db is updated
      */
     public void insertCustomerInfo() {
         lbl_rentalMovieCustomer.setText("max");
@@ -89,6 +90,7 @@ public class RentalMovieController {
 
     /**
      * This method removes the rental card from the rental view
+     * TODO remove/return rented movie from db
      */
     public void removeFromRental() {
         System.out.println("console test: return button has been clicked");
@@ -100,6 +102,7 @@ public class RentalMovieController {
 
     /**
      * This method extends the movie rental
+     * TODO implement an extension of the return date in db
      */
     public void extendRental() {
         System.out.println("console test: extend button has been clicked");
@@ -107,6 +110,7 @@ public class RentalMovieController {
 
     /**
      * This method reminds the customer of his rental
+     * TODO find a way to actually remind the customer
      */
     public void remindCustomerOfRental() {
         System.out.println("console test: remind button has been clicked");

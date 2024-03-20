@@ -17,6 +17,17 @@ import javafx.scene.layout.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * controller class for the rental view of the application
+ * which provides an overview of all rented movies, displaying
+ * the movie itself and customer / rental information
+ * with options of reminding the customer, extending the rental
+ * and returning the movie
+ *
+ * TODO connect Backend
+ *
+ * @author Hannes, Luka
+ */
 public class RentalController {
 
     @FXML
@@ -41,6 +52,7 @@ public class RentalController {
      * This method initializes the rental view
      * sets up the behavior of the scroll pane and adjusts the column count based on window size.
      * also, it initializes the view with test rentals for development purposes.
+     * TODO get rented movies from db
      * @throws IOException
      */
     public void initialize() throws IOException {
@@ -56,7 +68,8 @@ public class RentalController {
         });
 
         //Load Rental View
-        List<Movies> allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        //TODO change to not get all movies but only those that are rented from db
+        List<Movies> allMovies = Utility.getFullMovieList();
         for (int i = 0; i < allMovies.size(); i++) {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
