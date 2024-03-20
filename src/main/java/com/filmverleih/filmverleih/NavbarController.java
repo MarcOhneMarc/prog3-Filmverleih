@@ -40,21 +40,27 @@ public class NavbarController {
      */
     @FXML
     public void changeToRental() throws IOException {
-        //RentalController rentalController = connector.getRentalController();
-        //MainApplication.borderPane.setCenter(rentalController.getOuterPane());
+        RentalController rentalController = connector.getRentalController();
+        MainApplication.borderPane.setCenter(rentalController.getOuterPane());
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setRight(filterController.getOuterPane());
+
+        //MainApplication.borderPane.setRight(null);
     }
 
     @FXML
     public void changeToSettings() throws IOException {
         SettingsController settingsController = connector.getSettingsController();
         MainApplication.borderPane.setCenter(settingsController.getOuterPane());
+
+        MainApplication.borderPane.setRight(null);
     }
 
     @FXML
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
+
+        MainApplication.borderPane.setRight(null);
     }
 }

@@ -7,18 +7,17 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class represents the controller for the library view in the application.
@@ -58,9 +57,14 @@ public class LibraryController {
     private ScrollPane scrollPane; // pane to scroll in the grid (Child = gridPane)
 
     @FXML
+    public AnchorPane outerAnchorPane;
+
+    @FXML
     private GridPane gridPane; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
 
     private CartController cartController;
+
+    public List<Movies> allMovies;
 
     /**
      * Initializes the library view.
@@ -78,23 +82,27 @@ public class LibraryController {
                 adjustColumnCount(newValue.doubleValue());
             }
         });
+        allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        updateMovies(allMovies);
+    }
 
+    public void updateMovies(List<Movies> updatedList) {
+        gridPane.getChildren().clear();
         //Load Library View
         String imgUrl = "";
-        List<Movies> AllMovies = Utility.getFullMovieList(); //get all Movies From DB
-        for (int i = 0; i < AllMovies.size(); i++) {
+        for (int i = 0; i < updatedList.size(); i++) {
             int finalI = i;
-            imgUrl = AllMovies.get(i).getCover();
+            imgUrl = updatedList.get(i).getCover();
 
             StackPane stackPane = new StackPane();
             gridPane.add(stackPane, i, i / 4);
 
-            StackPane stackPaneViewAddToCart = createAddToCartButton(AllMovies, stackPane, finalI);
+            StackPane stackPaneViewAddToCart = createAddToCartButton(updatedList, stackPane, finalI);
 
             if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
             {
 
-                Label label = new Label(AllMovies.get(i).getName());
+                Label label = new Label(updatedList.get(i).getName());
 
                 label.setWrapText(true); // Enable text wrapping
                 label.setAlignment(Pos.CENTER); // Center align the text
@@ -110,7 +118,7 @@ public class LibraryController {
 
                 label.setOnMouseClicked(event ->{
                     try {
-                        goToMovie(AllMovies.get(finalI));
+                        goToMovie(updatedList.get(finalI));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -128,7 +136,7 @@ public class LibraryController {
 
                 imageView.setOnMouseClicked(event ->{
                     try {
-                        goToMovie(AllMovies.get(finalI));
+                        goToMovie(updatedList.get(finalI));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -202,7 +210,7 @@ public class LibraryController {
      * @param windowWidth the width of the window
      */
     private void adjustColumnCount(double windowWidth) {
-        double imageWidth = 200 + 40; // Width of images plus margin
+        double imageWidth = 200 + 20; // Width of images plus margin
         int numColumns = Math.max(1, (int) (windowWidth / imageWidth)); // Count of columns from windowWidth
 
         int row = 0;
@@ -217,6 +225,7 @@ public class LibraryController {
             }
         }
     }
+
     //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
@@ -226,12 +235,16 @@ public class LibraryController {
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
 
+    public List<Movies> getAllMovies() {
+        return allMovies;
+    }
+
     /**
      * @return returns main frame of the scene to the connector the method is called from
      */
-    public ScrollPane getOuterPane()
+    public AnchorPane getOuterPane()
     {
-        return scrollPane;
+        return outerAnchorPane;
     }
     
 }
