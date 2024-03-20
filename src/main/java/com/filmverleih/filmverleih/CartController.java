@@ -80,6 +80,8 @@ public class CartController {
     private VBox vbx_CartMovieCardsVBox;
     @FXML
     private ScrollPane scp_Cart;
+    @FXML
+    private SplitPane spp_CartSplitPaneMiddle;
 
     /**
      *This method fills in the movie-cards to the movie list on the left

@@ -189,6 +189,15 @@
     -fx-background: #191919;
 }
 
+#scp_Cart .track,
+#scp_Cart .track-background {
+    -fx-background-color: #191919;
+}
+
+#scp_Cart .thumb {
+    -fx-background-color:  #949494;
+}
+
 #tbv_CartItemsTable {
     -fx-background-color: transparent;
 }
