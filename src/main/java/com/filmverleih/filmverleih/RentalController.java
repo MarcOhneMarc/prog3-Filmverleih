@@ -38,7 +38,9 @@ public class RentalController {
     }
 
     /**
-     *
+     * This method initializes the rental view
+     * sets up the behavior of the scroll pane and adjusts the column count based on window size.
+     * also, it initializes the view with test rentals for development purposes.
      * @throws IOException
      */
     public void initialize() throws IOException {
@@ -68,9 +70,9 @@ public class RentalController {
 
             grp_rentalGrid.setHgap(20);
             grp_rentalGrid.setVgap(20);
+            grp_rentalGrid.setAlignment(Pos.CENTER);
 
             grp_rentalGrid.add(rentalCard, i, i / 4);
-
         }
 
         // Initialize the count of columns
@@ -101,13 +103,19 @@ public class RentalController {
         }
     }
 
-    /*
-    public AnchorPane getOuterPane(){
-        return anp_rentalOuterAnchorPane;
-    }
+    /**
+     * This method returns a rented movie and removes it from the rental view.
+     * @param hBox the rental movie card which will be removed
+     * @param movie the movie that will be returned
      */
+    public void removeFromRental(HBox hBox, Movies movie) {
+        grp_rentalGrid.getChildren().remove(hBox);
+    }
 
-    public ScrollPane getOuterPane() {
-        return scp_rentalScrollPane;
+    /**
+     * @return passes the main frame if the scene to the Controller it is called from
+     */
+    public AnchorPane getOuterPane() {
+        return anp_rentalOuterAnchorPane;
     }
 }

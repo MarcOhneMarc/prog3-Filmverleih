@@ -116,7 +116,7 @@
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button fx:id="btn_rentalMovieReturn" mnemonicParsing="false" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Rückgabe" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btn_rentalMovieReturn" mnemonicParsing="false" onAction="#removeFromRental" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Rückgabe" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Button>

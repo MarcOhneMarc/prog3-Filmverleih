@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 import static java.lang.String.valueOf;
 
@@ -20,6 +21,9 @@ public class RentalMovieController {
 
     private RentalController rentalController;
     private Movies movie;
+
+    @FXML
+    private HBox hbx_rentalMovieCard;
 
     @FXML
     private ImageView imv_rentalMovieCover;
@@ -48,7 +52,6 @@ public class RentalMovieController {
     private Button btn_rentalMovieReturn;
 
 
-
     public void setRentalController(RentalController rentalController) {
         this.rentalController = rentalController;
     }
@@ -62,7 +65,12 @@ public class RentalMovieController {
         this.movie = movie;
         String imageUrl = movie.getCover();
         if(!imageUrl.isEmpty()) {
+
             imv_rentalMovieCover.setImage(new Image(movie.getCover()));
+            imv_rentalMovieCover.setPreserveRatio(false);
+            imv_rentalMovieCover.setFitWidth(200);
+            imv_rentalMovieCover.setFitHeight(300);
+
         }
         lbl_rentalMovieTitle.setText(movie.getName());
         lbl_rentalMovieLength.setText(valueOf(movie.getLength()));
@@ -85,12 +93,10 @@ public class RentalMovieController {
     public void removeFromRental() {
         System.out.println("console test: return button has been clicked");
 
-        /*
-        if (rentalController != null) {
-            rentalController.removeMovieCard(hbx_CartMovie, movie);
-        }
 
-         */
+        if (rentalController != null) {
+            rentalController.removeFromRental(hbx_rentalMovieCard, movie);
+        }
     }
 
 
