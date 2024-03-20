@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
@@ -72,6 +73,14 @@ public class MovieController {
         }
         lbl_nameMovieScene.setText(movie.getName());
         lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
+        if (movie.getName().length() > 40) {
+            int breakIndex = movie.getName().lastIndexOf(" ", 40);
+            if (breakIndex != -1) {
+                lbl_nameMovieScene.setText(movie.getName().substring(0, breakIndex) + "\n" + movie.getName().substring(breakIndex + 1));
+            } else {
+                lbl_nameMovieScene.setText(movie.getName().substring(0, 40) + "\n" + movie.getName().substring(40));
+            }
+        }
         lbl_yearMovieScene.setText(valueOf(movie.getYear()));
         lbl_fskMovieScene.setText(valueOf(movie.getFsk()));
         lbl_durationMovieScene.setText(valueOf(movie.getLength()));
@@ -87,11 +96,13 @@ public class MovieController {
             Label genreLabel = new Label();
             genreLabel.setText(genre);
             genreLabel.getStyleClass().addAll("lbl_class_genreMovieScene", "lbl_class_movieSceneLabels");
+            genreLabel.setPadding(new Insets(0,2,0,2));
 
             hbx_genreMovieScene.getChildren().add(genreLabel);
         }
 
         txa_commentMovieScene.setText(movie.getComment());
+        txa_commentMovieScene.setWrapText(true);
         lbl_idValueMovieScene.setText(valueOf(movie.getMovieid()));
         lbl_countValueMovieScene.setText(valueOf(movie.getCount()));
 
