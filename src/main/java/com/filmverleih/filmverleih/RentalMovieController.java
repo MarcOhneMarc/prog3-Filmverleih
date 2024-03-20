@@ -73,7 +73,7 @@ public class RentalMovieController {
 
         }
         lbl_rentalMovieTitle.setText(movie.getName());
-        lbl_rentalMovieLength.setText(valueOf(movie.getLength()));
+        lbl_rentalMovieLength.setText(valueOf(movie.getLength()) + " min");
         lbl_rentalMovieYear.setText(valueOf(movie.getYear()));
     }
 
