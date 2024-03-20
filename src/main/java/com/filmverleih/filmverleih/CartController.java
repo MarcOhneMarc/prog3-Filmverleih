@@ -5,15 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.scene.layout.HBox;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
@@ -37,7 +34,7 @@ import java.text.DecimalFormat;
 public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
-    private List<Movies> fullMovieList = Utility.getFullMovieList(); //List that must contain the movies in cart
+    private List<Movies> fullMovieList = new ArrayList<>(); //List that must contain the movies in cart
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
@@ -52,8 +49,6 @@ public class CartController {
         this.connector = connector;
     }
 
-    @FXML
-    private BorderPane bdp_CartBorderPane;
     @FXML
     private TextField txf_CartName;
     @FXML
@@ -80,6 +75,8 @@ public class CartController {
     private VBox vbx_CartMovieCardsVBox;
     @FXML
     private ScrollPane scp_Cart;
+    @FXML
+    private AnchorPane acp_CartBackground;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -87,17 +84,28 @@ public class CartController {
      */
     public void fillMovieList() throws IOException {
         for(Movies movie : fullMovieList){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
-            HBox movieCard = loader.load();
-            CartMovieController controller = loader.getController();
-
-            controller.setCartController(this);
-
-            vbx_CartMovieCardsVBox.getChildren().add(movieCard);
-            controller.insertMovieInfo(movie);
-
-            vbx_CartMovieCardsVBox.setSpacing(20.0);
+            addMovieToMovieList(movie);
         }
+    }
+
+    /**
+     * This method adds one movie to the card view list
+     * The FXMLLoader lodes the needed fxml for the single cards
+     * which are then added to the vbox on the left
+     * @param movie
+     * @throws IOException
+     */
+    private void addMovieToMovieList(Movies movie) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CartMovie.fxml"));
+        HBox movieCard = loader.load();
+        CartMovieController controller = loader.getController();
+
+        controller.setCartController(this);
+
+        vbx_CartMovieCardsVBox.getChildren().add(movieCard);
+        controller.insertMovieInfo(movie);
+
+        vbx_CartMovieCardsVBox.setSpacing(20.0);
     }
 
     /**
@@ -189,12 +197,13 @@ public class CartController {
      * the TableView as well as updating the total price
      * @param movie the movie to add to the cart
      */
-    public void addMovieToCart(Movies movie) {
+    public void addMovieToCart(Movies movie) throws IOException {
         if (movie == null) {
             throw new IllegalArgumentException(ERR_MOVIE_NULL);
         } else {
             fullMovieList.add(movie);
             tbv_CartItemsTable.getItems().clear();
+            addMovieToMovieList(movie);
             fillTableView();
             updateTotalPrice();
         }
@@ -228,16 +237,14 @@ public class CartController {
      */
     @FXML
     public void orderCart() throws IOException {
-        fillTableView();
-        setOrderInformationLabels();
-        fillMovieList();
         System.out.println("console test: order button has been clicked");
     }
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public BorderPane getOuterPane() {
-        return bdp_CartBorderPane;
+    public AnchorPane getOuterPane() {
+        setOrderInformationLabels();
+        return acp_CartBackground;
     }
 }
