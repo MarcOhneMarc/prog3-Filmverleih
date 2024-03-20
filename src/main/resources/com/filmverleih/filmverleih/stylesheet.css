@@ -24,6 +24,7 @@
 #headerSearchbar {
     -fx-background-color: #949494;
     -fx-background-radius: 12px;
+    -fx-alignment: center;
 }
 
 #btnHello {
@@ -153,7 +154,7 @@
     -fx-background-color: #FF4040;
 }
 
-#spp_CartSplitPaneMiddle {
+#hbx_CartMainHBox {
     -fx-background-color: #191919;
 }
 
@@ -184,24 +185,49 @@
     -fx-text-fill: #000000;
 }
 
+#acp_CartBackground {
+    -fx-background-color: #191919;
+}
+
 #scp_Cart {
     -fx-background: #191919;
+    -fx-border-color: #191919;
+}
+
+#scp_Cart .track,
+#scp_Cart .track-background {
+    -fx-background-color: #191919;
+}
+
+#scp_Cart .thumb {
+    -fx-background-color:  #949494;
 }
 
 #tbv_CartItemsTable {
     -fx-background-color: transparent;
 }
 
-#tbv_CartItemsTable .column-header {
-    -fx-background-color: #191919;
-}
-
 #tbv_CartItemsTable .column-header .label {
     -fx-text-fill: #FFFFFF;
 }
 
+#tbv_CartItemsTable .column-header-background .filler {
+    -fx-background-color: #191919;
+}
+
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical,
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .track,
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .track-background {
+    -fx-background-color: #191919;
+}
+
+#tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  #949494;
+}
+
 .tbc_class_TableColumns {
-    -fx-cell: #191919;
+    -fx-background-color: #191919;
+    -fx-text-fill: #FFFFFF;
 }
 
 #hbx_CartMovie {
@@ -251,5 +277,17 @@
 
 #grp_orderInfoLabelGrid {
     -fx-spacing: 30;
+}
 
+.btn_class_libraryAddMovieToCartButton {
+    -fx-background-color: #5C5C5C;
+    -fx-background-radius: 12;
+    -fx-border-color: #191919;
+    -fx-border-insets: -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+
+#pan_paneCartIconBackground {
+    -fx-background-color: #518E21;
 }
