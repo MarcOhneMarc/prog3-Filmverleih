@@ -1,23 +1,31 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Movies;
-import javafx.event.ActionEvent;
+import com.filmverleih.filmverleih.entity.Users;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * controller class for the settings frame of the application
- * where movies can be added by typing in all
- * necessary details or deleted by giving the movieID
+ * Tab1: movies can be managed, added or deleted
+ * Tab2: user can be managed, added or removed and seen in a Table
  *
  * @author Hannes
  */
 public class SettingsController {
 
-    @FXML
-    private TabPane tbp_settingsTabView;
+    private List<Users> fullUserList = Utility.getFullUserList();
+    private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
+    private static final String ERR_USER_NULL = "Error: user is null";
+
+
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -27,6 +35,11 @@ public class SettingsController {
         this.connector = connector;
     }
 
+    //outer pane
+    @FXML
+    private TabPane tbp_settingsTabView;
+
+    //components of the movie managing tab
     @FXML
     private TextField txf_movieID;
     @FXML
@@ -75,28 +88,33 @@ public class SettingsController {
     private TextField txf_deleteMovieId;
 
 
-    int movieID;
-    String movieName;
-    int movieYear;
-    int movieLength;
-    int movieFSK;
-    BigDecimal movieRating;
-    String movieGenre1;
-    String movieGenre2;
-    String movieGenre3;
-    String movieDirector1;
-    String movieDirector2;
-    String movieDirector3;
-    int movieCount;
-    String movieStudio;
-    String movieActors;
-    String movieUndefined3;
-    String movieUndefined4;
-    String movieUndefined5;
-    String movieLinkToCover;
-    String movieComment;
-    boolean dvd;
-    boolean blueRay;
+    //components of the employee managing tab
+    @FXML
+    TextField txf_userIdAdd;
+    @FXML
+    TextField txf_userFirstName;
+    @FXML
+    TextField txf_userSurname;
+    @FXML
+    TextField txf_userIdDelete;
+    @FXML
+    Label lbl_addUser;
+    @FXML
+    Button btn_addUser;
+    @FXML
+    Button btn_deleteUser;
+    @FXML
+    CheckBox cbx_selAdminUser;
+    @FXML
+    TableView<Users> tbv_userTable;
+    @FXML
+    TableColumn<Users, Integer> tbc_userID;
+    @FXML
+    TableColumn<Users, String> tbc_userName;
+    @FXML
+    TableColumn<Users, Boolean> tbc_userIsAdmin;
+
+
 
 
     /**
@@ -144,8 +162,80 @@ public class SettingsController {
         utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
     }
 
+    /**
+     * This method fills the TableView with users from
+     * the observableList fullUserList
+     * It uses the id, name and isAdmin from Users.
+     */
+    public void fillTableView() {
+        fullUserListObservable.clear();
+
+        for (Users user : fullUserList) {
+            fullUserListObservable.add(user);
+        }
+
+        tbv_userTable.setItems(fullUserListObservable);
+
+        tbc_userID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getUserid()).asObject());
+        tbc_userName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        tbc_userIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
+    }
+
+    /**
+     * This method adds a user to the user management TableView
+     * @param user the user that will be added
+     */
+    public void addUserToTableView(Users user) {
+        if (user == null) {
+            throw new IllegalArgumentException(ERR_USER_NULL);
+        } else {
+            fullUserListObservable.add(user);
+            tbv_userTable.refresh();
+        }
+    }
+
+    /**
+     * This method removes a user to the user management TableView
+     * @param user the user that will be removed
+     */
+    public void removeUserFromTableView(Users user) {
+        if (user == null) {
+            throw new IllegalArgumentException(ERR_USER_NULL);
+        } else {
+            fullUserListObservable.remove(user);
+            tbv_userTable.refresh();
+        }
+    }
+
+    /**
+     * This method adds an user and is linked to the add button of the
+     * user management tab
+     * TODO actually add user to db
+     * TODO add user to List and refresh TableView
+     */
+    @FXML
+    public void addUser() {
+        System.out.println("console test: add user button has been clicked");
+    }
+
+    /**
+     * This method removes an user and is linked to the delete button of the
+     * user management tab
+     * TODO actually delete user to db
+     * TODO remove user from List and refresh TableView
+     */
+    @FXML
+    public void deleteUser() {
+        System.out.println("console test: delete user button has been clicked");
+    }
+
+    /**
+     * TODO remove fillTableView() from here and find a better suiting place for its calling
+     * @return passes the main frame if the scene to the Controller it is called from
+     */
     public TabPane getOuterPane()
     {
+        fillTableView();
         return tbp_settingsTabView;
     }
 }
