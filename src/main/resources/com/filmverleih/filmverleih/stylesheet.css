@@ -154,7 +154,7 @@
     -fx-background-color: #FF4040;
 }
 
-#spp_CartSplitPaneMiddle {
+#hbx_CartMainHBox {
     -fx-background-color: #191919;
 }
 
@@ -187,6 +187,7 @@
 
 #scp_Cart {
     -fx-background: #191919;
+    -fx-border-color: #191919;
 }
 
 #scp_Cart .track,
