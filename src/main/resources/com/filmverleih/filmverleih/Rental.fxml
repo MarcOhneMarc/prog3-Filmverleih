@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="acp_RentalBackground" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.RentalController">
+<AnchorPane fx:id="acp_RentalBackground" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" styleClass="acp_class_RentalBackground" stylesheets="@rentalStylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.RentalController">
    <children>
       <ScrollPane prefHeight="200.0" prefWidth="200.0">
         <content>
