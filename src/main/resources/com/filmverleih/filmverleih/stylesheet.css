@@ -185,6 +185,10 @@
     -fx-text-fill: #000000;
 }
 
+#acp_CartBackground {
+    -fx-background-color: #191919;
+}
+
 #scp_Cart {
     -fx-background: #191919;
     -fx-border-color: #191919;

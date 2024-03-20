@@ -5,15 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.scene.layout.HBox;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
@@ -53,8 +50,6 @@ public class CartController {
     }
 
     @FXML
-    private BorderPane bdp_CartBorderPane;
-    @FXML
     private TextField txf_CartName;
     @FXML
     private TextField txf_CartSurname;
@@ -81,7 +76,7 @@ public class CartController {
     @FXML
     private ScrollPane scp_Cart;
     @FXML
-    private SplitPane spp_CartSplitPaneMiddle;
+    private AnchorPane acp_CartBackground;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -248,8 +243,8 @@ public class CartController {
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public BorderPane getOuterPane() {
+    public AnchorPane getOuterPane() {
         setOrderInformationLabels();
-        return bdp_CartBorderPane;
+        return acp_CartBackground;
     }
 }
