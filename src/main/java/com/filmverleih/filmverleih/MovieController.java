@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 
 import static java.lang.String.valueOf;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class MovieController {
     /**
      * This method transfers the movie to the CartController where it is added to cart
      */
-    public void transferMovieToCart() {
+    public void transferMovieToCart() throws IOException {
         connector.getCartController().addMovieToCart(movie);
     }
 
