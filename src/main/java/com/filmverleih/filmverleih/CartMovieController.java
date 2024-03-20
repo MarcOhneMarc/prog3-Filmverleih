@@ -55,7 +55,7 @@ public class CartMovieController {
         }
         lbl_CartMovieTitle.setText(movie.getName());
         lbl_CartMovieRating.setText(valueOf(movie.getRating() + "/10 ☆"));
-        lbl_CartMovieDuration.setText(valueOf(movie.getLength()));
+        lbl_CartMovieDuration.setText(valueOf(movie.getLength()) + " min");
         lbl_CartMovieYear.setText(valueOf(movie.getYear()));
     }
 
