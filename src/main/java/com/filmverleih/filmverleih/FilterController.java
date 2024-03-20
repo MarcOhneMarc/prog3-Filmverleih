@@ -1,13 +1,13 @@
 package com.filmverleih.filmverleih;
 
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
+import javafx.fxml.FXML;
+import javafx.scene.layout.VBox;
 
 public class FilterController {
 
-    AnchorPane anchorPane;
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
-
+    @FXML
+    VBox vbx_FilterBackground;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
@@ -16,8 +16,7 @@ public class FilterController {
         this.connector = connector;
     }
 
-    public AnchorPane getOuterPane()
-    {
-        return anchorPane;
+    public VBox getOuterPane(){
+        return vbx_FilterBackground;
     }
 }
