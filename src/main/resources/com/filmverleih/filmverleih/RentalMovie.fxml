@@ -17,7 +17,7 @@
       <ImageView fx:id="imv_rentalMovieCover" fitHeight="300.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <VBox fx:id="vbx_rentalMovieCardInfoVbox" prefHeight="300.0" prefWidth="296.0">
          <children>
-            <Label fx:id="lbl_rentalMovieTitel" styleClass="lbl_class_rentalMovieCardLabels" text="MovieTitle-Value">
+            <Label fx:id="lbl_rentalMovieTitle" styleClass="lbl_class_rentalMovieCardLabels" text="MovieTitle-Value">
                <font>
                   <Font size="32.0" />
                </font>
