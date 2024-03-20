@@ -154,7 +154,17 @@
     -fx-background-color: #FF4040;
 }
 
+#txa_commentMovieScene {
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+#txa_commentMovieScene .scroll-bar:vertical{
+    -fx-background-color: #191919;
+}
+
 #hbx_CartMainHBox {
+
     -fx-background-color: #191919;
 }
 

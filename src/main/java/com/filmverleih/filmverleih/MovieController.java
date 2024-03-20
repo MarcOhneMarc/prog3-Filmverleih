@@ -2,13 +2,20 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+
+import static java.lang.String.valueOf;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class MovieController {
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
@@ -22,39 +29,37 @@ public class MovieController {
 
     //Attributes
     @FXML
-    private ImageView ivw_Cover;
+    private BorderPane bpn_borderPaneMovieScene;
     @FXML
-    private TextArea ta_comment;
+    private HBox hbx_movieCoverInfos;
     @FXML
-    private SplitPane sp_Movie;
+    private ImageView igv_coverMovieScene;
+    @FXML
+    private Label lbl_nameMovieScene;
+    @FXML
+    private Label lbl_yearMovieScene;
+    @FXML
+    private Label lbl_fskMovieScene;
+    @FXML
+    private Label lbl_durationMovieScene;
+    @FXML
+    private Label lbl_directorsMovieScene;
+    @FXML
+    private Label lbl_actorsMovieScene;
+    @FXML
+    private Label lbl_ratingMovieScene;
+    @FXML
+    private HBox hbx_genreMovieScene;
+    @FXML
+    private TextArea txa_commentMovieScene;
+    @FXML
+    private StackPane stp_addToCartInfoAndButton;
+    @FXML
+    private Label lbl_idValueMovieScene;
+    @FXML
+    private Label lbl_countValueMovieScene;
 
-    //Labels that need to be filled
-    @FXML
-    private Label lbl_id;
-    @FXML
-    private Label lbl_name;
-    @FXML
-    private Label lbl_year;
-    @FXML
-    private Label lbl_genre;
-    @FXML
-    private Label lbl_length;
-    @FXML
-    private Label lbl_rating;
-    @FXML
-    private Label lbl_count;
-    @FXML
-    private Label lbl_type;
-    @FXML
-    private Label lbl_cover;
-    @FXML
-    private Label lbl_directors;
-    @FXML
-    private Label lbl_studio;
-    @FXML
-    private Label lbl_actors;
-    @FXML
-    private Label lbl_fsk;
+    private Movies movie;
 
     /**
      * displays the Movie details in Center of application
@@ -62,43 +67,61 @@ public class MovieController {
      */
     public void fillPage(Movies movie)
     {
-        int id = movie.getMovieid();
-        String name = movie.getName();
-        int year = movie.getYear();
-        String genre = movie.getGenre();
-        int length = movie.getLength();
-        BigDecimal rating = movie.getRating();
-        int count = movie.getCount();
-        String type = movie.getType();
-        String cover = movie.getCover();
-        String directors = movie.getDirectors();
-        String studio = movie.getStudio();
-        String actors = movie.getActors();
-        String comment = movie.getComment();
-        int fsk = movie.getFsk();
-        lbl_id.setText(String.valueOf(id));
-        lbl_name.setText(name);
-        lbl_year.setText(String.valueOf(year));
-        lbl_genre.setText(genre);
-        lbl_length.setText(String.valueOf(length));
-        lbl_rating.setText(String.valueOf(rating));
-        lbl_count.setText(String.valueOf(count));
-        lbl_type.setText(type);
-        lbl_cover.setText(cover);
-        lbl_directors.setText(directors);
-        lbl_studio.setText(studio);
-        lbl_actors.setText(actors);
-        lbl_fsk.setText(String.valueOf(fsk));
-        ta_comment.setText(comment);
-        if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
-        else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
+        this.movie = movie;
+        if(!movie.getCover().isEmpty()) {
+            igv_coverMovieScene.setImage(new Image(movie.getCover()));
+        }
+        lbl_nameMovieScene.setText(movie.getName());
+        lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
+        if (movie.getName().length() > 40) {
+            int breakIndex = movie.getName().lastIndexOf(" ", 40);
+            if (breakIndex != -1) {
+                lbl_nameMovieScene.setText(movie.getName().substring(0, breakIndex) + "\n" + movie.getName().substring(breakIndex + 1));
+            } else {
+                lbl_nameMovieScene.setText(movie.getName().substring(0, 40) + "\n" + movie.getName().substring(40));
+            }
+        }
+        lbl_yearMovieScene.setText(valueOf(movie.getYear()));
+        lbl_fskMovieScene.setText(valueOf(movie.getFsk()));
+        lbl_durationMovieScene.setText(valueOf(movie.getLength()));
+        lbl_directorsMovieScene.setText(movie.getDirectors());
+        lbl_actorsMovieScene.setText(movie.getActors());
+
+        hbx_genreMovieScene.getChildren().clear();
+        lbl_ratingMovieScene.setText("☆" + movie.getRating() + "/10");
+
+        List<String> genreList = List.of(movie.getGenre().split(", "));
+
+        for(String genre : genreList) {
+            Label genreLabel = new Label();
+            genreLabel.setText(genre);
+            genreLabel.getStyleClass().addAll("lbl_class_genreMovieScene", "lbl_class_movieSceneLabels");
+            genreLabel.setPadding(new Insets(0,2,0,2));
+
+            hbx_genreMovieScene.getChildren().add(genreLabel);
+        }
+
+        txa_commentMovieScene.setText(movie.getComment());
+        txa_commentMovieScene.setWrapText(true);
+        lbl_idValueMovieScene.setText(valueOf(movie.getMovieid()));
+        lbl_countValueMovieScene.setText(valueOf(movie.getCount()));
+
+        //if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
+        //else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
+    }
+
+    /**
+     * This method transfers the movie to the CartController where it is added to cart
+     */
+    public void transferMovieToCart() {
+        connector.getCartController().addMovieToCart(movie);
     }
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public SplitPane getOuterPane()
+    public BorderPane getOuterPane()
     {
-        return sp_Movie;
+        return bpn_borderPaneMovieScene;
     }
 }
