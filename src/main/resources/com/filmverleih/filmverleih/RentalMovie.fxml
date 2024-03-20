@@ -108,11 +108,11 @@
       </VBox>
       <VBox fx:id="vbx_rentalMovieCardButtonVbox" prefHeight="300.0" prefWidth="269.0">
          <children>
-            <Button fx:id="btn_rentalMovieRemind" mnemonicParsing="false" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Mahnung" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btn_rentalMovieRemind" mnemonicParsing="false" onAction="#remindCustomerOfRental" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Mahnung" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Button>
-            <Button fx:id="btn_rentalMovieExtend" mnemonicParsing="false" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Verlängern" textAlignment="CENTER" textFill="WHITE">
+            <Button fx:id="btn_rentalMovieExtend" mnemonicParsing="false" onAction="#extendRental" prefHeight="75.0" prefWidth="205.0" styleClass="btn_class_rentalMovieButtons" text="Verlängern" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font></Button>

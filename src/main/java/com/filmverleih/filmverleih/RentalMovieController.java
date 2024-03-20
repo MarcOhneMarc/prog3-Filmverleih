@@ -93,10 +93,23 @@ public class RentalMovieController {
     public void removeFromRental() {
         System.out.println("console test: return button has been clicked");
 
-
         if (rentalController != null) {
             rentalController.removeFromRental(hbx_rentalMovieCard, movie);
         }
+    }
+
+    /**
+     * This method extends the movie rental
+     */
+    public void extendRental() {
+        System.out.println("console test: extend button has been clicked");
+    }
+
+    /**
+     * This method reminds the customer of his rental
+     */
+    public void remindCustomerOfRental() {
+        System.out.println("console test: remind button has been clicked");
     }
 
 
