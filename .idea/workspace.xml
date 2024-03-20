@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/settings.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +41,9 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2dPMbY71TSTk8QRx0tkqEgiB8jF" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
