@@ -110,6 +110,9 @@ public class MovieController {
         //else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
     }
 
+    /**
+     * This method transfers the movie to the CartController where it is added to cart
+     */
     public void transferMovieToCart() {
         connector.getCartController().addMovieToCart(movie);
     }
