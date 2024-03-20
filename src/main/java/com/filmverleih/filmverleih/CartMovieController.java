@@ -56,10 +56,10 @@ public class CartMovieController {
             igv_CartMovieImage.setImage(new Image(movie.getCover()));
         }
         lbl_CartMovieTitle.setText(movie.getName());
-        lbl_CartMovieRating.setText(valueOf(movie.getRating() + "/10 ☆"));
-        lbl_CartMovieDuration.setText(valueOf(movie.getLength()) + " min");
+        lbl_CartMovieRating.setText(movie.getRating() + "/10 ☆");
+        lbl_CartMovieDuration.setText(movie.getLength() + " min");
         lbl_CartMovieYear.setText(valueOf(movie.getYear()));
-        lbl_CartMovieCardFsk.setText("FSK " + valueOf(movie.getFsk()));
+        lbl_CartMovieCardFsk.setText("FSK " + movie.getFsk());
     }
 
     /**
