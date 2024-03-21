@@ -141,7 +141,7 @@ public class EditMovieController {
         txf_movieEditFSK.setText(valueOf(currentMovieFSK));
         txf_movieEditRating.setText(valueOf(currentMovieRating));
 
-        if(!currentMovieGenres.isEmpty()) {
+        if(currentMovieGenres != null) {
             txf_movieEditGenre1.setText(genreArray[0]);
             if(genreArray.length > 1) {
                 txf_movieEditGenre2.setText(genreArray[1]);
@@ -151,7 +151,7 @@ public class EditMovieController {
             }
         }
 
-        if(!currentMovieDirectors.isEmpty()) {
+        if(currentMovieDirectors != null) {
             txf_movieEditDirector1.setText(directorsArray[0]);
             if(directorsArray.length > 1) {
                 txf_movieEditDirector2.setText(directorsArray[1]);
@@ -200,6 +200,7 @@ public class EditMovieController {
     }
 
     private void addToTxfStringList(TextField textField, String data) {
+        txfStringList.clear();
         ArrayList<Object> tempList = new ArrayList<>();
         tempList.add(textField);
         tempList.add(data);
