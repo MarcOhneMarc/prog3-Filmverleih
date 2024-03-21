@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Movies;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
@@ -113,6 +114,10 @@ public class EditMovieController {
     private ImageView igv_movieEditActorsUndo;
     @FXML
     private ImageView igv_movieEditLinkToCoverUndo;
+    @FXML
+    private CheckBox cbx_movieEditSelDVD;
+    @FXML
+    private CheckBox cbx_movieEditSelBluRay;
 
 
     private Movies movie;
@@ -131,6 +136,7 @@ public class EditMovieController {
     private String currentMovieActors;
     private String currentLinkToCover;
     private String currentMovieComment;
+    private String currentMovieType;
     private String[] genreArray = new String[10];
     private String[] directorsArray = new String[10];
 
@@ -145,6 +151,7 @@ public class EditMovieController {
         txaListenerInitializer();
         insertMovieData();
         undoButtonAddEventHandler();
+        checkBoxAddEventHandler();
     }
 
     private void splitGenreDirectorsToArray() {
@@ -170,6 +177,7 @@ public class EditMovieController {
         this.currentMovieActors = movie.getActors();
         this.currentLinkToCover = movie.getCover();
         this.currentMovieComment = movie.getComment();
+        this.currentMovieType = movie.getType();
     }
 
     private void insertMovieData() {
@@ -206,6 +214,8 @@ public class EditMovieController {
         txf_movieEditLinkToCover.setText(currentLinkToCover);
         txa_movieEditComment.setText(currentMovieComment);
         txa_movieEditComment.setWrapText(true);
+        if(currentMovieType.equals("DVD")) {cbx_movieEditSelDVD.setSelected(true);}
+        if(currentMovieType.equals("Blu-Ray")) {cbx_movieEditSelBluRay.setSelected(true);}
     }
 
     private void txfListFiller() {
@@ -297,6 +307,31 @@ public class EditMovieController {
                 tempTextField.setText(tempCurrentMovieData);
             });
         }
+    }
+
+    private void checkBoxAddEventHandler() {
+        cbx_movieEditSelDVD.setOnAction(event -> {
+            cbx_movieEditSelBluRay.setSelected(!cbx_movieEditSelDVD.isSelected());
+            checkIfCheckBoxesChanged();
+        });
+        cbx_movieEditSelBluRay.setOnAction(event -> {
+            cbx_movieEditSelDVD.setSelected(!cbx_movieEditSelBluRay.isSelected());
+            checkIfCheckBoxesChanged();
+        });
+    }
+
+    private void checkIfCheckBoxesChanged() {
+        if(currentMovieType.equals("DVD") && !cbx_movieEditSelDVD.isSelected()) {
+            cbx_movieEditSelDVD.setStyle("-fx-text-fill: #FF4040");
+            cbx_movieEditSelBluRay.setStyle("-fx-text-fill: #FF4040");
+        } else if(currentMovieType.equals("Blu-Ray") && !cbx_movieEditSelBluRay.isSelected()) {
+            cbx_movieEditSelBluRay.setStyle("-fx-fill: #FF4040");
+            cbx_movieEditSelDVD.setStyle("-fx-text-fill: #FF4040");
+        } else {
+            cbx_movieEditSelBluRay.setStyle("-fx-fill: #FFF");
+            cbx_movieEditSelDVD.setStyle("-fx-text-fill: #FFF");
+        }
+
     }
 
     public AnchorPane getOuterPane() {

@@ -15,3 +15,7 @@
     -fx-focus-color: transparent;
     -fx-text-box-border: transparent;
 }
+#lbl_movieEditCaption {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 32;
+}
