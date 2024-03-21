@@ -1,0 +1,11 @@
+#acp_EditMovieBackground {
+    -fx-background-color: #191919;
+}
+
+.txf_class_movieEdit {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+}

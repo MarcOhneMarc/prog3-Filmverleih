@@ -33,7 +33,7 @@ public class LibraryController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
-                                    Integer,
+                                    EditMovieController,
                                     Integer,
                                     Integer> connector;
     /**
@@ -47,7 +47,7 @@ public class LibraryController {
                             SettingsController,
                             FilterController,
                             CartController,
-                            Integer,
+                            EditMovieController,
                             Integer,
                             Integer> connector) {
         this.connector = connector;

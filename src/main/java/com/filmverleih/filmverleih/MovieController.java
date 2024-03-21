@@ -19,12 +19,30 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class MovieController {
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,
+                            LibraryController,
+                            MovieController,
+                            RentalController,
+                            SettingsController,
+                            FilterController,
+                            CartController,
+                            EditMovieController,
+                            Integer,
+                            Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,
+                                                    LibraryController,
+                                                    MovieController,
+                                                    RentalController,
+                                                    SettingsController,
+                                                    FilterController,
+                                                    CartController,
+                                                    EditMovieController,
+                                                    Integer,
+                                                    Integer> connector) {
         this.connector = connector;
     }
 
@@ -109,6 +127,12 @@ public class MovieController {
 
         //if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
         //else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
+    }
+
+    public void changeToEdit() {
+        EditMovieController editMovieController = connector.getEditMovieController();
+        editMovieController.initialize(movie);
+        MainApplication.borderPane.setCenter(editMovieController.getOuterPane());
     }
 
     /**
