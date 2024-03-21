@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
@@ -9,6 +10,11 @@ import java.io.IOException;
  * It handles user interactions related to navigation between different views.
  */
 public class NavbarController {
+    @FXML
+    public TextField searchbar;
+
+    private FilterController filterController;
+
     //Instantiate Controller-Connector for Navbar-Library-Connection
     private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
     /**
@@ -17,6 +23,7 @@ public class NavbarController {
      */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
         this.connector = connector;
+        this.filterController = connector.getFilterController();
     }
     /**
      * Handles the user's request to switch to the library view.
@@ -63,4 +70,14 @@ public class NavbarController {
 
         MainApplication.borderPane.setRight(null);
     }
+
+    @FXML
+    public void initialize() {
+        // Add listener to text field and combo box for filtering
+        searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterController.searchBar = newValue;
+            filterController.generateFilters();
+        });
+    }
+
 }

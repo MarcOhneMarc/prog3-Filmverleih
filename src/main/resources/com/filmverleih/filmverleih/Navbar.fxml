@@ -43,7 +43,7 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <TextField id="headerSearchbar" prefHeight="50.0" prefWidth="1080.0" promptText="Suche..." stylesheets="@stylesheet.css">
+            <TextField fx:id="searchbar"  id="headerSearchbar" prefHeight="50.0" prefWidth="1080.0" promptText="Suche..." stylesheets="@stylesheet.css">
                <font>
                   <Font size="34.0" />
                </font>
