@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
@@ -14,13 +15,32 @@ import java.util.stream.Collectors;
 
 public class FilterController {
 
-
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    private NWayControllerConnector<
+            NavbarController,
+            LibraryController,
+            MovieController,
+            RentalController,
+            SettingsController,
+            FilterController,
+            CartController,
+            Integer,
+            Integer,
+            Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
+    public void setConnector(
+            NWayControllerConnector<NavbarController,
+                    LibraryController,
+                    MovieController,
+                    RentalController,
+                    SettingsController,
+                    FilterController,
+                    CartController,
+                    Integer,
+                    Integer,
+                    Integer> connector) {
         this.connector = connector;
         this.libraryController = connector.getLibraryController();
     }
@@ -28,7 +48,9 @@ public class FilterController {
     private LibraryController libraryController;
 
     @FXML
-    VBox vbx_FilterBackground;
+    private ComboBox<String> sortComboBox;
+    @FXML
+    private VBox vbx_FilterBackground;
     @FXML
     private TextField txf_year;
     @FXML
@@ -56,10 +78,9 @@ public class FilterController {
     @FXML
     public TextField txf_fsk;
 
-
     public String searchBar;
-
-    private Predicate<Movies> predicate = movie -> true;
+    private Predicate<Movies> predicate;
+    private Comparator<Movies> comparator;
 
     @FXML
     public void initialize() {
@@ -68,6 +89,53 @@ public class FilterController {
             double roundedValue = Math.round(value * 10.0) / 10.0;
             lbl_rating.setText(String.valueOf(roundedValue));
         });
+
+        sortComboBox.setOnAction(event -> {
+            String selectedOption = sortComboBox.getSelectionModel().getSelectedItem();
+            if (selectedOption != null) {
+                sortListBy(selectedOption);
+            }
+        });
+    }
+
+    private void sortListBy(String selectedOption) {
+        comparator = null;
+
+        switch (selectedOption) {
+            case "Name aufsteigend":
+                comparator = Comparator.comparing(Movies::getName);
+                break;
+            case "Name absteigend":
+                comparator = Comparator.comparing(Movies::getName).reversed();
+                break;
+            case "Jahr aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getYear);
+                break;
+            case "Jahr absteigend":
+                comparator = Comparator.comparingInt(Movies::getYear).reversed();
+                break;
+            case "Bewertung aufsteigend":
+                comparator = Comparator.comparing(Movies::getRating);
+                break;
+            case "Bewertung absteigend":
+                comparator = Comparator.comparing(Movies::getRating).reversed();
+                break;
+            case "Länge aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getLength);
+                break;
+            case "Länge absteigend":
+                comparator = Comparator.comparingInt(Movies::getLength).reversed();
+                break;
+            case "FSK aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getFsk);
+                break;
+            case "FSK absteigend":
+                comparator = Comparator.comparingInt(Movies::getFsk).reversed();
+                break;
+        }
+        if (comparator != null) {
+            libraryController.sortMovies(comparator);
+        }
     }
 
     public void generateFilters() {
@@ -86,14 +154,17 @@ public class FilterController {
         predicate = movie -> true;
 
         if (!searchBar.isEmpty()) {
-            predicate = predicate.and(movie -> movie.getName().toLowerCase().contains(searchBar.toLowerCase()));
+            predicate = predicate.and(movie ->
+                    movie.getName().toLowerCase().contains(searchBar.toLowerCase()));
         }
         if (!yearFilter.isEmpty()) {
             int intYear = Integer.parseInt(yearFilter);
-            predicate = predicate.and(movie -> movie.getYear() == intYear);
+            predicate = predicate.and(movie ->
+                    movie.getYear() == intYear);
         }
         if (!genreFilter.isEmpty()) {
-            predicate = predicate.and(movie -> movie.getGenre().toLowerCase().contains(genreFilter.toLowerCase()));
+            predicate = predicate.and(movie ->
+                    movie.getGenre().toLowerCase().contains(genreFilter.toLowerCase()));
         }
         if (!minLengthFilter.isEmpty() || !maxLengthFilter.isEmpty()) {
             predicate = predicate.and(movie -> {
@@ -105,24 +176,36 @@ public class FilterController {
         }
         if (cbx_ratingEmpty.isSelected()) {
             BigDecimal roundedValue = BigDecimal.valueOf(Math.round(ratingFilter * 10.0) / 10.0);
-            predicate = predicate.and(movie -> movie.getRating().equals(ratingFilter));
-        }p
-
-        applyFilter();
-    }
-
-    public void applyFilter() {
-        List<Movies> currentMovieList = libraryController.getAllMovies();
-
-        if (currentMovieList.isEmpty()) {
-            return;
+            predicate = predicate.and(movie ->
+                    movie.getRating().equals(ratingFilter));
+        }
+        if (!typeFilter.isEmpty()) {
+            predicate = predicate.and(movie ->
+                    movie.getType().toLowerCase().contains(typeFilter.toLowerCase()));
+        }
+        if (!commentFilter.isEmpty()) {
+            predicate = predicate.and(movie ->
+                    movie.getComment().toLowerCase().contains(commentFilter.toLowerCase()));
+        }
+        if (!directorFilter.isEmpty()) {
+            predicate = predicate.and(movie ->
+                    movie.getDirectors().toLowerCase().contains(directorFilter.toLowerCase()));
+        }
+        if (!studioFilter.isEmpty()) {
+            predicate = predicate.and(movie ->
+                    movie.getStudio().toLowerCase().contains(studioFilter.toLowerCase()));
+        }
+        if (!actorFilter.isEmpty()) {
+            predicate = predicate.and(movie ->
+                    movie.getActors().toLowerCase().contains(actorFilter.toLowerCase()));
+        }
+        if (!fskFilter.isEmpty()) {
+            int fsk = Integer.parseInt(fskFilter);
+            predicate = predicate.and(movie ->
+                    movie.getFsk() == fsk);
         }
 
-        List<Movies> updatedMoviesList = currentMovieList.stream()
-                .filter(predicate)
-                .collect(Collectors.toList());
-
-        libraryController.updateMovies(updatedMoviesList); // Update the library view with filtered movies
+        libraryController.filterMovies(predicate);
     }
 
     public VBox getOuterPane(){

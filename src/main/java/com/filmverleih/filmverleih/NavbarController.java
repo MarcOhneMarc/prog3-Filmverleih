@@ -37,6 +37,7 @@ public class NavbarController {
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setCenter(libraryController.getOuterPane());
         MainApplication.borderPane.setRight(filterController.getOuterPane());
+        showSearchbar();
     }
 
     /**
@@ -51,6 +52,7 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(rentalController.getOuterPane());
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setRight(filterController.getOuterPane());
+        showSearchbar();
 
         //MainApplication.borderPane.setRight(null);
     }
@@ -61,6 +63,7 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(settingsController.getOuterPane());
 
         MainApplication.borderPane.setRight(null);
+        hideSearchbar();
     }
 
     @FXML
@@ -69,6 +72,7 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
 
         MainApplication.borderPane.setRight(null);
+        hideSearchbar();
     }
 
     @FXML
@@ -78,6 +82,14 @@ public class NavbarController {
             filterController.searchBar = newValue;
             filterController.generateFilters();
         });
+    }
+
+    private void showSearchbar() {
+        searchbar.setVisible(true);
+    }
+
+    private void hideSearchbar() {
+        searchbar.setVisible(false);
     }
 
 }
