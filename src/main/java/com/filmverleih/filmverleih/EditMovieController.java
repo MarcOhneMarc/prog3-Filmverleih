@@ -1,9 +1,12 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
@@ -80,7 +83,7 @@ public class EditMovieController {
     private TextArea txa_movieEditComment;
 
     private Movies movie;
-    ArrayList<ArrayList<Object>> txfStringList = new ArrayList<>();
+    private ArrayList<ArrayList<Object>> txfStringList = new ArrayList<>();
 
     private int currentMovieId;
     private String currentMovieName;
@@ -101,11 +104,13 @@ public class EditMovieController {
 
     public void initialize(Movies movie) {
         this.movie = movie;
+        txfStringList.clear();
         movieDataGetter();
         splitGenreDirectorsToArray();
-        insertMovieData();
         txfListFiller();
         txfListenerInitializer();
+        txaListenerInitializer();
+        insertMovieData();
     }
 
     private void splitGenreDirectorsToArray() {
@@ -200,7 +205,6 @@ public class EditMovieController {
     }
 
     private void addToTxfStringList(TextField textField, String data) {
-        txfStringList.clear();
         ArrayList<Object> tempList = new ArrayList<>();
         tempList.add(textField);
         tempList.add(data);
@@ -211,14 +215,24 @@ public class EditMovieController {
         for(ArrayList<Object> tempRow : txfStringList) {
             TextField tempTextField = (TextField) tempRow.getFirst();
                 tempTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-                    currentMovieName = (String) tempRow.get(1);
-                    if (!newValue.equals(currentMovieName)) {
-                        tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-                    } else {
+                    String tempCurrentMovieData = (String) tempRow.get(1);
+                    if (newValue.equals(tempCurrentMovieData)) {
                         tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                    } else {
+                        tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
                     }
                 });
         }
+    }
+
+    private void txaListenerInitializer() {
+        txa_movieEditComment.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.equals(currentMovieComment)) {
+                txa_movieEditComment.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+            } else {
+                txa_movieEditComment.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
+            }
+        });
     }
 
     public AnchorPane getOuterPane() {
