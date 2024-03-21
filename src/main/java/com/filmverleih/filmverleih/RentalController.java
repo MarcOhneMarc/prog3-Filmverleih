@@ -38,6 +38,8 @@ public class RentalController {
     @FXML
     GridPane grp_rentalGrid;
 
+    private double windowWidth = 1920;
+
     private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
 
     /**
@@ -63,6 +65,7 @@ public class RentalController {
         scp_rentalScrollPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                windowWidth = newValue.doubleValue();
                 adjustColumnCount(newValue.doubleValue());
             }
         });
@@ -75,16 +78,12 @@ public class RentalController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
             HBox rentalCard = loader.load();
             RentalMovieController controller = loader.getController();
-
             controller.setRentalController(this);
 
             controller.insertMovieInfo(allMovies.get(i));
             controller.insertCustomerInfo();
 
-            grp_rentalGrid.setHgap(20);
-            grp_rentalGrid.setVgap(20);
-            grp_rentalGrid.setAlignment(Pos.CENTER);
-
+            GridPane.setMargin(rentalCard,  new Insets(20, 0, 0, 20));
             grp_rentalGrid.add(rentalCard, i, i / 4);
         }
 
@@ -100,7 +99,7 @@ public class RentalController {
      * @param windowWidth the width of the window
      */
     private void adjustColumnCount(double windowWidth) {
-        double cardWidth = 750 + 40; // Width of card plus margin
+        double cardWidth = 750 + 20; // Width of card plus margin
         int numColumns = Math.max(1, (int) (windowWidth / cardWidth)); // Count of columns from windowWidth
 
         int row = 0;
@@ -123,6 +122,7 @@ public class RentalController {
      */
     public void removeFromRental(HBox hBox, Movies movie) {
         grp_rentalGrid.getChildren().remove(hBox);
+        adjustColumnCount(windowWidth);
     }
 
     /**
