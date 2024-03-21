@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Init">
+    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Filter Ui hinzugefügt, und erste Testdaten">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NWayControllerConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NWayControllerConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +190,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710953489810</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="FEAT-Filter Ui hinzugefügt, und erste Testdaten">
+      <option name="closed" value="true" />
+      <created>1710978400857</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1710978400857</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +235,7 @@
     <MESSAGE value="FEAT-added some comments on CartController.java" />
     <MESSAGE value="FEAT-Meeting final changes" />
     <MESSAGE value="FEAT-Init" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Init" />
+    <MESSAGE value="FEAT-Filter Ui hinzugefügt, und erste Testdaten" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Filter Ui hinzugefügt, und erste Testdaten" />
   </component>
 </project>

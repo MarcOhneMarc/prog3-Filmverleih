@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class FilterController {
 
@@ -20,6 +21,7 @@ public class FilterController {
      */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
         this.connector = connector;
+        this.libraryController = connector.getLibraryController();
     }
 
     private LibraryController libraryController;
@@ -29,10 +31,6 @@ public class FilterController {
 
     @FXML
     private TextField testFilter;
-
-    public void setLibraryController(LibraryController libraryController) {
-        this.libraryController = libraryController;
-    }
 
     public void generateFilters() {
         String filterText = testFilter.getText(); // Assuming testFilter is some UI element for input
@@ -50,7 +48,6 @@ public class FilterController {
     }
 
     public void applyFilter(Predicate<Movies> predicate) {
-        List<Movies> updatedMoviesList = new ArrayList<>();
 
         if (libraryController == null) {
             // Handle the scenario where libraryController is null
@@ -63,11 +60,9 @@ public class FilterController {
             return;
         }
 
-        for (Movies movie : currentMovieList) {
-            if (predicate.test(movie)) {
-                updatedMoviesList.add(movie);
-            }
-        }
+        List<Movies> updatedMoviesList = currentMovieList.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
 
         libraryController.updateMovies(updatedMoviesList); // Update the library view with filtered movies
     }
