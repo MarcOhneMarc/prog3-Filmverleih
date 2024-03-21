@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
@@ -81,6 +83,37 @@ public class EditMovieController {
     private TextField txf_movieEditLinkToCover;
     @FXML
     private TextArea txa_movieEditComment;
+    @FXML
+    private ImageView igv_movieEditNameUndo;
+    @FXML
+    private ImageView igv_movieEditYearUndo;
+    @FXML
+    private ImageView igv_movieEditLengthUndo;
+    @FXML
+    private ImageView igv_movieEditFskUndo;
+    @FXML
+    private ImageView igv_movieEditRatingUndo;
+    @FXML
+    private ImageView igv_movieEditGenre1Undo;
+    @FXML
+    private ImageView igv_movieEditGenre2Undo;
+    @FXML
+    private ImageView igv_movieEditGenre3Undo;
+    @FXML
+    private ImageView igv_movieEditDirector1Undo;
+    @FXML
+    private ImageView igv_movieEditDirector2Undo;
+    @FXML
+    private ImageView igv_movieEditDirector3Undo;
+    @FXML
+    private ImageView igv_movieEditCountUndo;
+    @FXML
+    private ImageView igv_movieEditStudioUndo;
+    @FXML
+    private ImageView igv_movieEditActorsUndo;
+    @FXML
+    private ImageView igv_movieEditLinkToCoverUndo;
+
 
     private Movies movie;
     private ArrayList<ArrayList<Object>> txfStringList = new ArrayList<>();
@@ -98,8 +131,8 @@ public class EditMovieController {
     private String currentMovieActors;
     private String currentLinkToCover;
     private String currentMovieComment;
-    private String[] genreArray;
-    private String[] directorsArray;
+    private String[] genreArray = new String[10];
+    private String[] directorsArray = new String[10];
 
 
     public void initialize(Movies movie) {
@@ -111,6 +144,7 @@ public class EditMovieController {
         txfListenerInitializer();
         txaListenerInitializer();
         insertMovieData();
+        undoButtonAddEventHandler();
     }
 
     private void splitGenreDirectorsToArray() {
@@ -175,39 +209,53 @@ public class EditMovieController {
     }
 
     private void txfListFiller() {
-        addToTxfStringList(txf_movieEditName, currentMovieName);
-        addToTxfStringList(txf_movieEditYear, valueOf(currentMovieYear));
-        addToTxfStringList(txf_movieEditLength, valueOf(currentMovieDuration));
-        addToTxfStringList(txf_movieEditFSK, valueOf(currentMovieFSK));
-        addToTxfStringList(txf_movieEditRating, valueOf(currentMovieRating));
+        addToTxfStringList(txf_movieEditName, currentMovieName, igv_movieEditNameUndo);
+        addToTxfStringList(txf_movieEditYear, valueOf(currentMovieYear), igv_movieEditYearUndo);
+        addToTxfStringList(txf_movieEditLength, valueOf(currentMovieDuration), igv_movieEditLengthUndo);
+        addToTxfStringList(txf_movieEditFSK, valueOf(currentMovieFSK), igv_movieEditFskUndo);
+        addToTxfStringList(txf_movieEditRating, valueOf(currentMovieRating), igv_movieEditRatingUndo);
         if(genreArray != null) {
-            addToTxfStringList(txf_movieEditGenre1, genreArray[0]);
-            if(genreArray.length > 1) {
-                addToTxfStringList(txf_movieEditGenre2, genreArray[1]);
-                    if(genreArray.length > 2) {
-                    addToTxfStringList(txf_movieEditGenre3, genreArray[2]);
-                }
-            }
+            addToTxfStringList(txf_movieEditGenre1, genreArray[0], igv_movieEditGenre1Undo);
+        } else {
+            addToTxfStringList(txf_movieEditGenre1, null, igv_movieEditGenre1Undo);
         }
+        if(genreArray.length > 1) {
+            addToTxfStringList(txf_movieEditGenre2, genreArray[1], igv_movieEditGenre2Undo);
+        } else {
+            addToTxfStringList(txf_movieEditGenre2, null, igv_movieEditGenre2Undo);
+        }
+        if(genreArray.length > 2) {
+            addToTxfStringList(txf_movieEditGenre3, genreArray[2], igv_movieEditGenre3Undo);
+        } else {
+            addToTxfStringList(txf_movieEditGenre3, null, igv_movieEditGenre3Undo);
+        }
+
         if(directorsArray != null) {
-            addToTxfStringList(txf_movieEditDirector1, directorsArray[0]);
-            if(directorsArray.length > 1) {
-                addToTxfStringList(txf_movieEditDirector2, directorsArray[1]);
-                if(directorsArray.length > 2) {
-                    addToTxfStringList(txf_movieEditDirector3, directorsArray[2]);
-                }
-            }
+            addToTxfStringList(txf_movieEditDirector1, directorsArray[0], igv_movieEditDirector1Undo);
+        } else {
+            addToTxfStringList(txf_movieEditDirector1, null, igv_movieEditDirector1Undo);
         }
-        addToTxfStringList(txf_movieEditCount, valueOf(currentMovieCount));
-        addToTxfStringList(txf_movieEditStudio, currentMovieStudio);
-        addToTxfStringList(txf_movieEditActors, currentMovieActors);
-        addToTxfStringList(txf_movieEditLinkToCover, currentLinkToCover);
+        if(directorsArray.length > 1) {
+            addToTxfStringList(txf_movieEditDirector2, directorsArray[1], igv_movieEditDirector2Undo);
+        } else {
+            addToTxfStringList(txf_movieEditDirector2, null, igv_movieEditDirector2Undo);
+        }
+        if(directorsArray.length > 2) {
+            addToTxfStringList(txf_movieEditDirector3, directorsArray[2], igv_movieEditDirector3Undo);
+        } else {
+            addToTxfStringList(txf_movieEditDirector3, null, igv_movieEditDirector3Undo);
+        }
+        addToTxfStringList(txf_movieEditCount, valueOf(currentMovieCount), igv_movieEditCountUndo);
+        addToTxfStringList(txf_movieEditStudio, currentMovieStudio, igv_movieEditStudioUndo);
+        addToTxfStringList(txf_movieEditActors, currentMovieActors, igv_movieEditActorsUndo);
+        addToTxfStringList(txf_movieEditLinkToCover, currentLinkToCover, igv_movieEditLinkToCoverUndo);
     }
 
-    private void addToTxfStringList(TextField textField, String data) {
+    private void addToTxfStringList(TextField textField, String data, ImageView undoButton) {
         ArrayList<Object> tempList = new ArrayList<>();
         tempList.add(textField);
         tempList.add(data);
+        tempList.add(undoButton);
         txfStringList.add(tempList);
     };
 
@@ -216,10 +264,15 @@ public class EditMovieController {
             TextField tempTextField = (TextField) tempRow.getFirst();
                 tempTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     String tempCurrentMovieData = (String) tempRow.get(1);
-                    if (newValue.equals(tempCurrentMovieData)) {
+                    if(newValue == null && tempCurrentMovieData == null) {
                         tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-                    } else {
-                        tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
+                    }
+                    if(newValue != null) {
+                        if (newValue.equals(tempCurrentMovieData)) {
+                            tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                        } else {
+                            tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
+                        }
                     }
                 });
         }
@@ -233,6 +286,17 @@ public class EditMovieController {
                 txa_movieEditComment.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
             }
         });
+    }
+
+    private void undoButtonAddEventHandler() {
+        for(ArrayList<Object> tempRow : txfStringList) {
+            TextField tempTextField = (TextField) tempRow.getFirst();
+            String tempCurrentMovieData = (String) tempRow.get(1);
+            ImageView tempUndoIcon = (ImageView) tempRow.get(2);
+            tempUndoIcon.setOnMouseClicked(event -> {
+                tempTextField.setText(tempCurrentMovieData);
+            });
+        }
     }
 
     public AnchorPane getOuterPane() {

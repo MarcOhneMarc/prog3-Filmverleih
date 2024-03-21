@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -40,24 +42,186 @@
                </rowConstraints>
                <children>
                   <TextField fx:id="txf_movieEditID" disable="true" promptText="ID" styleClass="txf_class_movieEdit" GridPane.rowIndex="1" />
-                  <TextField fx:id="txf_movieEditName" promptText="Name" styleClass="txf_class_movieEdit" GridPane.rowIndex="2" />
-                  <TextField fx:id="txf_movieEditYear" prefWidth="372.0" promptText="Jahr" styleClass="txf_class_movieEdit" GridPane.rowIndex="3" />
-                  <TextField fx:id="txf_movieEditLength" promptText="Länge" styleClass="txf_class_movieEdit" GridPane.rowIndex="4" />
-                  <TextField fx:id="txf_movieEditFSK" promptText="FSK" styleClass="txf_class_movieEdit" GridPane.rowIndex="5" />
-                  <TextField fx:id="txf_movieEditRating" promptText="Rating" styleClass="txf_class_movieEdit" GridPane.rowIndex="6" />
-                  <TextField fx:id="txf_movieEditGenre1" promptText="Genre 1" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txf_movieEditGenre2" promptText="Genre 2" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="txf_movieEditGenre3" promptText="Genre 3" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="txf_movieEditDirector1" promptText="Director 1*" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="txf_movieEditDirector2" promptText="Director 2" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="txf_movieEditDirector3" promptText="Director 3" styleClass="txf_class_movieEdit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="txf_movieEditCount" promptText="Anzahl" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="txf_movieEditStudio" promptText="Studio" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <TextField fx:id="txf_movieEditActors" promptText="Actors" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <TextField fx:id="txf_movieEditUndefined3" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <TextField fx:id="txf_movieEditUndefined4" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <TextField fx:id="txf_movieEditUndefined5" styleClass="txf_class_movieEdit" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <TextField fx:id="txf_movieEditLinkToCover" promptText="Link to Cover" styleClass="txf_class_movieEdit" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="txf_movieEditName" prefWidth="410.0" promptText="Name" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditNameUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txf_movieEditYear" prefWidth="410.0" promptText="Jahr" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditYearUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="txf_movieEditLength" prefWidth="410.0" promptText="Länge" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditLengthUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="txf_movieEditFSK" prefWidth="410.0" promptText="FSK" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditFskUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="6">
+                     <children>
+                        <TextField fx:id="txf_movieEditRating" prefWidth="410.0" promptText="Rating" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditRatingUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="txf_movieEditGenre1" prefWidth="410.0" promptText="Genre 1" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditGenre1Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="txf_movieEditGenre2" prefWidth="410.0" promptText="Genre 2" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditGenre2Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txf_movieEditGenre3" prefWidth="410.0" promptText="Genre 3" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditGenre3Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="txf_movieEditDirector1" prefWidth="410.0" promptText="Director 1*" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditDirector1Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="txf_movieEditDirector2" prefWidth="410.0" promptText="Director 2" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditDirector2Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <TextField fx:id="txf_movieEditDirector3" prefWidth="410.0" promptText="Director 3" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditDirector3Undo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="txf_movieEditCount" prefWidth="410.0" promptText="Anzahl" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditCountUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="txf_movieEditStudio" prefWidth="410.0" promptText="Studio" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditStudioUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="txf_movieEditActors" prefWidth="410.0" promptText="Actors" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditActorsUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="txf_movieEditUndefined3" prefWidth="410.0" styleClass="txf_class_movieEdit" />
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="txf_movieEditUndefined4" prefWidth="410.0" styleClass="txf_class_movieEdit" />
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <children>
+                        <TextField fx:id="txf_movieEditUndefined5" prefWidth="410.0" styleClass="txf_class_movieEdit" />
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="txf_movieEditLinkToCover" prefWidth="410.0" promptText="Link to Cover" styleClass="txf_class_movieEdit" />
+                        <ImageView fx:id="igv_movieEditLinkToCoverUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                   <TextArea fx:id="txa_movieEditComment" prefHeight="51.0" prefWidth="228.0" promptText="Comment" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="5" />
                   <Button fx:id="btn_deleteMovie" mnemonicParsing="false" styleClass="bib-button" text="Löschen" textFill="WHITE" GridPane.rowIndex="12" />
                   <Label prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_SettingsLabel" text="Film hinzufügen" />
@@ -69,7 +233,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.rowIndex="8">
                      <children>
-                        <Button fx:id="btn_confirmMovieEdit" mnemonicParsing="false" styleClass="bib-button" text="Speichern" textFill="WHITE" />
+                        <Button fx:id="btn_confirmMovieEdit" mnemonicParsing="false" text="Speichern" textFill="WHITE" />
                         <Button fx:id="btn_cancleMovieEdit" mnemonicParsing="false" text="Abbrechen" />
                      </children>
                   </HBox>

@@ -131,8 +131,8 @@ public class MovieController {
 
     public void changeToEdit() {
         EditMovieController editMovieController = connector.getEditMovieController();
-        editMovieController.initialize(movie);
         MainApplication.borderPane.setCenter(editMovieController.getOuterPane());
+        editMovieController.initialize(movie);
     }
 
     /**
