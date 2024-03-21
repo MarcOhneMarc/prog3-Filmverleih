@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane fx:id="acp_EditMovieBackground" prefHeight="990.0" prefWidth="1920.0" stylesheets="@editMovieStylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.EditMovieController">
    <children>
       <VBox fx:id="vbx_movieParamGrid" layoutX="70.0" layoutY="70.0" prefHeight="814.0" prefWidth="1699.0">
@@ -40,7 +39,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="txf_movieEditID" promptText="ID" styleClass="txf_class_movieEdit" GridPane.rowIndex="1" />
+                  <TextField fx:id="txf_movieEditID" disable="true" promptText="ID" styleClass="txf_class_movieEdit" GridPane.rowIndex="1" />
                   <TextField fx:id="txf_movieEditName" promptText="Name" styleClass="txf_class_movieEdit" GridPane.rowIndex="2" />
                   <TextField fx:id="txf_movieEditYear" prefWidth="372.0" promptText="Jahr" styleClass="txf_class_movieEdit" GridPane.rowIndex="3" />
                   <TextField fx:id="txf_movieEditLength" promptText="Länge" styleClass="txf_class_movieEdit" GridPane.rowIndex="4" />
