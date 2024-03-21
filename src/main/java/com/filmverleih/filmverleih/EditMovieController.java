@@ -1,20 +1,16 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static java.lang.String.valueOf;
 
@@ -84,6 +80,7 @@ public class EditMovieController {
     private TextArea txa_movieEditComment;
 
     private Movies movie;
+    ArrayList<ArrayList<Object>> txfStringList = new ArrayList<>();
 
     private int currentMovieId;
     private String currentMovieName;
@@ -98,15 +95,26 @@ public class EditMovieController {
     private String currentMovieActors;
     private String currentLinkToCover;
     private String currentMovieComment;
-    private String genreArray[];
-    private String directorsArray[];
+    private String[] genreArray;
+    private String[] directorsArray;
 
 
     public void initialize(Movies movie) {
         this.movie = movie;
         movieDataGetter();
+        splitGenreDirectorsToArray();
         insertMovieData();
+        txfListFiller();
         txfListenerInitializer();
+    }
+
+    private void splitGenreDirectorsToArray() {
+        if(currentMovieGenres != null) {
+            this.genreArray = currentMovieGenres.split(", ");
+        }
+        if(currentMovieDirectors != null) {
+            this.directorsArray = currentMovieDirectors.split(", ");
+        }
     }
 
     private void movieDataGetter() {
@@ -133,8 +141,7 @@ public class EditMovieController {
         txf_movieEditFSK.setText(valueOf(currentMovieFSK));
         txf_movieEditRating.setText(valueOf(currentMovieRating));
 
-        if(currentMovieGenres != null) {
-            this.genreArray = currentMovieGenres.split(", ");
+        if(!currentMovieGenres.isEmpty()) {
             txf_movieEditGenre1.setText(genreArray[0]);
             if(genreArray.length > 1) {
                 txf_movieEditGenre2.setText(genreArray[1]);
@@ -144,8 +151,7 @@ public class EditMovieController {
             }
         }
 
-        if(currentMovieDirectors != null) {
-            this.directorsArray = currentMovieDirectors.split(", ");
+        if(!currentMovieDirectors.isEmpty()) {
             txf_movieEditDirector1.setText(directorsArray[0]);
             if(directorsArray.length > 1) {
                 txf_movieEditDirector2.setText(directorsArray[1]);
@@ -163,163 +169,56 @@ public class EditMovieController {
         txa_movieEditComment.setWrapText(true);
     }
 
-
-    private void txfListenerInitializer() {
-        txf_movieEditName.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(currentMovieName)) {
-                txf_movieEditName.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
+    private void txfListFiller() {
+        addToTxfStringList(txf_movieEditName, currentMovieName);
+        addToTxfStringList(txf_movieEditYear, valueOf(currentMovieYear));
+        addToTxfStringList(txf_movieEditLength, valueOf(currentMovieDuration));
+        addToTxfStringList(txf_movieEditFSK, valueOf(currentMovieFSK));
+        addToTxfStringList(txf_movieEditRating, valueOf(currentMovieRating));
+        if(genreArray != null) {
+            addToTxfStringList(txf_movieEditGenre1, genreArray[0]);
+            if(genreArray.length > 1) {
+                addToTxfStringList(txf_movieEditGenre2, genreArray[1]);
+                    if(genreArray.length > 2) {
+                    addToTxfStringList(txf_movieEditGenre3, genreArray[2]);
+                }
             }
-            else {
-                txf_movieEditName.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+        }
+        if(directorsArray != null) {
+            addToTxfStringList(txf_movieEditDirector1, directorsArray[0]);
+            if(directorsArray.length > 1) {
+                addToTxfStringList(txf_movieEditDirector2, directorsArray[1]);
+                if(directorsArray.length > 2) {
+                    addToTxfStringList(txf_movieEditDirector3, directorsArray[2]);
+                }
             }
-        });
-
-        txf_movieEditYear.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(valueOf(currentMovieYear))) {
-                txf_movieEditYear.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditYear.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditLength.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(valueOf(currentMovieDuration))) {
-                txf_movieEditLength.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditLength.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditFSK.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(valueOf(currentMovieFSK))) {
-                txf_movieEditFSK.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditFSK.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditRating.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(valueOf(currentMovieRating))) {
-                txf_movieEditRating.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditRating.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditGenre1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[0])) {
-                txf_movieEditGenre1.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditGenre1.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditGenre2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[1])) {
-                txf_movieEditGenre2.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditGenre2.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditGenre3.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[2])) {
-                txf_movieEditGenre3.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditGenre3.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditDirector1.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[0])) {
-                txf_movieEditDirector1.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditDirector1.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditDirector2.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[1])) {
-                txf_movieEditDirector2.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditDirector2.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditDirector3.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(genreArray[2])) {
-                txf_movieEditDirector3.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditDirector3.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditCount.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(valueOf(currentMovieCount))) {
-                txf_movieEditCount.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditCount.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditStudio.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(currentMovieStudio)) {
-                txf_movieEditStudio.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditStudio.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditActors.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(currentMovieActors)) {
-                txf_movieEditActors.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditActors.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txf_movieEditLinkToCover.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(currentLinkToCover)) {
-                txf_movieEditLinkToCover.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txf_movieEditLinkToCover.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-
-        txa_movieEditComment.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(!newValue.equals(currentMovieComment)) {
-                txa_movieEditComment.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
-            }
-            else {
-                txa_movieEditComment.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
-            }
-        });
-        //addChangeListener(txf_movieEditYear);
-
+        }
+        addToTxfStringList(txf_movieEditCount, valueOf(currentMovieCount));
+        addToTxfStringList(txf_movieEditStudio, currentMovieStudio);
+        addToTxfStringList(txf_movieEditActors, currentMovieActors);
+        addToTxfStringList(txf_movieEditLinkToCover, currentLinkToCover);
     }
 
-    /*public static void addChangeListener(TextField textField) {
-        textField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+    private void addToTxfStringList(TextField textField, String data) {
+        ArrayList<Object> tempList = new ArrayList<>();
+        tempList.add(textField);
+        tempList.add(data);
+        txfStringList.add(tempList);
+    };
 
-            }
-        });
-    }*/
+    private void txfListenerInitializer() {
+        for(ArrayList<Object> tempRow : txfStringList) {
+            TextField tempTextField = (TextField) tempRow.getFirst();
+                tempTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                    currentMovieName = (String) tempRow.get(1);
+                    if (!newValue.equals(currentMovieName)) {
+                        tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
+                    } else {
+                        tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                    }
+                });
+        }
+    }
 
     public AnchorPane getOuterPane() {
         return acp_EditMovieBackground;
