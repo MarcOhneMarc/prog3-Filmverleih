@@ -7,6 +7,7 @@ module com.filmverleih.filmverleih {
     requires jakarta.persistence;
 
 
+    opens com.filmverleih.filmverleih to javafx.fxml;
     exports com.filmverleih.filmverleih;
     exports com.filmverleih.filmverleih.entity;
     opens com.filmverleih.filmverleih.entity to javafx.fxml, org.hibernate.orm.core;
