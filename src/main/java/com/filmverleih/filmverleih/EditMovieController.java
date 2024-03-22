@@ -287,7 +287,7 @@ public class EditMovieController {
         tempList.add(data);
         tempList.add(undoButton);
         txfStringUndoList.add(tempList);
-    };
+    }
 
     private void txfListenerInitializer() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
@@ -323,9 +323,7 @@ public class EditMovieController {
             TextField tempTextField = (TextField) tempRow.getFirst();
             String tempCurrentMovieData = (String) tempRow.get(1);
             ImageView tempUndoIcon = (ImageView) tempRow.get(2);
-            tempUndoIcon.setOnMouseClicked(event -> {
-                tempTextField.setText(tempCurrentMovieData);
-            });
+            tempUndoIcon.setOnMouseClicked(event -> tempTextField.setText(tempCurrentMovieData));
         }
     }
 
