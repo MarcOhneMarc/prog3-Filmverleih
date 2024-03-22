@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 import java.math.BigDecimal;
 
@@ -46,6 +47,8 @@ public class EditMovieController {
         this.bpn_navbarBorderPane = connector.getNavbarController().getOuterPane();
     }
 
+    @FXML
+    private StackPane stp_movieEditBackStackPane;
     @FXML
     private AnchorPane acp_EditMovieBackground;
     @FXML
@@ -283,7 +286,7 @@ public class EditMovieController {
                 tempTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     String tempCurrentMovieData = (String) tempRow.get(1);
                     if(newValue == null && tempCurrentMovieData == null) {
-                        tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                        tempTextField.setStyle("-fx-text-fill: #FFF");
                     }
                     if(newValue != null) {
                         if (newValue.equals(tempCurrentMovieData)) {
@@ -379,8 +382,8 @@ public class EditMovieController {
             TextField tempTextField = (TextField) tempRow.getFirst();
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
             tempTextField.setDisable(true);
-            tempUndoButton.setOpacity(30);
-            tempUndoButton.setDisable(false);
+            tempUndoButton.setOpacity(0.3);
+            tempUndoButton.setDisable(true);
         }
         cbx_movieEditSelBluRay.setDisable(true);
         cbx_movieEditSelDVD.setDisable(true);
@@ -401,7 +404,7 @@ public class EditMovieController {
         acp_movieEditDeleteConfirmation.setVisible(false);
     }
 
-    public AnchorPane getOuterPane() {
-        return acp_EditMovieBackground;
+    public StackPane getOuterPane() {
+        return stp_movieEditBackStackPane;
     }
 }

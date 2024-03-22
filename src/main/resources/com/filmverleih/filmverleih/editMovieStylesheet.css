@@ -40,3 +40,7 @@
     -fx-text-fill: #FF4040;
     -fx-font-size: 40;
 }
+
+#acp_movieEditDeleteConfirmation {
+    -fx-background-color: #393939;
+}
