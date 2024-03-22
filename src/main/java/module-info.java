@@ -10,5 +10,4 @@ module com.filmverleih.filmverleih {
     exports com.filmverleih.filmverleih;
     exports com.filmverleih.filmverleih.entity;
     opens com.filmverleih.filmverleih.entity to javafx.fxml, org.hibernate.orm.core;
-    opens com.filmverleih.filmverleih to javafx.fxml, org.hibernate.orm.core;
 }
