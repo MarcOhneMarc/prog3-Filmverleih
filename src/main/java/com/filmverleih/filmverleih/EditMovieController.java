@@ -161,6 +161,7 @@ public class EditMovieController {
         txfListenerInitializer();
         txaListenerInitializer();
         insertMovieData();
+        addOnlyNumbersConstraint();
         undoButtonAddEventHandler();
         checkBoxAddEventHandler();
     }
@@ -222,11 +223,18 @@ public class EditMovieController {
         txf_movieEditCount.setText(valueOf(currentMovieCount));
         txf_movieEditStudio.setText(currentMovieStudio);
         txf_movieEditActors.setText(currentMovieActors);
-        txf_movieEditLinkToCover.setText(currentLinkToCover);
+        txf_movieEditLinkToCover.setText(currentLinkToCover);               //TODO akzeptierende Regx für URL
         txa_movieEditComment.setText(currentMovieComment);
         txa_movieEditComment.setWrapText(true);
         if(currentMovieType.equals("DVD")) {cbx_movieEditSelDVD.setSelected(true);}
         if(currentMovieType.equals("Blu-Ray")) {cbx_movieEditSelBluRay.setSelected(true);}
+    }
+
+    private void addOnlyNumbersConstraint() {
+        TextFieldFunctions.addYearChecker(txf_movieEditYear);                 //TODO ^\d{4}$ als akzeptierende Regx
+        TextFieldFunctions.addOnlyNumberChecker(txf_movieEditLength);
+        TextFieldFunctions.addOnlyNumberChecker(txf_movieEditFSK);
+        TextFieldFunctions.addOnlyNumberChecker(txf_movieEditCount);
     }
 
     private void txfListFiller() {
