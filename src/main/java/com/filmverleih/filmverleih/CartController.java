@@ -77,6 +77,8 @@ public class CartController {
     private ScrollPane scp_Cart;
     @FXML
     private AnchorPane acp_CartBackground;
+    @FXML
+    private AnchorPane acp_newCustomerPopup;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -236,11 +238,18 @@ public class CartController {
      * to test the TableView, after pressing the button once.
      */
     @FXML
-    public void orderCart() throws IOException {
-        System.out.println("Ordert Card");
+    public void orderCart() {
+       Utility utility = new Utility();
+       if(utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+           for (Movies movies : fullMovieList) {
+               utility.addRentalToDB(movies.getMovieid(), Integer.parseInt(txf_CartID.getText()), calculateCurrentDate().toString(), calculateReturnDate().toString());
+               removeMovieFromCart(movies);
+           }
+       } else {
+           acp_newCustomerPopup.setDisable(false);
+           acp_newCustomerPopup.setVisible(true);
+       };
     }
-
-
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from

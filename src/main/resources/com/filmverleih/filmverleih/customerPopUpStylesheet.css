@@ -1,0 +1,47 @@
+#acp_EditMovieBackground {
+    -fx-background-color: #191919;
+}
+
+.txf_class_movieEdit {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+    -fx-font-size: 22;
+    -fx-text-fill: #FFF;
+}
+#txa_movieEditComment .content{
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+}
+#txa_movieEditComment {
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+#lbl_movieEditCaption {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 32;
+}
+.btn_class_CustomerPopupButtons {
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 12;
+    -fx-font-size: 22;
+}
+
+#btn_confirmMovieEdit,
+#btn_newCustomerPopupCancel{
+    -fx-background-color: #518E21;
+}
+
+#btn_cancelMovieEdit,
+#btn_deleteMovieEdit,
+#btn_newCustomerPopupConfirm{
+    -fx-background-color: #FF4040;
+}
+
+#lbl_newCustomerPopup {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 40;
+}
+
+#acp_newCustomerPopup {
+    -fx-background-color: #393939;
+}

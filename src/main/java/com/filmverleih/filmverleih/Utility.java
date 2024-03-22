@@ -1,7 +1,9 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.entity.Rentals;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -189,4 +191,60 @@ public class Utility {
         return  new ArrayList<Users>();
     }
 
+    public static List<Customers> getFullCustomerList() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Customers> customers = session.createQuery("FROM Customers ", Customers.class).getResultList();
+                transaction.commit();
+                return customers;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new ArrayList<Customers>();
+    }
+
+    Boolean checkCustomerDuplicate(Integer Id) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getCustomerid() == Id ) return true;
+        }
+        return false;
+    }
+
+    public Boolean addRentalToDB(int movieID, int customerID, String startdate, String enddate) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                Rentals rental = new Rentals();
+                rental.setMovieid(movieID);
+                rental.setCustomerid(customerID);
+                rental.setStartdate(startdate);
+                rental.setEnddate(enddate);
+
+                // Film zur Datenbank hinzufügen
+                session.save(rental);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                System.out.println("Order went wrong Code: 77619");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            System.out.println("Order went wrong Code: 77618");
+            return false;
+        }
+        return true;
+    }
 }
