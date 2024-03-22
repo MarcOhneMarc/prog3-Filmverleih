@@ -18,7 +18,15 @@
     -fx-font-size: 28;
     -fx-font-family: inter;
     -fx-font-weight: normal;
+}
 
+.loginButton {
+    -fx-background-color: #FFFF3D;
+    -fx-background-radius: 12px;
+    -fx-text-fill: #000;
+    -fx-font-size: 22;
+    -fx-font-family: inter;
+    -fx-font-weight: normal;
 }
 
 #headerSearchbar {
@@ -105,6 +113,15 @@
 
 }
 
+.bib_textfieldLogin {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+    -fx-font-weight: bold;
+}
+
 .bib_comment {
     -fx-control-inner-background: #949494;/* Hintergrundfarbe */
         -fx-text-fill: white; /* Textfarbe */
@@ -152,6 +169,10 @@
 
 .deleteButtonColor {
     -fx-background-color: #FF4040;
+}
+
+#anchorPane {
+    -fx-background-image:url("cinema.png");
 }
 
 #txa_commentMovieScene {
