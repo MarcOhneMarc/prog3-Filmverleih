@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Filter laufzeitoptimierung in verbindung mit librarycontroller">
+    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Resetbtn + librarycontroller aufgeräumt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Library.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="tick-27-core" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,9 +64,6 @@
   }
 }</component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.filmverleih.filmverleih" />
     </key>
@@ -114,6 +111,7 @@
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.SettingsApplication" />
         <item itemvalue="Application.MainApplication" />
+        <item itemvalue="Application.SettingsApplication" />
         <item itemvalue="Application.MainApplication" />
       </list>
     </recent_temporary>
@@ -187,68 +185,27 @@
       <option name="project" value="LOCAL" />
       <updated>1710175267906</updated>
     </task>
-    <task id="LOCAL-00007" summary="FEAT-Init">
-      <option name="closed" value="true" />
-      <created>1710953489810</created>
+    <task id="LOCAL-00007" summary="FEAT-tick-27-core&#10;added:&#10;- Customer Entity&#10;- Date-Picker for CartController&#10;&#10;refactors:&#10;- Price-Calculation&#10;- date-Calculation">
+      <created>1711037002418</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1710953489810</updated>
+      <updated>1711037002418</updated>
     </task>
-    <task id="LOCAL-00008" summary="FEAT-Filter Ui hinzugefügt, und erste Testdaten">
-      <option name="closed" value="true" />
-      <created>1710978400857</created>
+    <task id="LOCAL-00008" summary="FEAT-tick-27-core&#10;fixed :&#10;If tomorrow was a sunday, and you didnt pick a date manually, you could return the movie on a sunday, although you couldnt.&#10;&#10;Problem: i ran into styling problems, the calendar button looks dogsh*t.">
+      <created>1711041015622</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1710978400857</updated>
+      <updated>1711041015622</updated>
     </task>
-    <task id="LOCAL-00009" summary="FEAT-Filter Ui hinzugefügt, und erste Testdaten">
-      <option name="closed" value="true" />
-      <created>1710979970117</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1710979970117</updated>
-    </task>
-    <task id="LOCAL-00010" summary="FEAT-First Filters working">
-      <option name="closed" value="true" />
-      <created>1711044929465</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1711044929465</updated>
-    </task>
-    <task id="LOCAL-00011" summary="FEAT-Filter laufzeitoptimierung in verbindung mit librarycontroller">
-      <option name="closed" value="true" />
-      <created>1711062367846</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1711062367846</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="origin/tick-35" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -259,7 +216,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/tick-25" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -278,10 +235,8 @@
     <MESSAGE value="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java" />
     <MESSAGE value="FEAT-added some comments on CartController.java" />
     <MESSAGE value="FEAT-Meeting final changes" />
-    <MESSAGE value="FEAT-Init" />
-    <MESSAGE value="FEAT-Filter Ui hinzugefügt, und erste Testdaten" />
-    <MESSAGE value="FEAT-First Filters working" />
-    <MESSAGE value="FEAT-Filter laufzeitoptimierung in verbindung mit librarycontroller" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Filter laufzeitoptimierung in verbindung mit librarycontroller" />
+    <MESSAGE value="FEAT-tick-27-core&#10;added:&#10;- Customer Entity&#10;- Date-Picker for CartController&#10;&#10;refactors:&#10;- Price-Calculation&#10;- date-Calculation" />
+    <MESSAGE value="FEAT-tick-27-core&#10;fixed :&#10;If tomorrow was a sunday, and you didnt pick a date manually, you could return the movie on a sunday, although you couldnt.&#10;&#10;Problem: i ran into styling problems, the calendar button looks dogsh*t." />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-tick-27-core&#10;fixed :&#10;If tomorrow was a sunday, and you didnt pick a date manually, you could return the movie on a sunday, although you couldnt.&#10;&#10;Problem: i ran into styling problems, the calendar button looks dogsh*t." />
   </component>
 </project>

@@ -79,11 +79,17 @@ public class FilterController {
     public TextField txf_fsk;
 
     public String searchBar;
-    private Predicate<Movies> predicate;
-    private Comparator<Movies> comparator;
+
+    public boolean isLibrary;
+    public boolean isRental;
+
+
 
     @FXML
     public void initialize() {
+        isLibrary = true;
+        isRental = false;
+
         sld_rating.valueProperty().addListener((observable, oldValue, newValue) -> {
             double value = newValue.doubleValue();
             double roundedValue = Math.round(value * 10.0) / 10.0;
@@ -99,7 +105,7 @@ public class FilterController {
     }
 
     private void sortListBy(String selectedOption) {
-        comparator = null;
+        Comparator<Movies> comparator = null;
 
         switch (selectedOption) {
             case "Name aufsteigend":
@@ -133,8 +139,17 @@ public class FilterController {
                 comparator = Comparator.comparingInt(Movies::getFsk).reversed();
                 break;
         }
+
         if (comparator != null) {
-            libraryController.sortMovies(comparator);
+            if (isLibrary) {
+                libraryController.comparator = comparator;
+                libraryController.sortMovies();
+            } else if (isRental) {
+                //rentalController.comparator = comparator;
+                //rentalController.sortMovies();
+            } else {
+                return;
+            }
         }
     }
 
@@ -151,7 +166,7 @@ public class FilterController {
         String actorFilter = txf_actor.getText();
         String fskFilter = txf_fsk.getText();
 
-        predicate = movie -> true;
+        Predicate<Movies> predicate = movie -> true;
 
         if (!searchBar.isEmpty()) {
             predicate = predicate.and(movie ->
@@ -205,7 +220,17 @@ public class FilterController {
                     movie.getFsk() == fsk);
         }
 
-        libraryController.filterMovies(predicate);
+        if (predicate != null) {
+            if (isLibrary) {
+                libraryController.predicate = predicate;
+                libraryController.filterMovies();
+            } else if (isRental) {
+                //rentalController.predicate = movie -> true;
+                //rentalController.sortAndFilter();
+            } else {
+                return;
+            }
+        }
     }
 
     public void resetFilters() {
@@ -220,9 +245,18 @@ public class FilterController {
         txf_studio.setText("");
         txf_actor.setText("");
         txf_fsk.setText("");
-        predicate = movie -> true;
-        libraryController.filterMovies(predicate);
+
+        if (isLibrary) {
+            libraryController.predicate = movie -> true;
+            libraryController.filterMovies();
+        } else if (isRental) {
+            //rentalController.predicate = movie -> true;
+            //rentalController.sortAndFilter();
+        } else {
+            return;
+        }
     }
+
 
     public VBox getOuterPane(){
         return vbx_FilterBackground;

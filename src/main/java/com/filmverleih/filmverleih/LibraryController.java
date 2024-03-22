@@ -13,9 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * This class represents the controller for the library view in the application.
@@ -61,10 +64,11 @@ public class LibraryController {
     private GridPane gridPane; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
 
     private CartController cartController;
-
     private double windowWidth;
+    public Predicate<Movies> predicate;
+    public Comparator<Movies> comparator;
 
-    public List<Movies> allMovies;
+    private List<Movies> allMovies;
 
     /**
      * Initializes the library view.
@@ -92,15 +96,17 @@ public class LibraryController {
         updateMovies(allMovies);
     }
 
-    public void sortMovies(Comparator<Movies> comparator) {
-
+    public void sortMovies() {
+        List<Movies> sortedList = allMovies.stream().sorted(comparator).toList();;
+        gridPane.getChildren().clear();
+        updateMovies(sortedList);
+        filterMovies();
         adjustColumnCount();
     }
 
-    public void filterMovies(Predicate<Movies> predicate) {
+    public void filterMovies() {
         gridPane.getChildren().forEach(node -> {
-            if (node instanceof StackPane) {
-                StackPane stackPane = (StackPane) node;
+            if (node instanceof StackPane stackPane) {
                 boolean isVisible = stackPane.getChildren().stream()
                         .filter(child -> child instanceof ImageView)
                         .map(child -> (ImageView) child)

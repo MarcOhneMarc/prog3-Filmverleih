@@ -38,6 +38,8 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(libraryController.getOuterPane());
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
+        filterController.isLibrary = true;
+        filterController.isRental = false;
     }
 
     /**
@@ -53,6 +55,8 @@ public class NavbarController {
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
+        filterController.isRental = true;
+        filterController.isLibrary = false;
 
         //MainApplication.borderPane.setRight(null);
     }
