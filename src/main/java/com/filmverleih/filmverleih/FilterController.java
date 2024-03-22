@@ -208,6 +208,22 @@ public class FilterController {
         libraryController.filterMovies(predicate);
     }
 
+    public void resetFilters() {
+        txf_year.setText("");
+        txf_genre.setText("");
+        txf_minLength.setText("");
+        txf_maxLength.setText("");
+        sld_rating.setValue(0);
+        txf_type.setText("");
+        txf_comment.setText("");
+        txf_director.setText("");
+        txf_studio.setText("");
+        txf_actor.setText("");
+        txf_fsk.setText("");
+        predicate = movie -> true;
+        libraryController.filterMovies(predicate);
+    }
+
     public VBox getOuterPane(){
         return vbx_FilterBackground;
     }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
@@ -11,8 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <VBox id="vbx_FilterBackground" fx:id="vbx_FilterBackground" alignment="TOP_CENTER" prefHeight="990.0" prefWidth="340.0" spacing="10.0" stylesheets="@filterStylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.FilterController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Sort">
@@ -20,20 +20,20 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <ComboBox prefHeight="25.0" prefWidth="421.0" fx:id="sortComboBox" promptText="Sort by">
+      <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="421.0" promptText="Sort by">
 
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Name aufsteigend"/>
-               <String fx:value="Name absteigend"/>
-               <String fx:value="Jahr aufsteigend"/>
-               <String fx:value="Jahr absteigend"/>
-               <String fx:value="Bewertung aufsteigend"/>
-               <String fx:value="Bewertung absteigend"/>
-               <String fx:value="Länge aufsteigend"/>
-               <String fx:value="Länge absteigend"/>
-               <String fx:value="FSK aufsteigend"/>
-               <String fx:value="FSK absteigend"/>
+               <String fx:value="Name aufsteigend" />
+               <String fx:value="Name absteigend" />
+               <String fx:value="Jahr aufsteigend" />
+               <String fx:value="Jahr absteigend" />
+               <String fx:value="Bewertung aufsteigend" />
+               <String fx:value="Bewertung absteigend" />
+               <String fx:value="Länge aufsteigend" />
+               <String fx:value="Länge absteigend" />
+               <String fx:value="FSK aufsteigend" />
+               <String fx:value="FSK absteigend" />
             </FXCollections>
          </items>
 
@@ -120,13 +120,14 @@
             <TextField fx:id="txf_fsk" promptText="FSK" />
          </children>
       </VBox>
-      <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#generateFilters" prefHeight="35.0" prefWidth="355.0" text="Apply Filters" textAlignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#resetFilters" prefHeight="35.0" prefWidth="423.0" text="Reset all" textAlignment="CENTER">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#generateFilters" prefHeight="35.0" prefWidth="355.0" text="Apply Filters" textAlignment="CENTER" />
          </children>
          <VBox.margin>
             <Insets top="10.0" />
