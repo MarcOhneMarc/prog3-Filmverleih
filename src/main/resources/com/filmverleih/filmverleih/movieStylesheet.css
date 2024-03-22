@@ -42,3 +42,8 @@
 #hbx_genreMovieScene {
     -fx-spacing: 10;
 }
+
+#txa_commentMovieScene {
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}

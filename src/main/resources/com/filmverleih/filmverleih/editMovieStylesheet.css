@@ -8,10 +8,11 @@
     -fx-font-size: 22;
     -fx-text-fill: #FFF;
 }
-
-#txa_movieEditComment {
+#txa_movieEditComment .content{
     -fx-background-color: #949494;
     -fx-background-radius: 12px;
+}
+#txa_movieEditComment {
     -fx-focus-color: transparent;
     -fx-text-box-border: transparent;
 }
