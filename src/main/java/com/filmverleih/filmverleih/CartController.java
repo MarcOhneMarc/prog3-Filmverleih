@@ -237,8 +237,10 @@ public class CartController {
      */
     @FXML
     public void orderCart() throws IOException {
-        System.out.println("console test: order button has been clicked");
+        System.out.println("Ordert Card");
     }
+
+
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
