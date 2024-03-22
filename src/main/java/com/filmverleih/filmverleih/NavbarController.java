@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -18,6 +19,9 @@ public class NavbarController {
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
         this.connector = connector;
     }
+
+    @FXML
+    private BorderPane bpn_navbarOuterBorderPane;
     /**
      * Handles the user's request to switch to the library view.
      * It loads the Library view into the center of the application frame and the Filter view into the right sidebar.
@@ -54,5 +58,9 @@ public class NavbarController {
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
+    }
+
+    public BorderPane getOuterPane() {
+        return bpn_navbarOuterBorderPane;
     }
 }

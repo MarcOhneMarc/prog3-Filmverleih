@@ -1,22 +1,19 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputControl;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import static java.lang.String.valueOf;
 
@@ -46,10 +43,13 @@ public class EditMovieController {
                                                     Integer,
                                                     Integer> connector) {
         this.connector = connector;
+        this.bpn_navbarBorderPane = connector.getNavbarController().getOuterPane();
     }
 
     @FXML
     private AnchorPane acp_EditMovieBackground;
+    @FXML
+    private GridPane grp_movieEditParamSelect;
     @FXML
     private TextField txf_movieEditID;
     @FXML
@@ -118,10 +118,18 @@ public class EditMovieController {
     private CheckBox cbx_movieEditSelDVD;
     @FXML
     private CheckBox cbx_movieEditSelBluRay;
-
+    @FXML
+    private Button btn_confirmMovieEdit;
+    @FXML
+    private Button btn_cancelMovieEdit;
+    @FXML
+    private Button btn_deleteMovieEdit;
+    @FXML
+    private AnchorPane acp_movieEditDeleteConfirmation;
 
     private Movies movie;
-    private ArrayList<ArrayList<Object>> txfStringList = new ArrayList<>();
+    private ArrayList<ArrayList<Object>> txfStringUndoList = new ArrayList<>();
+    private BorderPane bpn_navbarBorderPane;
 
     private int currentMovieId;
     private String currentMovieName;
@@ -143,7 +151,7 @@ public class EditMovieController {
 
     public void initialize(Movies movie) {
         this.movie = movie;
-        txfStringList.clear();
+        txfStringUndoList.clear();
         movieDataGetter();
         splitGenreDirectorsToArray();
         txfListFiller();
@@ -266,11 +274,11 @@ public class EditMovieController {
         tempList.add(textField);
         tempList.add(data);
         tempList.add(undoButton);
-        txfStringList.add(tempList);
+        txfStringUndoList.add(tempList);
     };
 
     private void txfListenerInitializer() {
-        for(ArrayList<Object> tempRow : txfStringList) {
+        for(ArrayList<Object> tempRow : txfStringUndoList) {
             TextField tempTextField = (TextField) tempRow.getFirst();
                 tempTextField.textProperty().addListener((observable, oldValue, newValue) -> {
                     String tempCurrentMovieData = (String) tempRow.get(1);
@@ -299,7 +307,7 @@ public class EditMovieController {
     }
 
     private void undoButtonAddEventHandler() {
-        for(ArrayList<Object> tempRow : txfStringList) {
+        for(ArrayList<Object> tempRow : txfStringUndoList) {
             TextField tempTextField = (TextField) tempRow.getFirst();
             String tempCurrentMovieData = (String) tempRow.get(1);
             ImageView tempUndoIcon = (ImageView) tempRow.get(2);
@@ -331,7 +339,66 @@ public class EditMovieController {
             cbx_movieEditSelBluRay.setStyle("-fx-fill: #FFF");
             cbx_movieEditSelDVD.setStyle("-fx-text-fill: #FFF");
         }
+    }
 
+    public void cancelMovieEdit() {
+        MovieController movieController = connector.getMovieController();
+        MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        movieController.fillPage(movie);
+    }
+
+    public void openDeleteConfirmation() {
+        disableEditNodes();
+        enableDeleteConfirmation();
+    }
+
+    public void cancelMoveDeletion() {
+        enableEditNodes();
+        disableDeleteConfirmation();
+    }
+
+    private void enableEditNodes() {
+        for(ArrayList<Object> tempRow : txfStringUndoList) {
+            TextField tempTextField = (TextField) tempRow.getFirst();
+            ImageView tempUndoButton = (ImageView) tempRow.get(2);
+            tempTextField.setDisable(false);
+            tempUndoButton.setOpacity(100);
+            tempUndoButton.setDisable(false);
+        }
+        cbx_movieEditSelBluRay.setDisable(false);
+        cbx_movieEditSelDVD.setDisable(false);
+        btn_confirmMovieEdit.setDisable(false);
+        btn_cancelMovieEdit.setDisable(false);
+        btn_deleteMovieEdit.setDisable(false);
+        txa_movieEditComment.setDisable(false);
+        bpn_navbarBorderPane.setDisable(false);
+    }
+
+    private void disableEditNodes() {
+        for(ArrayList<Object> tempRow : txfStringUndoList) {
+            TextField tempTextField = (TextField) tempRow.getFirst();
+            ImageView tempUndoButton = (ImageView) tempRow.get(2);
+            tempTextField.setDisable(true);
+            tempUndoButton.setOpacity(30);
+            tempUndoButton.setDisable(false);
+        }
+        cbx_movieEditSelBluRay.setDisable(true);
+        cbx_movieEditSelDVD.setDisable(true);
+        btn_confirmMovieEdit.setDisable(true);
+        btn_cancelMovieEdit.setDisable(true);
+        btn_deleteMovieEdit.setDisable(true);
+        txa_movieEditComment.setDisable(true);
+        bpn_navbarBorderPane.setDisable(true);
+    }
+
+    private void enableDeleteConfirmation() {
+        acp_movieEditDeleteConfirmation.setDisable(false);
+        acp_movieEditDeleteConfirmation.setVisible(true);
+    }
+
+    private void disableDeleteConfirmation() {
+        acp_movieEditDeleteConfirmation.setDisable(true);
+        acp_movieEditDeleteConfirmation.setVisible(false);
     }
 
     public AnchorPane getOuterPane() {

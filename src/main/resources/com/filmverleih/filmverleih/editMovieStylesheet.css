@@ -19,3 +19,24 @@
     -fx-text-fill: #FFF;
     -fx-font-size: 32;
 }
+.btn_class_movieEditButtons {
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 12;
+    -fx-font-size: 22;
+}
+
+#btn_confirmMovieEdit,
+#btn_movieEditDeleteCancel{
+    -fx-background-color: #518E21;
+}
+
+#btn_cancelMovieEdit,
+#btn_deleteMovieEdit,
+#btn_movieEditDeleteConfirm{
+    -fx-background-color: #FF4040;
+}
+
+#lbl_movieEditDeleteConfirmation {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 40;
+}
