@@ -234,6 +234,7 @@ public class EditMovieController {
         TextFieldFunctions.addYearChecker(txf_movieEditYear);                 //TODO ^\d{4}$ als akzeptierende Regx
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditLength);
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditFSK);
+        TextFieldFunctions.addRatingChecker(txf_movieEditRating);               //TODO ^-?\d\.\d$ akzeptierende Regx
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditCount);
     }
 
