@@ -230,12 +230,14 @@ public class CartController {
 
 
     /**
-     * test method to link the order button to the controller
-     * which prints a small verification message in the console
-     * that the order button has been clicked
+     * This method is called when clicking the order button
+     * and then saves the order from the cart in the rentals table
+     * of the db
      *
-     * Also added a call for the fillTableView() Method in order
-     * to test the TableView, after pressing the button once.
+     * If the provided customerID is already in the customer table
+     * the order will be made
+     * Else there will be a PopUp where a new customer can be saved to
+     * the db with all needed attributes
      */
     @FXML
     public void orderCart() {
@@ -243,7 +245,9 @@ public class CartController {
        if(utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (Movies movies : fullMovieList) {
                utility.addRentalToDB(movies.getMovieid(), Integer.parseInt(txf_CartID.getText()), calculateCurrentDate().toString(), calculateReturnDate().toString());
+
                removeMovieFromCart(movies);
+               vbx_CartMovieCardsVBox.getChildren().clear();
            }
        } else {
            acp_newCustomerPopup.setDisable(false);
