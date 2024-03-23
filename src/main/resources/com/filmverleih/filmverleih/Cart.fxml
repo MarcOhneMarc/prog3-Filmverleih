@@ -106,6 +106,7 @@
                            <Font size="32.0" />
                         </font>
                      </Button>
+                     <Label fx:id="lbl_errorEmptyCart" text="Der Einkaufswagen ist leer!" textFill="#ff4040" visible="false" />
                      <Label fx:id="lbl_errorDuplicateRentalMessage" text="Error: duplicated rental" textFill="#ff4040" visible="false" />
                   </children>
                   <HBox.margin>

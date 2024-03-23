@@ -81,6 +81,8 @@ public class CartController {
     private Label lbl_errorDuplicateRentalMessage;
     @FXML
     private Label lbl_errorNoID;
+    @FXML
+    private Label lbl_errorEmptyCart;
 
     //PopUp FXML components
     @FXML
@@ -279,9 +281,6 @@ public class CartController {
                        calculateCurrentDate().toString(),
                        calculateReturnDate().toString());
 
-               //vbx_CartMovieCardsVBox.getChildren().clear();
-
-
                if (!addSuccessful) {
                    System.out.println("The movie " + fullMovieList.get(i).getName() + " has already been rented to costumer");
                    lbl_errorDuplicateRentalMessage.setText(fullMovieList.get(i).getName() + " befindet sich bereits in Leihgabe an den Kunden!");
@@ -310,6 +309,19 @@ public class CartController {
             btn_OrderCart.setDisable(false);
         }
     }
+
+    /*
+    private void updateEmptyCartLabel() {
+        if (fullMovieList.isEmpty()) {
+            lbl_errorEmptyCart.setVisible(true);
+            btn_OrderCart.setDisable(true);
+        } else {
+            lbl_errorEmptyCart.setVisible(false);
+            btn_OrderCart.setDisable(false);
+        }
+    }
+    */
+
 
 
     /**
