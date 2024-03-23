@@ -44,7 +44,7 @@ public class EditMovieController {
                                                     Integer,
                                                     Integer> connector) {
         this.connector = connector;
-        this.bpn_navbarBorderPane = connector.getNavbarController().getOuterPane();
+        //this.bpn_navbarBorderPane = connector.getNavbarController().getOuterPane();
     }
 
     @FXML
@@ -381,7 +381,7 @@ public class EditMovieController {
         btn_cancelMovieEdit.setDisable(false);
         btn_deleteMovieEdit.setDisable(false);
         txa_movieEditComment.setDisable(false);
-        bpn_navbarBorderPane.setDisable(false);
+        connector.getNavbarController().enableNavBar();
     }
 
     private void disableEditNodes() {
@@ -398,7 +398,7 @@ public class EditMovieController {
         btn_cancelMovieEdit.setDisable(true);
         btn_deleteMovieEdit.setDisable(true);
         txa_movieEditComment.setDisable(true);
-        bpn_navbarBorderPane.setDisable(true);
+        connector.getNavbarController().disableNavBar();
     }
 
     private void enableDeleteConfirmation() {

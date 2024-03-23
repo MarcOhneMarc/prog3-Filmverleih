@@ -60,6 +60,14 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
     }
 
+    public void disableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(true);
+    }
+
+    public void enableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(false);
+    }
+
     public BorderPane getOuterPane() {
         return bpn_navbarOuterBorderPane;
     }
