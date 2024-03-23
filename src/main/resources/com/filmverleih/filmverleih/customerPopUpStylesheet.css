@@ -44,4 +44,13 @@
 
 #acp_newCustomerPopup {
     -fx-background-color: #393939;
+    -fx-background-radius: 12;
+}
+
+#vbx_newCustomerFields {
+    -fx-spacing: 10;
+}
+
+#hbx_customerPopUpButtonHBox {
+    -fx-spacing: 20;
 }

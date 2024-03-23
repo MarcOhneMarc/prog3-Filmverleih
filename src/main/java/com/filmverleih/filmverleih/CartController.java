@@ -79,6 +79,8 @@ public class CartController {
     private AnchorPane acp_CartBackground;
     @FXML
     private AnchorPane acp_newCustomerPopup;
+    @FXML
+    private StackPane stp_cartOuterStackPane;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -250,16 +252,39 @@ public class CartController {
                vbx_CartMovieCardsVBox.getChildren().clear();
            }
        } else {
-           acp_newCustomerPopup.setDisable(false);
-           acp_newCustomerPopup.setVisible(true);
+           enablePopUpDisableCart();
        };
+    }
+
+    private void enablePopUpDisableCart() {
+        connector.getNavbarController().disableNavBar();
+        acp_newCustomerPopup.setDisable(false);
+        acp_newCustomerPopup.setVisible(true);
+        acp_CartBackground.setDisable(true);
+    }
+
+    @FXML
+    private void confirmNewCustomerRegistration() {
+        //TODO register a new Customer to DB
+        connector.getNavbarController().enableNavBar();
+        acp_newCustomerPopup.setDisable(true);
+        acp_newCustomerPopup.setVisible(false);
+        acp_CartBackground.setDisable(false);
+    }
+
+    @FXML
+    private void cancelNewCustomerRegistration() {
+        connector.getNavbarController().enableNavBar();
+        acp_newCustomerPopup.setDisable(true);
+        acp_newCustomerPopup.setVisible(false);
+        acp_CartBackground.setDisable(false);
     }
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public AnchorPane getOuterPane() {
+    public StackPane getOuterPane() {
         setOrderInformationLabels();
-        return acp_CartBackground;
+        return stp_cartOuterStackPane;
     }
 }
