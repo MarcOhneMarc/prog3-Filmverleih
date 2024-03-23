@@ -45,3 +45,8 @@
 #acp_movieEditDeleteConfirmation {
     -fx-background-color: #393939;
 }
+
+#lbl_movieEditDeleteFeedback {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 16;
+}

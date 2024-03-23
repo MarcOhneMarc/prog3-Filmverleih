@@ -89,7 +89,7 @@ public class Utility {
         return true;
     }
 
-    public Boolean DeleteMovieInDB(int movDelID) {
+    public static Boolean DeleteMovieInDB(int movDelID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;

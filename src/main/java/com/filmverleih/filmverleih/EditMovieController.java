@@ -2,10 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -44,7 +41,6 @@ public class EditMovieController {
                                                     Integer,
                                                     Integer> connector) {
         this.connector = connector;
-        //this.bpn_navbarBorderPane = connector.getNavbarController().getOuterPane();
     }
 
     @FXML
@@ -128,11 +124,16 @@ public class EditMovieController {
     @FXML
     private Button btn_deleteMovieEdit;
     @FXML
+    private Button btn_movieEditDeleteConfirm;
+    @FXML
+    private Label lbl_movieEditDeleteFeedback;
+    @FXML
     private AnchorPane acp_movieEditDeleteConfirmation;
 
     private Movies movie;
     private ArrayList<ArrayList<Object>> txfStringUndoList = new ArrayList<>();
-    private BorderPane bpn_navbarBorderPane;
+    private final String MOVIE_DELETE_FAILED = "Es ist etwas schiefgelaufen! Versuchen sie es bitte erneut.";
+    private final String MOVIE_DELETE_SUCESSFULL = "Der Film wurde erfolgreich entfernt.";
 
     private int currentMovieId;
     private String currentMovieName;
@@ -356,6 +357,20 @@ public class EditMovieController {
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(movie);
     }
+
+    /*public void deleteMovie() {
+        Boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
+        if (movieIsDeleted) {
+            lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_SUCESSFULL);
+            lbl_movieEditDeleteFeedback.setVisible(true);
+            btn_movieEditDeleteConfirm.setDisable(true);
+            this.movie = null;
+        } else {
+            lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_FAILED);
+            lbl_movieEditDeleteFeedback.setVisible(true);
+            btn_movieEditDeleteConfirm.setDisable(true);
+        } TODO muss mal gucken eine updateMovieList methode im LibraryController wäre echt geil, um fehler zu verhindern dann kann man nach einem erfolgreichen delete in die einzel movie ansicht geworfen werden wo man den edit button dann deactivate
+    }*/
 
     public void openDeleteConfirmation() {
         disableEditNodes();
