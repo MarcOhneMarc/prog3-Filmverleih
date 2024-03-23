@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
  *
  * TODO connect Backend
  *
- * @author Hannes, Jannis
+ * @author Hannes, Jannis, Marc
  */
 public class CartController {
 
@@ -256,6 +256,11 @@ public class CartController {
        };
     }
 
+    /**
+     * This method enables the new customer registration pop up
+     * and disables the navbar and the "background" pane
+     * in order to not allow the user to navigate away
+     */
     private void enablePopUpDisableCart() {
         connector.getNavbarController().disableNavBar();
         acp_newCustomerPopup.setDisable(false);
@@ -263,6 +268,13 @@ public class CartController {
         acp_CartBackground.setDisable(true);
     }
 
+    /**
+     * This method confirms the registration of a new customer
+     * which saves it in the customers table in the db, if the button
+     * "confirm" is clicked.
+     * Then it closes the PopUp and while enabling the "background"
+     * again.
+     */
     @FXML
     private void confirmNewCustomerRegistration() {
         //TODO register a new Customer to DB
@@ -272,6 +284,11 @@ public class CartController {
         acp_CartBackground.setDisable(false);
     }
 
+    /**
+     * This method cancels the registration of a new customer
+     * and closes the PopUp while enabling "background" again,
+     * if the "cancel" button is clicked.
+     */
     @FXML
     private void cancelNewCustomerRegistration() {
         connector.getNavbarController().enableNavBar();

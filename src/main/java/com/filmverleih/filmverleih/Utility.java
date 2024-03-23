@@ -169,7 +169,7 @@ public class Utility {
 
 
     /**
-     * This method provides a List of all User from the Table Users
+     * This method provides a List of all User from the table Users
      * @return a list with all users
      */
     public static List<Users> getFullUserList() {
@@ -191,6 +191,10 @@ public class Utility {
         return  new ArrayList<Users>();
     }
 
+    /**
+     * This method provides a List of all Customer from the table customers
+     * @return a List with all customers
+     */
     public static List<Customers> getFullCustomerList() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -210,14 +214,28 @@ public class Utility {
         return  new ArrayList<Customers>();
     }
 
-    Boolean checkCustomerDuplicate(Integer Id) {
+    /**
+     * This method checks if a customer is already registered in the db
+     * using the customerID and checking its occurrence
+     * @param id the customerID that will be checked
+     * @return true if customer is registered, false if not
+     */
+    Boolean checkCustomerDuplicate(int id) {
         for(Customers customers:getFullCustomerList())
         {
-            if (customers.getCustomerid() == Id ) return true;
+            if (customers.getCustomerid() == id ) return true;
         }
         return false;
     }
 
+    /**
+     * This method adds a rental to db into the rentals table
+     * @param movieID the id of the rented movie
+     * @param customerID the id of the customer
+     * @param startdate the star date of the rental
+     * @param enddate the return date of the rental
+     * @return true if adding was successful, false if not
+     */
     public Boolean addRentalToDB(int movieID, int customerID, String startdate, String enddate) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
