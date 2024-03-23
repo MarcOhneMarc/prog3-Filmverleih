@@ -264,13 +264,13 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
-       Utility utility = new Utility();
-       if(utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+       if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (Movies movies : fullMovieList) {
-               utility.addRentalToDB(movies.getMovieid(), Integer.parseInt(txf_CartID.getText()), calculateCurrentDate().toString(), calculateReturnDate().toString());
+               Utility.addRentalToDB(movies.getMovieid(), Integer.parseInt(txf_CartID.getText()), calculateCurrentDate().toString(), calculateReturnDate().toString());
 
                removeMovieFromCart(movies);
                vbx_CartMovieCardsVBox.getChildren().clear();
+               txf_CartID.clear();
            }
        } else {
            enablePopUpDisableCart();
@@ -299,7 +299,7 @@ public class CartController {
     @FXML
     private void confirmNewCustomerRegistration() {
         //TODO register a new Customer to DB
-        //registerNewCustomer()
+        registerNewCustomer();
         connector.getNavbarController().enableNavBar();
         acp_newCustomerPopup.setDisable(true);
         acp_newCustomerPopup.setVisible(false);
@@ -324,7 +324,16 @@ public class CartController {
      * TextFields needed for creating a new customer in the db
      */
     private void registerNewCustomer() {
-
+        Utility.addCustomerToDB(
+                //Integer.parseInt(txf_PopUpCustomerID.getText().toString()),
+                txf_PopUpCustomerSurName.getText(),
+                txf_PopUpCustomerLastName.getText(),
+                txf_PopUpCustomerStreet.getText(),
+                txf_PopUpCustomerPostalCode.getText(),
+                txf_PopUpCustomerCity.getText(),
+                txf_PopUpCustomerPhone.getText(),
+                txf_PopUpCustomerEMail.getText()
+        );
     }
 
     /**

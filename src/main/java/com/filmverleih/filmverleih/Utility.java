@@ -220,7 +220,7 @@ public class Utility {
      * @param id the customerID that will be checked
      * @return true if customer is registered, false if not
      */
-    Boolean checkCustomerDuplicate(int id) {
+    public static Boolean checkCustomerDuplicate(int id) {
         for(Customers customers:getFullCustomerList())
         {
             if (customers.getCustomerid() == id ) return true;
@@ -240,7 +240,7 @@ public class Utility {
      * @param email the email address of the customer
      * @return true if adding was successful, false if not
      */
-    public Boolean addCustomerToDB(int customerId, String firstName, String lastName, String street, String postalCode, String city, String phone, String email) {
+    public static Boolean addCustomerToDB(String firstName, String lastName, String street, String postalCode, String city, String phone, String email) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -248,7 +248,7 @@ public class Utility {
                 transaction = session.beginTransaction();
 
                 Customers customers = new Customers();
-                customers.setCustomerid(customerId);
+                //customers.setCustomerid(customerId);
                 customers.setFirstname(firstName);
                 customers.setLastname(lastName);
                 customers.setStreet(street);
@@ -282,7 +282,7 @@ public class Utility {
      * @param enddate the return date of the rental
      * @return true if adding was successful, false if not
      */
-    public Boolean addRentalToDB(int movieID, int customerID, String startdate, String enddate) {
+    public static Boolean addRentalToDB(int movieID, int customerID, String startdate, String enddate) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
