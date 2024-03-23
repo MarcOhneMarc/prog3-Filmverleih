@@ -77,6 +77,10 @@ public class CartController {
     private AnchorPane acp_newCustomerPopup;
     @FXML
     private StackPane stp_cartOuterStackPane;
+    @FXML
+    private Label lbl_errorDuplicateRentalMessage;
+    @FXML
+    private Label lbl_errorNoID;
 
     //PopUp FXML components
     @FXML
@@ -138,6 +142,7 @@ public class CartController {
     public void removeMovieCard(HBox movieCard, Movies movie) {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
+        lbl_errorDuplicateRentalMessage.setVisible(false); //TODO find a better place for this call
     }
 
 
@@ -264,22 +269,48 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
+       setNoIDMessage();
+
        if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
-           for (Movies movies : fullMovieList) {
+           for (int i = 0; i < fullMovieList.size(); i++) {
                boolean addSuccessful = Utility.addRentalToDB(
-                       movies.getMovieid(),
+                       fullMovieList.get(i).getMovieid(),
                        Integer.parseInt(txf_CartID.getText()),
                        calculateCurrentDate().toString(),
                        calculateReturnDate().toString());
 
-               vbx_CartMovieCardsVBox.getChildren().clear();
-               txf_CartID.clear();
+               //vbx_CartMovieCardsVBox.getChildren().clear();
+
+
+               if (!addSuccessful) {
+                   System.out.println("The movie " + fullMovieList.get(i).getName() + " has already been rented to costumer");
+                   lbl_errorDuplicateRentalMessage.setText(fullMovieList.get(i).getName() + " befindet sich bereits in Leihgabe an den Kunden!");
+                   lbl_errorDuplicateRentalMessage.setWrapText(true);
+                   lbl_errorDuplicateRentalMessage.setVisible(true);
+               } else {
+                   vbx_CartMovieCardsVBox.getChildren().remove(i);
+                   removeMovieFromCart(fullMovieList.get(i));
+               }
+
            }
-           fullMovieList.clear();
        } else {
            enablePopUpDisableCart();
        };
     }
+
+    @FXML
+    private void setNoIDMessage() {
+        lbl_errorNoID.setText("Bitte geben Sie erst eine ID ein!");
+        lbl_errorNoID.setWrapText(true);
+        if (txf_CartID.getText().isBlank()) {
+            lbl_errorNoID.setVisible(true);
+            btn_OrderCart.setDisable(true);
+        } else {
+            lbl_errorNoID.setVisible(false);
+            btn_OrderCart.setDisable(false);
+        }
+    }
+
 
     /**
      * This method enables the new customer registration pop up
@@ -338,6 +369,8 @@ public class CartController {
                 txf_PopUpCustomerPhone.getText(),
                 txf_PopUpCustomerEMail.getText()
         );
+        //set the generated costumerID to the txf_CartID field allowing to order directly
+        //txf_CartID.setText();
     }
 
     /**

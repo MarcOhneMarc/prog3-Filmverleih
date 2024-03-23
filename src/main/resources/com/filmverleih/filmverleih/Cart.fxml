@@ -40,7 +40,8 @@
                            <Insets />
                         </VBox.margin>
                      </Label>
-                     <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_CartID" maxWidth="450.0" onKeyTyped="#setNoIDMessage" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                     <Label fx:id="lbl_errorNoID" text="Error: noID" textFill="#ff4040" visible="false" />
                      <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                         <columns>
                            <TableColumn fx:id="tbc_Movie" maxWidth="300.0" prefWidth="300.0" resizable="false" styleClass="tbc_class_TableColumns" text="Film" />
@@ -100,11 +101,12 @@
                            </Label>
                         </children>
                      </GridPane>
-                     <Button fx:id="btn_OrderCart" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
+                     <Button fx:id="btn_OrderCart" disable="true" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
                         <font>
                            <Font size="32.0" />
                         </font>
                      </Button>
+                     <Label fx:id="lbl_errorDuplicateRentalMessage" text="Error: duplicated rental" textFill="#ff4040" visible="false" />
                   </children>
                   <HBox.margin>
                      <Insets />
