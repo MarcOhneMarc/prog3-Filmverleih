@@ -40,8 +40,6 @@
                            <Insets />
                         </VBox.margin>
                      </Label>
-                     <TextField fx:id="txf_CartName" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
-                     <TextField fx:id="txf_CartSurname" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_CartID" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
                      <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                         <columns>
@@ -130,14 +128,14 @@
                </Label>
                <VBox fx:id="vbx_newCustomerFields" alignment="CENTER" prefHeight="500.0" prefWidth="450.0">
                   <children>
-                     <TextField disable="true" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Straße" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="PLZ" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Stadt" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Telefon-Nr" styleClass="txf_class_CartTextFields" />
-                     <TextField maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="E-mail" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerID" disable="true" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerSurName" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerLastName" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerStreet" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Straße" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerPostalCode" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="PLZ" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerCity" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Stadt" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerPhone" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="Telefon-Nr" styleClass="txf_class_CartTextFields" />
+                     <TextField fx:id="txf_PopUpCustomerEMail" maxHeight="50.0" maxWidth="450.0" prefHeight="50.0" prefWidth="450.0" promptText="E-mail" styleClass="txf_class_CartTextFields" />
                   </children>
                </VBox>
                <HBox fx:id="hbx_customerPopUpButtonHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

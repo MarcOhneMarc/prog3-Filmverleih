@@ -50,10 +50,6 @@ public class CartController {
     }
 
     @FXML
-    private TextField txf_CartName;
-    @FXML
-    private TextField txf_CartSurname;
-    @FXML
     private TextField txf_CartID;
     @FXML
     private TableView<Movies> tbv_CartItemsTable;
@@ -81,6 +77,28 @@ public class CartController {
     private AnchorPane acp_newCustomerPopup;
     @FXML
     private StackPane stp_cartOuterStackPane;
+
+    //PopUp FXML components
+    @FXML
+    private TextField txf_PopUpCustomerID;
+    @FXML
+    private TextField txf_PopUpCustomerSurName;
+    @FXML
+    private TextField txf_PopUpCustomerLastName;
+    @FXML
+    private TextField txf_PopUpCustomerStreet;
+    @FXML
+    private TextField txf_PopUpCustomerPostalCode;
+    @FXML
+    private TextField txf_PopUpCustomerCity;
+    @FXML
+    private TextField txf_PopUpCustomerPhone;
+    @FXML
+    private TextField txf_PopUpCustomerEMail;
+    @FXML
+    private Button btn_newCustomerPopupConfirm;
+    @FXML
+    private Button btn_newCustomerPopupCancel;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -240,6 +258,9 @@ public class CartController {
      * the order will be made
      * Else there will be a PopUp where a new customer can be saved to
      * the db with all needed attributes
+     *
+     * TODO handle throws exception if cart is empty and customer id is empty
+     * TODO handle throws exception if cart is not empty but id is empty
      */
     @FXML
     public void orderCart() {
@@ -278,6 +299,7 @@ public class CartController {
     @FXML
     private void confirmNewCustomerRegistration() {
         //TODO register a new Customer to DB
+        //registerNewCustomer()
         connector.getNavbarController().enableNavBar();
         acp_newCustomerPopup.setDisable(true);
         acp_newCustomerPopup.setVisible(false);
@@ -295,6 +317,14 @@ public class CartController {
         acp_newCustomerPopup.setDisable(true);
         acp_newCustomerPopup.setVisible(false);
         acp_CartBackground.setDisable(false);
+    }
+
+    /**
+     * This method gets the input from the new customer registration
+     * TextFields needed for creating a new customer in the db
+     */
+    private void registerNewCustomer() {
+
     }
 
     /**
