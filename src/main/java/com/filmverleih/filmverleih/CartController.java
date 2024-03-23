@@ -266,12 +266,16 @@ public class CartController {
     public void orderCart() {
        if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (Movies movies : fullMovieList) {
-               Utility.addRentalToDB(movies.getMovieid(), Integer.parseInt(txf_CartID.getText()), calculateCurrentDate().toString(), calculateReturnDate().toString());
+               boolean addSuccessful = Utility.addRentalToDB(
+                       movies.getMovieid(),
+                       Integer.parseInt(txf_CartID.getText()),
+                       calculateCurrentDate().toString(),
+                       calculateReturnDate().toString());
 
-               removeMovieFromCart(movies);
                vbx_CartMovieCardsVBox.getChildren().clear();
                txf_CartID.clear();
            }
+           fullMovieList.clear();
        } else {
            enablePopUpDisableCart();
        };

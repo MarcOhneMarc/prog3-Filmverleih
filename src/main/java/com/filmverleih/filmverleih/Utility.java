@@ -230,7 +230,7 @@ public class Utility {
 
     /**
      * This method adds a customer to db into the customers table
-     * @param customerId the id of the customer
+     * @param //customerId the id of the customer
      * @param firstName the firstname of the customer
      * @param lastName the lastname of the customer
      * @param street the street where the customer lives
