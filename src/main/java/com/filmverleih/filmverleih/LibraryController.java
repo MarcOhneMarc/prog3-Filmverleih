@@ -96,13 +96,55 @@ public class LibraryController {
         updateMovies(allMovies);
     }
 
+
     public void sortMovies() {
-        List<Movies> sortedList = allMovies.stream().sorted(comparator).toList();;
+        List<Movies> sortedList = allMovies.stream().sorted(comparator).toList();
         gridPane.getChildren().clear();
         updateMovies(sortedList);
         filterMovies();
         adjustColumnCount();
     }
+
+    /*
+    public void sortMovies() {
+        gridPane.getChildren().forEach(node -> {
+            if (node instanceof StackPane stackPane1) {
+                Movies movie1 = (Movies) stackPane1.getChildren().stream()
+                        .filter(child -> child instanceof ImageView)
+                        .map(child -> (ImageView) child)
+                        .map(ImageView::getUserData)
+                        .findFirst().orElse(null);
+
+                gridPane.getChildren().forEach(node2 -> {
+                    if (node2 instanceof StackPane stackPane2) {
+                        Movies movie2 = (Movies) stackPane2.getChildren().stream()
+                                .filter(child2 -> child2 instanceof ImageView)
+                                .map(child2 -> (ImageView) child2)
+                                .map(ImageView::getUserData)
+                                .findFirst().orElse(null);
+
+                        if (movie1 != null && movie2 != null) {
+                            int result = comparator.compare(movie1, movie2);
+
+                            if (result < 0) {
+                                int rowIndex1 = GridPane.getRowIndex(stackPane1);
+                                int colIndex1 = GridPane.getColumnIndex(stackPane1);
+
+                                int rowIndex2 = GridPane.getRowIndex(stackPane2);
+                                int colIndex2 = GridPane.getColumnIndex(stackPane2);
+
+                                GridPane.setRowIndex(stackPane1, rowIndex2);
+                                GridPane.setColumnIndex(stackPane1, colIndex2);
+
+                                GridPane.setRowIndex(stackPane2, rowIndex1);
+                                GridPane.setColumnIndex(stackPane2, colIndex1);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }*/
 
     public void filterMovies() {
         gridPane.getChildren().forEach(node -> {
