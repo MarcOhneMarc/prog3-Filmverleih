@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
+    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-sync">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710175267906</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711196235558</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711196235558</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,6 +227,7 @@
     <MESSAGE value="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java" />
     <MESSAGE value="FEAT-added some comments on CartController.java" />
     <MESSAGE value="FEAT-Meeting final changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Meeting final changes" />
+    <MESSAGE value="FEAT-sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-sync" />
   </component>
 </project>

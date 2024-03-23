@@ -38,93 +38,94 @@
          </items>
 
       </ComboBox>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Filter">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Jahr:" />
-            <TextField fx:id="txf_year" promptText="Jahr" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Genre:" />
-            <TextField fx:id="txf_genre" promptText="Genre" />
-         </children>
-      </VBox>
-      <VBox prefHeight="0.0" prefWidth="340.0" spacing="5.0">
-         <children>
-            <Label text="Länge:" />
-            <HBox alignment="CENTER" prefHeight="13.0" prefWidth="340.0" spacing="10.0">
-               <children>
-                  <TextField fx:id="txf_minLength" prefHeight="25.0" prefWidth="160.0" promptText="Min" />
-                  <TextField fx:id="txf_maxLength" prefHeight="25.0" prefWidth="160.0" promptText="Max" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox prefHeight="0.0" prefWidth="340.0" spacing="5.0">
-         <children>
-            <HBox prefHeight="15.0" prefWidth="320.0">
-               <children>
-                  <CheckBox fx:id="cbx_ratingEmpty" mnemonicParsing="false" prefHeight="30.0" prefWidth="16.0">
-                     <HBox.margin>
-                        <Insets right="5.0" />
-                     </HBox.margin></CheckBox>
-                  <Label prefHeight="12.0" prefWidth="79.0" text="Bewerung: " />
-                  <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" />
-               </children>
-            </HBox>
-            <Slider fx:id="sld_rating" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" minorTickCount="0" showTickLabels="true" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Type:" />
-            <TextField fx:id="txf_type" promptText="Type" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Search in Comment" />
-            <TextField fx:id="txf_comment" promptText="Search in Comment" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Director:" />
-            <TextField fx:id="txf_director" promptText="Director" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Studio:" />
-            <TextField fx:id="txf_studio" promptText="Studio" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="Actor:" />
-            <TextField fx:id="txf_actor" promptText="Actor" />
-         </children>
-      </VBox>
-      <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
-         <children>
-            <Label text="FSK:" />
-            <TextField fx:id="txf_fsk" promptText="FSK" />
-         </children>
-      </VBox>
       <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Filter">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Jahr:" />
+                  <TextField fx:id="txf_year" promptText="Jahr" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Genre:" />
+                  <TextField fx:id="txf_genre" promptText="Genre" />
+               </children>
+            </VBox>
+            <VBox prefHeight="0.0" prefWidth="340.0" spacing="5.0">
+               <children>
+                  <Label text="Länge:" />
+                  <HBox alignment="CENTER" prefHeight="13.0" prefWidth="340.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="txf_minLength" prefHeight="25.0" prefWidth="160.0" promptText="Min" />
+                        <TextField fx:id="txf_maxLength" prefHeight="25.0" prefWidth="160.0" promptText="Max" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="0.0" prefWidth="340.0" spacing="5.0">
+               <children>
+                  <HBox prefHeight="15.0" prefWidth="320.0">
+                     <children>
+                        <CheckBox fx:id="cbx_ratingEmpty" mnemonicParsing="false" prefHeight="30.0" prefWidth="16.0">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                        <Label prefHeight="12.0" prefWidth="79.0" text="Bewerung: " />
+                        <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" />
+                     </children>
+                  </HBox>
+                  <Slider fx:id="sld_rating" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" minorTickCount="0" showTickLabels="true" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Type:" />
+                  <TextField fx:id="txf_type" promptText="Type" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Search in Comment" />
+                  <TextField fx:id="txf_comment" promptText="Search in Comment" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Director:" />
+                  <TextField fx:id="txf_director" promptText="Director" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Studio:" />
+                  <TextField fx:id="txf_studio" promptText="Studio" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="Actor:" />
+                  <TextField fx:id="txf_actor" promptText="Actor" />
+               </children>
+            </VBox>
+            <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
+               <children>
+                  <Label text="FSK:" />
+                  <TextField fx:id="txf_fsk" promptText="FSK" />
+               </children>
+            </VBox>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#resetFilters" prefHeight="35.0" prefWidth="423.0" text="Reset all" textAlignment="CENTER">
                <VBox.margin>
-                  <Insets />
+                  <Insets top="20.0" />
                </VBox.margin>
             </Button>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#generateFilters" prefHeight="35.0" prefWidth="355.0" text="Apply Filters" textAlignment="CENTER" />

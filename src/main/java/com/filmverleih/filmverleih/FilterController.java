@@ -186,9 +186,9 @@ public class FilterController {
             });
         }
         if (cbx_ratingEmpty.isSelected()) {
-            BigDecimal roundedValue = BigDecimal.valueOf(Math.round(ratingFilter * 10.0) / 10.0);
+            Double roundedValue = Double.valueOf(Math.round(ratingFilter * 10.0) / 10.0);
             predicate = predicate.and(movie ->
-                    movie.getRating().equals(ratingFilter));
+                    Double.valueOf(movie.getRating().toString()) > roundedValue);
         }
         if (!typeFilter.isEmpty()) {
             predicate = predicate.and(movie ->
