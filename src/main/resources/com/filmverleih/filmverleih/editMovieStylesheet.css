@@ -50,3 +50,7 @@
     -fx-text-fill: #FF4040;
     -fx-font-size: 16;
 }
+
+.lbl_class_movieEditTextFieldTitles {
+    -fx-text-fill: #949494;
+}

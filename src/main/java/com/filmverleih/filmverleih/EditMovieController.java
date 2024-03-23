@@ -52,15 +52,26 @@ public class EditMovieController {
     @FXML
     private TextField txf_movieEditID;
     @FXML
+    private Label lbl_movieEditNameTitle;
+    @FXML
     private TextField txf_movieEditName;
     @FXML
+    private Label lbl_movieEditYearTitle;
+    @FXML
     private TextField txf_movieEditYear;
+
+    @FXML
+    private Label lbl_movieEditLengthTitle;
     @FXML
     private TextField txf_movieEditLength;
     @FXML
     private TextField txf_movieEditFSK;
     @FXML
+    private Label lbl_movieEditFskTitle;
+    @FXML
     private TextField txf_movieEditRating;
+    @FXML
+    private Label lbl_movieEditRatingTitle;
     @FXML
     private TextField txf_movieEditGenre1;
     @FXML
@@ -76,9 +87,15 @@ public class EditMovieController {
     @FXML
     private TextField txf_movieEditCount;
     @FXML
+    private Label lbl_movieEditCountTitle;
+    @FXML
     private TextField txf_movieEditStudio;
     @FXML
+    private Label lbl_movieEditActorsTitle;
+    @FXML
     private TextField txf_movieEditActors;
+    @FXML
+    private Label lbl_movieEditLinkToCoverTitle;
     @FXML
     private TextField txf_movieEditLinkToCover;
     @FXML
@@ -135,6 +152,9 @@ public class EditMovieController {
     private final String MOVIE_DELETE_FAILED = "Es ist etwas schiefgelaufen! Versuchen sie es bitte erneut.";
     private final String MOVIE_DELETE_SUCESSFULL = "Der Film wurde erfolgreich entfernt.";
 
+    private final double MAX_RATING = 10;
+    private final double MIN_RATING = 0;
+
     private int currentMovieId;
     private String currentMovieName;
     private int currentMovieYear;
@@ -151,6 +171,19 @@ public class EditMovieController {
     private String currentMovieType;
     private String[] genreArray = new String[10];
     private String[] directorsArray = new String[10];
+
+    private String changedName;
+    private int changedYear;
+    private int changedLength;
+    private int changedFsk;
+    private BigDecimal changedRating;
+    private String changedGenres;
+    private String changedDirectors;
+    private int changedCount;
+    private String changedStudio;
+    private String changedActors;
+    private String changedLinkToCover;
+    private String changedComment;
 
 
     public void initialize(Movies movie) {
@@ -352,13 +385,78 @@ public class EditMovieController {
         }
     }
 
+    public void confirmMovieEdit() {
+        validEntryChecker();
+    }
+
+    private boolean validEntryChecker() {
+        boolean entriesAreValid = true;
+        saveInfosAsNeededDataTypes();
+        if(changedName.isEmpty()) {
+            lbl_movieEditNameTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        if(changedYear < 1920 || changedYear > 2024) {
+            lbl_movieEditYearTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        if(changedFsk != 0 && changedFsk != 6 && changedFsk != 12 && changedFsk != 16 && changedFsk != 18) {
+            lbl_movieEditFskTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        if(changedRating.doubleValue() < MIN_RATING || changedRating.doubleValue() >= MAX_RATING) {
+            lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        if(!changedActors.matches("^(\\w+( \\w+)*(, \\w+( \\w+)*)*)+$")) {
+            lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        if(!currentLinkToCover.isEmpty() || !currentLinkToCover.matches("[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))")) {
+            lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        }
+        return entriesAreValid;
+    }
+
+    private void saveInfosAsNeededDataTypes() {
+        this.changedName = txf_movieEditName.getText();
+        this.changedYear = Integer.parseInt(txf_movieEditYear.getText());
+        this.changedLength = Integer.parseInt(txf_movieEditLength.getText());
+        this.changedFsk = Integer.parseInt(txf_movieEditFSK.getText());
+        this.changedRating = BigDecimal.valueOf(Double.parseDouble(txf_movieEditRating.getText()));
+        if(currentMovieGenres != null) {
+            this.changedGenres = genreArray[0];
+            if(genreArray.length > 1) {
+                this.changedGenres = this.changedGenres + ", " + genreArray[1];
+                if (genreArray.length > 2) {
+                    this.changedGenres = this.changedGenres + ", " + genreArray[2];
+                }
+            }
+        }
+        if(currentMovieDirectors != null) {
+            this.changedDirectors = directorsArray[0];
+            if(directorsArray.length > 1) {
+                this.changedDirectors = this.changedDirectors + ", " + directorsArray[1];
+                if (directorsArray.length > 2) {
+                    this.changedDirectors = this.changedDirectors + ", " + directorsArray[2];
+                }
+            }
+        }
+        this.changedCount = Integer.parseInt(txf_movieEditCount.getText());
+        this.changedStudio = txf_movieEditStudio.getText();
+        this.changedActors = txf_movieEditActors.getText();
+        this.changedLinkToCover = txf_movieEditLinkToCover.getText();
+        this.changedComment = txa_movieEditComment.getText();
+    }
+
     public void cancelMovieEdit() {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(movie);
     }
 
-    /*public void deleteMovie() {
+    public void deleteMovie() {/*
         Boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
         if (movieIsDeleted) {
             lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_SUCESSFULL);
@@ -370,7 +468,7 @@ public class EditMovieController {
             lbl_movieEditDeleteFeedback.setVisible(true);
             btn_movieEditDeleteConfirm.setDisable(true);
         } TODO muss mal gucken eine updateMovieList methode im LibraryController wäre echt geil, um fehler zu verhindern dann kann man nach einem erfolgreichen delete in die einzel movie ansicht geworfen werden wo man den edit button dann deactivate
-    }*/
+    */}
 
     public void openDeleteConfirmation() {
         disableEditNodes();
