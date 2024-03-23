@@ -369,35 +369,19 @@ public class EditMovieController {
 
     private void enableEditNodes() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
-            TextField tempTextField = (TextField) tempRow.getFirst();
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
-            tempTextField.setDisable(false);
             tempUndoButton.setOpacity(100);
-            tempUndoButton.setDisable(false);
         }
-        cbx_movieEditSelBluRay.setDisable(false);
-        cbx_movieEditSelDVD.setDisable(false);
-        btn_confirmMovieEdit.setDisable(false);
-        btn_cancelMovieEdit.setDisable(false);
-        btn_deleteMovieEdit.setDisable(false);
-        txa_movieEditComment.setDisable(false);
+        acp_EditMovieBackground.setDisable(false);
         connector.getNavbarController().enableNavBar();
     }
 
     private void disableEditNodes() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
-            TextField tempTextField = (TextField) tempRow.getFirst();
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
-            tempTextField.setDisable(true);
             tempUndoButton.setOpacity(0.3);
-            tempUndoButton.setDisable(true);
         }
-        cbx_movieEditSelBluRay.setDisable(true);
-        cbx_movieEditSelDVD.setDisable(true);
-        btn_confirmMovieEdit.setDisable(true);
-        btn_cancelMovieEdit.setDisable(true);
-        btn_deleteMovieEdit.setDisable(true);
-        txa_movieEditComment.setDisable(true);
+        acp_EditMovieBackground.setDisable(true);
         connector.getNavbarController().disableNavBar();
     }
 
