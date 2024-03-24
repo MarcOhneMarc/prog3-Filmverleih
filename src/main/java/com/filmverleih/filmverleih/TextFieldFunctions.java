@@ -27,7 +27,7 @@ public class TextFieldFunctions {
 
     public static void addRatingChecker(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("^-?\\d?\\.\\d?$")) {
+            if (!newValue.matches("^-?\\d?\\.?\\d?$")) {
                 textField.setText(oldValue);
             }
         });
