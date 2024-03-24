@@ -131,6 +131,8 @@ public class EditMovieController {
     @FXML
     private ImageView igv_movieEditLinkToCoverUndo;
     @FXML
+    private ImageView igv_movieEditCommentUndo;
+    @FXML
     private CheckBox cbx_movieEditSelDVD;
     @FXML
     private CheckBox cbx_movieEditSelBluRay;
@@ -339,7 +341,7 @@ public class EditMovieController {
                     }
                     if(newValue != null) {
                         if (newValue.equals(tempCurrentMovieData)) {
-                            tempTextField.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                            tempTextField.setStyle("-fx-text-fill: #FFF");
                         } else {
                             tempTextField.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
                         }
@@ -351,7 +353,7 @@ public class EditMovieController {
     private void txaListenerInitializer() {
         txa_movieEditComment.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(currentMovieComment)) {
-                txa_movieEditComment.setStyle("-fx-text-fill: #FFF; -fx-prompt-text-fill: #FFF");
+                txa_movieEditComment.setStyle("-fx-text-fill: #FFF;");
             } else {
                 txa_movieEditComment.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
             }
@@ -365,6 +367,7 @@ public class EditMovieController {
             ImageView tempUndoIcon = (ImageView) tempRow.get(2);
             tempUndoIcon.setOnMouseClicked(event -> tempTextField.setText(tempCurrentMovieData));
         }
+        igv_movieEditCommentUndo.setOnMouseClicked(event -> txa_movieEditComment.setText(currentMovieComment));
     }
 
     private void checkBoxAddEventHandler() {
@@ -394,18 +397,18 @@ public class EditMovieController {
     public void confirmMovieEdit() {
         if(validEntryChecker()) {
             boolean dbUpdateSuccessful = Utility.UpdateMovieInDB(currentMovieId,
-                    currentMovieName,
-                    currentMovieYear,
-                    currentMovieDuration,
-                    currentMovieFSK,
-                    currentMovieRating,
-                    currentMovieGenres,
-                    currentMovieDirectors,
-                    currentMovieCount,
-                    currentMovieStudio,
-                    currentMovieActors,
-                    currentLinkToCover,
-                    currentMovieComment);
+                    changedName,
+                    changedYear,
+                    changedLength,
+                    changedFsk,
+                    changedRating,
+                    changedGenres,
+                    changedDirectors,
+                    changedCount,
+                    changedStudio,
+                    changedActors,
+                    changedLinkToCover,
+                    changedComment);
             if (dbUpdateSuccessful) {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_SUCCESSFUL);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #518E21");
@@ -445,7 +448,7 @@ public class EditMovieController {
             lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");}
-        if(!changedLinkToCover.isEmpty() && !changedLinkToCover.matches("^[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
+        if(!changedLinkToCover.isEmpty() && !changedLinkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
             lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");}
@@ -458,22 +461,18 @@ public class EditMovieController {
         this.changedLength = Integer.parseInt(txf_movieEditLength.getText());
         this.changedFsk = Integer.parseInt(txf_movieEditFSK.getText());
         this.changedRating = BigDecimal.valueOf(Double.parseDouble(txf_movieEditRating.getText()));
-        if(currentMovieGenres != null) {
-            this.changedGenres = genreArray[0];
-            if(genreArray.length > 1) {
-                this.changedGenres = this.changedGenres + ", " + genreArray[1];
-                if (genreArray.length > 2) {
-                    this.changedGenres = this.changedGenres + ", " + genreArray[2];
-                }
+        this.changedGenres = txf_movieEditGenre1.getText();
+        if(!txf_movieEditGenre2.getText().isEmpty()) {
+            this.changedGenres = this.changedGenres + ", " + txf_movieEditGenre2.getText();
+            if (!txf_movieEditGenre3.getText().isEmpty()) {
+                this.changedGenres = this.changedGenres + ", " + txf_movieEditGenre3.getText();
             }
         }
-        if(currentMovieDirectors != null) {
-            this.changedDirectors = directorsArray[0];
-            if(directorsArray.length > 1) {
-                this.changedDirectors = this.changedDirectors + ", " + directorsArray[1];
-                if (directorsArray.length > 2) {
-                    this.changedDirectors = this.changedDirectors + ", " + directorsArray[2];
-                }
+        this.changedDirectors = txf_movieEditDirector1.getText();
+        if(!txf_movieEditDirector2.getText().isEmpty()) {
+            this.changedDirectors = this.changedDirectors + ", " + txf_movieEditDirector2.getText();
+            if (!txf_movieEditDirector3.getText().isEmpty()) {
+                this.changedDirectors = this.changedDirectors + ", " + txf_movieEditDirector3.getText();
             }
         }
         this.changedCount = Integer.parseInt(txf_movieEditCount.getText());

@@ -15,8 +15,20 @@
 }
 
 #txa_movieEditComment {
+    -fx-font-size: 17;
     -fx-focus-color: transparent;
     -fx-text-box-border: transparent;
+}
+
+#txa_movieEditComment .scroll-bar:vertical,
+#txa_movieEditComment .scroll-bar:vertical .track,
+#txa_movieEditComment .scroll-bar:vertical .track-background {
+    -fx-background-color: #191919;
+}
+
+#txa_movieEditComment .scroll-bar:vertical .thumb {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
 }
 
 #lbl_movieEditCaption {

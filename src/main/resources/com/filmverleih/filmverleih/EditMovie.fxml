@@ -230,7 +230,6 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <TextArea fx:id="txa_movieEditComment" maxWidth="460.0" prefHeight="51.0" prefWidth="228.0" promptText="Comment" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="5" />
                   <Button fx:id="btn_deleteMovieEdit" mnemonicParsing="false" onAction="#openDeleteConfirmation" prefHeight="50.0" prefWidth="185.0" styleClass="btn_class_movieEditButtons" text="Löschen" textFill="WHITE" GridPane.rowIndex="19" />
                   <Label fx:id="lbl_movieEditCaption" prefHeight="54.0" prefWidth="241.0" text="Film bearbeiten" />
                   <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="14">
@@ -331,6 +330,16 @@
                      </GridPane.margin>
                   </Label>
                   <Label fx:id="lbl_movieEditSaveFeedback" alignment="TOP_LEFT" maxWidth="650.0" text="Label" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="15" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7">
+                     <children>
+                        <TextArea fx:id="txa_movieEditComment" maxWidth="460.0" prefHeight="51.0" prefWidth="410.0" promptText="Comment" />
+                        <ImageView fx:id="igv_movieEditCommentUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@undo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
             </GridPane>
          </children>

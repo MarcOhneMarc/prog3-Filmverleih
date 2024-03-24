@@ -112,7 +112,7 @@ public class Utility {
         return true;
     }
 
-    public static Boolean UpdateMovieInDB(int movUpID,
+    public static Boolean UpdateMovieInDB(int movieid,
                                    String name,
                                    int year,
                                    int length,
@@ -123,7 +123,7 @@ public class Utility {
                                    int count,
                                    String studio,
                                    String actors,
-                                   String linkToCover,
+                                   String cover,
                                    String comment) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -143,14 +143,14 @@ public class Utility {
                 query.setParameter("count", count);
                 query.setParameter("studio", studio);
                 query.setParameter("actors", actors);
-                query.setParameter("cover", linkToCover);
+                query.setParameter("cover", cover);
                 query.setParameter("comment", comment);
-                query.setParameter("movieid", movUpID);
+                query.setParameter("movieid", movieid);
 
                 query.executeUpdate();
 
-
                 transaction.commit();
+
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
