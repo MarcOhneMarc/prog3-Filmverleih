@@ -249,7 +249,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="lbl_movieEditGenre1Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -279,7 +279,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="lbl_movieEditGenre2Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 2" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -289,12 +289,12 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 1" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <Label fx:id="lbl_movieEditDirector1Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 1" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 2" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                  <Label fx:id="lbl_movieEditDirector2Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 2" GridPane.columnIndex="1" GridPane.rowIndex="9">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>

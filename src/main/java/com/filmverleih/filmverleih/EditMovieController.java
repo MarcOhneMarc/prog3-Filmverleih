@@ -65,21 +65,29 @@ public class EditMovieController {
     @FXML
     private TextField txf_movieEditLength;
     @FXML
-    private TextField txf_movieEditFSK;
-    @FXML
     private Label lbl_movieEditFskTitle;
     @FXML
-    private TextField txf_movieEditRating;
+    private TextField txf_movieEditFSK;
     @FXML
     private Label lbl_movieEditRatingTitle;
     @FXML
+    private TextField txf_movieEditRating;
+    @FXML
+    private Label lbl_movieEditGenre1Title;
+    @FXML
     private TextField txf_movieEditGenre1;
+    @FXML
+    private Label lbl_movieEditGenre2Title;
     @FXML
     private TextField txf_movieEditGenre2;
     @FXML
     private TextField txf_movieEditGenre3;
     @FXML
+    private Label lbl_movieEditDirector1Title;
+    @FXML
     private TextField txf_movieEditDirector1;
+    @FXML
+    private Label lbl_movieEditDirector2Title;
     @FXML
     private TextField txf_movieEditDirector2;
     @FXML
@@ -353,7 +361,7 @@ public class EditMovieController {
     private void txaListenerInitializer() {
         txa_movieEditComment.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(currentMovieComment)) {
-                txa_movieEditComment.setStyle("-fx-text-fill: #FFF;");
+                txa_movieEditComment.setStyle("-fx-text-fill: #FFF");
             } else {
                 txa_movieEditComment.setStyle("-fx-text-fill: #FF4040; -fx-prompt-text-fill: #FF4040");
             }
@@ -432,26 +440,52 @@ public class EditMovieController {
             lbl_movieEditNameTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditNameTitle.setStyle("-fx-text-fill: #949494");}
+
         if(changedYear < 1920 || changedYear > 2024) {
             lbl_movieEditYearTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditYearTitle.setStyle("-fx-text-fill: #949494");}
+
         if(changedFsk != 0 && changedFsk != 6 && changedFsk != 12 && changedFsk != 16 && changedFsk != 18) {
             lbl_movieEditFskTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditFskTitle.setStyle("-fx-text-fill: #949494");}
+
         if(!txf_movieEditRating.getText().matches("^\\d\\.\\d$")) {//changedRating.doubleValue() < MIN_RATING || changedRating.doubleValue() >= MAX_RATING
             lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #949494");}
+
+        if(txf_movieEditGenre1.getText().isEmpty() && (!txf_movieEditGenre2.getText().isEmpty() || !txf_movieEditGenre3.getText().isEmpty())){
+            lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        } else {lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #949494");}
+
+        if(txf_movieEditGenre2.getText().isEmpty() && !txf_movieEditGenre3.getText().isEmpty()) {
+            lbl_movieEditGenre2Title.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        } else {lbl_movieEditGenre2Title.setStyle("-fx-text-fill: #949494");}
+
         if(!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)+$")) {//^(\w+( \w+)*(, \w+( \w+)*)*)+$
             lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");}
+
+        if(txf_movieEditDirector1.getText().isEmpty() && (!txf_movieEditDirector2.getText().isEmpty() || !txf_movieEditDirector3.getText().isEmpty())){
+            lbl_movieEditDirector1Title.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        } else {lbl_movieEditDirector1Title.setStyle("-fx-text-fill: #949494");}
+
+        if(txf_movieEditDirector2.getText().isEmpty() && !txf_movieEditDirector3.getText().isEmpty()){
+            lbl_movieEditDirector2Title.setStyle("-fx-text-fill: #FF4040");
+            entriesAreValid = false;
+        } else {lbl_movieEditDirector2Title.setStyle("-fx-text-fill: #949494");}
+
         if(!changedLinkToCover.isEmpty() && !changedLinkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
             lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         } else {lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");}
+
         return entriesAreValid;
     }
 
@@ -462,14 +496,14 @@ public class EditMovieController {
         this.changedFsk = Integer.parseInt(txf_movieEditFSK.getText());
         this.changedRating = BigDecimal.valueOf(Double.parseDouble(txf_movieEditRating.getText()));
         this.changedGenres = txf_movieEditGenre1.getText();
-        if(!txf_movieEditGenre2.getText().isEmpty()) {
+        if(!txf_movieEditGenre1.getText().isEmpty() && !txf_movieEditGenre2.getText().isEmpty()) {
             this.changedGenres = this.changedGenres + ", " + txf_movieEditGenre2.getText();
             if (!txf_movieEditGenre3.getText().isEmpty()) {
                 this.changedGenres = this.changedGenres + ", " + txf_movieEditGenre3.getText();
             }
         }
         this.changedDirectors = txf_movieEditDirector1.getText();
-        if(!txf_movieEditDirector2.getText().isEmpty()) {
+        if(!txf_movieEditDirector1.getText().isEmpty() && !txf_movieEditDirector2.getText().isEmpty()) {
             this.changedDirectors = this.changedDirectors + ", " + txf_movieEditDirector2.getText();
             if (!txf_movieEditDirector3.getText().isEmpty()) {
                 this.changedDirectors = this.changedDirectors + ", " + txf_movieEditDirector3.getText();
@@ -485,7 +519,7 @@ public class EditMovieController {
     public void cancelMovieEdit() {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
-        movieController.fillPage(movie);
+        movieController.fillPage(Utility.getMovieById(movie.getMovieid()));
     }
 
     public void deleteMovie() {/*

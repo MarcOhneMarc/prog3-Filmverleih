@@ -131,7 +131,19 @@ public class Utility {
             try {
                 transaction = session.beginTransaction();
 
-                Query query = session.createQuery("UPDATE Movies SET name = :name, year = :year, length = :length, fsk = :fsk, rating = :rating, genre = :genre, directors = :directors, count = :count, studio = :studio, actors = :actors, cover = :cover, comment = :comment WHERE movieid = :movieid");
+                Query query = session.createQuery("UPDATE Movies SET name = :name" +
+                        ", year = :year" +
+                        ", length = :length" +
+                        ", fsk = :fsk" +
+                        ", rating = :rating" +
+                        ", genre = :genre" +
+                        ", directors = :directors" +
+                        ", count = :count" +
+                        ", studio = :studio" +
+                        ", actors = :actors" +
+                        ", cover = :cover" +
+                        ", comment = :comment" +
+                        " WHERE movieid = :movieid");
 
                 query.setParameter("name", name);
                 query.setParameter("year", year);
@@ -161,6 +173,27 @@ public class Utility {
             return false;
         }
         return true;
+    }
+
+    public static Movies getMovieById(int movieId) {
+        Movies returnMovie = null;
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return returnMovie;
     }
     Movies getMovieByUrl(String url)
     {
