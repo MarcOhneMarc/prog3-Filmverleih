@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -10,12 +11,14 @@ import java.io.IOException;
  */
 public class NavbarController {
     //Instantiate Controller-Connector for Navbar-Library-Connection
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    @FXML
+    private BorderPane navbarPane;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController, Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,Integer,Integer> connector) {
         this.connector = connector;
     }
     /**
@@ -54,5 +57,9 @@ public class NavbarController {
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
+    }
+
+    public BorderPane getBorderPane(){
+        return navbarPane;
     }
 }

@@ -1,13 +1,16 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Users;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,18 +29,20 @@ public class SettingsController {
     private static final String ERR_USER_NULL = "Error: user is null";
 
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, Integer, Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, Integer, Integer> connector) {
         this.connector = connector;
     }
 
     //outer pane
     @FXML
     private TabPane tbp_settingsTabView;
+    @FXML
+    private Tab mitarbeiterTab;
 
     //components of the movie managing tab
     @FXML
@@ -86,6 +91,10 @@ public class SettingsController {
     private CheckBox cbx_selBlueRay;
     @FXML
     private TextField txf_deleteMovieId;
+    @FXML
+    private Label lbl_deleteMovie;
+    @FXML
+    private Button btn_deleteMovie;
 
 
     //components of the employee managing tab
@@ -106,6 +115,8 @@ public class SettingsController {
     @FXML
     CheckBox cbx_selAdminUser;
     @FXML
+    Label lbl_idNotExisting;
+    @FXML
     TableView<Users> tbv_userTable;
     @FXML
     TableColumn<Users, Integer> tbc_userID;
@@ -113,8 +124,8 @@ public class SettingsController {
     TableColumn<Users, String> tbc_userName;
     @FXML
     TableColumn<Users, Boolean> tbc_userIsAdmin;
-
-
+    @FXML
+    private DialogPane dialogPane;
 
 
     /**
@@ -128,8 +139,9 @@ public class SettingsController {
         Utility utility = new Utility();
         System.out.println("console test: add movie button was clicked");
         if (cbx_selBlueRay.isSelected()) {
-             movieType = "BlueRay";
-        };
+            movieType = "BlueRay";
+        }
+        ;
         utility.newMovieInDB(txf_movieName.getText(),
                 Integer.parseInt(txf_movieYear.getText()),
                 txf_movieGenre1.getText() + ", "
@@ -181,31 +193,109 @@ public class SettingsController {
         tbc_userIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
     }
 
+
+    public void viewForAdmins() {
+
+        Users loggedUser = connector.getLoginController().getLoggedUser();
+        lbl_idNotExisting.setVisible(false);
+        if (loggedUser.getIsadmin()) {
+            fillTableView();
+            if(!tbp_settingsTabView.getTabs().contains(mitarbeiterTab)){
+                tbp_settingsTabView.getTabs().add(mitarbeiterTab);
+            }
+            txf_deleteMovieId.setVisible(true);
+            lbl_deleteMovie.setVisible(true);
+            btn_deleteMovie.setVisible(true);
+        } else {
+            tbp_settingsTabView.getTabs().remove(mitarbeiterTab);
+            txf_deleteMovieId.setVisible(false);
+            lbl_deleteMovie.setVisible(false);
+            btn_deleteMovie.setVisible(false);
+        }
+    }
+
     /**
      * This method adds a user to the user management TableView
-     * @param user the user that will be added
+     * and to the db
      */
-    public void addUserToTableView(Users user) {
+    @FXML
+    public void addUserToTableView() {
+        int id = Integer.parseInt(txf_userIdAdd.getText());
+        String name = txf_userFirstName.getText();
+        String surname = txf_userSurname.getText();
+        boolean isAdmin = cbx_selAdminUser.isSelected();
+
+        Users user = new Users();
+        user.setUserid(id);
+        user.setName(name);
+        user.setIsadmin(isAdmin);
+        user.setPassword("testPassword");
+
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
+            Utility utility = new Utility();
+            utility.addUserToDB(user);
             fullUserListObservable.add(user);
             tbv_userTable.refresh();
         }
     }
 
     /**
-     * This method removes a user to the user management TableView
-     * @param user the user that will be removed
+     * This method removes a user from the user management TableView
+     * and from the db
      */
-    public void removeUserFromTableView(Users user) {
-        if (user == null) {
-            throw new IllegalArgumentException(ERR_USER_NULL);
-        } else {
-            fullUserListObservable.remove(user);
-            tbv_userTable.refresh();
+    @FXML
+    public void removeUserFromTableView() {
+        int id = Integer.parseInt(txf_userIdDelete.getText());
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Mitarbeiter löschen");
+        alert.setX(1550);
+        alert.setY(840);
+        dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("stylesheetDialog.css").toString());
+        dialogPane.getStyleClass().add("dialog");
+        boolean found = false;
+
+        for (Users user : Utility.getFullUserList()) {
+            if (user == null) {
+                throw new IllegalArgumentException(ERR_USER_NULL);
+            }
+            if (user.getUserid() == id) {
+                Utility utility = new Utility();
+                utility.deleteUserInDB(user);
+                fullUserListObservable.remove(user);
+                tbv_userTable.refresh();
+                alert.setHeaderText("Mitarbeiter mit der ID " + id +" wurde gelöscht");
+                PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+                pauseTransition.setOnFinished(event -> alert.close());
+                alert.show();
+                pauseTransition.play();
+
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            alert.setHeaderText("Mitarbeiter mit der ID " + id +" existiert nicht");
+            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+            pauseTransition.setOnFinished(event -> alert.close());
+            alert.show();
+            pauseTransition.play();
         }
     }
+
+    public void logout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Möchten Sie sich abmelden?");
+        alert.setTitle("Logout");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            connector.getLoginController().setLoggedUserToNull();
+            MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
+            MainApplication.borderPane.setTop(null);
+        }
+    }
+
 
     /**
      * This method adds an user and is linked to the add button of the
@@ -231,10 +321,11 @@ public class SettingsController {
 
     /**
      * TODO remove fillTableView() from here and find a better suiting place for its calling
+     *
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public TabPane getOuterPane()
-    {
+    public TabPane getOuterPane() {
+        viewForAdmins();
         fillTableView();
         return tbp_settingsTabView;
     }

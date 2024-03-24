@@ -39,13 +39,13 @@ public class CartController {
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,Integer,Integer> connector;
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,Integer,Integer> connector) {
         this.connector = connector;
     }
 

@@ -100,7 +100,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" text="Bestellen" textFill="WHITE">
+                  <Button fx:id="btn_OrderCart" mnemonicParsing="false" onAction="#orderCart" prefHeight="50.0" prefWidth="450.0" styleClass="btnGreen" text="Bestellen" textFill="WHITE">
                      <font>
                         <Font size="32.0" />
                      </font>

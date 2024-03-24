@@ -20,6 +20,25 @@
     -fx-font-weight: normal;
 
 }
+.button{
+    -fx-cursor: hand;
+}
+
+.check-box{
+    -fx-cursor: hand;
+}
+
+.btnYellow:hover{
+    -fx-effect: dropshadow(three-pass-box, #fcfcb7, 10, 0.6, 0, 0);
+}
+
+.btnRed:hover{
+    -fx-effect: dropshadow(three-pass-box, #d75050, 10, 0.6, 0, 0);
+}
+
+.btnGreen:hover{
+    -fx-effect: dropshadow(three-pass-box, #6fbd37, 10, 0.6, 0, 0);
+}
 
 #headerSearchbar {
     -fx-background-color: #949494;
@@ -70,6 +89,85 @@
 .lbl_class_SettingsLabel {
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 32;
+}
+
+.lbl_class_SettingsLabelDeleteUser {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 22;
+}
+
+.settingsTableView{
+    -fx-background-color: #393939;
+    -fx-background-radius: 7px;
+    -fx-border-color: #FFFFFF;
+    -fx-border-radius: 9px;
+    -fx-border-width: 2px;
+}
+
+.settingsTableView .column-header-background{
+    -fx-background-color: #393939;
+    -fx-border-width: 2px;
+    -fx-border-color: transparent transparent #FFFFFF transparent;
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 15;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: #FFFFFF;
+}
+
+.table-view .scroll-bar * {
+    -fx-min-width: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+
+    -fx-min-height: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+}
+
+.settingsTableView .column-header{
+    -fx-background-color: transparent;
+}
+
+.settingsTableView .column-header .label{
+    -fx-text-fill: #FFFFFF;
+}
+
+.lbl_class_LoginLabelWrongCredentials {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.bib_textfieldLogin {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12px;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.loginButton {
+    -fx-background-color: #FFFF3D;
+    -fx-background-radius: 12px;
+    -fx-text-fill: #000;
+    -fx-font-size: 22;
+    -fx-font-family: inter;
+    -fx-font-weight: normal;
+}
+
+#anchorPane {
+    -fx-background-image:url("cinema.png");
 }
 
 #vbx_movieParamGrid {
@@ -171,6 +269,12 @@
 #btn_OrderCart {
     -fx-background-color: #518E21;
     -fx-background-radius: 12;
+}
+
+#cbx_showPassword {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
 }
 
 .txf_class_CartTextFields {

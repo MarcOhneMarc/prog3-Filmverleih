@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -70,10 +71,18 @@
                                         <TextField fx:id="txf_movieUndefined5" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                         <TextField fx:id="txf_movieLinkToCover" promptText="Link to Cover" styleClass="bib_textfield" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                         <TextArea fx:id="txa_movieComment" prefHeight="51.0" prefWidth="228.0" promptText="Comment" styleClass="bib_comment" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="5" />
-                                        <Button fx:id="btn_addMovie" mnemonicParsing="false" onAction="#addMovie" styleClass="bib-button" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="8" />
-                                        <Label styleClass="lbl_class_SettingsLabel" text="Film löschen" GridPane.rowIndex="10" />
+                                        <Button fx:id="btn_addMovie" mnemonicParsing="false" onAction="#addMovie" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="8">
+                                 <styleClass>
+                                    <String fx:value="bib-button" />
+                                    <String fx:value="btnGreen" />
+                                 </styleClass></Button>
+                                        <Label fx:id="lbl_deleteMovie" styleClass="lbl_class_SettingsLabel" text="Film löschen" GridPane.rowIndex="10" />
                                         <TextField fx:id="txf_deleteMovieId" promptText="ID" styleClass="bib_textfield" GridPane.rowIndex="11" />
-                                        <Button fx:id="btn_deleteMovie" mnemonicParsing="false" onAction="#deleteMovie" styleClass="bib-button" text="Löschen" textFill="WHITE" GridPane.rowIndex="12" />
+                                        <Button fx:id="btn_deleteMovie" mnemonicParsing="false" onAction="#deleteMovie" text="Löschen" textFill="WHITE" GridPane.rowIndex="12">
+                                 <styleClass>
+                                    <String fx:value="bib-button" />
+                                    <String fx:value="btnRed" />
+                                 </styleClass></Button>
                                         <Label prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_SettingsLabel" text="Film hinzufügen" />
                                         <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                                             <children>
@@ -85,11 +94,24 @@
                                 </GridPane>
                             </children>
                         </VBox>
+                  <Button fx:id="btn_logoutUser" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" styleClass="deleteButtonColor" text="Logout">
+                        <styleClass>
+                            <String fx:value="bib-button" />
+                            <String fx:value="deleteButtonColor" />
+                        </styleClass>
+                  </Button>
+                        <Button fx:id="btn_logoutLibrary" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" onAction="#logout" styleClass="deleteButtonColor" text="Logout">
+                            <styleClass>
+                                <String fx:value="bib-button" />
+                                <String fx:value="deleteButtonColor" />
+                        <String fx:value="btnRed" />
+                            </styleClass>
+                        </Button>
                     </children>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab styleClass="tbs_settingsTab" text="Mitarbeiter">
+        <Tab fx:id="mitarbeiterTab" styleClass="tbs_settingsTab" text="Mitarbeiter">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
                     <children>
@@ -118,30 +140,42 @@
                                         <TextField fx:id="txf_userIdDelete" promptText="ID" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                         <Label fx:id="lbl_addUser" prefHeight="50.0" prefWidth="353.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter hinzufügen" />
                                         <Label fx:id="lbl_deleteUser" prefHeight="50.0" prefWidth="330.0" styleClass="lbl_class_SettingsLabel" text="Mitarbeiter löschen" GridPane.columnIndex="1" />
-                                        <Button fx:id="btn_addUser" mnemonicParsing="false" onAction="#addUser" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
+                                        <Button fx:id="btn_addUser" mnemonicParsing="false" onAction="#addUserToTableView" prefHeight="44.0" prefWidth="135.0" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="5">
                                             <styleClass>
                                                 <String fx:value="addButtonColor" />
                                                 <String fx:value="bib-button" />
+                                    <String fx:value="btnGreen" />
                                             </styleClass>
                                         </Button>
-                                        <Button fx:id="btn_deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                        <Button fx:id="btn_deleteUser" mnemonicParsing="false" onAction="#removeUserFromTableView" text="Löschen" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                             <styleClass>
                                                 <String fx:value="bib-button" />
                                                 <String fx:value="deleteButtonColor" />
+                                    <String fx:value="btnRed" />
                                             </styleClass>
                                         </Button>
                                         <CheckBox fx:id="cbx_selAdminUser" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Admin" textFill="WHITE" GridPane.rowIndex="4" />
+                              <Label fx:id="lbl_idNotExisting" prefHeight="47.0" prefWidth="407.0" styleClass="lbl_class_SettingsLabelDeleteUser" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     </children>
                                 </GridPane>
                             </children>
                         </VBox>
-                        <TableView fx:id="tbv_userTable" layoutX="261.0" layoutY="104.0" prefHeight="496.0" prefWidth="510.0">
+                        <TableView fx:id="tbv_userTable" layoutX="261.0" layoutY="104.0" prefHeight="496.0" prefWidth="510.0" styleClass="settingsTableView">
                             <columns>
                                 <TableColumn fx:id="tbc_userID" prefWidth="120.0" text="ID" />
                                 <TableColumn fx:id="tbc_userName" prefWidth="274.0" text="Name" />
                         <TableColumn fx:id="tbc_userIsAdmin" prefWidth="115.0" text="Admin" />
                             </columns>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
                         </TableView>
+                  <Button fx:id="btn_logout" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" onAction="#logout" text="Logout">
+                     <styleClass>
+                        <String fx:value="bib-button" />
+                        <String fx:value="deleteButtonColor" />
+                        <String fx:value="btnRed" />
+                     </styleClass></Button>
                     </children></AnchorPane>
             </content>
         </Tab>

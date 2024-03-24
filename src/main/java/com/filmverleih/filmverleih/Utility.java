@@ -189,4 +189,45 @@ public class Utility {
         return  new ArrayList<Users>();
     }
 
+    public Boolean deleteUserInDB(Users user){
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("DELETE FROM Users WHERE userid = " + user.getUserid()).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public Boolean addUserToDB(Users user) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.save(user);//add user to db
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
