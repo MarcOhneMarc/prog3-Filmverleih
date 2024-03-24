@@ -137,6 +137,8 @@ public class EditMovieController {
     @FXML
     private Button btn_confirmMovieEdit;
     @FXML
+    private Label lbl_movieEditSaveFeedback;
+    @FXML
     private Button btn_cancelMovieEdit;
     @FXML
     private Button btn_deleteMovieEdit;
@@ -149,8 +151,12 @@ public class EditMovieController {
 
     private Movies movie;
     private ArrayList<ArrayList<Object>> txfStringUndoList = new ArrayList<>();
-    private final String MOVIE_DELETE_FAILED = "Es ist etwas schiefgelaufen! Versuchen sie es bitte erneut.";
-    private final String MOVIE_DELETE_SUCESSFULL = "Der Film wurde erfolgreich entfernt.";
+    private final String MOVIE_DELETE_SUCCESSFUL = "Der Film wurde erfolgreich entfernt.";
+    private final String MOVIE_DELETE_FAILED = "Es ist etwas schiefgelaufen! Versuchen Sie es bitte erneut.";
+    private final String MOVIE_SAVE_SUCCESSFUL = "Die Daten wurden erfolgreich gespeichert.";
+    private final String MOVIE_SAVE_FAILED = "Manche Textfelder stimmen nicht mit den Anforderungen überein. " +
+            "Die Titel dieser wurden rot markiert.";
+    private final String MOVIE_SAVE_WENT_WRONG = "Etwas ist schiefgelaufen, bitte versuchen Sie es erneut.";
 
     private final double MAX_RATING = 10;
     private final double MIN_RATING = 0;
@@ -386,7 +392,34 @@ public class EditMovieController {
     }
 
     public void confirmMovieEdit() {
-        validEntryChecker();
+        if(validEntryChecker()) {
+            boolean dbUpdateSuccessful = Utility.UpdateMovieInDB(currentMovieId,
+                    currentMovieName,
+                    currentMovieYear,
+                    currentMovieDuration,
+                    currentMovieFSK,
+                    currentMovieRating,
+                    currentMovieGenres,
+                    currentMovieDirectors,
+                    currentMovieCount,
+                    currentMovieStudio,
+                    currentMovieActors,
+                    currentLinkToCover,
+                    currentMovieComment);
+            if (dbUpdateSuccessful) {
+                lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_SUCCESSFUL);
+                lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #518E21");
+                lbl_movieEditSaveFeedback.setVisible(true);
+            } else {
+                lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
+                lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
+                lbl_movieEditSaveFeedback.setVisible(true);
+            }
+        } else {
+            lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_FAILED);
+            lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
+            lbl_movieEditSaveFeedback.setVisible(true);
+        }
     }
 
     private boolean validEntryChecker() {
@@ -395,27 +428,27 @@ public class EditMovieController {
         if(changedName.isEmpty()) {
             lbl_movieEditNameTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
+        } else {lbl_movieEditNameTitle.setStyle("-fx-text-fill: #949494");}
         if(changedYear < 1920 || changedYear > 2024) {
             lbl_movieEditYearTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
+        } else {lbl_movieEditYearTitle.setStyle("-fx-text-fill: #949494");}
         if(changedFsk != 0 && changedFsk != 6 && changedFsk != 12 && changedFsk != 16 && changedFsk != 18) {
             lbl_movieEditFskTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
-        if(changedRating.doubleValue() < MIN_RATING || changedRating.doubleValue() >= MAX_RATING) {
+        } else {lbl_movieEditFskTitle.setStyle("-fx-text-fill: #949494");}
+        if(!txf_movieEditRating.getText().matches("^\\d\\.\\d$")) {//changedRating.doubleValue() < MIN_RATING || changedRating.doubleValue() >= MAX_RATING
             lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
-        if(!changedActors.matches("^(\\w+( \\w+)*(, \\w+( \\w+)*)*)+$")) {
+        } else {lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #949494");}
+        if(!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)+$")) {//^(\w+( \w+)*(, \w+( \w+)*)*)+$
             lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
-        if(!currentLinkToCover.isEmpty() || !currentLinkToCover.matches("[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))")) {
+        } else {lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");}
+        if(!changedLinkToCover.isEmpty() && !changedLinkToCover.matches("^[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
             lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
-        }
+        } else {lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");}
         return entriesAreValid;
     }
 

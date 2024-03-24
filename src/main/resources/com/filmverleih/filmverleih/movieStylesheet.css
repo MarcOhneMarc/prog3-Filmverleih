@@ -23,6 +23,7 @@
 
 #txa_commentMovieScene .content{
     -fx-background-color: #191919;
+    -fx-background-radius: 0;
 }
 
 #btn_addToCartMovieScene {

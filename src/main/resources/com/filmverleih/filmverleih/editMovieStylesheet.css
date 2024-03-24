@@ -4,22 +4,26 @@
 
 .txf_class_movieEdit {
     -fx-background-color: #949494;
-    -fx-background-radius: 12px;
+    -fx-background-radius: 12;
     -fx-font-size: 22;
     -fx-text-fill: #FFF;
 }
+
 #txa_movieEditComment .content{
     -fx-background-color: #949494;
-    -fx-background-radius: 12px;
+    -fx-background-radius: 12;
 }
+
 #txa_movieEditComment {
     -fx-focus-color: transparent;
     -fx-text-box-border: transparent;
 }
+
 #lbl_movieEditCaption {
     -fx-text-fill: #FFF;
     -fx-font-size: 32;
 }
+
 .btn_class_movieEditButtons {
     -fx-text-fill: #FFF;
     -fx-background-radius: 12;
@@ -53,4 +57,8 @@
 
 .lbl_class_movieEditTextFieldTitles {
     -fx-text-fill: #949494;
+}
+
+#lbl_movieEditSaveFeedback {
+    -fx-font-size: 22;
 }

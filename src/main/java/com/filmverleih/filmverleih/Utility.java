@@ -15,6 +15,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.event.spi.EventSource;
+import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -111,22 +112,53 @@ public class Utility {
         return true;
     }
 
-    public Boolean UpdateMovieInDB(int movUpID) {
+    public static Boolean UpdateMovieInDB(int movUpID,
+                                   String name,
+                                   int year,
+                                   int length,
+                                   int fsk,
+                                   BigDecimal rating,
+                                   String genres,
+                                   String directors,
+                                   int count,
+                                   String studio,
+                                   String actors,
+                                   String linkToCover,
+                                   String comment) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
+                Query query = session.createQuery("UPDATE Movies SET name = :name, year = :year, length = :length, fsk = :fsk, rating = :rating, genre = :genre, directors = :directors, count = :count, studio = :studio, actors = :actors, cover = :cover, comment = :comment WHERE movieid = :movieid");
+
+                query.setParameter("name", name);
+                query.setParameter("year", year);
+                query.setParameter("length", length);
+                query.setParameter("fsk", fsk);
+                query.setParameter("rating", rating);
+                query.setParameter("genre", genres);
+                query.setParameter("directors", directors);
+                query.setParameter("count", count);
+                query.setParameter("studio", studio);
+                query.setParameter("actors", actors);
+                query.setParameter("cover", linkToCover);
+                query.setParameter("comment", comment);
+                query.setParameter("movieid", movUpID);
+
+                query.executeUpdate();
+
 
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
+            return false;
         }
         return true;
     }
