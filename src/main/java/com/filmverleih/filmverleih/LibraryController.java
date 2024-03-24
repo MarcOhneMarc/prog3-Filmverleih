@@ -67,7 +67,6 @@ public class LibraryController {
     private double windowWidth;
     public Predicate<Movies> predicate;
     public Comparator<Movies> comparator;
-
     private List<Movies> allMovies;
 
     /**
@@ -150,9 +149,9 @@ public class LibraryController {
         gridPane.getChildren().forEach(node -> {
             if (node instanceof StackPane stackPane) {
                 boolean isVisible = stackPane.getChildren().stream()
-                        .filter(child -> child instanceof ImageView)
-                        .map(child -> (ImageView) child)
-                        .map(ImageView::getUserData)
+                        .filter(child -> child instanceof ImageView || child instanceof Label)
+                        .map(child -> (Node) child)
+                        .map(Node::getUserData)
                         .anyMatch(data -> data instanceof Movies && predicate.test((Movies) data));
                 stackPane.setVisible(isVisible);
                 stackPane.setManaged(isVisible);
