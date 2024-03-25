@@ -236,6 +236,12 @@
     -fx-background-color: #393939;
 }
 
+#lbl_CartMovieCardFsk {
+    -fx-background-color: #518E21;
+    -fx-font-size: 17;
+    -fx-text-fill: #FFFFFF;
+}
+
 .lbl_class_CartMovieLabels {
     -fx-text-fill: #FFFFFF;
 }
@@ -292,4 +298,48 @@
 
 #pan_paneCartIconBackground {
     -fx-background-color: #518E21;
+
+
 }
+
+
+
+.tbp_settingsTabView > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #949494;
+
+}
+
+.tbp_settingsTabView > .tab-header-area > .headers-region > .tab {
+    -fx-background-insets: 0 1 0 0, 1 2 1 1, 2 3 1 2;
+}
+
+.tab .tab-label {
+    -fx-text-fill: white;
+      -fx-font-size: 22px;
+        -fx-wrap-text: true;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: black;
+}
+
+.tab-pane {
+    -fx-tab-min-width:150px;
+    -fx-tab-max-width:150px;
+    -fx-tab-min-height:50px;
+    -fx-tab-max-height:50px;
+}
+
+.tbp_settingsTabView > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color:#393939;
+}
+
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+
+}
+
+
+
+

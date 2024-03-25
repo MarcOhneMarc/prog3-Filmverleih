@@ -43,10 +43,13 @@
                   <Font size="32.0" />
                </font>
             </Button>
-            <TextField id="headerSearchbar" prefHeight="50.0" prefWidth="1080.0" promptText="Suche..." stylesheets="@stylesheet.css">
+            <TextField id="headerSearchbar" fx:id="searchbar" prefHeight="50.0" prefWidth="1080.0" promptText="Suche..." stylesheets="@stylesheet.css">
                <font>
-                  <Font size="34.0" />
+                  <Font size="32.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </TextField>
          </children>
          <padding>

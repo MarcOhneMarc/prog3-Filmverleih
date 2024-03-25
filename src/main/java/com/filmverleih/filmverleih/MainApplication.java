@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
-
  * The MainApplication class creates the main frame where the navbar and the library are initially loaded in.
  * It also provides methods to change the center and left sidebar content.
  */
@@ -47,21 +46,27 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Navbar.fxml");
             navbarRoot = loader.load();
             navbarController = loader.getController();
+
             loader  = Utility.loadFXML("Library.fxml");
             libraryRoot = loader.load();
             libraryController = loader.getController();
+
             loader = Utility.loadFXML("Movie.fxml");
             movieRoot = loader.load();
             movieController = loader.getController();
+
             loader = Utility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
+
             loader = Utility.loadFXML("Settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
+
             loader = Utility.loadFXML("Filter.fxml");
             filterRoot = loader.load();
             filterController = loader.getController();
+
             loader = Utility.loadFXML("Cart.fxml");
             cartRoot = loader.load();
             cartController = loader.getController();
@@ -117,6 +122,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
         borderPane.setTop(navbarRoot);
         borderPane.setCenter(libraryRoot);
+        borderPane.setRight(filterRoot);
 
         String css = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);

@@ -110,8 +110,8 @@ public class MovieController {
             }
         }
         lbl_yearMovieScene.setText(valueOf(movie.getYear()));
-        lbl_fskMovieScene.setText(valueOf(movie.getFsk()));
-        lbl_durationMovieScene.setText(valueOf(movie.getLength()));
+        lbl_fskMovieScene.setText("FSK " + valueOf(movie.getFsk()));
+        lbl_durationMovieScene.setText(valueOf(movie.getLength()) + " min");
         lbl_directorsMovieScene.setText(movie.getDirectors());
         lbl_actorsMovieScene.setText(movie.getActors());
 
