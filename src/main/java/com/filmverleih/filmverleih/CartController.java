@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
  *
  * TODO connect Backend
  *
- * @author Hannes, Jannis
+ * @author Hannes, Jannis, Marc
  */
 public class CartController {
 
@@ -49,10 +49,6 @@ public class CartController {
         this.connector = connector;
     }
 
-    @FXML
-    private TextField txf_CartName;
-    @FXML
-    private TextField txf_CartSurname;
     @FXML
     private TextField txf_CartID;
     @FXML
@@ -77,10 +73,41 @@ public class CartController {
     private ScrollPane scp_Cart;
     @FXML
     private AnchorPane acp_CartBackground;
+    @FXML
+    private AnchorPane acp_newCustomerPopup;
+    @FXML
+    private StackPane stp_cartOuterStackPane;
+    @FXML
+    private Label lbl_errorDuplicateRentalMessage;
+    @FXML
+    private Label lbl_errorNoID;
+    @FXML
+    private Label lbl_errorEmptyCart;
+
+    //PopUp FXML components
+    @FXML
+    private TextField txf_PopUpCustomerID;
+    @FXML
+    private TextField txf_PopUpCustomerSurName;
+    @FXML
+    private TextField txf_PopUpCustomerLastName;
+    @FXML
+    private TextField txf_PopUpCustomerStreet;
+    @FXML
+    private TextField txf_PopUpCustomerPostalCode;
+    @FXML
+    private TextField txf_PopUpCustomerCity;
+    @FXML
+    private TextField txf_PopUpCustomerPhone;
+    @FXML
+    private TextField txf_PopUpCustomerEMail;
+    @FXML
+    private Button btn_newCustomerPopupConfirm;
+    @FXML
+    private Button btn_newCustomerPopupCancel;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
-     * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
         for(Movies movie : fullMovieList){
@@ -116,6 +143,10 @@ public class CartController {
     public void removeMovieCard(HBox movieCard, Movies movie) {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
+
+        //TODO find a better place for the following call
+        lbl_errorDuplicateRentalMessage.setVisible(false);
+        updateCart();
     }
 
 
@@ -129,7 +160,6 @@ public class CartController {
         for (Movies movie : fullMovieList) {
             fullMovieListObservable.add(movie);
         }
-
 
         tbv_CartItemsTable.setItems(fullMovieListObservable);
 
@@ -175,7 +205,6 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
-
         updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
         lbl_ReturnDateValue.setText(calculateReturnDate().toString());
@@ -222,31 +251,173 @@ public class CartController {
             tbv_CartItemsTable.getItems().clear();
             fillTableView();
             updateTotalPrice();
+            updateCart();
         }
     }
 
-
-
     /**
-     * test method to link the order button to the controller
-     * which prints a small verification message in the console
-     * that the order button has been clicked
+     * This method is called when clicking the order button
+     * and then saves the order from the cart in the rentals table
+     * of the db
      *
-     * Also added a call for the fillTableView() Method in order
-     * to test the TableView, after pressing the button once.
+     * If the provided customerID is already in the customer table
+     * the order will be made
+     * Else there will be a PopUp where a new customer can be saved to
+     * the db with all needed attributes
      */
     @FXML
-    public void orderCart() throws IOException {
-        System.out.println("Ordert Card");
+    public void orderCart() {
+
+       if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+           for (int i = 0; i < fullMovieList.size(); i++) {
+               boolean addSuccessful = Utility.addRentalToDB(
+                       fullMovieList.get(i).getMovieid(),
+                       Integer.parseInt(txf_CartID.getText()),
+                       calculateCurrentDate().toString(),
+                       calculateReturnDate().toString());
+               if (!addSuccessful) {
+                    setDuplicateRentalLabel(fullMovieList.get(i));
+               } else {
+                   vbx_CartMovieCardsVBox.getChildren().remove(i);
+                   removeMovieFromCart(fullMovieList.get(i));
+               }
+           }
+       } else {
+           enablePopUpDisableCart();
+       };
+        updateCart();
+    }
+
+    /**
+     * This method sets a label if a certain movie could not be rented because
+     * the movie is already rented by the customer (duplicate key value)
+     * @param movie the movie that could not be rented
+     */
+    public void setDuplicateRentalLabel(Movies movie) {
+        System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
+        lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
+        lbl_errorDuplicateRentalMessage.setWrapText(true);
+        lbl_errorDuplicateRentalMessage.setVisible(true);
     }
 
 
+    /**
+     * This method enables the new customer registration pop up
+     * and disables the navbar and the "background" pane
+     * in order to not allow the user to navigate away
+     */
+    private void enablePopUpDisableCart() {
+        connector.getNavbarController().disableNavBar();
+        acp_newCustomerPopup.setDisable(false);
+        acp_newCustomerPopup.setVisible(true);
+        acp_CartBackground.setDisable(true);
+    }
+
+    /**
+     * This method confirms the registration of a new customer
+     * which saves it in the customers table in the db, if the button
+     * "confirm" is clicked.
+     * Then it closes the PopUp and while enabling the "background"
+     * again.
+     */
+    @FXML
+    private void confirmNewCustomerRegistration() {
+        registerNewCustomer();
+        connector.getNavbarController().enableNavBar();
+        acp_newCustomerPopup.setDisable(true);
+        acp_newCustomerPopup.setVisible(false);
+        acp_CartBackground.setDisable(false);
+    }
+
+    /**
+     * This method cancels the registration of a new customer
+     * and closes the PopUp while enabling "background" again,
+     * if the "cancel" button is clicked.
+     */
+    @FXML
+    private void cancelNewCustomerRegistration() {
+        connector.getNavbarController().enableNavBar();
+        acp_newCustomerPopup.setDisable(true);
+        acp_newCustomerPopup.setVisible(false);
+        acp_CartBackground.setDisable(false);
+    }
+
+    /**
+     * This method gets the input from the new customer registration
+     * TextFields needed for creating a new customer in the db
+     * TODO check if getLastAddedCustomerID is a valid way to get it
+     */
+    private void registerNewCustomer() {
+        boolean addSuccessful = Utility.addCustomerToDB(
+                txf_PopUpCustomerSurName.getText(),
+                txf_PopUpCustomerLastName.getText(),
+                txf_PopUpCustomerStreet.getText(),
+                txf_PopUpCustomerPostalCode.getText(),
+                txf_PopUpCustomerCity.getText(),
+                txf_PopUpCustomerPhone.getText(),
+                txf_PopUpCustomerEMail.getText()
+        );
+
+        if (addSuccessful) {
+            txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+        }
+    }
+
+    /**
+     * This method checks whether all TextFields are filled in order to
+     * disable or enable the new customer registration confirm button
+     */
+    @FXML
+    private void checkWhetherToDisableNewCustomerButton() {
+        boolean anyEmpty = txf_PopUpCustomerSurName.getText().isEmpty() ||
+                txf_PopUpCustomerLastName.getText().isEmpty() ||
+                txf_PopUpCustomerStreet.getText().isEmpty() ||
+                txf_PopUpCustomerPostalCode.getText().isEmpty() ||
+                txf_PopUpCustomerCity.getText().isEmpty() ||
+                txf_PopUpCustomerPhone.getText().isEmpty() ||
+                txf_PopUpCustomerEMail.getText().isEmpty();
+
+        btn_newCustomerPopupConfirm.setDisable(anyEmpty);
+    }
+
+    /**
+     * This method is linked to the ID input TextField and reacts if
+     * there is typing in this field.
+     * It then checks whether the cart is empty and the id input filed
+     * in order to disable or enable the order button and showing error
+     * message labels.
+     */
+    @FXML
+    public void checkIDEmpty() {
+        if (txf_CartID.getText().isBlank()) {
+            btn_OrderCart.setDisable(true);
+            lbl_errorNoID.setVisible(true);
+        } else {
+            lbl_errorNoID.setVisible(false);
+            if (!fullMovieList.isEmpty()) {
+                btn_OrderCart.setDisable(false);
+                lbl_errorEmptyCart.setVisible(false);
+            } else {
+                btn_OrderCart.setDisable(true);
+                lbl_errorEmptyCart.setVisible(true);
+            }
+        }
+    }
+
+    /**
+     * This method updates the card by setting the order information labels
+     * and checking whether the ID is empty
+     */
+    public void updateCart() {
+        setOrderInformationLabels();
+        checkIDEmpty();
+    }
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
-    public AnchorPane getOuterPane() {
-        setOrderInformationLabels();
-        return acp_CartBackground;
+    public StackPane getOuterPane() {
+        updateCart();
+        return stp_cartOuterStackPane;
     }
 }
