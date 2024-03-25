@@ -90,9 +90,7 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
     /**
      * @return returns sixth controller, here : FilterController
      */
-    public V getFilterController() {
-        return filterController;
-    }
+    public V getFilterController() { return filterController; }
 
     /**
      * @return returns seventh controller, here : CartController
