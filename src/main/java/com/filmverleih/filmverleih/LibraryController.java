@@ -243,6 +243,14 @@ public class LibraryController {
     }
 
     /**
+     * This method updates all Movies in case of changes
+     */
+    public void updateMovieList() {
+        List<Movies> allMovies = Utility.getFullMovieList();
+        updateMovies(allMovies);
+    }
+
+    /**
      * This method creates a StackPane that acts as a button to add a movie to cart
      * the params are used to ensure the functionality of the button
      * @param AllMovies
