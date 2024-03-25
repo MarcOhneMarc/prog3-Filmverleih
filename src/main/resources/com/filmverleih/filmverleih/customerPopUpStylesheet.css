@@ -1,0 +1,31 @@
+.btn_class_CustomerPopupButtons {
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 12;
+    -fx-font-size: 22;
+}
+
+#btn_newCustomerPopupConfirm{
+    -fx-background-color: #518E21;
+}
+
+#btn_newCustomerPopupCancel{
+    -fx-background-color: #FF4040;
+}
+
+#lbl_newCustomerPopup {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 40;
+}
+
+#acp_newCustomerPopup {
+    -fx-background-color: #393939;
+    -fx-background-radius: 12;
+}
+
+#vbx_newCustomerFields {
+    -fx-spacing: 10;
+}
+
+#hbx_customerPopUpButtonHBox {
+    -fx-spacing: 20;
+}

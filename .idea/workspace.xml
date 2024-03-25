@@ -29,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="tick-59" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,9 +52,10 @@
   &quot;keyToString&quot;: {
     &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.SettingsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;d94254d5-1e14-4bd8-b185-5d6cc26f59e7&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tick-35&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
@@ -63,20 +64,32 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.filmverleih.filmverleih" />
     </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.filmverleih.filmverleih.entity" />
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
-      <module name="Filmverleih" />
+      <module name="JavaFX-Tutorial" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
@@ -115,6 +128,7 @@
       <list>
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.SettingsApplication" />
+        <item itemvalue="Application.SettingsApplication" />
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.MainApplication" />
       </list>
@@ -140,6 +154,7 @@
       <workItem from="1710165751465" duration="59000" />
       <workItem from="1710165832318" duration="786000" />
       <workItem from="1710173132642" duration="2214000" />
+      <workItem from="1711131963034" duration="1015000" />
     </task>
     <task id="LOCAL-00001" summary="BUG-changed Navbar Search Test to Prompt (Suche...)">
       <option name="closed" value="true" />
@@ -189,7 +204,55 @@
       <option name="project" value="LOCAL" />
       <updated>1710175267906</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711196235558</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711196235558</updated>
+    </task>
+    <task id="LOCAL-00008" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711198164076</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711198164076</updated>
+    </task>
+    <task id="LOCAL-00009" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711319878137</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711319878137</updated>
+    </task>
+    <task id="LOCAL-00010" summary="FEAT-Suchalgorithmus Laufzeitoptimierung">
+      <option name="closed" value="true" />
+      <created>1711369509933</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1711369509933</updated>
+    </task>
+    <task id="LOCAL-00011" summary="FEAT-Kommentare">
+      <option name="closed" value="true" />
+      <created>1711387234417</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1711387234417</updated>
+    </task>
+    <task id="LOCAL-00012" summary="FEAT-updateMovieList">
+      <option name="closed" value="true" />
+      <created>1711394077780</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1711394077780</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,6 +288,10 @@
     <MESSAGE value="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java" />
     <MESSAGE value="FEAT-added some comments on CartController.java" />
     <MESSAGE value="FEAT-Meeting final changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-Meeting final changes" />
+    <MESSAGE value="FEAT-sync" />
+    <MESSAGE value="FEAT-Suchalgorithmus Laufzeitoptimierung" />
+    <MESSAGE value="FEAT-Kommentare" />
+    <MESSAGE value="FEAT-updateMovieList" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-updateMovieList" />
   </component>
 </project>
