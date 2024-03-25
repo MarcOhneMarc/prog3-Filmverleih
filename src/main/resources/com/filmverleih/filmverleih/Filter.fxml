@@ -75,7 +75,7 @@
                <children>
                   <HBox prefHeight="15.0" prefWidth="320.0">
                      <children>
-                        <CheckBox fx:id="cbx_ratingEmpty" mnemonicParsing="false" prefHeight="30.0" prefWidth="16.0">
+                        <CheckBox id="cbx_rating" fx:id="cbx_ratingEmpty" mnemonicParsing="false" prefHeight="30.0" prefWidth="16.0" stylesheets="@filterStylesheet.css">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -84,7 +84,7 @@
                         <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" />
                      </children>
                   </HBox>
-                  <Slider fx:id="sld_rating" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" minorTickCount="0" showTickLabels="true" />
+                  <Slider id="sld_rating" fx:id="sld_rating" blockIncrement="1.0" majorTickUnit="10.0" max="10.0" minorTickCount="0" showTickLabels="true" stylesheets="@filterStylesheet.css" />
                </children>
             </VBox>
             <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">

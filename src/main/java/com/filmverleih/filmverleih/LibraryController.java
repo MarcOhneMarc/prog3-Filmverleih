@@ -67,7 +67,6 @@ public class LibraryController {
     private double windowWidth;
     public Predicate<Movies> predicate;
     public Comparator<Movies> comparator;
-    private List<Movies> allMovies;
 
     /**
      * Initializes the library view.
@@ -91,59 +90,72 @@ public class LibraryController {
             }
         });
 
-        allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        List<Movies> allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        this.comparator = Comparator.comparing(Movies::getName);
         updateMovies(allMovies);
     }
 
-
     public void sortMovies() {
-        List<Movies> sortedList = allMovies.stream().sorted(comparator).toList();
-        gridPane.getChildren().clear();
-        updateMovies(sortedList);
-        filterMovies();
-        adjustColumnCount();
-    }
+        List<StackPane> stackPanes = new ArrayList<>();
 
-    /*
-    public void sortMovies() {
-        gridPane.getChildren().forEach(node -> {
-            if (node instanceof StackPane stackPane1) {
-                Movies movie1 = (Movies) stackPane1.getChildren().stream()
-                        .filter(child -> child instanceof ImageView)
-                        .map(child -> (ImageView) child)
-                        .map(ImageView::getUserData)
-                        .findFirst().orElse(null);
-
-                gridPane.getChildren().forEach(node2 -> {
-                    if (node2 instanceof StackPane stackPane2) {
-                        Movies movie2 = (Movies) stackPane2.getChildren().stream()
-                                .filter(child2 -> child2 instanceof ImageView)
-                                .map(child2 -> (ImageView) child2)
-                                .map(ImageView::getUserData)
-                                .findFirst().orElse(null);
-
-                        if (movie1 != null && movie2 != null) {
-                            int result = comparator.compare(movie1, movie2);
-
-                            if (result < 0) {
-                                int rowIndex1 = GridPane.getRowIndex(stackPane1);
-                                int colIndex1 = GridPane.getColumnIndex(stackPane1);
-
-                                int rowIndex2 = GridPane.getRowIndex(stackPane2);
-                                int colIndex2 = GridPane.getColumnIndex(stackPane2);
-
-                                GridPane.setRowIndex(stackPane1, rowIndex2);
-                                GridPane.setColumnIndex(stackPane1, colIndex2);
-
-                                GridPane.setRowIndex(stackPane2, rowIndex1);
-                                GridPane.setColumnIndex(stackPane2, colIndex1);
-                            }
-                        }
-                    }
-                });
+        // Fügen Sie alle StackPanes dem gridPane hinzu
+        for (Node node : gridPane.getChildren()) {
+            if (node instanceof StackPane) {
+                stackPanes.add((StackPane) node);
             }
+        }
+
+        // Sortieren Sie die StackPanes basierend auf dem Comparator
+        stackPanes.sort((stackPane1, stackPane2) -> {
+            Movies movie1 = stackPane1.getChildren().stream()
+                    .filter(child -> child instanceof ImageView || child instanceof Label)
+                    .map(child -> {
+                        if (child instanceof ImageView) {
+                            return (ImageView) child;
+                        } else if (child instanceof Label) {
+                            return (Label) child;
+                        }
+                        return null;
+                    })
+                    .map(Node::getUserData)
+                    .filter(userData -> userData instanceof Movies)
+                    .map(userData -> (Movies) userData)
+                    .findFirst().orElse(null);
+
+            Movies movie2 = stackPane2.getChildren().stream()
+                    .filter(child -> child instanceof ImageView || child instanceof Label)
+                    .map(child -> {
+                        if (child instanceof ImageView) {
+                            return (ImageView) child;
+                        } else if (child instanceof Label) {
+                            return (Label) child;
+                        }
+                        return null;
+                    })
+                    .map(Node::getUserData)
+                    .filter(userData -> userData instanceof Movies)
+                    .map(userData -> (Movies) userData)
+                    .findFirst().orElse(null);
+
+            if (movie1 != null && movie2 != null) {
+                return this.comparator.compare(movie1, movie2);
+            }
+            return 0; // Wenn movie1 oder movie2 null ist, gibt es keinen Unterschied in der Reihenfolge
         });
-    }*/
+
+        int numColumns = calculateNumColumns();
+        int index = 0;
+
+        for (StackPane stackPane : stackPanes) {
+            if (stackPane.isVisible() && stackPane.isManaged()) {
+                int row = index / numColumns;
+                int column = index % numColumns;
+                GridPane.setRowIndex(stackPane, row);
+                GridPane.setColumnIndex(stackPane, column);
+                index++;
+            }
+        }
+    }
 
     public void filterMovies() {
         gridPane.getChildren().forEach(node -> {
@@ -263,7 +275,7 @@ public class LibraryController {
 
     private int calculateNumColumns() {
         double gridWidth = gridPane.getWidth();
-        double imageWidth = 200+20; // Annahme: Breite eines Films beträgt 200
+        double imageWidth = 200+20;
         return Math.max(1, (int) (windowWidth / imageWidth));
     }
 
@@ -273,11 +285,8 @@ public class LibraryController {
      *
      */
     private void adjustColumnCount() {
-        int numColumns = calculateNumColumns(); // Anzahl der Spalten aus der Fensterbreite
+        int numColumns = calculateNumColumns();
 
-        int rowCount = (int) Math.ceil((double) gridPane.getChildren().size() / numColumns); // Anzahl der Zeilen
-
-        // Setzen der Anzahl der Spalten im GridPane
         gridPane.getColumnConstraints().clear();
         for (int i = 0; i < numColumns; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
@@ -285,7 +294,6 @@ public class LibraryController {
             gridPane.getColumnConstraints().add(columnConstraints);
         }
 
-        // Neu anordnen der sichtbaren Kinder im GridPane
         int childIndex = 0;
         for (Node child : gridPane.getChildren()) {
             if (child.isVisible() && child.isManaged()) {
@@ -296,6 +304,7 @@ public class LibraryController {
                 childIndex++;
             }
         }
+        sortMovies();
     }
 
     //uses connector to switch smoothly between controllers, without loosing track of runtime-instance

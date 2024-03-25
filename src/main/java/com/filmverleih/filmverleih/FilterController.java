@@ -5,10 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+/**
+ * Controller class for managing filters in the application.
+ */
 public class FilterController {
 
     private NWayControllerConnector<
@@ -22,6 +24,7 @@ public class FilterController {
             Integer,
             Integer,
             Integer> connector;
+
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
@@ -39,9 +42,11 @@ public class FilterController {
                     Integer> connector) {
         this.connector = connector;
         this.libraryController = connector.getLibraryController();
+        this.navbarController = connector.getNavbarController();
     }
 
     private LibraryController libraryController;
+    private NavbarController navbarController;
 
     @FXML
     private ComboBox<String> sortComboBox;
@@ -80,7 +85,9 @@ public class FilterController {
     public boolean isRental;
 
 
-
+    /**
+     * Initializes the FilterController.
+     */
     @FXML
     public void initialize() {
         isLibrary = true;
@@ -100,6 +107,9 @@ public class FilterController {
         });
     }
 
+    /**
+     * Generates a comparator to sort with in the library or rental Page
+     */
     private void sortListBy(String selectedOption) {
         Comparator<Movies> comparator = null;
 
@@ -149,6 +159,9 @@ public class FilterController {
         }
     }
 
+    /**
+     * Generates a predicate to filter with in the library or rental Page
+     */
     public void generateFilters() {
         String yearFilter = txf_year.getText();
         String genreFilter = txf_genre.getText();
@@ -164,7 +177,7 @@ public class FilterController {
 
         Predicate<Movies> predicate = movie -> true;
 
-        if (!searchBar.isEmpty()) {
+        if (navbarController.searchbar != null && !navbarController.searchbar.getText().isEmpty()) {
             predicate = predicate.and(movie ->
                     movie.getName().toLowerCase().contains(searchBar.toLowerCase()));
         }
@@ -229,7 +242,11 @@ public class FilterController {
         }
     }
 
+    /**
+     * Undos and Clears all Filter-Fields
+     */
     public void resetFilters() {
+        this.navbarController.searchbar.setText("");
         txf_year.setText("");
         txf_genre.setText("");
         txf_minLength.setText("");
@@ -253,7 +270,10 @@ public class FilterController {
         }
     }
 
-
+    /**
+     * Retrieves the outer pane of the filter interface.
+     * @return the outer pane (VBox)
+     */
     public VBox getOuterPane(){
         return vbx_FilterBackground;
     }
