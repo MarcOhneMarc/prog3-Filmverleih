@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
@@ -26,7 +27,11 @@ public class NavbarController {
         this.filterController = connector.getFilterController();
     }
 
-    /**
+    @FXML
+    private BorderPane bpn_navbarOuterBorderPane;
+
+  
+      /**
      * Initializes the controller after its root element has been completely processed.
      * Adds a listener to the search bar text field and updates the filter controller accordingly.
      */
@@ -111,4 +116,15 @@ public class NavbarController {
         searchbar.setVisible(false);
     }
 
+    public void disableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(true);
+    }
+
+    public void enableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(false);
+    }
+
+    public BorderPane getOuterPane() {
+        return bpn_navbarOuterBorderPane;
+    }
 }
