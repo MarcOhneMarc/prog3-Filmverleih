@@ -120,7 +120,7 @@
                   <Insets bottom="20.0" right="20.0" />
                </GridPane.margin>
             </StackPane>
-            <Label fx:id="lbl_feedbackMessageMovieScene" alignment="CENTER" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label fx:id="lbl_feedbackMessageMovieScene" alignment="CENTER" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </bottom>
