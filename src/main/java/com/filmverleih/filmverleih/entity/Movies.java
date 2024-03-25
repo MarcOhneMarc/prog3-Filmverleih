@@ -118,9 +118,7 @@ public class Movies {
         this.type = type;
     }
 
-    public String getCover() {
-        return cover;
-    }
+    public String getCover() { return cover; }
 
     public void setCover(String cover) {
         this.cover = cover;
@@ -142,9 +140,7 @@ public class Movies {
         this.directors = directors;
     }
 
-    public String getStudio() {
-        return studio;
-    }
+    public String getStudio() { return studio; }
 
     public void setStudio(String studio) {
         this.studio = studio;

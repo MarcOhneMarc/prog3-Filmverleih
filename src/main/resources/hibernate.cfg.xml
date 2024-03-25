@@ -12,6 +12,8 @@
 
         <!-- Mapping files or annotated classes -->
         <mapping class="com.filmverleih.filmverleih.entity.Movies"/>
+        <mapping class="com.filmverleih.filmverleih.entity.Rentals"/>
+        <mapping class="com.filmverleih.filmverleih.entity.Customers"/>
         <mapping class="com.filmverleih.filmverleih.entity.Users"/>
     </session-factory>
 </hibernate-configuration>
