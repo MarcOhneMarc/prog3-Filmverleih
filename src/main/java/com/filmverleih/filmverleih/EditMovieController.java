@@ -484,7 +484,7 @@ public class EditMovieController {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_SUCCESSFUL);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #518E21");
                 lbl_movieEditSaveFeedback.setVisible(true);
-                //connector.getLibraryController().updateMovieList(); TODO vor merge wieder einfügen
+                connector.getLibraryController().updateMovieList();
             } else {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
@@ -533,7 +533,7 @@ public class EditMovieController {
                 }
 
                 if (txf_movieEditRating.getText() != null) {
-                    if (!txf_movieEditRating.getText().matches("^\\d\\.\\d$")) {//changedRating.doubleValue() < MIN_RATING || changedRating.doubleValue() >= MAX_RATING
+                    if (!txf_movieEditRating.getText().matches("^\\d\\.\\d$")) {
                         lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
                         entriesAreValid = false;
                     } else {
@@ -561,7 +561,7 @@ public class EditMovieController {
                 }
 
                 if (changedActors != null) {
-                    if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$")) {//^(\w+( \w+)*(, \w+( \w+)*)*)+$
+                    if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$")) {
                         lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
                         entriesAreValid = false;
                     } else {
@@ -672,12 +672,12 @@ public class EditMovieController {
             movieController.disableEditAndCartButtons();
             resetStylingAndDisables();
             MainApplication.borderPane.setCenter(movieController.getOuterPane());
-            //connector.getLibraryController().updateMovieList(); TODO vor merge wieder einfügen
+            connector.getLibraryController().updateMovieList();
         } else {
             lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieEditDeleteFeedback.setVisible(true);
             btn_movieEditDeleteConfirm.setDisable(true);
-        } //TODO muss mal gucken eine updateMovieList methode im LibraryController wäre echt geil, um fehler zu verhindern dann kann man nach einem erfolgreichen delete in die einzel movie ansicht geworfen werden wo man den edit button dann deactivate
+        }
     }
 
     /**
