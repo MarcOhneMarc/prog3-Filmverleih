@@ -31,7 +31,9 @@ public class MainApplication extends Application {
     private FilterController filterController;
     private Parent cartRoot;
     private CartController cartController;
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    private Parent editMovieRoot;
+    private EditMovieController editMovieController;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
     public static BorderPane borderPane; // the main frame of the application
 
     /**
@@ -68,6 +70,9 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Cart.fxml");
             cartRoot = loader.load();
             cartController = loader.getController();
+            loader = Utility.loadFXML("EditMovie.fxml");
+            editMovieRoot = loader.load();
+            editMovieController = loader.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -85,7 +90,8 @@ public class MainApplication extends Application {
                           rentalController,
                           settingsController,
                           filterController,
-                          cartController);
+                          cartController,
+                          editMovieController);
         navbarController.setConnector(connector);
         libraryController.setConnector(connector);
         movieController.setConnector(connector);
@@ -93,6 +99,7 @@ public class MainApplication extends Application {
         settingsController.setConnector(connector);
         filterController.setConnector(connector);
         cartController.setConnector(connector);
+        editMovieController.setConnector(connector);
     }
 
     public MainApplication() throws IOException {

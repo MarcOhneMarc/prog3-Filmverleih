@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -17,12 +18,12 @@ public class NavbarController {
     private FilterController filterController;
 
     //Instantiate Controller-Connector for Navbar-Library-Connection
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
         this.connector = connector;
         this.filterController = connector.getFilterController();
     }
@@ -44,6 +45,10 @@ public class NavbarController {
         });
     }
 
+
+    @FXML
+    private BorderPane bpn_navbarOuterBorderPane;
+  
     /**
      * Handles the user's request to switch to the library view.
      * It loads the Library view into the center of the application frame and the Filter view into the right sidebar.
@@ -120,6 +125,26 @@ public class NavbarController {
         bpn_navbarOuterBorderPane.setDisable(true);
     }
 
+    public void enableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(false);
+    }
+
+    public BorderPane getOuterPane() {
+        return bpn_navbarOuterBorderPane;
+    }
+
+    /**
+     * Disables the navigation bar by setting its outer border pane to be disabled.
+     * This prevents user interaction with the navigation bar components.
+     */
+    public void disableNavBar() {
+        bpn_navbarOuterBorderPane.setDisable(true);
+    }
+
+    /**
+     * Enables the navigation bar by setting its outer border pane to be enabled.
+     * This allows user interaction with the navigation bar components.
+     */
     public void enableNavBar() {
         bpn_navbarOuterBorderPane.setDisable(false);
     }
