@@ -60,10 +60,18 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
     }
 
+    /**
+     * Disables the navigation bar by setting its outer border pane to be disabled.
+     * This prevents user interaction with the navigation bar components.
+     */
     public void disableNavBar() {
         bpn_navbarOuterBorderPane.setDisable(true);
     }
 
+    /**
+     * Enables the navigation bar by setting its outer border pane to be enabled.
+     * This allows user interaction with the navigation bar components.
+     */
     public void enableNavBar() {
         bpn_navbarOuterBorderPane.setDisable(false);
     }
