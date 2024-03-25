@@ -145,7 +145,8 @@ public class CartController {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
 
-        //lbl_errorDuplicateRentalMessage.setVisible(false); //TODO find a better place for this call
+        //TODO find a better place for the following call
+        lbl_errorDuplicateRentalMessage.setVisible(false);
         updateCart();
     }
 
@@ -255,8 +256,6 @@ public class CartController {
         }
     }
 
-
-
     /**
      * This method is called when clicking the order button
      * and then saves the order from the cart in the rentals table
@@ -293,6 +292,11 @@ public class CartController {
         updateCart();
     }
 
+    /**
+     * This method sets a label if a certain movie could not be rented because
+     * the movie is already rented by the customer (duplicate key value)
+     * @param movie the movie that could not be rented
+     */
     public void setDuplicateRentalLabel(Movies movie) {
         System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
@@ -322,7 +326,6 @@ public class CartController {
      */
     @FXML
     private void confirmNewCustomerRegistration() {
-        //TODO register a new Customer to DB
         registerNewCustomer();
         connector.getNavbarController().enableNavBar();
         acp_newCustomerPopup.setDisable(true);
@@ -346,10 +349,10 @@ public class CartController {
     /**
      * This method gets the input from the new customer registration
      * TextFields needed for creating a new customer in the db
+     * TODO check if getLastAddedCustomerID is a valid way to get it
      */
     private void registerNewCustomer() {
-        Utility.addCustomerToDB(
-                //Integer.parseInt(txf_PopUpCustomerID.getText().toString()),
+        boolean addSuccessful = Utility.addCustomerToDB(
                 txf_PopUpCustomerSurName.getText(),
                 txf_PopUpCustomerLastName.getText(),
                 txf_PopUpCustomerStreet.getText(),
@@ -358,12 +361,39 @@ public class CartController {
                 txf_PopUpCustomerPhone.getText(),
                 txf_PopUpCustomerEMail.getText()
         );
-        //set the generated costumerID to the txf_CartID field allowing to order directly
-        //txf_CartID.setText();
+
+        if (addSuccessful) {
+            txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+        }
     }
 
+    /**
+     * This method checks whether all TextFields are filled in order to
+     * disable or enable the new customer registration confirm button
+     */
+    @FXML
+    private void checkWhetherToDisableNewCustomerButton() {
+        boolean anyEmpty = txf_PopUpCustomerSurName.getText().isEmpty() ||
+                txf_PopUpCustomerLastName.getText().isEmpty() ||
+                txf_PopUpCustomerStreet.getText().isEmpty() ||
+                txf_PopUpCustomerPostalCode.getText().isEmpty() ||
+                txf_PopUpCustomerCity.getText().isEmpty() ||
+                txf_PopUpCustomerPhone.getText().isEmpty() ||
+                txf_PopUpCustomerEMail.getText().isEmpty();
+
+        btn_newCustomerPopupConfirm.setDisable(anyEmpty);
+    }
+
+    /**
+     * This method is linked to the ID input TextField and reacts if
+     * there is typing in this field.
+     * It then checks whether the cart is empty and the id input filed
+     * in order to disable or enable the order button and showing error
+     * message labels.
+     */
     @FXML
     public void checkIDEmpty() {
+        /* //Does not work
         if (txf_CartID.getText().isBlank()) {
             btn_OrderCart.setDisable(true);
             //lbl_errorNoID.setVisible(true);
@@ -372,8 +402,29 @@ public class CartController {
             btn_OrderCart.setDisable(false); //button enabled
             //lbl_errorEmptyCart.setVisible(true);
         }
+        */
+
+        //Does work (apparently)
+        if (txf_CartID.getText().isBlank()) {
+            btn_OrderCart.setDisable(true);
+            lbl_errorNoID.setVisible(true);
+        } else {
+            lbl_errorNoID.setVisible(false);
+
+            if (!fullMovieList.isEmpty()) {
+                btn_OrderCart.setDisable(false);
+                lbl_errorEmptyCart.setVisible(false);
+            } else {
+                btn_OrderCart.setDisable(true);
+                lbl_errorEmptyCart.setVisible(true);
+            }
+        }
     }
 
+    /**
+     * This method updates the card by setting the order information labels
+     * and checking whether the ID is empty
+     */
     public void updateCart() {
         setOrderInformationLabels();
         checkIDEmpty();
@@ -383,7 +434,6 @@ public class CartController {
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public StackPane getOuterPane() {
-        //setOrderInformationLabels();
         updateCart();
         return stp_cartOuterStackPane;
     }

@@ -4,11 +4,11 @@
     -fx-font-size: 22;
 }
 
-#btn_newCustomerPopupCancel{
+#btn_newCustomerPopupConfirm{
     -fx-background-color: #518E21;
 }
 
-#btn_newCustomerPopupConfirm{
+#btn_newCustomerPopupCancel{
     -fx-background-color: #FF4040;
 }
 
