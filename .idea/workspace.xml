@@ -7,6 +7,7 @@
     <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_02_2024_22_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_02_2024_22_57__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" afterDir="false" />
@@ -55,7 +56,10 @@
     &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;d94254d5-1e14-4bd8-b185-5d6cc26f59e7&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;tick-35&quot;,
+
+    &quot;git-widget-placeholder&quot;: &quot;tick-22&quot;,
+
+
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,

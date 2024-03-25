@@ -8,7 +8,7 @@
 
 <TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" stylesheets="@stylesheet.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
     <tabs>
-        <Tab id="tab" fx:id="tbs_settingsTab" styleClass="tbs_settingsTab" text="Bibliothek">
+        <Tab id="tabbb" fx:id="tbs_settingsTab" styleClass="tbs_settingsTab" text="Bibliothek">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="919.0" prefWidth="1920.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
                     <children>
