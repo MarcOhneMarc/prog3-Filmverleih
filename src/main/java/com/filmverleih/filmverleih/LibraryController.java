@@ -122,6 +122,7 @@ public class LibraryController {
         int numColumns = calculateNumColumns();
         int index = 0;
 
+        /* Print all Movies Sorted
         for (StackPane stackPane : stackPanes) {
             for (Node child : stackPane.getChildren()) {
                 if (child instanceof ImageView || child instanceof Label) {
@@ -132,7 +133,7 @@ public class LibraryController {
                     }
                 }
             }
-        }
+        }*/
 
         for (StackPane stackPane : stackPanes) {
             if (stackPane.isVisible() && stackPane.isManaged()) {
