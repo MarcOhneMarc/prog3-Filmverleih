@@ -144,7 +144,9 @@ public class CartController {
     public void removeMovieCard(HBox movieCard, Movies movie) {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
-        lbl_errorDuplicateRentalMessage.setVisible(false); //TODO find a better place for this call
+
+        //lbl_errorDuplicateRentalMessage.setVisible(false); //TODO find a better place for this call
+        updateCart();
     }
 
 
@@ -158,7 +160,6 @@ public class CartController {
         for (Movies movie : fullMovieList) {
             fullMovieListObservable.add(movie);
         }
-
 
         tbv_CartItemsTable.setItems(fullMovieListObservable);
 
@@ -204,7 +205,6 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
-
         updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
         lbl_ReturnDateValue.setText(calculateReturnDate().toString());
@@ -251,6 +251,7 @@ public class CartController {
             tbv_CartItemsTable.getItems().clear();
             fillTableView();
             updateTotalPrice();
+            updateCart();
         }
     }
 
@@ -271,7 +272,6 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
-       setNoIDMessage();
 
        if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
@@ -280,48 +280,25 @@ public class CartController {
                        Integer.parseInt(txf_CartID.getText()),
                        calculateCurrentDate().toString(),
                        calculateReturnDate().toString());
-
                if (!addSuccessful) {
-                   System.out.println("The movie " + fullMovieList.get(i).getName() + " has already been rented to costumer");
-                   lbl_errorDuplicateRentalMessage.setText(fullMovieList.get(i).getName() + " befindet sich bereits in Leihgabe an den Kunden!");
-                   lbl_errorDuplicateRentalMessage.setWrapText(true);
-                   lbl_errorDuplicateRentalMessage.setVisible(true);
+                    setDuplicateRentalLabel(fullMovieList.get(i));
                } else {
                    vbx_CartMovieCardsVBox.getChildren().remove(i);
                    removeMovieFromCart(fullMovieList.get(i));
                }
-
            }
        } else {
            enablePopUpDisableCart();
        };
+        updateCart();
     }
 
-    @FXML
-    private void setNoIDMessage() {
-        lbl_errorNoID.setText("Bitte geben Sie erst eine ID ein!");
-        lbl_errorNoID.setWrapText(true);
-        if (txf_CartID.getText().isBlank()) {
-            lbl_errorNoID.setVisible(true);
-            btn_OrderCart.setDisable(true);
-        } else {
-            lbl_errorNoID.setVisible(false);
-            btn_OrderCart.setDisable(false);
-        }
+    public void setDuplicateRentalLabel(Movies movie) {
+        System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
+        lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
+        lbl_errorDuplicateRentalMessage.setWrapText(true);
+        lbl_errorDuplicateRentalMessage.setVisible(true);
     }
-
-    /*
-    private void updateEmptyCartLabel() {
-        if (fullMovieList.isEmpty()) {
-            lbl_errorEmptyCart.setVisible(true);
-            btn_OrderCart.setDisable(true);
-        } else {
-            lbl_errorEmptyCart.setVisible(false);
-            btn_OrderCart.setDisable(false);
-        }
-    }
-    */
-
 
 
     /**
@@ -385,11 +362,29 @@ public class CartController {
         //txf_CartID.setText();
     }
 
+    @FXML
+    public void checkIDEmpty() {
+        if (txf_CartID.getText().isBlank()) {
+            btn_OrderCart.setDisable(true);
+            //lbl_errorNoID.setVisible(true);
+
+        } else if (!fullMovieList.isEmpty()) {
+            btn_OrderCart.setDisable(false); //button enabled
+            //lbl_errorEmptyCart.setVisible(true);
+        }
+    }
+
+    public void updateCart() {
+        setOrderInformationLabels();
+        checkIDEmpty();
+    }
+
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public StackPane getOuterPane() {
-        setOrderInformationLabels();
+        //setOrderInformationLabels();
+        updateCart();
         return stp_cartOuterStackPane;
     }
 }
