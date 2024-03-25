@@ -330,7 +330,7 @@
                      </GridPane.margin>
                   </Label>
                   <Label fx:id="lbl_movieEditSaveFeedback" alignment="TOP_LEFT" maxWidth="650.0" text="Label" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="15" GridPane.rowSpan="2" GridPane.valignment="TOP" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7">
                      <children>
                         <TextArea fx:id="txa_movieEditComment" maxWidth="460.0" prefHeight="51.0" prefWidth="410.0" promptText="Comment" />
                         <ImageView fx:id="igv_movieEditCommentUndo" fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -348,7 +348,7 @@
          <children>
             <Label fx:id="lbl_movieEditDeleteConfirmation" layoutX="57.0" layoutY="49.0" text="Möchten sie den Film wirklich löschen?" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
             <Button fx:id="btn_movieEditDeleteConfirm" layoutX="119.0" layoutY="157.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="50.0" prefWidth="200.0" styleClass="btn_class_movieEditButtons" text="Bestätigen" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="150.0" />
-            <Button fx:id="btn_movieEditDeleteCancel" layoutX="543.0" layoutY="183.0" mnemonicParsing="false" onAction="#cancelMoveDeletion" prefHeight="50.0" prefWidth="200.0" styleClass="btn_class_movieEditButtons" text="Abbrechen" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="150.0" />
+            <Button fx:id="btn_movieEditDeleteCancel" layoutX="543.0" layoutY="183.0" mnemonicParsing="false" onAction="#cancelMovieDeletion" prefHeight="50.0" prefWidth="200.0" styleClass="btn_class_movieEditButtons" text="Abbrechen" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="150.0" />
             <Label fx:id="lbl_movieEditDeleteFeedback" alignment="CENTER" maxWidth="403.0" text="label" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="198.0" />
          </children>
       </AnchorPane>

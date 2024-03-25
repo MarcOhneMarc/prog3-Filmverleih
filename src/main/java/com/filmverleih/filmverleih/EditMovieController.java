@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
@@ -59,9 +58,6 @@ public class EditMovieController {
     private Label lbl_movieEditYearTitle;
     @FXML
     private TextField txf_movieEditYear;
-
-    @FXML
-    private Label lbl_movieEditLengthTitle;
     @FXML
     private TextField txf_movieEditLength;
     @FXML
@@ -94,8 +90,6 @@ public class EditMovieController {
     private TextField txf_movieEditDirector3;
     @FXML
     private TextField txf_movieEditCount;
-    @FXML
-    private Label lbl_movieEditCountTitle;
     @FXML
     private TextField txf_movieEditStudio;
     @FXML
@@ -217,6 +211,10 @@ public class EditMovieController {
         checkBoxAddEventHandler();
     }
 
+    /**
+     * Splits the current movie's genres and directors into arrays.
+     * If the genres or directors are not null, they are split by ", " and stored in corresponding arrays.
+     */
     private void splitGenreDirectorsToArray() {
         if(currentMovieGenres != null) {
             this.genreArray = currentMovieGenres.split(", ");
@@ -226,6 +224,11 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Retrieves movie data from the current movie object and assigns it to corresponding variables.
+     * This method populates various attributes with data such as movie ID, name, year, duration, FSK rating,
+     * rating, genres, directors, count, studio, actors, cover link, comment, and type.
+     */
     private void movieDataGetter() {
         this.currentMovieId = movie.getMovieid();
         this.currentMovieName = movie.getName();
@@ -243,6 +246,11 @@ public class EditMovieController {
         this.currentMovieType = movie.getType();
     }
 
+    /**
+     * Inserts movie data into corresponding UI fields for editing.
+     * This method sets the text of various text fields and checkboxes with the current movie data.
+     * It also handles cases where there might be multiple genres or directors.
+     */
     private void insertMovieData() {
         txf_movieEditID.setText(valueOf(currentMovieId));
         txf_movieEditName.setText(currentMovieName);
@@ -253,42 +261,52 @@ public class EditMovieController {
 
         if(currentMovieGenres != null) {
             txf_movieEditGenre1.setText(genreArray[0]);
-        } //txf_movieEditGenre1.setText();
+        }
         if(genreArray.length > 1) {
             txf_movieEditGenre2.setText(genreArray[1]);
-        } //else {txf_movieEditGenre2.setText(null);}
+        }
         if (genreArray.length > 2) {
             txf_movieEditGenre3.setText(genreArray[2]);
-        } //else {txf_movieEditGenre3.setText(null);}
+        }
 
         if(currentMovieDirectors != null) {
             txf_movieEditDirector1.setText(directorsArray[0]);
         }
         if(directorsArray.length > 1) {
             txf_movieEditDirector2.setText(directorsArray[1]);
-        } //else {txf_movieEditDirector2.setText(null);}
+        }
         if (directorsArray.length > 2) {
             txf_movieEditDirector3.setText(directorsArray[2]);
-        } //else {txf_movieEditDirector3.setText(null);}
+        }
 
         txf_movieEditCount.setText(valueOf(currentMovieCount));
         txf_movieEditStudio.setText(currentMovieStudio);
         txf_movieEditActors.setText(currentMovieActors);
-        txf_movieEditLinkToCover.setText(currentLinkToCover);               //TODO akzeptierende Regx für URL
+        txf_movieEditLinkToCover.setText(currentLinkToCover);
         txa_movieEditComment.setText(currentMovieComment);
         txa_movieEditComment.setWrapText(true);
         if(currentMovieType.equals("DVD")) {cbx_movieEditSelDVD.setSelected(true);}
         if(currentMovieType.equals("BR")) {cbx_movieEditSelBluRay.setSelected(true);}
     }
 
+    /**
+     * Adds constraints to ensure that only numbers are entered in certain text fields.
+     * This method applies specific constraints to the UI text fields for editing movie details,
+     * allowing only numeric input for fields such as year, length, FSK rating, rating, and count.
+     */
     private void addOnlyNumbersConstraint() {
-        TextFieldFunctions.addYearChecker(txf_movieEditYear);                 //TODO ^\d{4}$ als akzeptierende Regx
+        TextFieldFunctions.addYearChecker(txf_movieEditYear);
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditLength);
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditFSK);
-        TextFieldFunctions.addRatingChecker(txf_movieEditRating);               //TODO ^-?\d\.\d$ akzeptierende Regx
+        TextFieldFunctions.addRatingChecker(txf_movieEditRating);
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditCount);
     }
 
+    /**
+     * Fills text fields with current movie data and adds corresponding undo functionality.
+     * This method populates text fields with the current movie's data and sets up undo functionality
+     * for each text field, allowing users to revert changes.
+     */
     private void txfListFiller() {
         addToTxfStringList(txf_movieEditName, currentMovieName, igv_movieEditNameUndo);
         addToTxfStringList(txf_movieEditYear, valueOf(currentMovieYear), igv_movieEditYearUndo);
@@ -332,6 +350,15 @@ public class EditMovieController {
         addToTxfStringList(txf_movieEditLinkToCover, currentLinkToCover, igv_movieEditLinkToCoverUndo);
     }
 
+    /**
+     * Adds a text field, its associated data, and its undo button to the list for undo functionality.
+     * This method creates a temporary list containing the provided text field, data, and undo button,
+     * and then adds this list to the list used for managing undo functionality.
+     *
+     * @param textField The text field to be added
+     * @param data The unedited movie data
+     * @param undoButton The undo button associated with the text field
+     */
     private void addToTxfStringList(TextField textField, String data, ImageView undoButton) {
         ArrayList<Object> tempList = new ArrayList<>();
         tempList.add(textField);
@@ -340,6 +367,12 @@ public class EditMovieController {
         txfStringUndoList.add(tempList);
     }
 
+    /**
+     * Initializes listeners for text fields in the undo list to manage changes.
+     * This method sets up listeners for each text field in the undo list. When the text in a text field changes,
+     * the listener compares the new value with the original data associated with the text field. If there's a change,
+     * the text field's style is updated to indicate the modification.
+     */
     private void txfListenerInitializer() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
             TextField tempTextField = (TextField) tempRow.getFirst();
@@ -359,6 +392,12 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Initializes a listener for the comment text area to manage changes.
+     * This method sets up a listener for the comment text area. When the text in the text area changes,
+     * the listener compares the new value with the original comment associated with the movie.
+     * If there's a change, the text area's style is updated to indicate the modification.
+     */
     private void txaListenerInitializer() {
         txa_movieEditComment.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(currentMovieComment)) {
@@ -369,6 +408,12 @@ public class EditMovieController {
         });
     }
 
+    /**
+     * Adds event handlers to undo buttons for reverting changes.
+     * This method sets up event handlers for each undo button associated with text fields in the undo list.
+     * When an undo button is clicked, it restores the original data associated with the respective text field.
+     * Additionally, an event handler is added for the comment undo button to revert changes made to the comment text area.
+     */
     private void undoButtonAddEventHandler() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
             TextField tempTextField = (TextField) tempRow.getFirst();
@@ -379,6 +424,12 @@ public class EditMovieController {
         igv_movieEditCommentUndo.setOnMouseClicked(event -> txa_movieEditComment.setText(currentMovieComment));
     }
 
+    /**
+     * Adds event handlers to checkbox for managing selection changes.
+     * This method sets up event handlers for the DVD and Blu-ray checkboxes in the edit movie view.
+     * When a checkbox is clicked, it ensures that only one checkbox can be selected at a time and
+     * triggers a method to check if checkbox selections have changed.
+     */
     private void checkBoxAddEventHandler() {
         cbx_movieEditSelDVD.setOnAction(event -> {
             cbx_movieEditSelBluRay.setSelected(!cbx_movieEditSelDVD.isSelected());
@@ -390,6 +441,11 @@ public class EditMovieController {
         });
     }
 
+    /**
+     * Checks if checkbox selections have changed and updates styles accordingly.
+     * This method checks if the selection of DVD or Blu-ray checkboxes has changed compared to the current movie type.
+     * Depending on the changes, it adjusts the text color of the checkboxes to indicate the modification.
+     */
     private void checkIfCheckBoxesChanged() {
         if(currentMovieType.equals("DVD") && !cbx_movieEditSelDVD.isSelected()) {
             cbx_movieEditSelDVD.setStyle("-fx-text-fill: #FF4040");
@@ -403,6 +459,11 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Confirms the editing of the movie with updated information.
+     * This method validates the entries, updates the movie information in the database if entries are valid,
+     * and provides feedback on the success or failure of the operation.
+     */
     public void confirmMovieEdit() {
         if(validEntryChecker()) {
             boolean dbUpdateSuccessful = Utility.UpdateMovieInDB(currentMovieId,
@@ -423,6 +484,7 @@ public class EditMovieController {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_SUCCESSFUL);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #518E21");
                 lbl_movieEditSaveFeedback.setVisible(true);
+                //connector.getLibraryController().updateMovieList(); TODO vor merge wieder einfügen
             } else {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
@@ -435,6 +497,13 @@ public class EditMovieController {
         }
     }
 
+    /**
+     * Checks if the entered data is valid for updating the movie.
+     * This method validates the entered data for various fields including name, year, FSK rating, rating, genres,
+     * directors, actors, and link to cover. It updates the styles of corresponding labels to indicate invalid entries.
+     *
+     * @return true if all entries are valid, false otherwise
+     */
     private boolean validEntryChecker() {
         boolean entriesAreValid = true;
         saveInfosAsNeededDataTypes();
@@ -483,11 +552,13 @@ public class EditMovieController {
                 }
             }
 
-            if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)+$")) {//^(\w+( \w+)*(, \w+( \w+)*)*)+$
-                lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            } else {
-                lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
+            if (changedActors != null) {
+                if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$")) {//^(\w+( \w+)*(, \w+( \w+)*)*)+$
+                    lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
+                } else {
+                    lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
+                }
             }
 
             if (changedDirectors != null) {
@@ -519,6 +590,11 @@ public class EditMovieController {
         return entriesAreValid;
     }
 
+    /**
+     * Converts and saves information from text fields to the appropriate data types.
+     * This method retrieves data from text fields and converts them to the required data types.
+     * It updates corresponding fields to hold the converted data for further processing.
+     */
     private void saveInfosAsNeededDataTypes() {
         this.changedName = txf_movieEditName.getText();
         this.changedYear = Integer.parseInt(txf_movieEditYear.getText());
@@ -549,36 +625,89 @@ public class EditMovieController {
         } else {this.changedType = "BR";}
     }
 
+    /**
+     * Cancels the movie editing operation and navigates back to the movie details page.
+     * This method retrieves the movie controller, sets the center of the main application border pane to the movie details page,
+     * and fills the page with the details of the current movie.
+     */
     public void cancelMovieEdit() {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(Utility.getMovieById(movie.getMovieid()));
     }
 
-    public void deleteMovie() {/*
+    /**
+     * Deletes the current movie from the database.
+     * This method attempts to delete the current movie from the database.
+     * If the deletion is successful, it provides feedback, disables edit and cart buttons,
+     * resets styling and disables for the movie details, and navigates back to the movie details page.
+     * If the deletion fails, it displays an error message and disables the delete confirmation button.
+     */
+    public void deleteMovie() {
         Boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
         if (movieIsDeleted) {
-            lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_SUCESSFULL);
-            lbl_movieEditDeleteFeedback.setVisible(true);
-            btn_movieEditDeleteConfirm.setDisable(true);
-            this.movie = null;
+            MovieController movieController = connector.getMovieController();
+            movieController.feedbackMessage(MOVIE_DELETE_SUCCESSFUL, "-fx-text-fill: #FF4040");
+            movieController.disableEditAndCartButtons();
+            resetStylingAndDisables();
+            MainApplication.borderPane.setCenter(movieController.getOuterPane());
+            //connector.getLibraryController().updateMovieList(); TODO vor merge wieder einfügen
         } else {
             lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieEditDeleteFeedback.setVisible(true);
             btn_movieEditDeleteConfirm.setDisable(true);
-        } TODO muss mal gucken eine updateMovieList methode im LibraryController wäre echt geil, um fehler zu verhindern dann kann man nach einem erfolgreichen delete in die einzel movie ansicht geworfen werden wo man den edit button dann deactivate
-    */}
+        } //TODO muss mal gucken eine updateMovieList methode im LibraryController wäre echt geil, um fehler zu verhindern dann kann man nach einem erfolgreichen delete in die einzel movie ansicht geworfen werden wo man den edit button dann deactivate
+    }
 
+    /**
+     * Resets styling and disables for movie details after editing.
+     * This method resets the text field styles to default, sets label styles to default,
+     * hides the delete feedback label, enables the delete confirmation button,
+     * enables edit nodes, and disables delete confirmation.
+     */
+    private void resetStylingAndDisables() {
+        for(ArrayList<Object> tempRow: txfStringUndoList) {
+            TextField tempTxf = (TextField) tempRow.getFirst();
+            tempTxf.setStyle("-fx-text-fill: #FFF");
+        }
+        lbl_movieEditNameTitle.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditYearTitle.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditFskTitle.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditGenre2Title.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditDirector1Title.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditDirector2Title.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
+        lbl_movieEditDeleteFeedback.setVisible(false);
+        btn_movieEditDeleteConfirm.setDisable(false);
+        enableEditNodes();
+        disableDeleteConfirmation();
+    }
+
+    /**
+     * Opens the delete confirmation dialog.
+     * This method disables the nodes related to editing and enables the delete confirmation.
+     */
     public void openDeleteConfirmation() {
         disableEditNodes();
         enableDeleteConfirmation();
     }
 
-    public void cancelMoveDeletion() {
+    /**
+     * Cancels the movie deletion operation.
+     * This method enables the nodes related to editing and disables the delete confirmation.
+     */
+    public void cancelMovieDeletion() {
         enableEditNodes();
         disableDeleteConfirmation();
     }
 
+    /**
+     * Enables the nodes for editing.
+     * This method sets the opacity of undo buttons to 100, enables the background of the edit movie pane,
+     * and enables the navigation bar.
+     */
     private void enableEditNodes() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
@@ -588,6 +717,11 @@ public class EditMovieController {
         connector.getNavbarController().enableNavBar();
     }
 
+    /**
+     * Disables the nodes for editing.
+     * This method sets the opacity of undo buttons to 0.3, disables the background of the edit movie pane,
+     * and disables the navigation bar.
+     */
     private void disableEditNodes() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
@@ -597,11 +731,19 @@ public class EditMovieController {
         connector.getNavbarController().disableNavBar();
     }
 
+    /**
+     * Enables the delete confirmation.
+     * This method enables the delete confirmation pane and makes it visible.
+     */
     private void enableDeleteConfirmation() {
         acp_movieEditDeleteConfirmation.setDisable(false);
         acp_movieEditDeleteConfirmation.setVisible(true);
     }
 
+    /**
+     * Disables the delete confirmation.
+     * This method disables the delete confirmation pane and makes it invisible.
+     */
     private void disableDeleteConfirmation() {
         acp_movieEditDeleteConfirmation.setDisable(true);
         acp_movieEditDeleteConfirmation.setVisible(false);

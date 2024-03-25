@@ -74,13 +74,14 @@
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="175.0" valignment="BOTTOM" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="igv_MovieEdit" fitHeight="75.0" fitWidth="75.0" onMouseClicked="#changeToEdit" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="igv_editMovieMovieScene" fitHeight="75.0" fitWidth="75.0" onMouseClicked="#changeToEdit" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@schaltflache-bearbeiten.png" />
                </image>
@@ -88,7 +89,7 @@
                   <Insets bottom="20.0" left="20.0" />
                </GridPane.margin>
             </ImageView>
-            <StackPane fx:id="stp_addToCartInfoAndButton" alignment="BOTTOM_RIGHT" maxHeight="150.0" maxWidth="300.0" prefHeight="150.0" prefWidth="300.0" GridPane.columnIndex="1">
+            <StackPane fx:id="stp_addToCartInfoAndButton" alignment="BOTTOM_RIGHT" maxHeight="150.0" maxWidth="300.0" prefHeight="150.0" prefWidth="300.0" GridPane.columnIndex="2">
                <children>
                   <GridPane alignment="TOP_CENTER" maxHeight="100.0" maxWidth="280.0" StackPane.alignment="TOP_CENTER">
                     <columnConstraints>
@@ -119,6 +120,7 @@
                   <Insets bottom="20.0" right="20.0" />
                </GridPane.margin>
             </StackPane>
+            <Label fx:id="lbl_feedbackMessageMovieScene" alignment="CENTER" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </bottom>

@@ -112,6 +112,24 @@ public class Utility {
         return true;
     }
 
+    /**
+     * Utility method to update a movie record in the database.
+     * @param movieid The ID of the movie to be updated.
+     * @param name The new name of the movie.
+     * @param year The new year of the movie.
+     * @param length The new length of the movie.
+     * @param fsk The new FSK rating of the movie.
+     * @param rating The new rating of the movie.
+     * @param genres The new genres of the movie.
+     * @param directors The new directors of the movie.
+     * @param count The new count of the movie.
+     * @param studio The new studio of the movie.
+     * @param actors The new actors of the movie.
+     * @param cover The new cover of the movie.
+     * @param comment The new comment of the movie.
+     * @param type The new type of the movie.
+     * @return True if the update was successful, false otherwise.
+     */
     public static Boolean UpdateMovieInDB(int movieid,
                                     String name,
                                     int year,
@@ -178,6 +196,11 @@ public class Utility {
         return true;
     }
 
+    /**
+     * Utility method to retrieve a movie from the database by its ID.
+     * @param movieId The ID of the movie to retrieve.
+     * @return The movie object corresponding to the given ID, or null if no such movie is found.
+     */
     public static Movies getMovieById(int movieId) {
         Movies returnMovie = null;
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
