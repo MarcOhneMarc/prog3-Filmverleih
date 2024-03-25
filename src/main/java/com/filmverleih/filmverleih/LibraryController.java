@@ -95,6 +95,10 @@ public class LibraryController {
         updateMovies(allMovies);
     }
 
+    /**
+     * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
+     * The sorting is based on a comparator associated with the Movies objects.
+     */
     public void sortMovies() {
         List<StackPane> stackPanes = new ArrayList<>();
 
@@ -105,37 +109,9 @@ public class LibraryController {
             }
         }
 
-        // Sortieren Sie die StackPanes basierend auf dem Comparator
         stackPanes.sort((stackPane1, stackPane2) -> {
-            Movies movie1 = stackPane1.getChildren().stream()
-                    .filter(child -> child instanceof ImageView || child instanceof Label)
-                    .map(child -> {
-                        if (child instanceof ImageView) {
-                            return (ImageView) child;
-                        } else if (child instanceof Label) {
-                            return (Label) child;
-                        }
-                        return null;
-                    })
-                    .map(Node::getUserData)
-                    .filter(userData -> userData instanceof Movies)
-                    .map(userData -> (Movies) userData)
-                    .findFirst().orElse(null);
-
-            Movies movie2 = stackPane2.getChildren().stream()
-                    .filter(child -> child instanceof ImageView || child instanceof Label)
-                    .map(child -> {
-                        if (child instanceof ImageView) {
-                            return (ImageView) child;
-                        } else if (child instanceof Label) {
-                            return (Label) child;
-                        }
-                        return null;
-                    })
-                    .map(Node::getUserData)
-                    .filter(userData -> userData instanceof Movies)
-                    .map(userData -> (Movies) userData)
-                    .findFirst().orElse(null);
+            Movies movie1 = getMovieFromStackPane(stackPane1);
+            Movies movie2 = getMovieFromStackPane(stackPane2);
 
             if (movie1 != null && movie2 != null) {
                 return this.comparator.compare(movie1, movie2);
@@ -145,6 +121,18 @@ public class LibraryController {
 
         int numColumns = calculateNumColumns();
         int index = 0;
+
+        for (StackPane stackPane : stackPanes) {
+            for (Node child : stackPane.getChildren()) {
+                if (child instanceof ImageView || child instanceof Label) {
+                    if (child.getUserData() instanceof Movies) {
+                        Movies movie = (Movies) child.getUserData();
+                        System.out.println(movie.getName()); // Assuming Movies class has appropriate toString() method
+                        break;
+                    }
+                }
+            }
+        }
 
         for (StackPane stackPane : stackPanes) {
             if (stackPane.isVisible() && stackPane.isManaged()) {
@@ -157,6 +145,28 @@ public class LibraryController {
         }
     }
 
+    /**
+     * Retrieves the Movies object associated with the provided StackPane.
+     *
+     * @param stackPane The StackPane whose associated Movies object is to be retrieved.
+     * @return The Movies object associated with the StackPane, or null if no such object is found.
+     */
+    private Movies getMovieFromStackPane(StackPane stackPane) {
+        for (Node child : stackPane.getChildren()) {
+            if (child instanceof ImageView || child instanceof Label) {
+                if (child.getUserData() instanceof Movies) {
+                    return (Movies) child.getUserData();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Filters the movie StackPane objects within the GridPane based on the provided predicate.
+     * Sets the visibility and manageability of each StackPane accordingly.
+     * Adjusts the column count after filtering.
+     */
     public void filterMovies() {
         gridPane.getChildren().forEach(node -> {
             if (node instanceof StackPane stackPane) {
@@ -172,6 +182,13 @@ public class LibraryController {
         adjustColumnCount();
     }
 
+    /**
+     * Updates the display of movies within the GridPane based on the provided list of movies.
+     * Each movie is represented by a StackPane containing either an ImageView with the movie cover image
+     * or a Label with the movie name if no cover image is available.
+     *
+     * @param movieList The list of Movies objects to be displayed or updated.
+     */
     public void updateMovies(List<Movies> movieList) {
         for (Movies movie: movieList) {
             String imgUrl = movie.getCover();
@@ -273,6 +290,12 @@ public class LibraryController {
         return stackPaneViewAddToCart;
     }
 
+    /**
+     * Calculates the number of columns that can fit within the GridPane based on its width
+     * and the width of the images to be displayed.
+     *
+     * @return The number of columns that can fit within the GridPane.
+     */
     private int calculateNumColumns() {
         double gridWidth = gridPane.getWidth();
         double imageWidth = 200+20;
@@ -307,7 +330,12 @@ public class LibraryController {
         sortMovies();
     }
 
-    //uses connector to switch smoothly between controllers, without loosing track of runtime-instance
+    /**
+     * Navigates to the details page of the specified movie.
+     *
+     * @param movie The movie to navigate to.
+     * @throws IOException If an I/O error occurs while navigating.
+     */
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());

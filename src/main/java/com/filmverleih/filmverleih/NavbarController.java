@@ -25,6 +25,20 @@ public class NavbarController {
         this.connector = connector;
         this.filterController = connector.getFilterController();
     }
+
+    /**
+     * Initializes the controller after its root element has been completely processed.
+     * Adds a listener to the search bar text field and updates the filter controller accordingly.
+     */
+    @FXML
+    public void initialize() {
+        // Add listener to text field and combo box for filtering
+        searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterController.searchBar = newValue;
+            filterController.generateFilters();
+        });
+    }
+
     /**
      * Handles the user's request to switch to the library view.
      * It loads the Library view into the center of the application frame and the Filter view into the right sidebar.
@@ -61,6 +75,11 @@ public class NavbarController {
         //MainApplication.borderPane.setRight(null);
     }
 
+    /**
+     * Switches the main view of the application to the settings view.
+     *
+     * @throws IOException If an I/O error occurs while switching the view.
+     */
     @FXML
     public void changeToSettings() throws IOException {
         SettingsController settingsController = connector.getSettingsController();
@@ -70,6 +89,11 @@ public class NavbarController {
         hideSearchbar();
     }
 
+    /**
+     * Switches the main view of the application to the cart view.
+     *
+     * @throws IOException If an I/O error occurs while switching the view.
+     */
     @FXML
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
@@ -77,15 +101,6 @@ public class NavbarController {
 
         MainApplication.borderPane.setRight(null);
         hideSearchbar();
-    }
-
-    @FXML
-    public void initialize() {
-        // Add listener to text field and combo box for filtering
-        searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterController.searchBar = newValue;
-            filterController.generateFilters();
-        });
     }
 
     private void showSearchbar() {

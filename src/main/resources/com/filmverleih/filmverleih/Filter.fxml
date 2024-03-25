@@ -80,7 +80,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </CheckBox>
-                        <Label prefHeight="12.0" prefWidth="79.0" text="Bewerung: " />
+                        <Label prefHeight="25.0" prefWidth="141.0" text="Bewerung minimal: " />
                         <Label fx:id="lbl_rating" alignment="CENTER_RIGHT" />
                      </children>
                   </HBox>
