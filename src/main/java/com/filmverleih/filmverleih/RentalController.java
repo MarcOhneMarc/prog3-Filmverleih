@@ -34,8 +34,8 @@ public class RentalController {
     AnchorPane anp_rentalOuterAnchorPane;
 
     @FXML
-
     Pane pane;
+    @FXML
     ScrollPane scp_rentalScrollPane;
     @FXML
     GridPane grp_rentalGrid;

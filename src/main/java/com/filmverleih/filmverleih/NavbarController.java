@@ -45,9 +45,6 @@ public class NavbarController {
         });
     }
 
-
-    @FXML
-    private BorderPane bpn_navbarOuterBorderPane;
   
     /**
      * Handles the user's request to switch to the library view.
@@ -119,18 +116,6 @@ public class NavbarController {
 
     private void hideSearchbar() {
         searchbar.setVisible(false);
-    }
-
-    public void disableNavBar() {
-        bpn_navbarOuterBorderPane.setDisable(true);
-    }
-
-    public void enableNavBar() {
-        bpn_navbarOuterBorderPane.setDisable(false);
-    }
-
-    public BorderPane getOuterPane() {
-        return bpn_navbarOuterBorderPane;
     }
 
     /**

@@ -247,6 +247,7 @@ public class LibraryController {
      * This method updates all Movies in case of changes
      */
     public void updateMovieList() {
+        gridPane.getChildren().clear();
         List<Movies> allMovies = Utility.getFullMovieList();
         updateMovies(allMovies);
     }
