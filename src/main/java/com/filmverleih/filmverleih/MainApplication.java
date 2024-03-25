@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
-
  * The MainApplication class creates the main frame where the navbar and the library are initially loaded in.
  * It also provides methods to change the center and left sidebar content.
  */
