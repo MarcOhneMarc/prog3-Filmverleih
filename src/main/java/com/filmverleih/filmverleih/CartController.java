@@ -108,7 +108,6 @@ public class CartController {
 
     /**
      *This method fills in the movie-cards to the movie list on the left
-     * TODO parameter List must be transferred to show the correct list of movies in cart
      */
     public void fillMovieList() throws IOException {
         for(Movies movie : fullMovieList){
@@ -265,9 +264,6 @@ public class CartController {
      * the order will be made
      * Else there will be a PopUp where a new customer can be saved to
      * the db with all needed attributes
-     *
-     * TODO handle throws exception if cart is empty and customer id is empty
-     * TODO handle throws exception if cart is not empty but id is empty
      */
     @FXML
     public void orderCart() {
@@ -393,24 +389,11 @@ public class CartController {
      */
     @FXML
     public void checkIDEmpty() {
-        /* //Does not work
-        if (txf_CartID.getText().isBlank()) {
-            btn_OrderCart.setDisable(true);
-            //lbl_errorNoID.setVisible(true);
-
-        } else if (!fullMovieList.isEmpty()) {
-            btn_OrderCart.setDisable(false); //button enabled
-            //lbl_errorEmptyCart.setVisible(true);
-        }
-        */
-
-        //Does work (apparently)
         if (txf_CartID.getText().isBlank()) {
             btn_OrderCart.setDisable(true);
             lbl_errorNoID.setVisible(true);
         } else {
             lbl_errorNoID.setVisible(false);
-
             if (!fullMovieList.isEmpty()) {
                 btn_OrderCart.setDisable(false);
                 lbl_errorEmptyCart.setVisible(false);
