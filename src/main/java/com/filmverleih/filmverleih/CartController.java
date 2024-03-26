@@ -107,6 +107,8 @@ public class CartController {
     private Button btn_newCustomerPopupConfirm;
     @FXML
     private Button btn_newCustomerPopupCancel;
+    @FXML
+    private Label lbl_errorInvalidEmail;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -377,7 +379,8 @@ public class CartController {
                 txf_PopUpCustomerPostalCode.getText().isEmpty() ||
                 txf_PopUpCustomerCity.getText().isEmpty() ||
                 txf_PopUpCustomerPhone.getText().isEmpty() ||
-                txf_PopUpCustomerEMail.getText().isEmpty();
+                txf_PopUpCustomerEMail.getText().isEmpty() ||
+                !validateEmail();
 
         btn_newCustomerPopupConfirm.setDisable(anyEmpty);
     }
@@ -406,11 +409,19 @@ public class CartController {
         }
     }
 
-    @FXML
-    private void validateEmail() {
+    /**
+     * This method checks whether an email is valid or not
+     * using the apache commons validator EmailValidator
+     * @return true if valid, false if invalid
+     */
+    private boolean validateEmail() {
         boolean validEmail = EmailValidator.getInstance().isValid(txf_PopUpCustomerEMail.getText());
         if (!validEmail) {
-
+            lbl_errorInvalidEmail.setVisible(true);
+            return false;
+        } else {
+            lbl_errorInvalidEmail.setVisible(false);
+            return true;
         }
     }
 
