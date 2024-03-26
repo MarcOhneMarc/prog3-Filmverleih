@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RentalsUtility {

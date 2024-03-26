@@ -166,8 +166,6 @@ public class RentalController {
         adjustColumnCount();
     }
 
-
-
     /**
      * Calculates the number of columns that can fit within the GridPane based on its width
      * and the width of the images to be displayed.
