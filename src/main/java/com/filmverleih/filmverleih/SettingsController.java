@@ -1,6 +1,8 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
+import com.filmverleih.filmverleih.utilitys.UserUtility;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 public class SettingsController {
 
-    private List<Users> fullUserList = Utility.getFullUserList();
+    private List<Users> fullUserList = UserUtility.getFullUserList();
     private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
@@ -125,12 +127,11 @@ public class SettingsController {
     @FXML
     public void addMovie() {
         String movieType = "DVD";
-        Utility utility = new Utility();
         System.out.println("console test: add movie button was clicked");
         if (cbx_selBlueRay.isSelected()) {
              movieType = "BlueRay";
         };
-        utility.newMovieInDB(txf_movieName.getText(),
+        MoviesUtility.newMovieInDB(txf_movieName.getText(),
                 Integer.parseInt(txf_movieYear.getText()),
                 txf_movieGenre1.getText() + ", "
                         + txf_movieGenre2.getText() + ", "
@@ -158,8 +159,7 @@ public class SettingsController {
     @FXML
     public void deleteMovie() {
         System.out.println("console test: delete movie button was clicked");
-        Utility utility = new Utility();
-        utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
+        MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
     }
 
     /**

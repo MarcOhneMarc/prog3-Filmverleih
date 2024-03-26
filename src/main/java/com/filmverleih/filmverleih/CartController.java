@@ -1,5 +1,7 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -268,9 +270,9 @@ public class CartController {
     @FXML
     public void orderCart() {
 
-       if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+       if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
-               boolean addSuccessful = Utility.addRentalToDB(
+               boolean addSuccessful = RentalsUtility.addRentalToDB(
                        fullMovieList.get(i).getMovieid(),
                        Integer.parseInt(txf_CartID.getText()),
                        calculateCurrentDate().toString(),
@@ -348,7 +350,7 @@ public class CartController {
      * TODO check if getLastAddedCustomerID is a valid way to get it
      */
     private void registerNewCustomer() {
-        boolean addSuccessful = Utility.addCustomerToDB(
+        boolean addSuccessful = CustomersUtility.addCustomerToDB(
                 txf_PopUpCustomerSurName.getText(),
                 txf_PopUpCustomerLastName.getText(),
                 txf_PopUpCustomerStreet.getText(),
@@ -359,7 +361,7 @@ public class CartController {
         );
 
         if (addSuccessful) {
-            txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+            txf_CartID.setText(String.valueOf(CustomersUtility.getLastAddedCustomerID()));
         }
     }
 

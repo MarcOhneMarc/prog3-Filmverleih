@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -466,7 +467,7 @@ public class EditMovieController {
      */
     public void confirmMovieEdit() {
         if(validEntryChecker()) {
-            boolean dbUpdateSuccessful = Utility.UpdateMovieInDB(currentMovieId,
+            boolean dbUpdateSuccessful = MoviesUtility.UpdateMovieInDB(currentMovieId,
                     changedName,
                     changedYear,
                     changedLength,
@@ -654,7 +655,7 @@ public class EditMovieController {
     public void cancelMovieEdit() {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
-        movieController.fillPage(Utility.getMovieById(movie.getMovieid()));
+        movieController.fillPage(MoviesUtility.getMovieById(movie.getMovieid()));
     }
 
     /**
@@ -665,7 +666,7 @@ public class EditMovieController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
-        Boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
+        Boolean movieIsDeleted = MoviesUtility.DeleteMovieInDB(movie.getMovieid());
         if (movieIsDeleted) {
             MovieController movieController = connector.getMovieController();
             movieController.feedbackMessage(MOVIE_DELETE_SUCCESSFUL, "-fx-text-fill: #FF4040");

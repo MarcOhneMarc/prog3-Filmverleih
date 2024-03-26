@@ -92,4 +92,18 @@ public class CustomersUtility {
         }
         return true;
     }
+
+    /**
+     * This method returns the last added customer ID from the
+     * customer table by getting the id of the last element of the
+     * fullCustomersList();
+     * @return the last added customerID
+     */
+    public static int getLastAddedCustomerID() {
+        List<Customers> customersList = getFullCustomerList();
+        if (customersList.isEmpty()) {
+            return 1;
+        }
+        return customersList.getLast().getCustomerid();
+    }
 }
