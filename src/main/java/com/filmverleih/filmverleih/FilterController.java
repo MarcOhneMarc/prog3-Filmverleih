@@ -24,14 +24,15 @@ public class FilterController {
      */
 
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
-
         this.connector = connector;
         this.libraryController = connector.getLibraryController();
         this.navbarController = connector.getNavbarController();
+        this.rentalController = connector.getRentalController();
     }
 
     private LibraryController libraryController;
     private NavbarController navbarController;
+    private RentalController rentalController;
 
     @FXML
     private ComboBox<String> sortComboBox;
@@ -136,8 +137,8 @@ public class FilterController {
                 libraryController.comparator = comparator;
                 libraryController.sortMovies();
             } else if (isRental) {
-                //rentalController.comparator = comparator;
-                //rentalController.sortMovies();
+                rentalController.comparator = comparator;
+                rentalController.sortMovies();
             } else {
                 return;
             }
@@ -219,8 +220,8 @@ public class FilterController {
                 libraryController.predicate = predicate;
                 libraryController.filterMovies();
             } else if (isRental) {
-                //rentalController.predicate = movie -> true;
-                //rentalController.sortAndFilter();
+                rentalController.predicate = predicate;
+                //rentalController.filterMovies();
             } else {
                 return;
             }
@@ -248,8 +249,8 @@ public class FilterController {
             libraryController.predicate = movie -> true;
             libraryController.filterMovies();
         } else if (isRental) {
-            //rentalController.predicate = movie -> true;
-            //rentalController.sortAndFilter();
+            rentalController.predicate = movie -> true;
+            //rentalController.filterMovies();
         } else {
             return;
         }

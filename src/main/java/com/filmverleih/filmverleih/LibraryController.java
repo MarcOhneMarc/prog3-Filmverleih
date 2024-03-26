@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -14,11 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * This class represents the controller for the library view in the application.
@@ -61,7 +60,7 @@ public class LibraryController {
     public AnchorPane outerAnchorPane;
 
     @FXML
-    private GridPane gridPane; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
+    private GridPane grp_libraryGrid; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
 
     private CartController cartController;
     private double windowWidth;
@@ -83,16 +82,16 @@ public class LibraryController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 windowWidth = newValue.doubleValue();
-                gridPane.setMaxWidth(windowWidth);
-                gridPane.setPrefWidth(windowWidth);
-                gridPane.setMinWidth(windowWidth);
+                grp_libraryGrid.setMaxWidth(windowWidth);
+                grp_libraryGrid.setPrefWidth(windowWidth);
+                grp_libraryGrid.setMinWidth(windowWidth);
                 adjustColumnCount();
             }
         });
 
-        List<Movies> allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        List<Movies> allMovies = MoviesUtility.getFullMovieList(); //get all Movies From DB
         this.comparator = Comparator.comparing(Movies::getName);
-        updateMovies(allMovies);
+        updateLibrary(allMovies);
     }
 
     /**
@@ -103,7 +102,7 @@ public class LibraryController {
         List<StackPane> stackPanes = new ArrayList<>();
 
         // Fügen Sie alle StackPanes dem gridPane hinzu
-        for (Node node : gridPane.getChildren()) {
+        for (Node node : grp_libraryGrid.getChildren()) {
             if (node instanceof StackPane) {
                 stackPanes.add((StackPane) node);
             }
@@ -139,8 +138,8 @@ public class LibraryController {
             if (stackPane.isVisible() && stackPane.isManaged()) {
                 int row = index / numColumns;
                 int column = index % numColumns;
-                GridPane.setRowIndex(stackPane, row);
-                GridPane.setColumnIndex(stackPane, column);
+                grp_libraryGrid.setRowIndex(stackPane, row);
+                grp_libraryGrid.setColumnIndex(stackPane, column);
                 index++;
             }
         }
@@ -169,7 +168,7 @@ public class LibraryController {
      * Adjusts the column count after filtering.
      */
     public void filterMovies() {
-        gridPane.getChildren().forEach(node -> {
+        grp_libraryGrid.getChildren().forEach(node -> {
             if (node instanceof StackPane stackPane) {
                 boolean isVisible = stackPane.getChildren().stream()
                         .filter(child -> child instanceof ImageView || child instanceof Label)
@@ -190,12 +189,12 @@ public class LibraryController {
      *
      * @param movieList The list of Movies objects to be displayed or updated.
      */
-    public void updateMovies(List<Movies> movieList) {
+    public void updateLibrary(List<Movies> movieList) {
         for (Movies movie: movieList) {
             String imgUrl = movie.getCover();
 
             StackPane stackPane = new StackPane();
-            gridPane.add(stackPane, 1, 1);
+            grp_libraryGrid.add(stackPane, 1, 1);
 
             StackPane stackPaneViewAddToCart = createAddToCartButton(movieList, stackPane, movie);
 
@@ -247,9 +246,9 @@ public class LibraryController {
      * This method updates all Movies in case of changes
      */
     public void updateMovieList() {
-        gridPane.getChildren().clear();
+        grp_libraryGrid.getChildren().clear();
         List<Movies> allMovies = Utility.getFullMovieList();
-        updateMovies(allMovies);
+        updateLibrary(allMovies);
     }
 
     /**
@@ -307,7 +306,7 @@ public class LibraryController {
      * @return The number of columns that can fit within the GridPane.
      */
     private int calculateNumColumns() {
-        double gridWidth = gridPane.getWidth();
+        double gridWidth = grp_libraryGrid.getWidth();
         double imageWidth = 200+20;
         return Math.max(1, (int) (windowWidth / imageWidth));
     }
@@ -320,20 +319,20 @@ public class LibraryController {
     private void adjustColumnCount() {
         int numColumns = calculateNumColumns();
 
-        gridPane.getColumnConstraints().clear();
+        grp_libraryGrid.getColumnConstraints().clear();
         for (int i = 0; i < numColumns; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setPercentWidth(100.0 / numColumns);
-            gridPane.getColumnConstraints().add(columnConstraints);
+            grp_libraryGrid.getColumnConstraints().add(columnConstraints);
         }
 
         int childIndex = 0;
-        for (Node child : gridPane.getChildren()) {
+        for (Node child : grp_libraryGrid.getChildren()) {
             if (child.isVisible() && child.isManaged()) {
                 int row = childIndex / numColumns;
                 int column = childIndex % numColumns;
-                GridPane.setRowIndex(child, row);
-                GridPane.setColumnIndex(child, column);
+                grp_libraryGrid.setRowIndex(child, row);
+                grp_libraryGrid.setColumnIndex(child, column);
                 childIndex++;
             }
         }

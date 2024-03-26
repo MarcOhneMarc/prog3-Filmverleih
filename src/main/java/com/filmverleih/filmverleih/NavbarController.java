@@ -61,6 +61,7 @@ public class NavbarController {
         showSearchbar();
         filterController.isLibrary = true;
         filterController.isRental = false;
+        filterController.resetFilters();
     }
 
     /**
@@ -78,6 +79,7 @@ public class NavbarController {
         showSearchbar();
         filterController.isRental = true;
         filterController.isLibrary = false;
+        filterController.resetFilters();
 
         //MainApplication.borderPane.setRight(null);
     }
