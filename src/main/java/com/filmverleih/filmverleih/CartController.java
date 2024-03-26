@@ -386,7 +386,9 @@ public class CartController {
                 txf_PopUpCustomerCity.getText().isEmpty() ||
                 txf_PopUpCustomerPhone.getText().isEmpty() ||
                 txf_PopUpCustomerEMail.getText().isEmpty() ||
+                !validatePhone() ||
                 !validateEmail();
+
 
         btn_newCustomerPopupConfirm.setDisable(anyEmpty);
     }
@@ -431,6 +433,27 @@ public class CartController {
         }
     }
 
+    /**
+     * This method checks whether a phone number is valid or not
+     * using a phone number regex
+     * @return true if valid, false if invalid
+     */
+    private boolean validatePhone() {
+        boolean validPhone = txf_PopUpCustomerPhone.getText().toString().matches("^\\+?[0-9 ]+$");
+        if (!validPhone) {
+            lbl_errorInvalidPhone.setVisible(true);
+            return false;
+        } else {
+            lbl_errorInvalidPhone.setVisible(false);
+            return true;
+        }
+    }
+
+    /**
+     * This method checks whether an email is already in db
+     * and sets an error message label if it is true
+     * @return true if email is unique, false if not
+     */
     private boolean validateUniqueEmail() {
         if (CustomersUtility.checkDuplicateEmailInCustomer(txf_PopUpCustomerEMail.getText())) {
             lbl_errorInvalidEmail.setText("Diese Email ist bereits vergeben!");
@@ -442,6 +465,11 @@ public class CartController {
         }
     }
 
+    /**
+     * This method checks whether a phone number is already in db
+     * and sets an error message label if it is true
+     * @return true if phone number is unique, false if not
+     */
     private boolean validateUniquePhone() {
         if (CustomersUtility.checkDuplicatePhoneInCustomer(txf_PopUpCustomerPhone.getText())) {
             lbl_errorInvalidPhone.setText("Diese Telefon-Nr ist bereits vergeben!");
