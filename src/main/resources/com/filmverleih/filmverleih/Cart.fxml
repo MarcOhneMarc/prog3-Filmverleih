@@ -139,6 +139,7 @@
                      <TextField fx:id="txf_PopUpCustomerPhone" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Telefon-Nr" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerEMail" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="E-mail" styleClass="txf_class_CartTextFields" />
                      <Label fx:id="lbl_errorInvalidEmail" text="E-mail nicht gültig!" textFill="#ff4040" visible="false" />
+                     <Label fx:id="lbl_errorInvalidPhone" text="Telefon-Nr nicht gültig!" textFill="#ff4040" visible="false" />
                   </children>
                </VBox>
                <HBox fx:id="hbx_customerPopUpButtonHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

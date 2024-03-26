@@ -1,5 +1,7 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -109,6 +111,8 @@ public class CartController {
     private Button btn_newCustomerPopupCancel;
     @FXML
     private Label lbl_errorInvalidEmail;
+    @FXML
+    private Label lbl_errorInvalidPhone;
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -326,11 +330,13 @@ public class CartController {
      */
     @FXML
     private void confirmNewCustomerRegistration() {
-        registerNewCustomer();
-        connector.getNavbarController().enableNavBar();
-        acp_newCustomerPopup.setDisable(true);
-        acp_newCustomerPopup.setVisible(false);
-        acp_CartBackground.setDisable(false);
+        if (validateUniquePhone() && validateUniqueEmail()) {
+            registerNewCustomer();
+            connector.getNavbarController().enableNavBar();
+            acp_newCustomerPopup.setDisable(true);
+            acp_newCustomerPopup.setVisible(false);
+            acp_CartBackground.setDisable(false);
+        }
     }
 
     /**
@@ -421,6 +427,28 @@ public class CartController {
             return false;
         } else {
             lbl_errorInvalidEmail.setVisible(false);
+            return true;
+        }
+    }
+
+    private boolean validateUniqueEmail() {
+        if (CustomersUtility.checkDuplicateEmailInCustomer(txf_PopUpCustomerEMail.getText())) {
+            lbl_errorInvalidEmail.setText("Diese Email ist bereits vergeben!");
+            lbl_errorInvalidEmail.setVisible(true);
+            return false;
+        } else {
+            lbl_errorInvalidEmail.setVisible(false);
+            return true;
+        }
+    }
+
+    private boolean validateUniquePhone() {
+        if (CustomersUtility.checkDuplicatePhoneInCustomer(txf_PopUpCustomerPhone.getText())) {
+            lbl_errorInvalidPhone.setText("Diese Telefon-Nr ist bereits vergeben!");
+            lbl_errorInvalidPhone.setVisible(true);
+            return false;
+        } else {
+            lbl_errorInvalidPhone.setVisible(false);
             return true;
         }
     }

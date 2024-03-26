@@ -92,4 +92,30 @@ public class CustomersUtility {
         }
         return true;
     }
+
+    /**
+     * This method checks whether a certain email address is already in the db
+     * @param email the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateEmailInCustomer(String email) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getEmail().equals(email)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks whether a certain phone number is already in the db
+     * @param phone the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicatePhoneInCustomer(String phone) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getPhone().equals(phone)) return true;
+        }
+        return false;
+    }
 }
