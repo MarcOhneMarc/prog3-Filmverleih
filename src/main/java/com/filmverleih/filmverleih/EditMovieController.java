@@ -151,6 +151,10 @@ public class EditMovieController {
     @FXML
     private Label lbl_movieEditDeleteFeedback;
     @FXML
+    private ImageView igv_movieEditXButton;
+    @FXML
+    private AnchorPane acp_movieEditConstraintInfo;
+    @FXML
     private AnchorPane acp_movieEditDeleteConfirmation;
 
     private Movies movie;
@@ -296,9 +300,15 @@ public class EditMovieController {
      */
     private void addOnlyNumbersConstraint() {
         TextFieldFunctions.addYearChecker(txf_movieEditYear);
-        TextFieldFunctions.addOnlyNumberChecker(txf_movieEditLength);
-        TextFieldFunctions.addOnlyNumberChecker(txf_movieEditFSK);
+        TextFieldFunctions.addDurationChecker(txf_movieEditLength);
+        TextFieldFunctions.addFskChecker(txf_movieEditFSK);
         TextFieldFunctions.addRatingChecker(txf_movieEditRating);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditGenre1);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditGenre2);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditGenre3);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditDirector1);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditDirector2);
+        TextFieldFunctions.addNoCommaChecker(txf_movieEditDirector3);
         TextFieldFunctions.addOnlyNumberChecker(txf_movieEditCount);
     }
 
@@ -706,6 +716,19 @@ public class EditMovieController {
         disableDeleteConfirmation();
     }
 
+    public void constraintInfoButtonClick() {
+        if(acp_movieEditConstraintInfo.isVisible()) {disableMovieConstraintInfo();}
+        else {enableMovieConstraintInfo();}
+    }
+
+    private void enableMovieConstraintInfo() {
+        acp_movieEditConstraintInfo.setVisible(true);
+    }
+
+    private void disableMovieConstraintInfo() {
+        acp_movieEditConstraintInfo.setVisible(false);
+    }
+
     /**
      * Opens the delete confirmation dialog.
      * This method disables the nodes related to editing and enables the delete confirmation.
@@ -732,8 +755,9 @@ public class EditMovieController {
     private void enableEditNodes() {
         for(ArrayList<Object> tempRow : txfStringUndoList) {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
-            tempUndoButton.setOpacity(100);
+            tempUndoButton.setOpacity(1);
         }
+        igv_movieEditXButton.setDisable(false);
         acp_EditMovieBackground.setDisable(false);
         connector.getNavbarController().enableNavBar();
     }
@@ -748,6 +772,7 @@ public class EditMovieController {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
             tempUndoButton.setOpacity(0.3);
         }
+        igv_movieEditXButton.setDisable(true);
         acp_EditMovieBackground.setDisable(true);
         connector.getNavbarController().disableNavBar();
     }

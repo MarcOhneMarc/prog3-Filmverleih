@@ -74,3 +74,16 @@
 #lbl_movieEditSaveFeedback {
     -fx-font-size: 22;
 }
+
+#acp_movieEditConstraintInfo {
+    -fx-background-color: #393939;
+}
+
+.lbl_class_movieEditConstraintInfoTitle {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+.lbl_class_movieEditConstraintInfos {
+    -fx-text-fill: #FFF;
+}
