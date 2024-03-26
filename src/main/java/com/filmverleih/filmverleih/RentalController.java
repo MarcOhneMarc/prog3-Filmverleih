@@ -88,6 +88,7 @@ public class RentalController {
         //TODO change to not get all movies but only those that are rented from db
         List<Movies> allMovies = MoviesUtility.getFullMovieList();
         updateRental(allMovies);
+        sortMovies();
     }
 
     /**
@@ -119,10 +120,10 @@ public class RentalController {
      * The sorting is based on a comparator associated with the Movies objects.
      */
     public void sortMovies() {
-        List<HBox> hBoxes = grp_rentalGrid.getChildren().stream()
+        List<HBox> hBoxes = new ArrayList<>(grp_rentalGrid.getChildren().stream()
                 .filter(node -> node instanceof HBox)
                 .map(node -> (HBox) node)
-                .toList();
+                .toList());
 
         hBoxes.sort((hBox1, hBox2) -> {
             Movies movie1 = (Movies) hBox1.getUserData();
@@ -156,9 +157,8 @@ public class RentalController {
     public void filterMovies() {
         grp_rentalGrid.getChildren().forEach(node -> {
             if (node instanceof HBox hBox) {
-                boolean isVisible = hBox.getChildren().stream()
-                        .map(Node::getUserData)
-                        .anyMatch(data -> data instanceof Movies && predicate.test((Movies) data));
+                Movies movie = (Movies) hBox.getUserData();
+                boolean isVisible = predicate.test(movie);
                 hBox.setVisible(isVisible);
                 hBox.setManaged(isVisible);
             }

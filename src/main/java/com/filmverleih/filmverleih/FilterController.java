@@ -221,7 +221,7 @@ public class FilterController {
                 libraryController.filterMovies();
             } else if (isRental) {
                 rentalController.predicate = predicate;
-                //rentalController.filterMovies();
+                rentalController.filterMovies();
             } else {
                 return;
             }
@@ -250,7 +250,7 @@ public class FilterController {
             libraryController.filterMovies();
         } else if (isRental) {
             rentalController.predicate = movie -> true;
-            //rentalController.filterMovies();
+            rentalController.filterMovies();
         } else {
             return;
         }
