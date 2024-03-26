@@ -1,5 +1,6 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -135,6 +136,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
+        LoggerUtility.logger.info("Application started...");
     }
 
     /**
