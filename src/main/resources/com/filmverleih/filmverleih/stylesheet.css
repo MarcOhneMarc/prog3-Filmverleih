@@ -41,6 +41,16 @@
     -fx-text-fill: white;
 }
 
+#scrollPane .track,
+#scrollPane .track-background {
+    -fx-background-color: #191919;
+}
+
+#scrollPane .thumb {
+    -fx-background-color:  #949494;
+    -fx-background-radius: 12;
+}
+
 
 #hbx_navBar {
     -fx-background-color: #5C5C5C;
