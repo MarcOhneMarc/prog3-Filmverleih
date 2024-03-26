@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -594,7 +595,8 @@ public class EditMovieController {
                     }
                 }
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
+                LoggerUtility.logger.warn("NullPointerException occurred; entry was not valid: 017");
                 entriesAreValid = false;
             }
         } else {entriesAreValid = false;}
@@ -640,7 +642,8 @@ public class EditMovieController {
                 this.changedType = "BR";
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("NumberFormatException; saveInfosAsNeededDataTypes: 018");
             saveInfoWorked = false;
         }
         return saveInfoWorked;

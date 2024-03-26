@@ -25,10 +25,10 @@ public class CustomersUtility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("getFullCostumerList went wrong, could not transact: 001");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed: 002");
         }
         return  new ArrayList<Customers>();
     }
@@ -81,13 +81,11 @@ public class CustomersUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("customer registration went wrong Code: 77621");
+                LoggerUtility.logger.warn("customer registration went wrong, could not transact: 003");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("customer registration went wrong Code: 77620");
+            LoggerUtility.logger.warn("build session failed: 004");
             return false;
         }
         return true;

@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -119,14 +120,14 @@ public class SettingsController {
 
     /**
      * test method to link the add button to the controller
-     * which prints a small verification message in the console
+     * which prints a small verification message in the log
      * that the add button has been clicked
      */
     @FXML
     public void addMovie() {
         String movieType = "DVD";
         Utility utility = new Utility();
-        System.out.println("console test: add movie button was clicked");
+        LoggerUtility.logger.info("add movie button was clicked: 022");
         if (cbx_selBlueRay.isSelected()) {
              movieType = "BlueRay";
         };
@@ -152,12 +153,12 @@ public class SettingsController {
 
     /**
      * test method to link the delete button to the controller
-     * which prints a small verification message in the console
+     * which prints a small verification message in the log
      * that the delete button has been clicked
      */
     @FXML
     public void deleteMovie() {
-        System.out.println("console test: delete movie button was clicked");
+        LoggerUtility.logger.info("delete movie button was clicked: 023");
         Utility utility = new Utility();
         utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
     }
@@ -215,7 +216,7 @@ public class SettingsController {
      */
     @FXML
     public void addUser() {
-        System.out.println("console test: add user button has been clicked");
+        LoggerUtility.logger.info("add user button has been clicked: 024");
     }
 
     /**
@@ -226,7 +227,7 @@ public class SettingsController {
      */
     @FXML
     public void deleteUser() {
-        System.out.println("console test: delete user button has been clicked");
+        LoggerUtility.logger.info("delete user button has been clicked: 025");
     }
 
     /**

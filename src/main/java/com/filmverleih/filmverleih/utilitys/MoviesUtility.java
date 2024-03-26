@@ -27,10 +27,10 @@ public class MoviesUtility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 005");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 006");
         }
         return new ArrayList<Movies>();
     }
@@ -85,11 +85,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact: 007");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 008");
             return false;
         }
         return true;
@@ -107,10 +107,10 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("updateMovieInDB went wrong, could not transact: 009");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 010");
         }
         return true;
     }

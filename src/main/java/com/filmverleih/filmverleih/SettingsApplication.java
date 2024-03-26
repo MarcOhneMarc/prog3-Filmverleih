@@ -1,5 +1,6 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,6 +43,7 @@ public class SettingsApplication extends Application {
 
         } catch (Exception e) {
             e.printStackTrace();
+            //LoggerUtility.logger.warn("Application could not start: ");
         }
 
     }
