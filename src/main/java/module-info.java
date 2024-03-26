@@ -5,6 +5,7 @@ module com.filmverleih.filmverleih {
     requires java.sql;
     requires java.naming;
     requires jakarta.persistence;
+    requires org.apache.commons.validator;
 
 
     opens com.filmverleih.filmverleih to javafx.fxml;

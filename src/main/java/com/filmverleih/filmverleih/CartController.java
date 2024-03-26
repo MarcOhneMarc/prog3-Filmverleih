@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 import java.time.LocalDate;
 import java.text.DecimalFormat;
 
@@ -401,6 +403,14 @@ public class CartController {
                 btn_OrderCart.setDisable(true);
                 lbl_errorEmptyCart.setVisible(true);
             }
+        }
+    }
+
+    @FXML
+    private void validateEmail() {
+        boolean validEmail = EmailValidator.getInstance().isValid(txf_PopUpCustomerEMail.getText());
+        if (!validEmail) {
+
         }
     }
 
