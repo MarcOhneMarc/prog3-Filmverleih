@@ -341,7 +341,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <ImageView fitHeight="45.0" fitWidth="45.0" onMouseClicked="#constraintInfoButtonClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                  <ImageView fx:id="igv_movieEditConstraintInfoButton" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#constraintInfoButtonClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="12">
                      <image>
                         <Image url="@Questionmark-Icon.png" />
                      </image>

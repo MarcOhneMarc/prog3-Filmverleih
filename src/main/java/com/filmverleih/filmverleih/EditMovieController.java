@@ -153,6 +153,8 @@ public class EditMovieController {
     @FXML
     private ImageView igv_movieEditXButton;
     @FXML
+    private ImageView igv_movieEditConstraintInfoButton;
+    @FXML
     private AnchorPane acp_movieEditConstraintInfo;
     @FXML
     private AnchorPane acp_movieEditDeleteConfirmation;
@@ -714,6 +716,7 @@ public class EditMovieController {
         btn_movieEditDeleteConfirm.setDisable(false);
         enableEditNodes();
         disableDeleteConfirmation();
+        disableMovieConstraintInfo();
     }
 
     public void constraintInfoButtonClick() {
@@ -757,7 +760,10 @@ public class EditMovieController {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
             tempUndoButton.setOpacity(1);
         }
+        igv_movieEditCommentUndo.setOpacity(1);
+        igv_movieEditConstraintInfoButton.setOpacity(1);
         igv_movieEditXButton.setDisable(false);
+        igv_movieEditXButton.setOpacity(1);
         acp_EditMovieBackground.setDisable(false);
         connector.getNavbarController().enableNavBar();
     }
@@ -772,7 +778,10 @@ public class EditMovieController {
             ImageView tempUndoButton = (ImageView) tempRow.get(2);
             tempUndoButton.setOpacity(0.3);
         }
+        igv_movieEditCommentUndo.setOpacity(0.3);
+        igv_movieEditConstraintInfoButton.setOpacity(0.3);
         igv_movieEditXButton.setDisable(true);
+        igv_movieEditXButton.setOpacity(0.3);
         acp_EditMovieBackground.setDisable(true);
         connector.getNavbarController().disableNavBar();
     }
