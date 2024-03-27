@@ -13,12 +13,12 @@
    <right>
       <HBox id="header" alignment="CENTER" prefHeight="90.0" prefWidth="352.0" spacing="20.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToCart" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Warenkorb" textAlignment="CENTER">
+            <Button fx:id="btn_navBarCart" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToCart" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Warenkorb" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#changeToSettings" prefHeight="50.0" prefWidth="50.0" styleClass="headerButton" stylesheets="@stylesheet.css">
+            <Button fx:id="btn_navBarSettings" mnemonicParsing="false" onAction="#changeToSettings" prefHeight="50.0" prefWidth="50.0" styleClass="headerButton" stylesheets="@stylesheet.css">
                <graphic>
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,12 +33,12 @@
    <center>
       <HBox id="header" alignment="CENTER_LEFT" prefHeight="90.0" spacing="20.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToLibrary" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Bibliothek" textAlignment="CENTER">
+            <Button fx:id="btn_navBarLibrary" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToLibrary" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Bibliothek" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
             </Button>
-            <Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToRental" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Verleih" textAlignment="CENTER">
+            <Button fx:id="btn_navBarRental" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#changeToRental" prefHeight="50.0" prefWidth="200.0" styleClass="headerButton" stylesheets="@stylesheet.css" text="Verleih" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>

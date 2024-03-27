@@ -521,36 +521,64 @@ public class EditMovieController {
         boolean saveInfoWorked = saveInfosAsNeededDataTypes();
         if (saveInfoWorked) {
             try {
-                if (changedName != null) {
+                /*if (changedName != null) {
                     if (changedName.isEmpty()) {
                         lbl_movieEditNameTitle.setStyle("-fx-text-fill: #FF4040");
                         entriesAreValid = false;
                     } else {
                         lbl_movieEditNameTitle.setStyle("-fx-text-fill: #949494");
                     }
+                }*/
+
+                if (MovieEntryValidator.nameIsValid(changedName)) {
+                    lbl_movieEditNameTitle.setStyle("-fx-text-fill: #949494");
+                } else {
+                    lbl_movieEditNameTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
                 }
 
-                if (changedYear < 1920 || changedYear > 2024) {
+                /*if (changedYear < 1920 || changedYear > 2024) {
                     lbl_movieEditYearTitle.setStyle("-fx-text-fill: #FF4040");
                     entriesAreValid = false;
                 } else {
                     lbl_movieEditYearTitle.setStyle("-fx-text-fill: #949494");
+                }*/
+
+                if (MovieEntryValidator.yearIsValid(changedYear)) {
+                    lbl_movieEditYearTitle.setStyle("-fx-text-fill: #949494");
+                } else {
+                    lbl_movieEditYearTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
                 }
 
-                if (changedFsk != 0 && changedFsk != 6 && changedFsk != 12 && changedFsk != 16 && changedFsk != 18) {
+                /*if (changedFsk != 0 && changedFsk != 6 && changedFsk != 12 && changedFsk != 16 && changedFsk != 18) {
                     lbl_movieEditFskTitle.setStyle("-fx-text-fill: #FF4040");
                     entriesAreValid = false;
                 } else {
                     lbl_movieEditFskTitle.setStyle("-fx-text-fill: #949494");
+                }*/
+
+                if (MovieEntryValidator.fskIsValid(changedFsk)) {
+                    lbl_movieEditFskTitle.setStyle("-fx-text-fill: #949494");
+                } else {
+                    lbl_movieEditFskTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
                 }
 
-                if (txf_movieEditRating.getText() != null) {
+                /*if (txf_movieEditRating.getText() != null) {
                     if (!txf_movieEditRating.getText().matches("^\\d\\.\\d$")) {
                         lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
                         entriesAreValid = false;
                     } else {
                         lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #949494");
                     }
+                } else {
+                    lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
+                }*/
+
+                if (MovieEntryValidator.ratingIsValid(txf_movieEditRating.getText())) {
+                    lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #949494");
                 } else {
                     lbl_movieEditRatingTitle.setStyle("-fx-text-fill: #FF4040");
                     entriesAreValid = false;
@@ -572,14 +600,6 @@ public class EditMovieController {
                     }
                 }
 
-                if (changedActors != null) {
-                    if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$")) {
-                        lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
-                        entriesAreValid = false;
-                    } else {
-                        lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
-                    }
-                }
 
                 if (changedDirectors != null) {
                     if (txf_movieEditDirector1.getText().isEmpty() && (!txf_movieEditDirector2.getText().isEmpty() || !txf_movieEditDirector3.getText().isEmpty())) {
@@ -597,13 +617,36 @@ public class EditMovieController {
                     }
                 }
 
-                if (changedLinkToCover != null) {
+                /*if (changedActors != null) {
+                    if (!changedActors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$")) {
+                        lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
+                        entriesAreValid = false;
+                    } else {
+                        lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
+                    }
+                }*/
+
+                if (MovieEntryValidator.actorsIsValid(changedActors)) {
+                    lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #949494");
+                } else {
+                    lbl_movieEditActorsTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
+                }
+
+                /*if (changedLinkToCover != null) {
                     if (!changedLinkToCover.isEmpty() && !changedLinkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
                         lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
                         entriesAreValid = false;
                     } else {
                         lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
                     }
+                }*/
+
+                if (MovieEntryValidator.linkToCoverIsValid(changedLinkToCover)) {
+                    lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
+                } else {
+                    lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
+                    entriesAreValid = false;
                 }
             } catch (NullPointerException e) {
                 e.printStackTrace();
