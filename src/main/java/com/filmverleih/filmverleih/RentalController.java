@@ -82,6 +82,14 @@ public class RentalController {
             }
         });
 
+        scp_rentalScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double windowHeight = newValue.doubleValue();
+                grp_rentalGrid.setMinHeight(windowHeight);
+            }
+        });
+
         this.comparator = Comparator.comparing(Movies::getName);
 
         //Load Rental View

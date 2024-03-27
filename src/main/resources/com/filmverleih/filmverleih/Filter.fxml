@@ -20,24 +20,7 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="421.0" promptText="Sort by">
-
-         <items>
-            <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Name aufsteigend" />
-               <String fx:value="Name absteigend" />
-               <String fx:value="Jahr aufsteigend" />
-               <String fx:value="Jahr absteigend" />
-               <String fx:value="Bewertung aufsteigend" />
-               <String fx:value="Bewertung absteigend" />
-               <String fx:value="Länge aufsteigend" />
-               <String fx:value="Länge absteigend" />
-               <String fx:value="FSK aufsteigend" />
-               <String fx:value="FSK absteigend" />
-            </FXCollections>
-         </items>
-
-      </ComboBox>
+      <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="421.0" promptText="Sort by" />
       <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Filter">

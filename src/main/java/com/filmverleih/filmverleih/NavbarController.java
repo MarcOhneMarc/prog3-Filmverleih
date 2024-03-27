@@ -45,7 +45,6 @@ public class NavbarController {
         });
     }
 
-  
     /**
      * Handles the user's request to switch to the library view.
      * It loads the Library view into the center of the application frame and the Filter view into the right sidebar.
@@ -59,9 +58,7 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(libraryController.getOuterPane());
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
-        filterController.isLibrary = true;
-        filterController.isRental = false;
-        filterController.resetFilters();
+        filterController.changeToLibrary();
     }
 
     /**
@@ -77,9 +74,7 @@ public class NavbarController {
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
-        filterController.isRental = true;
-        filterController.isLibrary = false;
-        filterController.resetFilters();
+        filterController.changeToRental();
 
         //MainApplication.borderPane.setRight(null);
     }

@@ -1,19 +1,22 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
  * Controller class for managing filters in the application.
  */
 public class FilterController {
-
 
     AnchorPane anchorPane;
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
@@ -67,17 +70,18 @@ public class FilterController {
 
     public String searchBar;
 
-    public boolean isLibrary;
-    public boolean isRental;
-
+    private boolean isLibrary;
+    private Map<String, String> libraryFilterConfig;
+    private boolean isRental;
+    private Map<String, String> rentalFilterConfig;
 
     /**
      * Initializes the FilterController.
      */
     @FXML
-    public void initialize() {
-        isLibrary = true;
-        isRental = false;
+    private void initialize() {
+        libraryFilterConfig = getConfigMap();
+        changeToLibrary();
 
         sld_rating.valueProperty().addListener((observable, oldValue, newValue) -> {
             double value = newValue.doubleValue();
@@ -254,6 +258,85 @@ public class FilterController {
         } else {
             return;
         }
+    }
+
+    public Map<String, String> getConfigMap() {
+        Map<String, String> config = new HashMap<>();
+        config.put("year", txf_year.getText());
+        config.put("genre", txf_genre.getText());
+        config.put("minLength", txf_minLength.getText());
+        config.put("maxLength", txf_maxLength.getText());
+        config.put("rating", String.valueOf(sld_rating.getValue()));
+        config.put("type", txf_type.getText());
+        config.put("comment", txf_comment.getText());
+        config.put("director", txf_director.getText());
+        config.put("studio", txf_studio.getText());
+        config.put("actor", txf_actor.getText());
+        config.put("fsk", txf_fsk.getText());
+        return config;
+    }
+
+    public void applyFilterConfig(Map<String, String> filterConfig) {
+        txf_year.setText(filterConfig.get("year"));
+        txf_genre.setText(filterConfig.get("genre"));
+        txf_minLength.setText(filterConfig.get("minLength"));
+        txf_maxLength.setText(filterConfig.get("maxLength"));
+        sld_rating.setValue(Double.parseDouble(filterConfig.get("rating")));
+        txf_type.setText(filterConfig.get("type"));
+        txf_comment.setText(filterConfig.get("comment"));
+        txf_director.setText(filterConfig.get("director"));
+        txf_studio.setText(filterConfig.get("studio"));
+        txf_actor.setText(filterConfig.get("actor"));
+        txf_fsk.setText(filterConfig.get("fsk"));
+    }
+
+    public void changeToRental() {
+        if (isRental) {
+            return;
+        }
+        libraryFilterConfig = getConfigMap();
+        applyFilterConfig(rentalFilterConfig);
+        sortComboBox.getItems().clear();
+        sortComboBox.getItems().addAll(
+                "Name aufsteigend",
+                "Name absteigend",
+                "Jahr aufsteigend",
+                "Jahr absteigend",
+                "Bewertung aufsteigend",
+                "Bewertung absteigend",
+                "Länge aufsteigend",
+                "Länge absteigend",
+                "FSK aufsteigend",
+                "FSK absteigend",
+                "RENTAL"
+        );
+
+        isRental = true;
+        isLibrary = false;
+    }
+
+    public void changeToLibrary() {
+        if (isLibrary) {
+            return;
+        }
+        rentalFilterConfig = getConfigMap();
+        applyFilterConfig(libraryFilterConfig);
+        sortComboBox.getItems().clear();
+        sortComboBox.getItems().addAll(
+                "Name aufsteigend",
+                "Name absteigend",
+                "Jahr aufsteigend",
+                "Jahr absteigend",
+                "Bewertung aufsteigend",
+                "Bewertung absteigend",
+                "Länge aufsteigend",
+                "Länge absteigend",
+                "FSK aufsteigend",
+                "FSK absteigend"
+        );
+
+        isRental = false;
+        isLibrary = true;
     }
 
     /**

@@ -54,7 +54,7 @@ public class LibraryController {
     }
 
     @FXML
-    private ScrollPane scrollPane; // pane to scroll in the grid (Child = gridPane)
+    private ScrollPane scp_libraryScrollPane; // pane to scroll in the grid (Child = gridPane)
 
     @FXML
     public AnchorPane outerAnchorPane;
@@ -74,11 +74,11 @@ public class LibraryController {
      */
     public void initialize() {
         // Set behavior of scrollPane
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scp_libraryScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scp_libraryScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Listener for change of window size
-        scrollPane.widthProperty().addListener(new ChangeListener<Number>() {
+        scp_libraryScrollPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 windowWidth = newValue.doubleValue();
@@ -86,6 +86,14 @@ public class LibraryController {
                 grp_libraryGrid.setPrefWidth(windowWidth);
                 grp_libraryGrid.setMinWidth(windowWidth);
                 adjustColumnCount();
+            }
+        });
+
+        scp_libraryScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double windowHeight = newValue.doubleValue();
+                grp_libraryGrid.setMinHeight(windowHeight);
             }
         });
 
@@ -349,6 +357,7 @@ public class LibraryController {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         movieController.fillPage(movie);
+        MainApplication.borderPane.setRight(null);
 
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
