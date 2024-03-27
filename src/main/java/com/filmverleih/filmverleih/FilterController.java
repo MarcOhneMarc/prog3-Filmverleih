@@ -254,6 +254,10 @@ public class FilterController {
         libraryController.removieMovieFromLibrary(24);
     }
 
+    public void sync() {
+        libraryController.syncLibraryWithDB();
+    }
+
     /**
      * Undos and Clears all Filter-Fields
      */

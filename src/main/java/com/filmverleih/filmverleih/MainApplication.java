@@ -2,9 +2,12 @@ package com.filmverleih.filmverleih;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -115,26 +118,52 @@ public class MainApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        //fire-up scenes
-        loadRootsAndControllers();
-        connectControllers();
-        borderPane = new BorderPane(); // the main frame of the application
-        Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
-        borderPane.setTop(navbarRoot);
-        borderPane.setCenter(libraryRoot);
-        borderPane.setRight(filterRoot);
-
+        // Set up the border pane and scene
+        borderPane = new BorderPane();
+        Scene scene = new Scene(borderPane);
         String css = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);
 
+        // Set stage properties
         stage.setTitle("Quantum-Vortex");
-
         Image icon = new Image(getClass().getResourceAsStream("logo.png"));
         stage.getIcons().add(icon);
-
         stage.setScene(scene);
-        stage.setMaximized(true);
+        //stage.setMaximized(true);
+
+        // Create a loading indicator
+        ProgressBar loadingIndicator = new ProgressBar();
+        loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+        loadingIndicator.setPrefSize(1920, 1080);
+        borderPane.setCenter(loadingIndicator);
+
+        // Show the stage
         stage.show();
+
+        // Load resources and initialize scene in a background thread
+        Task<Void> initializationTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                // Load roots and controllers
+                loadRootsAndControllers();
+                connectControllers();
+
+                // Update UI in JavaFX Application Thread
+                Platform.runLater(() -> {
+                    // Once everything is loaded, replace the loading indicator with the actual content
+                    borderPane.setCenter(null); // Remove the loading indicator
+                    borderPane.setTop(navbarRoot);
+                    borderPane.setRight(filterRoot);
+                    borderPane.setCenter(libraryRoot);
+                });
+                return null;
+            }
+        };
+
+        // Start the initialization task
+        Thread thread = new Thread(initializationTask);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /**

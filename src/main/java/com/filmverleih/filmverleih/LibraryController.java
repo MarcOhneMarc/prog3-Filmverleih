@@ -16,6 +16,7 @@ import javafx.scene.layout.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -263,6 +264,36 @@ public class LibraryController {
         updateLibrary(allMovies);
     }
 
+    public void syncLibraryWithDB() {
+        List<Movies> moviesInDb = MoviesUtility.getFullMovieList();
+        List<Movies> moviesToAdd = new ArrayList<>(); // Collect movies to add
+        for (Movies movieInDb: moviesInDb) {
+            boolean found = false;
+            for (Node node : grp_libraryGrid.getChildren()) {
+                if (node instanceof StackPane stackPane) {
+                    Movies movieInLibrary = getMovieFromStackPane(stackPane);
+                    assert movieInLibrary != null;
+                    if (movieInDb.getMovieid() == movieInLibrary.getMovieid()) {
+                        if (!movieInDb.equals(movieInLibrary)) {
+                            removieMovieFromLibrary(movieInLibrary.getMovieid());
+                        }
+                        found = true;
+                        break; // Found the movie in the library, no need to add
+                    }
+                }
+            }
+            if (!found) {
+                moviesToAdd.add(movieInDb); // Collect movies to add
+            }
+        }
+
+        for (Movies movieToAdd : moviesToAdd) {
+            addMovieToLibrary(movieToAdd); // Add collected movies to library
+        }
+
+        adjustColumnCount();
+    }
+
     public void updateMovieInLibrary(Movies movieToUpdate) {
         removieMovieFromLibrary(movieToUpdate.getMovieid());
         addMovieToLibrary(movieToUpdate);
@@ -271,15 +302,18 @@ public class LibraryController {
     }
 
     public void removieMovieFromLibrary(int movieToDelete) {
-        grp_libraryGrid.getChildren().forEach(node -> {
+        Iterator<Node> iterator = grp_libraryGrid.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node node = iterator.next();
             if (node instanceof StackPane stackPane) {
                 Movies movieInLibrary = getMovieFromStackPane(stackPane);
                 if (movieToDelete == movieInLibrary.getMovieid()) {
-                    grp_libraryGrid.getChildren().remove(stackPane);
+                    iterator.remove(); // Use iterator to remove the node
+                    adjustColumnCount();
+                    return;
                 }
             }
-        });
-        adjustColumnCount();
+        }
     }
 
     /**
