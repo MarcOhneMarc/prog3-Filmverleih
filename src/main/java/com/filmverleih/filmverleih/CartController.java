@@ -39,6 +39,7 @@ public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
     private int lastAddedCustomerID;
+    private boolean checkIDButtonClicked = false;
     private List<Movies> fullMovieList = new ArrayList<>(); //List that must contain the movies in cart
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
@@ -566,6 +567,20 @@ public class CartController {
             validateEmail();
             checkWhetherToDisableNewCustomerButton();
         });
+
+        txf_CartID.setOnKeyTyped(event -> {
+            checkIDEmpty();
+            acp_customerInfoCard.setVisible(false);
+            checkIDButtonClicked = false;
+            btn_OrderCart.setDisable(true);
+        });
+
+        btn_checkID.setOnAction(event -> {
+            checkIDButtonClicked = true;
+            checkIDEmpty();
+            checkID();
+        });
+
 
         setLastAddedCustomerID();
         updateCart();
