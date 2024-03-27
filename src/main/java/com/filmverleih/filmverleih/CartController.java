@@ -491,6 +491,23 @@ public class CartController {
     }
 
     /**
+     * This method initializes the CartController focussing on setting
+     * keyType events to the TextFields for phone and email
+     */
+    @FXML
+    private void initialize() {
+        txf_PopUpCustomerPhone.setOnKeyTyped(event -> {
+            validatePhone();
+            checkWhetherToDisableNewCustomerButton();
+        });
+
+        txf_PopUpCustomerEMail.setOnKeyTyped(event -> {
+            validateEmail();
+            checkWhetherToDisableNewCustomerButton();
+        });
+    }
+
+    /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public StackPane getOuterPane() {
