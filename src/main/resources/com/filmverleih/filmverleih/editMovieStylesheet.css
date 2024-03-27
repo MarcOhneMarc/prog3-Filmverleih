@@ -16,6 +16,7 @@
 
 #txa_movieEditComment {
     -fx-font-size: 17;
+    -fx-background: #191919;
     -fx-focus-color: transparent;
     -fx-text-box-border: transparent;
 }

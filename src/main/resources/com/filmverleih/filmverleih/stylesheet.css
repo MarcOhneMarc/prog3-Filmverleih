@@ -206,6 +206,11 @@
     -fx-border-color: #191919;
 }
 
+#scp_Cart:focused {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
 #scp_Cart .track,
 #scp_Cart .track-background {
     -fx-background-color: #191919;

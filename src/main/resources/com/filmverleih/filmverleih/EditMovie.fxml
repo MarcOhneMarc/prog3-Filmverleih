@@ -285,7 +285,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 3" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <Label fx:id="lbl_movieEditGenre3Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Genre 3" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
@@ -300,7 +300,7 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 3" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                  <Label fx:id="lbl_movieEditDirector3Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieEditTextFieldTitles" text="Director 3" GridPane.columnIndex="1" GridPane.rowIndex="11">
                      <GridPane.margin>
                         <Insets left="5.0" />
                      </GridPane.margin>
