@@ -38,6 +38,7 @@ import java.text.DecimalFormat;
 public class CartController {
 
     private static final double FIXED_PRICE = 7.50;
+    private int lastAddedCustomerID;
     private List<Movies> fullMovieList = new ArrayList<>(); //List that must contain the movies in cart
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
@@ -392,9 +393,15 @@ public class CartController {
         );
 
         if (addSuccessful) {
-            txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
-
+            //txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+            setLastAddedCustomerID();
+            txf_CartID.setText(String.valueOf(lastAddedCustomerID));
+            setCustomerInfoCardAfterRegistration();
         }
+    }
+
+    private void setLastAddedCustomerID() {
+        this.lastAddedCustomerID = Utility.getLastAddedCustomerID();
     }
 
     /**
@@ -518,8 +525,9 @@ public class CartController {
         }
     }
 
-    private void setCustomerInfoCard() {
-
+    private void setCustomerInfoCardAfterRegistration() {
+        setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
+        acp_customerInfoCard.setVisible(true);
     }
 
     private void setCustomerInfo(Customers customers) {
@@ -558,13 +566,16 @@ public class CartController {
             validateEmail();
             checkWhetherToDisableNewCustomerButton();
         });
+
+        setLastAddedCustomerID();
+        updateCart();
     }
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public StackPane getOuterPane() {
-        updateCart();
+        //updateCart();
         return stp_cartOuterStackPane;
     }
 }
