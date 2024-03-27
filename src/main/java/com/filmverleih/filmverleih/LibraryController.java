@@ -264,17 +264,17 @@ public class LibraryController {
     }
 
     public void updateMovieInLibrary(Movies movieToUpdate) {
-        removieMovieFromLibrary(movieToUpdate);
+        removieMovieFromLibrary(movieToUpdate.getMovieid());
         addMovieToLibrary(movieToUpdate);
         sortMovies();
         filterMovies();
     }
 
-    public void removieMovieFromLibrary(Movies movieToDelete) {
+    public void removieMovieFromLibrary(int movieToDelete) {
         grp_libraryGrid.getChildren().forEach(node -> {
             if (node instanceof StackPane stackPane) {
                 Movies movieInLibrary = getMovieFromStackPane(stackPane);
-                if (movieToDelete.getMovieid() == movieInLibrary.getMovieid()) {
+                if (movieToDelete == movieInLibrary.getMovieid()) {
                     grp_libraryGrid.getChildren().remove(stackPane);
                 }
             }

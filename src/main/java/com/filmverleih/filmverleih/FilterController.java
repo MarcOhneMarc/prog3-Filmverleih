@@ -250,6 +250,10 @@ public class FilterController {
         }
     }
 
+    public void test() {
+        libraryController.removieMovieFromLibrary(24);
+    }
+
     /**
      * Undos and Clears all Filter-Fields
      */

@@ -20,9 +20,11 @@
             <Font size="29.0" />
          </font>
       </Label>
+
       <ComboBox fx:id="cbx_sort" prefHeight="25.0" prefWidth="421.0" promptText="Sort by" />
       <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#test" prefHeight="35.0" prefWidth="355.0" text="test" textAlignment="CENTER" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Filter">
                <font>
                   <Font size="29.0" />
