@@ -53,3 +53,8 @@ Button {
 .combo-box .list-cell {
     -fx-padding: 5 10;
 }
+
+#scp_background {
+    -fx-background: #393939;
+    -fx-background-color: #393939;
+}

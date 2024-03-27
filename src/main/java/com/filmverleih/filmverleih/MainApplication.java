@@ -5,11 +5,13 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -132,10 +134,14 @@ public class MainApplication extends Application {
         //stage.setMaximized(true);
 
         // Create a loading indicator
+        VBox loadingScreenVBox = new VBox();
         ProgressBar loadingIndicator = new ProgressBar();
         loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        loadingIndicator.setPrefSize(1920, 1080);
-        borderPane.setCenter(loadingIndicator);
+        loadingScreenVBox.setPrefSize(1920, 1080);
+        loadingScreenVBox.getChildren().add(loadingIndicator);
+        loadingScreenVBox.setAlignment(Pos.CENTER);
+        loadingScreenVBox.setStyle("-fx-background-color: #191919");
+        borderPane.setCenter(loadingScreenVBox);
 
         // Show the stage
         stage.show();

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
+    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Filter.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/filterStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/filterStylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711394077780</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="FEAT-init">
+      <option name="closed" value="true" />
+      <created>1711579401248</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1711579401248</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +299,7 @@
     <MESSAGE value="FEAT-Suchalgorithmus Laufzeitoptimierung" />
     <MESSAGE value="FEAT-Kommentare" />
     <MESSAGE value="FEAT-updateMovieList" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-updateMovieList" />
+    <MESSAGE value="FEAT-init" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-init" />
   </component>
 </project>

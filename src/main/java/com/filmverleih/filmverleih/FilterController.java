@@ -1,9 +1,12 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.Comparator;
@@ -39,6 +42,8 @@ public class FilterController {
     private ComboBox<String> cbx_sort;
     @FXML
     private VBox vbx_FilterBackground;
+    @FXML
+    public ScrollPane scp_filterScrollPane;
     @FXML
     private TextField txf_year;
     @FXML
@@ -94,6 +99,14 @@ public class FilterController {
             String selectedOption = cbx_sort.getSelectionModel().getSelectedItem();
             if (selectedOption != null) {
                 sortListBy(selectedOption);
+            }
+        });
+
+        scp_filterScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double windowHeight = newValue.doubleValue();
+                vbx_FilterBackground.setMinHeight(windowHeight-90);
             }
         });
     }
@@ -250,12 +263,14 @@ public class FilterController {
         }
     }
 
-    public void test() {
-        libraryController.removieMovieFromLibrary(24);
-    }
-
     public void sync() {
-        libraryController.syncLibraryWithDB();
+        if (isLibrary) {
+            libraryController.syncLibraryWithDB();
+        } else if (isRental) {
+            //rentalcontroller.syncLibraryWithDB();
+        } else {
+            return;
+        }
     }
 
     /**
@@ -369,7 +384,7 @@ public class FilterController {
      * Retrieves the outer pane of the filter interface.
      * @return the outer pane (VBox)
      */
-    public VBox getOuterPane(){
-        return vbx_FilterBackground;
+    public ScrollPane getOuterPane(){
+        return scp_filterScrollPane;
     }
 }
