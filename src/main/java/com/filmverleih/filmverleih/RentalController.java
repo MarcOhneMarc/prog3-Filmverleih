@@ -25,11 +25,11 @@ import java.util.function.Predicate;
  * the movie itself and customer / rental information
  * with options of reminding the customer, extending the rental
  * and returning the movie
- *
  * TODO connect Backend
  *
  * @author Hannes, Luka
  */
+
 public class RentalController {
 
     @FXML
@@ -235,12 +235,11 @@ public class RentalController {
     public void extendRental(HBox hBox, Rentals rental) {
         LocalDate date = LocalDate.parse(rental.getEnddate());
         LocalDate newDate = date.plusWeeks(1);
-        RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString());
-        /*if (RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString())) {
-            //Hier Logic fuer anpassung der enddate info in der Card
+        if (RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString())) {
+            rental.setEnddate(newDate.toString());
         } else {
             System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
-        }*/
+        }
     }
 
     /**
