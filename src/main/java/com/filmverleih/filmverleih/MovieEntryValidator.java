@@ -42,7 +42,7 @@ public class MovieEntryValidator {
     }*/
 
     public static boolean listWithCommaIsValid(String actors) {
-        return actors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$");
+        return actors.matches("^(\\w+\\.?-?\\w*( \\w+\\.?-?\\w*)*(, \\w+\\.?-?\\w*( \\w+\\.?-?\\w*)*)*)?$");
     }
 
     public static boolean linkToCoverIsValid(String linkToCover) {
