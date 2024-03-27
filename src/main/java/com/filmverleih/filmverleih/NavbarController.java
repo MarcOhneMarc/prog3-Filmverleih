@@ -52,6 +52,7 @@ public class NavbarController {
      * @throws IOException if an error occurs during loading of FXML files
      */
     @FXML
+
     public void changeToLibrary() throws IOException {
         LibraryController libraryController = connector.getLibraryController();
         FilterController filterController  = connector.getFilterController();

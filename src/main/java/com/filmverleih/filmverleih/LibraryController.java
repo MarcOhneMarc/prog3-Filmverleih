@@ -199,55 +199,59 @@ public class LibraryController {
      */
     public void updateLibrary(List<Movies> movieList) {
         for (Movies movie: movieList) {
-            String imgUrl = movie.getCover();
-
-            StackPane stackPane = new StackPane();
-            grp_libraryGrid.add(stackPane, 1, 1);
-
-            StackPane stackPaneViewAddToCart = createAddToCartButton(movieList, stackPane, movie);
-
-            Node node = null;
-
-            if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
-            {
-                Label label = new Label(movie.getName());
-                label.setWrapText(true); // Enable text wrapping
-                label.setAlignment(Pos.CENTER); // Center align the text
-
-                // Set the size of the StackPane
-                label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
-                label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
-                label.getStyleClass().add("movieLabelLibrary");
-
-                node = label;
-            }
-            else {//put the Cover in the library
-                ImageView imageView = new ImageView();
-                imageView.setPreserveRatio(false);
-                imageView.setImage(new Image(imgUrl));
-                imageView.setFitWidth(200);
-                imageView.setFitHeight(300);
-
-                node = imageView;
-            }
-
-            node.setUserData(movie);
-
-            node.setOnMouseEntered(event -> stackPaneViewAddToCart.setOpacity(100));
-            node.setOnMouseExited(event -> stackPaneViewAddToCart.setOpacity(0));
-            node.setOnMouseClicked(event -> {
-                try {
-                    goToMovie(movie);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            stackPane.getChildren().add(node);
-            StackPane.setMargin(node, new Insets(20, 0, 0, 20));
-            stackPane.getChildren().add(stackPaneViewAddToCart);
+            addMovieToLibrary(movie);
         }
         adjustColumnCount();
+    }
+
+    private void addMovieToLibrary(Movies movie) {
+        String imgUrl = movie.getCover();
+
+        StackPane stackPane = new StackPane();
+        grp_libraryGrid.add(stackPane, 1, 1);
+
+        StackPane stackPaneViewAddToCart = createAddToCartButton(stackPane, movie);
+
+        Node node = null;
+
+        if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
+        {
+            Label label = new Label(movie.getName());
+            label.setWrapText(true); // Enable text wrapping
+            label.setAlignment(Pos.CENTER); // Center align the text
+
+            // Set the size of the StackPane
+            label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
+            label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
+            label.getStyleClass().add("movieLabelLibrary");
+
+            node = label;
+        }
+        else {//put the Cover in the library
+            ImageView imageView = new ImageView();
+            imageView.setPreserveRatio(false);
+            imageView.setImage(new Image(imgUrl));
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(300);
+
+            node = imageView;
+        }
+
+        node.setUserData(movie);
+
+        node.setOnMouseEntered(event -> stackPaneViewAddToCart.setOpacity(100));
+        node.setOnMouseExited(event -> stackPaneViewAddToCart.setOpacity(0));
+        node.setOnMouseClicked(event -> {
+            try {
+                goToMovie(movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        stackPane.getChildren().add(node);
+        StackPane.setMargin(node, new Insets(20, 0, 0, 20));
+        stackPane.getChildren().add(stackPaneViewAddToCart);
     }
 
     /**
@@ -259,15 +263,33 @@ public class LibraryController {
         updateLibrary(allMovies);
     }
 
+    public void updateMovieInLibrary(Movies movieToUpdate) {
+        removieMovieFromLibrary(movieToUpdate);
+        addMovieToLibrary(movieToUpdate);
+        sortMovies();
+        filterMovies();
+    }
+
+    public void removieMovieFromLibrary(Movies movieToDelete) {
+        grp_libraryGrid.getChildren().forEach(node -> {
+            if (node instanceof StackPane stackPane) {
+                Movies movieInLibrary = getMovieFromStackPane(stackPane);
+                if (movieToDelete.getMovieid() == movieInLibrary.getMovieid()) {
+                    grp_libraryGrid.getChildren().remove(stackPane);
+                }
+            }
+        });
+        adjustColumnCount();
+    }
+
     /**
      * This method creates a StackPane that acts as a button to add a movie to cart
      * the params are used to ensure the functionality of the button
-     * @param AllMovies
      * @param stackPane
      * @param movie
      * @return
      */
-    public StackPane createAddToCartButton(List<Movies> AllMovies, StackPane stackPane, Movies movie){
+    public StackPane createAddToCartButton(StackPane stackPane, Movies movie){
         StackPane stackPaneViewAddToCart = new StackPane();
         ImageView imageViewAddToCart = new ImageView();
         stackPaneViewAddToCart.getStyleClass().add("btn_class_libraryAddMovieToCartButton");

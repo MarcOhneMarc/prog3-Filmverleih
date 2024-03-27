@@ -20,7 +20,7 @@
             <Font size="29.0" />
          </font>
       </Label>
-      <ComboBox fx:id="sortComboBox" prefHeight="25.0" prefWidth="421.0" promptText="Sort by" />
+      <ComboBox fx:id="cbx_sort" prefHeight="25.0" prefWidth="421.0" promptText="Sort by" />
       <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Filter">
@@ -58,7 +58,7 @@
                <children>
                   <HBox prefHeight="15.0" prefWidth="320.0">
                      <children>
-                        <CheckBox id="cbx_rating" fx:id="cbx_ratingEmpty" mnemonicParsing="false" prefHeight="30.0" prefWidth="16.0" stylesheets="@filterStylesheet.css">
+                        <CheckBox id="cbx_rating" fx:id="cbx_ratingEmpty" prefHeight="30.0" prefWidth="16.0" stylesheets="@filterStylesheet.css">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -73,7 +73,15 @@
             <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
                <children>
                   <Label text="Type:" />
-                  <TextField fx:id="txf_type" promptText="Type" />
+                  <ComboBox fx:id="cbx_type" prefHeight="25.0" prefWidth="421.0" promptText="choose">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="keine Auswahl" />
+                           <String fx:value="DVD" />
+                           <String fx:value="Blu-Ray" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
                </children>
             </VBox>
             <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
@@ -103,7 +111,18 @@
             <VBox prefHeight="22.0" prefWidth="320.0" spacing="5.0">
                <children>
                   <Label text="FSK:" />
-                  <TextField fx:id="txf_fsk" promptText="FSK" />
+                  <ComboBox fx:id="cbx_fsk" prefHeight="25.0" prefWidth="421.0" promptText="choose">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="keine Auswahl" />
+                           <String fx:value="0" />
+                           <String fx:value="6" />
+                           <String fx:value="12" />
+                           <String fx:value="16" />
+                           <String fx:value="18" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
                </children>
             </VBox>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#resetFilters" prefHeight="35.0" prefWidth="423.0" text="Reset all" textAlignment="CENTER">

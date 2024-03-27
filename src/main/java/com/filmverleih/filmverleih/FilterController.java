@@ -1,7 +1,6 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -9,7 +8,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -38,7 +36,7 @@ public class FilterController {
     private RentalController rentalController;
 
     @FXML
-    private ComboBox<String> sortComboBox;
+    private ComboBox<String> cbx_sort;
     @FXML
     private VBox vbx_FilterBackground;
     @FXML
@@ -56,7 +54,7 @@ public class FilterController {
     @FXML
     public CheckBox cbx_ratingEmpty;
     @FXML
-    public TextField txf_type;
+    public ComboBox<String> cbx_type;
     @FXML
     public TextField txf_comment;
     @FXML
@@ -66,7 +64,7 @@ public class FilterController {
     @FXML
     public TextField txf_actor;
     @FXML
-    public TextField txf_fsk;
+    public ComboBox<String> cbx_fsk;
 
     public String searchBar;
 
@@ -80,8 +78,11 @@ public class FilterController {
      */
     @FXML
     private void initialize() {
+        cbx_fsk.setValue("keine Auswahl");
+        cbx_type.setValue("keine Auswahl");
         libraryFilterConfig = getConfigMap();
         changeToLibrary();
+
 
         sld_rating.valueProperty().addListener((observable, oldValue, newValue) -> {
             double value = newValue.doubleValue();
@@ -89,8 +90,8 @@ public class FilterController {
             lbl_rating.setText(String.valueOf(roundedValue));
         });
 
-        sortComboBox.setOnAction(event -> {
-            String selectedOption = sortComboBox.getSelectionModel().getSelectedItem();
+        cbx_sort.setOnAction(event -> {
+            String selectedOption = cbx_sort.getSelectionModel().getSelectedItem();
             if (selectedOption != null) {
                 sortListBy(selectedOption);
             }
@@ -158,12 +159,17 @@ public class FilterController {
         String minLengthFilter = txf_minLength.getText();
         String maxLengthFilter = txf_maxLength.getText();
         double ratingFilter = sld_rating.getValue();
-        String typeFilter = txf_type.getText();
+        String typeFilter;
+        if (cbx_type.getValue().equals("Blu-Ray")) {
+            typeFilter = "BR";
+        } else {
+            typeFilter = cbx_type.getValue();
+        }
         String commentFilter = txf_comment.getText();
         String directorFilter = txf_director.getText();
         String studioFilter = txf_studio.getText();
         String actorFilter = txf_actor.getText();
-        String fskFilter = txf_fsk.getText();
+        String fskFilter = cbx_fsk.getValue();
 
         Predicate<Movies> predicate = movie -> true;
 
@@ -193,10 +199,18 @@ public class FilterController {
             predicate = predicate.and(movie ->
                     Double.valueOf(movie.getRating().toString()) > roundedValue);
         }
+
         if (!typeFilter.isEmpty()) {
-            predicate = predicate.and(movie ->
-                    movie.getType().toLowerCase().contains(typeFilter.toLowerCase()));
+            if (!typeFilter.equals("keine Auswahl")) {
+                if (typeFilter.equals("Blu-Ray")) {
+                    predicate = predicate.and(movie -> movie.getType().contains("BR"));
+                }
+                else {
+                    predicate = predicate.and(movie -> movie.getType().toLowerCase().contains(typeFilter.toLowerCase()));
+                }
+            }
         }
+
         if (!commentFilter.isEmpty()) {
             predicate = predicate.and(movie ->
                     movie.getComment().toLowerCase().contains(commentFilter.toLowerCase()));
@@ -206,20 +220,24 @@ public class FilterController {
                     movie.getDirectors().toLowerCase().contains(directorFilter.toLowerCase()));
         }
         if (!studioFilter.isEmpty()) {
+            System.out.println(studioFilter);
             predicate = predicate.and(movie ->
                     movie.getStudio().toLowerCase().contains(studioFilter.toLowerCase()));
         }
         if (!actorFilter.isEmpty()) {
+            System.out.println(actorFilter);
             predicate = predicate.and(movie ->
                     movie.getActors().toLowerCase().contains(actorFilter.toLowerCase()));
         }
         if (!fskFilter.isEmpty()) {
-            int fsk = Integer.parseInt(fskFilter);
-            predicate = predicate.and(movie ->
-                    movie.getFsk() == fsk);
+            if (!fskFilter.equals("keine Auswahl")) {
+                int fsk = Integer.parseInt(fskFilter);
+                predicate = predicate.and(movie ->
+                        movie.getFsk() == fsk);
+            }
         }
 
-        if (predicate != null) {
+        if (!(predicate == null)) {
             if (isLibrary) {
                 libraryController.predicate = predicate;
                 libraryController.filterMovies();
@@ -242,12 +260,12 @@ public class FilterController {
         txf_minLength.setText("");
         txf_maxLength.setText("");
         sld_rating.setValue(0);
-        txf_type.setText("");
+        cbx_type.setValue("keine Auswahl");
         txf_comment.setText("");
         txf_director.setText("");
         txf_studio.setText("");
         txf_actor.setText("");
-        txf_fsk.setText("");
+        cbx_fsk.setValue("keine Auswahl");
 
         if (isLibrary) {
             libraryController.predicate = movie -> true;
@@ -267,12 +285,12 @@ public class FilterController {
         config.put("minLength", txf_minLength.getText());
         config.put("maxLength", txf_maxLength.getText());
         config.put("rating", String.valueOf(sld_rating.getValue()));
-        config.put("type", txf_type.getText());
+        config.put("type", cbx_type.getValue());
         config.put("comment", txf_comment.getText());
         config.put("director", txf_director.getText());
         config.put("studio", txf_studio.getText());
         config.put("actor", txf_actor.getText());
-        config.put("fsk", txf_fsk.getText());
+        config.put("fsk", cbx_fsk.getValue());
         return config;
     }
 
@@ -282,12 +300,12 @@ public class FilterController {
         txf_minLength.setText(filterConfig.get("minLength"));
         txf_maxLength.setText(filterConfig.get("maxLength"));
         sld_rating.setValue(Double.parseDouble(filterConfig.get("rating")));
-        txf_type.setText(filterConfig.get("type"));
+        cbx_type.setValue(filterConfig.get("type"));
         txf_comment.setText(filterConfig.get("comment"));
         txf_director.setText(filterConfig.get("director"));
         txf_studio.setText(filterConfig.get("studio"));
         txf_actor.setText(filterConfig.get("actor"));
-        txf_fsk.setText(filterConfig.get("fsk"));
+        cbx_fsk.setValue(filterConfig.get("fsk"));
     }
 
     public void changeToRental() {
@@ -296,8 +314,8 @@ public class FilterController {
         }
         libraryFilterConfig = getConfigMap();
         applyFilterConfig(rentalFilterConfig);
-        sortComboBox.getItems().clear();
-        sortComboBox.getItems().addAll(
+        cbx_sort.getItems().clear();
+        cbx_sort.getItems().addAll(
                 "Name aufsteigend",
                 "Name absteigend",
                 "Jahr aufsteigend",
@@ -321,8 +339,8 @@ public class FilterController {
         }
         rentalFilterConfig = getConfigMap();
         applyFilterConfig(libraryFilterConfig);
-        sortComboBox.getItems().clear();
-        sortComboBox.getItems().addAll(
+        cbx_sort.getItems().clear();
+        cbx_sort.getItems().addAll(
                 "Name aufsteigend",
                 "Name absteigend",
                 "Jahr aufsteigend",
