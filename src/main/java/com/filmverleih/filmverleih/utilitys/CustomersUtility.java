@@ -118,4 +118,23 @@ public class CustomersUtility {
         }
         return false;
     }
+
+    /**
+     * This method checks whether a certain customer db is already in the db
+     * @param id the id that will be checked
+     * @return true if id is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateCustomerID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return true;
+        }
+        return false;
+    }
+
+    public static Customers getCustomersByID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return customers;
+        }
+        return null;
+    }
 }

@@ -87,6 +87,8 @@ public class CartController {
     private Label lbl_errorNoID;
     @FXML
     private Label lbl_errorEmptyCart;
+    @FXML
+    private Button btn_checkID;
 
     //PopUp FXML components
     @FXML
@@ -113,6 +115,25 @@ public class CartController {
     private Label lbl_errorInvalidEmail;
     @FXML
     private Label lbl_errorInvalidPhone;
+
+    //Customer information card
+    @FXML
+    private AnchorPane acp_customerInfoCard;
+    @FXML
+    private Label lbl_customerIDValue;
+    @FXML
+    private Label lbl_customerSurnameValue;
+    @FXML
+    private Label lbl_customerLastNameValue;
+    @FXML
+    private Label lbl_customerStreetValue;
+    @FXML
+    private Label lbl_customerCityValue;
+    @FXML
+    private Label lbl_customerPhoneValue;
+    @FXML
+    private Label lbl_customerEmailValue;
+
 
     /**
      *This method fills in the movie-cards to the movie list on the left
@@ -288,10 +309,12 @@ public class CartController {
                } else {
                    vbx_CartMovieCardsVBox.getChildren().remove(i);
                    removeMovieFromCart(fullMovieList.get(i));
+                   //TODO find a better place for the following call
+                   acp_customerInfoCard.setVisible(false);
                }
            }
        } else {
-           enablePopUpDisableCart();
+           //enablePopUpDisableCart();
        };
         updateCart();
     }
@@ -370,6 +393,7 @@ public class CartController {
 
         if (addSuccessful) {
             txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+
         }
     }
 
@@ -403,10 +427,12 @@ public class CartController {
     @FXML
     public void checkIDEmpty() {
         if (txf_CartID.getText().isBlank()) {
+            btn_checkID.setDisable(true);
             btn_OrderCart.setDisable(true);
             lbl_errorNoID.setVisible(true);
         } else {
             lbl_errorNoID.setVisible(false);
+            btn_checkID.setDisable(false);
             if (!fullMovieList.isEmpty()) {
                 btn_OrderCart.setDisable(false);
                 lbl_errorEmptyCart.setVisible(false);
@@ -480,6 +506,33 @@ public class CartController {
             return true;
         }
     }
+
+    @FXML
+    private void checkID() {
+        boolean bool = CustomersUtility.checkDuplicateCustomerID(Integer.parseInt(txf_CartID.getText()));
+        if (!bool) {
+            enablePopUpDisableCart();
+        } else {
+            setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
+            acp_customerInfoCard.setVisible(true);
+        }
+    }
+
+    private void setCustomerInfoCard() {
+
+    }
+
+    private void setCustomerInfo(Customers customers) {
+        lbl_customerIDValue.setText(String.valueOf(customers.getCustomerid()));
+        lbl_customerSurnameValue.setText(customers.getFirstname());
+        lbl_customerLastNameValue.setText(customers.getLastname());
+        lbl_customerStreetValue.setText(customers.getStreet());
+        lbl_customerCityValue.setText(customers.getCity());
+        lbl_customerPhoneValue.setText(customers.getPhone());
+        lbl_customerEmailValue.setText(customers.getEmail());
+    }
+
+
 
     /**
      * This method updates the card by setting the order information labels

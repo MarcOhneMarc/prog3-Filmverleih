@@ -43,7 +43,7 @@
                      <HBox prefHeight="65.0" prefWidth="450.0">
                         <children>
                            <TextField fx:id="txf_CartID" maxHeight="50.0" maxWidth="370.0" onKeyTyped="#checkIDEmpty" prefHeight="50.0" prefWidth="370.0" promptText="ID" styleClass="txf_class_CartTextFields" />
-                           <Button fx:id="btn_checkID" maxHeight="50.0" maxWidth="70.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="70.0" text="check ID">
+                           <Button fx:id="btn_checkID" maxHeight="50.0" maxWidth="70.0" mnemonicParsing="false" onAction="#checkID" prefHeight="50.0" prefWidth="70.0" text="check ID">
                               <HBox.margin>
                                  <Insets left="10.0" />
                               </HBox.margin>
@@ -164,7 +164,7 @@
          </VBox>
       </children>
    </AnchorPane>
-   <AnchorPane fx:id="acp_customerInfoCard" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@customerPopUpStylesheet.css" StackPane.alignment="BOTTOM_RIGHT">
+   <AnchorPane fx:id="acp_customerInfoCard" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@customerPopUpStylesheet.css" visible="false" StackPane.alignment="BOTTOM_RIGHT">
       <children>
          <VBox layoutX="37.0" layoutY="9.0" prefHeight="182.0" prefWidth="329.0">
             <children>
