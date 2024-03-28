@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -93,7 +94,7 @@ public class RentalMovieController {
      * TODO remove/return rented movie from db
      */
     public void removeFromRental() {
-        System.out.println("console test: return button has been clicked");
+        LoggerUtility.logger.info("movie has been returned; return button clicked: 019");
 
         if (rentalController != null) {
             rentalController.removeFromRental(hbx_rentalMovieCard, movie);
@@ -105,7 +106,7 @@ public class RentalMovieController {
      * TODO implement an extension of the return date in db
      */
     public void extendRental() {
-        System.out.println("console test: extend button has been clicked");
+        LoggerUtility.logger.info("movie rental has been extended; extend button clicked: 020");
     }
 
     /**
@@ -113,7 +114,7 @@ public class RentalMovieController {
      * TODO find a way to actually remind the customer
      */
     public void remindCustomerOfRental() {
-        System.out.println("console test: remind button has been clicked");
+        LoggerUtility.logger.info("customer has been reminded; remind button clicked: 021");
     }
 
 

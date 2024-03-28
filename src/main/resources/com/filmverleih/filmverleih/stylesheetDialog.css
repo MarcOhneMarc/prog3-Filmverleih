@@ -1,0 +1,21 @@
+.button{
+    -fx-cursor: hand;
+    -fx-background-color: #FFFF3D;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #000;
+    -fx-font-size: 15;
+    -fx-font-family: inter;
+    -fx-font-weight: normal;
+}
+
+.button:hover{
+    -fx-effect: dropshadow(three-pass-box, #fcfcb7, 10, 0.6, 0, 0);
+}
+
+.dialog{
+    -fx-background-color: #949494;
+}
+
+.dialog *.header-panel{
+    -fx-background-color: #949494;
+}

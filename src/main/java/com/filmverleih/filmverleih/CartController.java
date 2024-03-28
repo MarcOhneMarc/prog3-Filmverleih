@@ -1,7 +1,9 @@
 package com.filmverleih.filmverleih;
 
+
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,13 +43,14 @@ public class CartController {
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector;
+
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
     }
 
@@ -296,7 +299,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);
