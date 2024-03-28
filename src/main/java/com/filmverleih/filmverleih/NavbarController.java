@@ -77,8 +77,6 @@ public class NavbarController {
         filterController.changeToLibrary();
         resetStyling();
         btn_navBarLibrary.setStyle("-fx-background-color: #FFFF8D");
-        filterController.isLibrary = true;
-        filterController.isRental = false;
     }
 
     /**
@@ -97,8 +95,6 @@ public class NavbarController {
         filterController.changeToRental();
         resetStyling();
         btn_navBarRental.setStyle("-fx-background-color: #FFFF8D");
-        filterController.isRental = true;
-        filterController.isLibrary = false;
 
         //MainApplication.borderPane.setRight(null);
     }

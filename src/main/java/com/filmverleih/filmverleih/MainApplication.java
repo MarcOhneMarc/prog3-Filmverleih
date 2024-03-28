@@ -157,7 +157,6 @@ public class MainApplication extends Application {
 
         String css = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);
-
         stage.setTitle("Quantum-Vortex");
 
         Image icon = new Image(getClass().getResourceAsStream("logo.png"));

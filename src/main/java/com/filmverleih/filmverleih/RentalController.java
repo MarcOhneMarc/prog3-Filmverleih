@@ -137,7 +137,6 @@ public class RentalController {
         GridPane.setMargin(rentalCard,  new Insets(20, 0, 0, 20));
         grp_rentalGrid.add(rentalCard, 1, 1);
     }
-
     /**
      * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
      * The sorting is based on a comparator associated with the Movies objects.
@@ -221,18 +220,6 @@ public class RentalController {
     }
 
     /**
-     * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
-     * The sorting is based on a comparator associated with the Movies objects.
-     */
-    public void sortMovies() {
-        List<HBox> hBoxes = new ArrayList<>(grp_rentalGrid.getChildren().stream()
-                .filter(node -> node instanceof HBox)
-                .map(node -> (HBox) node)
-                .toList());
-        adjustColumnCount();
-    }
-
-    /**
      * This method updates a specific Rental in the RentalView GridPane.
      * It deletes the rentalToUpdate in the Pane and adds the changed.
      */
@@ -258,22 +245,6 @@ public class RentalController {
                 return;
             }
         }
-
-    /**
-     * Filters the movie StackPane objects within the GridPane based on the provided predicate.
-     * Sets the visibility and manageability of each StackPane accordingly.
-     * Adjusts the column count after filtering.
-     */
-    public void filterMovies() {
-        grp_rentalGrid.getChildren().forEach(node -> {
-            if (node instanceof HBox hBox) {
-                Movies movie = (Movies) hBox.getUserData();
-                boolean isVisible = predicate.test(movie);
-                hBox.setVisible(isVisible);
-                hBox.setManaged(isVisible);
-            }
-        });
-        adjustColumnCount();
     }
 
     /**
