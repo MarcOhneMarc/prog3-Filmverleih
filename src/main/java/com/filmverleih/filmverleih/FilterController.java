@@ -181,10 +181,10 @@ public class FilterController {
         Comparator<Rentals> comparator = null;
 
         switch (selectedOption) {
-            case "Rückhgabedatum aufsteigend":
+            case "Rückgabedatum aufsteigend":
                 comparator = Comparator.comparing(Rentals::getEnddate);
                 break;
-            case "Rückhgabedatum absteigend":
+            case "Rückgabedatum absteigend":
                 comparator = Comparator.comparing(Rentals::getEnddate).reversed();
                 break;
             case "Film Name aufsteigend":
@@ -526,8 +526,8 @@ public class FilterController {
         applyFilterConfig(rentalFilterConfig);
         cbx_sort.getItems().clear();
         cbx_sort.getItems().addAll(
-                "Rückhgabedatum aufsteigend",
-                "Rückhgabedatum absteigend",
+                "Rückgabedatum aufsteigend",
+                "Rückgabedatum absteigend",
                 "Film Name aufsteigend",
                 "Film Name absteigend",
                 "Film Jahr aufsteigend",
