@@ -133,19 +133,40 @@ public class FilterController {
      * Generates a Comparator to Sort Movies in the LibraryView.
      */
     private void sortMovieListBy(String selectedOption) {
-        Comparator<Movies> comparator = switch (selectedOption) {
-            case "Name aufsteigend" -> Comparator.comparing(Movies::getName);
-            case "Name absteigend" -> Comparator.comparing(Movies::getName).reversed();
-            case "Jahr aufsteigend" -> Comparator.comparingInt(Movies::getYear);
-            case "Jahr absteigend" -> Comparator.comparingInt(Movies::getYear).reversed();
-            case "Bewertung aufsteigend" -> Comparator.comparing(Movies::getRating);
-            case "Bewertung absteigend" -> Comparator.comparing(Movies::getRating).reversed();
-            case "Länge aufsteigend" -> Comparator.comparingInt(Movies::getLength);
-            case "Länge absteigend" -> Comparator.comparingInt(Movies::getLength).reversed();
-            case "FSK aufsteigend" -> Comparator.comparingInt(Movies::getFsk);
-            case "FSK absteigend" -> Comparator.comparingInt(Movies::getFsk).reversed();
-            default -> null;
-        };
+        Comparator<Movies> comparator = null;
+
+        switch (selectedOption) {
+            case "Name aufsteigend":
+                comparator = Comparator.comparing(Movies::getName);
+                break;
+            case "Name absteigend":
+                comparator = Comparator.comparing(Movies::getName).reversed();
+                break;
+            case "Jahr aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getYear);
+                break;
+            case "Jahr absteigend":
+                comparator = Comparator.comparingInt(Movies::getYear).reversed();
+                break;
+            case "Bewertung aufsteigend":
+                comparator = Comparator.comparing(Movies::getRating);
+                break;
+            case "Bewertung absteigend":
+                comparator = Comparator.comparing(Movies::getRating).reversed();
+                break;
+            case "Länge aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getLength);
+                break;
+            case "Länge absteigend":
+                comparator = Comparator.comparingInt(Movies::getLength).reversed();
+                break;
+            case "FSK aufsteigend":
+                comparator = Comparator.comparingInt(Movies::getFsk);
+                break;
+            case "FSK absteigend":
+                comparator = Comparator.comparingInt(Movies::getFsk).reversed();
+                break;
+        }
 
         if (comparator != null) {
             libraryController.comparator = comparator;
@@ -157,26 +178,46 @@ public class FilterController {
      * Generates a Comparator to Sort Rentals in the RentalView.
      */
     private void sortRentalListBy(String selectedOption) {
-        Comparator<Rentals> comparator = switch (selectedOption) {
-            case "Rückhgabedatum aufsteigend" -> Comparator.comparing(Rentals::getEnddate);
-            case "Rückhgabedatum absteigend" -> Comparator.comparing(Rentals::getEnddate).reversed();
-            case "Film Name aufsteigend" -> Comparator.comparing(rental -> rental.getMovie().getName());
-            case "Film Name absteigend" ->
-                    Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
-            case "Film Jahr aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getYear());
-            case "Film Jahr absteigend" ->
-                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
-            case "Film Bewertung aufsteigend" -> Comparator.comparing(rental -> rental.getMovie().getRating());
-            case "Film Bewertung absteigend" ->
-                    Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
-            case "Film Länge aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getLength());
-            case "Film Länge absteigend" ->
-                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
-            case "Film FSK aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getFsk());
-            case "Film FSK absteigend" ->
-                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
-            default -> null;
-        };
+        Comparator<Rentals> comparator = null;
+
+        switch (selectedOption) {
+            case "Rückhgabedatum aufsteigend":
+                comparator = Comparator.comparing(Rentals::getEnddate);
+                break;
+            case "Rückhgabedatum absteigend":
+                comparator = Comparator.comparing(Rentals::getEnddate).reversed();
+                break;
+            case "Film Name aufsteigend":
+                comparator = Comparator.comparing(rental -> rental.getMovie().getName());
+                break;
+            case "Film Name absteigend":
+                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
+                break;
+            case "Film Jahr aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getYear());
+                break;
+            case "Film Jahr absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
+                break;
+            case "Film Bewertung aufsteigend":
+                comparator = Comparator.comparing(rental -> rental.getMovie().getRating());
+                break;
+            case "Film Bewertung absteigend":
+                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
+                break;
+            case "Film Länge aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getLength());
+                break;
+            case "Film Länge absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
+                break;
+            case "Film FSK aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getFsk());
+                break;
+            case "Film FSK absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
+                break;
+        }
 
         if (comparator != null) {
             rentalController.comparator = comparator;
@@ -487,16 +528,16 @@ public class FilterController {
         cbx_sort.getItems().addAll(
                 "Rückhgabedatum aufsteigend",
                 "Rückhgabedatum absteigend",
-                "Name aufsteigend",
-                "Name absteigend",
-                "Jahr aufsteigend",
-                "Jahr absteigend",
-                "Bewertung aufsteigend",
-                "Bewertung absteigend",
-                "Länge aufsteigend",
-                "Länge absteigend",
-                "FSK aufsteigend",
-                "FSK absteigend"
+                "Film Name aufsteigend",
+                "Film Name absteigend",
+                "Film Jahr aufsteigend",
+                "Film Jahr absteigend",
+                "Film Bewertung aufsteigend",
+                "Film Bewertung absteigend",
+                "Film Länge aufsteigend",
+                "Film Länge absteigend",
+                "Film FSK aufsteigend",
+                "Film FSK absteigend"
         );
 
         isRental = true;
