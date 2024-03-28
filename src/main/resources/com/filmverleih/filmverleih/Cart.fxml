@@ -50,7 +50,7 @@
                            </Button>
                         </children>
                      </HBox>
-                     <Label fx:id="lbl_errorNoID" text="Bitte ID eingeben!" textFill="#ff4040" visible="false" />
+                     <Label fx:id="lbl_errorNoID" text="ID ungültig!" textFill="#ff4040" visible="false" />
                      <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                         <columns>
                            <TableColumn fx:id="tbc_Movie" maxWidth="300.0" prefWidth="300.0" resizable="false" styleClass="tbc_class_TableColumns" text="Film" />

@@ -37,12 +37,12 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
                 System.out.println("Order went wrong Code: 77619");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
             System.out.println("Order went wrong Code: 77618");
             return false;
         }
