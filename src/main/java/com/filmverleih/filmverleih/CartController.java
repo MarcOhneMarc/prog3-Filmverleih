@@ -575,7 +575,6 @@ public class CartController {
      */
     @FXML
     private void initialize() {
-        fillObservableMovieList();
         setLastAddedCustomerID();
         updateCart();
         btn_checkID.setDisable(true);
