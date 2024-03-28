@@ -13,13 +13,10 @@ import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.validator.routines.EmailValidator;
 import javafx.collections.ListChangeListener;
@@ -33,7 +30,6 @@ import java.text.DecimalFormat;
  * the selected movies, providing a price calculation
  * and displaying the rental and return date.
  *
- * TODO connect Backend
  *
  * @author Hannes, Jannis, Marc
  */
@@ -177,7 +173,6 @@ public class CartController {
         vbx_CartMovieCardsVBox.getChildren().remove(movieCard);
         removeMovieFromCart(movie);
 
-        //TODO find a better place for the following call
         lbl_errorDuplicateRentalMessage.setVisible(false);
         updateCart();
     }
@@ -310,14 +305,11 @@ public class CartController {
                } else {
                    vbx_CartMovieCardsVBox.getChildren().remove(i);
                    removeMovieFromCart(fullMovieList.get(i));
-                   //TODO find a better place for the following call
                    acp_customerInfoCard.setVisible(false);
                }
            }
-       } else {
-           //enablePopUpDisableCart();
-       };
-        updateCart();
+       }
+       updateCart();
     }
 
     /**
