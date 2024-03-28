@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -80,17 +81,16 @@ public class RentalMovieController {
         lbl_rentalMovieTitle.setText(rentals.getMovie().getName());
         lbl_rentalMovieLength.setText(valueOf(rentals.getMovie().getLength()) + " min");
         lbl_rentalMovieYear.setText(valueOf(rentals.getMovie().getYear()));
+        lbl_rentalMovieCustomerNr.setText(valueOf(rentals.getCustomerid()));
     }
 
 
 
     /**
      * This method gets the customer information for the rental and sets them to the according label
-     * /TODO actually get customer info from db as soon as db is updated
      */
     public void insertCustomerInfo() {
-        lbl_rentalMovieCustomer.setText(rentals.getCustomer().getFirstname() + " " +
-                rentals.getCustomer().getLastname());
+        lbl_rentalMovieCustomer.setText(rentals.getCustomer().getFirstname() + " " + rentals.getCustomer().getLastname());
         lbl_rentalMovieDate.setText(rentals.getStartdate());
         lbl_rentalMovieReturnDate.setText(rentals.getEnddate());
         lbl_rentalMovieStatus.setText("verliehen");
@@ -98,11 +98,9 @@ public class RentalMovieController {
 
     /**
      * This method removes the rental card from the rental view
-     * TODO remove/return rented movie from db
      */
     public void removeFromRental() {
-        System.out.println("console test: return button has been clicked");
-
+        LoggerUtility.logger.info("movie has been returned; return button clicked: 019");
         if (rentalController != null) {
             rentalController.removeFromRental(hbx_rentalMovieCard, rentals);
         }
@@ -110,7 +108,7 @@ public class RentalMovieController {
 
     /**
      * This method extends the movie rental
-     * TODO implement an extension of the return date in db
+     *
      */
     public void extendRental() {
         System.out.println("console test: extend button has been clicked");
@@ -121,11 +119,12 @@ public class RentalMovieController {
 
     /**
      * This method reminds the customer of his rental
-     * TODO find a way to actually remind the customer
      */
-    public void remindCustomerOfRental() {
+    public void remindCustomer() {
         System.out.println("console test: remind button has been clicked");
+        if (rentalController != null) {
+            rentalController.remindCustomer(rentals);
+        }
     }
-
-
 }
+

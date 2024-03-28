@@ -4,6 +4,10 @@ import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+
+import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -27,9 +31,9 @@ import java.util.function.Predicate;
  * the movie itself and customer / rental information
  * with options of reminding the customer, extending the rental
  * and returning the movie
- * TODO connect Backend
+
  *
- * @author Hannes, Luka
+ * @author Hannes, Luka, Marc , Jonas
  */
 
 public class RentalController {
@@ -39,6 +43,8 @@ public class RentalController {
 
     @FXML
     Pane pane;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector;
+
     @FXML
     ScrollPane scp_rentalScrollPane;
     @FXML
@@ -49,13 +55,13 @@ public class RentalController {
     public Comparator<Rentals> comparator;
 
 
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
-
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
+      
         this.connector = connector;
     }
 
@@ -211,7 +217,18 @@ public class RentalController {
         for (Rentals rentalToAdd : rentalsToAdd) {
             addRentedMovieToRental(rentalToAdd); // Add collected movies to library
         }
+        adjustColumnCount();
+    }
 
+    /**
+     * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
+     * The sorting is based on a comparator associated with the Movies objects.
+     */
+    public void sortMovies() {
+        List<HBox> hBoxes = new ArrayList<>(grp_rentalGrid.getChildren().stream()
+                .filter(node -> node instanceof HBox)
+                .map(node -> (HBox) node)
+                .toList());
         adjustColumnCount();
     }
 
@@ -241,6 +258,22 @@ public class RentalController {
                 return;
             }
         }
+
+    /**
+     * Filters the movie StackPane objects within the GridPane based on the provided predicate.
+     * Sets the visibility and manageability of each StackPane accordingly.
+     * Adjusts the column count after filtering.
+     */
+    public void filterMovies() {
+        grp_rentalGrid.getChildren().forEach(node -> {
+            if (node instanceof HBox hBox) {
+                Movies movie = (Movies) hBox.getUserData();
+                boolean isVisible = predicate.test(movie);
+                hBox.setVisible(isVisible);
+                hBox.setManaged(isVisible);
+            }
+        });
+        adjustColumnCount();
     }
 
     /**
@@ -310,6 +343,18 @@ public class RentalController {
             rental.setEnddate(newDate.toString());
         } else {
             System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+        }
+    }
+
+    /**
+     * Method to remind a customer
+     * @param rental the rental to be reminded
+     */
+    public void remindCustomer(Rentals rental) {
+        if (WarningPdfGenerator.generatePdf(rental.getMovie().getName(), rental.getStartdate(), rental.getEnddate())) {
+            System.out.println("Das erstellen einer mahnung war erfolgreich");
+        } else {
+            System.out.println("Das erstellen einer mahnung ist fehlgeschlagen");
         }
     }
 

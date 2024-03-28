@@ -54,6 +54,7 @@ public class Movies {
     @Column(name = "fsk", nullable = false)
     private int fsk;
 
+
     public int getMovieid() {
         return movieid;
     }

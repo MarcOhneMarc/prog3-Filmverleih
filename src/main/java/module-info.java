@@ -5,6 +5,11 @@ module com.filmverleih.filmverleih {
     requires java.sql;
     requires java.naming;
     requires jakarta.persistence;
+    requires org.apache.pdfbox;
+    requires java.desktop;
+    requires org.apache.commons.validator;
+    requires org.slf4j;
+    requires org.apache.logging.log4j;
 
 
     opens com.filmverleih.filmverleih to javafx.fxml;

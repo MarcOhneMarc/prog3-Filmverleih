@@ -39,18 +39,39 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("Order went wrong Code: 77619");
+                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact: 011");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("Order went wrong Code: 77618");
+            LoggerUtility.logger.warn("build session failed: 012");
             return false;
         }
         return true;
     }
 
+    public static List<Rentals> getAllRentedMovies() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
+                transaction.commit();
+                return rentals;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return new ArrayList<Rentals>();
+    }
+
+    /**
+     * This method returns all rentals from db
+     * @return list of all rentals
+     */
     public static List<Rentals> getAllRentedMovies() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -84,6 +105,13 @@ public class RentalsUtility {
         return customersList.getLast().getCustomerid();
     }
 
+
+    /**
+     * This method deletes a rental from db
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @return true if deleting was successful, false if not
+     */
     public static boolean deleteRentalFromDB(int movieid, int customerid) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -104,6 +132,14 @@ public class RentalsUtility {
         return true;
     }
 
+
+    /**
+     * This method extends the rental
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @param enddate the end date of the rental
+     * @return true if extending was successful, false if not
+     */
     public static boolean extendRentalinDB(int movieid, int customerid,  String enddate) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {

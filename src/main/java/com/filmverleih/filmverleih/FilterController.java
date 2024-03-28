@@ -24,14 +24,16 @@ import java.util.function.Predicate;
 public class FilterController {
 
     AnchorPane anchorPane;
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector;
+
+
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
 
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
         this.libraryController = connector.getLibraryController();
         this.navbarController = connector.getNavbarController();

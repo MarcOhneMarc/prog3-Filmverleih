@@ -33,8 +33,8 @@ public class LibraryController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
-                                    EditMovieController,
-                                    Integer,
+                                    LoginController,
+                                    EditMovieController,                           
                                     Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -47,8 +47,8 @@ public class LibraryController {
                             SettingsController,
                             FilterController,
                             CartController,
-                            EditMovieController,
-                            Integer,
+                            LoginController,
+                            EditMovieController,             
                             Integer> connector) {
         this.connector = connector;
         this.cartController = connector.getCartController();
@@ -313,6 +313,7 @@ public class LibraryController {
      * This method updates a specific Movie in the LibraryView GridPane.
      * It deletes the movie in the Pane and adds the changed.
      */
+
     public void updateMovieInLibrary(Movies movieToUpdate) {
         removeMovieFromLibrary(movieToUpdate.getMovieid());
         addMovieToLibrary(movieToUpdate);
@@ -435,6 +436,7 @@ public class LibraryController {
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        MainApplication.borderPane.setRight(null);
         movieController.fillPage(movie);
         MainApplication.borderPane.setRight(null);
 
