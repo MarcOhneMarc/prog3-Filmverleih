@@ -24,6 +24,10 @@ public class Rentals {
     @JoinColumn(name = "movieid", referencedColumnName = "movieid", nullable = false)
     private Movies movie;
 
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "customerid", referencedColumnName = "customerid", nullable = false, insertable=false, updatable=false)
+    private Customers customer;
+
     public int getMovieid() {
         return movieid;
     }
@@ -75,5 +79,13 @@ public class Rentals {
 
     public void setMovie(Movies movie) {
         this.movie = movie;
+    }
+
+    public Customers getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customers customer) {
+        this.customer = customer;
     }
 }

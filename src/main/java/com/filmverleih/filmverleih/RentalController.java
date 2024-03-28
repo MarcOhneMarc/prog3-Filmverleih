@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -25,9 +26,8 @@ import java.util.function.Predicate;
  * the movie itself and customer / rental information
  * with options of reminding the customer, extending the rental
  * and returning the movie
- * TODO connect Backend
  *
- * @author Hannes, Luka
+ * @author Hannes, Luka, Marc
  */
 
 public class RentalController {
@@ -229,8 +229,8 @@ public class RentalController {
     /**
      * Method to extend a rental
      *  TODO Implement update Card Info with new End date
-     * @param hBox
-     * @param rental
+     * @param hBox the rental card
+     * @param rental the rental to be extended
      */
     public void extendRental(HBox hBox, Rentals rental) {
         LocalDate date = LocalDate.parse(rental.getEnddate());
@@ -239,6 +239,18 @@ public class RentalController {
             rental.setEnddate(newDate.toString());
         } else {
             System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+        }
+    }
+
+    /**
+     * Method to remind a customer
+     * @param rental the rental to be reminded
+     */
+    public void remindCustomer(Rentals rental) {
+        if (WarningPdfGenerator.generatePdf(rental.getMovie().getName(), rental.getStartdate(), rental.getEnddate())) {
+            System.out.println("Das erstellen einer mahnung war erfolgreich");
+        } else {
+            System.out.println("Das erstellen einer mahnung ist fehlgeschlagen");
         }
     }
 

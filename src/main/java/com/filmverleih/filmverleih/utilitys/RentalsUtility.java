@@ -51,6 +51,10 @@ public class RentalsUtility {
         return true;
     }
 
+    /**
+     * This method returns all rentals from db
+     * @return list of all rentals
+     */
     public static List<Rentals> getAllRentedMovies() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -60,7 +64,7 @@ public class RentalsUtility {
                 List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
                 transaction.commit();
                 for (Rentals rental: rentals) {
-                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate() + " " + rental.getMovie().getName());
+                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate() + " " + rental.getMovie().getName() + " " + rental.getCustomer().getLastname());
                 }
                 return rentals;
             } catch (Exception e) {
@@ -87,6 +91,13 @@ public class RentalsUtility {
         return customersList.getLast().getCustomerid();
     }
 
+
+    /**
+     * This method deletes a rental from db
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @return true if deleting was successful, false if not
+     */
     public static boolean deleteRentalFromDB(int movieid, int customerid) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -107,6 +118,13 @@ public class RentalsUtility {
         return true;
     }
 
+    /**
+     * This method extends the rental
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @param enddate the end date of the rental
+     * @return true if extending was successful, false if not
+     */
     public static boolean extendRentalinDB(int movieid, int customerid,  String enddate) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
