@@ -334,7 +334,7 @@ public class FilterController {
     }
 
     /**
-     * Generates a Predicate to filter Movies in the RentalView.
+     * Generates a Predicate to filter Rentals in the RentalView.
      */
     public void generateRentalFilters() {
         String yearFilter = txf_year.getText();
