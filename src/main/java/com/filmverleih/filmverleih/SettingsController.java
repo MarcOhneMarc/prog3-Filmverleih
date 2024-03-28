@@ -71,8 +71,6 @@ public class SettingsController {
 
     //components of the movie managing tab
     @FXML
-    private Tab mitarbeiterTab;
-    @FXML
     private AnchorPane acp_movieAddNodes;
     @FXML
     private TextField txf_movieID;
@@ -142,8 +140,8 @@ public class SettingsController {
     private CheckBox cbx_selDVD;
     @FXML
     private CheckBox cbx_selBlueRay;
-    @FXML
-    private TextField txf_deleteMovieId;
+    //@FXML
+    //private TextField txf_deleteMovieId;
     @FXML
     private CheckBox cbx_movieAddSelDVD;
     @FXML
@@ -185,6 +183,7 @@ public class SettingsController {
     private String changedComment;
     private String changedType;
 
+    @FXML
     private Label lbl_deleteMovie;
     @FXML
     private Button btn_deleteMovie;
@@ -625,7 +624,7 @@ public class SettingsController {
     private void enableAddNodes() {
         igv_movieAddConstraintInfoButton.setOpacity(1);
         acp_movieAddNodes.setDisable(false);
-        mitarbeiterTab.setDisable(false);
+        tbs_mitarbeiterTab.setDisable(false);
         //connector.getNavbarController().enableNavBar(); TODO
     }
 
@@ -637,7 +636,7 @@ public class SettingsController {
     private void disableAddNodes() {
         igv_movieAddConstraintInfoButton.setOpacity(0.3);
         acp_movieAddNodes.setDisable(true);
-        mitarbeiterTab.setDisable(true);
+        tbs_mitarbeiterTab.setDisable(true);
         //connector.getNavbarController().disableNavBar(); TODO
     }
 
@@ -692,12 +691,12 @@ public class SettingsController {
             if (!tbp_settingsTabView.getTabs().contains(tbs_mitarbeiterTab)) {
                 tbp_settingsTabView.getTabs().add(tbs_mitarbeiterTab);
             }
-            txf_deleteMovieId.setVisible(true);
+            txf_deleteMovieId1.setVisible(true);
             lbl_deleteMovie.setVisible(true);
             btn_deleteMovie.setVisible(true);
         } else {
             tbp_settingsTabView.getTabs().remove(tbs_mitarbeiterTab);
-            txf_deleteMovieId.setVisible(false);
+            txf_deleteMovieId1.setVisible(false);
             lbl_deleteMovie.setVisible(false);
             btn_deleteMovie.setVisible(false);
         }
