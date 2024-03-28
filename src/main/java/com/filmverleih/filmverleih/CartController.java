@@ -5,6 +5,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
