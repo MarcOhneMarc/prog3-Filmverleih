@@ -10,9 +10,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -28,10 +30,14 @@ public class SettingsController {
     private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
+    private Users userToDelete;
+
 
     NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, Integer, Integer> connector;
+
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
+     *
      * @param connector the controller passed by MainApplication
      */
     public void setConnector(NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, Integer, Integer> connector) {
@@ -42,7 +48,9 @@ public class SettingsController {
     @FXML
     private TabPane tbp_settingsTabView;
     @FXML
-    private Tab mitarbeiterTab;
+    private Tab tbs_settingsTab;
+    @FXML
+    private Tab tbs_mitarbeiterTab;
 
     //components of the movie managing tab
     @FXML
@@ -95,6 +103,22 @@ public class SettingsController {
     private Label lbl_deleteMovie;
     @FXML
     private Button btn_deleteMovie;
+    @FXML
+    private AnchorPane anp_employeeBackground;
+    @FXML
+    private AnchorPane anp_employeePopUp;
+    @FXML
+    private AnchorPane anp_logoutPopUp;
+    @FXML
+    private Button btn_acceptLogout;
+    @FXML
+    private Button btn_cancelLogout;
+    @FXML
+    private Label lbl_deleteEmployee;
+    @FXML
+    private Button btn_deleteEmployee;
+    @FXML
+    private Button btn_cancelDeletionEmployee;
 
 
     //components of the employee managing tab
@@ -103,7 +127,7 @@ public class SettingsController {
     @FXML
     TextField txf_userFirstName;
     @FXML
-    TextField txf_userSurname;
+    TextField txf_userPassword;
     @FXML
     TextField txf_userIdDelete;
     @FXML
@@ -112,6 +136,21 @@ public class SettingsController {
     Button btn_addUser;
     @FXML
     Button btn_deleteUser;
+    @FXML
+    Label lbl_loggedUserName;
+    @FXML
+    Label lbl_loggedUserId;
+    @FXML
+    Label lbl_loggedUserIsAdmin;
+    @FXML
+    TextField txf_oldPassword;
+    @FXML
+    TextField txf_newPassword;
+    @FXML
+    TextField txf_newPasswordRepeat;
+    @FXML
+    Button btn_confirmChangePassword;
+
     @FXML
     CheckBox cbx_selAdminUser;
     @FXML
@@ -124,8 +163,6 @@ public class SettingsController {
     TableColumn<Users, String> tbc_userName;
     @FXML
     TableColumn<Users, Boolean> tbc_userIsAdmin;
-    @FXML
-    private DialogPane dialogPane;
 
 
     /**
@@ -200,14 +237,14 @@ public class SettingsController {
         lbl_idNotExisting.setVisible(false);
         if (loggedUser.getIsadmin()) {
             fillTableView();
-            if(!tbp_settingsTabView.getTabs().contains(mitarbeiterTab)){
-                tbp_settingsTabView.getTabs().add(mitarbeiterTab);
+            if (!tbp_settingsTabView.getTabs().contains(tbs_mitarbeiterTab)) {
+                tbp_settingsTabView.getTabs().add(tbs_mitarbeiterTab);
             }
             txf_deleteMovieId.setVisible(true);
             lbl_deleteMovie.setVisible(true);
             btn_deleteMovie.setVisible(true);
         } else {
-            tbp_settingsTabView.getTabs().remove(mitarbeiterTab);
+            tbp_settingsTabView.getTabs().remove(tbs_mitarbeiterTab);
             txf_deleteMovieId.setVisible(false);
             lbl_deleteMovie.setVisible(false);
             btn_deleteMovie.setVisible(false);
@@ -219,17 +256,17 @@ public class SettingsController {
      * and to the db
      */
     @FXML
-    public void addUserToTableView() {
-        int id = Integer.parseInt(txf_userIdAdd.getText());
+    public void addUserToTableView() throws NoSuchAlgorithmException {
+        Encryptor encryptor = new Encryptor();
         String name = txf_userFirstName.getText();
-        String surname = txf_userSurname.getText();
+        String password = txf_userPassword.getText();
         boolean isAdmin = cbx_selAdminUser.isSelected();
+        String hashedPassword = encryptor.encryptPassword(password);
 
         Users user = new Users();
-        user.setUserid(id);
         user.setName(name);
         user.setIsadmin(isAdmin);
-        user.setPassword("testPassword");
+        user.setPassword(hashedPassword);
 
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
@@ -245,45 +282,94 @@ public class SettingsController {
      * This method removes a user from the user management TableView
      * and from the db
      */
-    @FXML
-    public void removeUserFromTableView() {
-        int id = Integer.parseInt(txf_userIdDelete.getText());
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Mitarbeiter löschen");
-        alert.setX(1550);
-        alert.setY(840);
-        dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("stylesheetDialog.css").toString());
-        dialogPane.getStyleClass().add("dialog");
-        boolean found = false;
 
+    public void deleteUser() {
+        if (userToDelete != null) {
+            disableDeleteUserPopUp();
+            Utility utility = new Utility();
+            utility.deleteUserInDB(userToDelete);
+            fullUserListObservable.remove(userToDelete);
+            tbv_userTable.refresh();
+        }
+    }
+
+
+    public boolean checkUserExists() {
+        int id = Integer.parseInt(txf_userIdDelete.getText());
         for (Users user : Utility.getFullUserList()) {
             if (user == null) {
                 throw new IllegalArgumentException(ERR_USER_NULL);
             }
             if (user.getUserid() == id) {
-                Utility utility = new Utility();
-                utility.deleteUserInDB(user);
-                fullUserListObservable.remove(user);
-                tbv_userTable.refresh();
-                alert.setHeaderText("Mitarbeiter mit der ID " + id +" wurde gelöscht");
-                PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
-                pauseTransition.setOnFinished(event -> alert.close());
-                alert.show();
-                pauseTransition.play();
-
-                found = true;
-                break;
+                userToDelete = user;
+                return true;
             }
         }
-        if (!found) {
-            alert.setHeaderText("Mitarbeiter mit der ID " + id +" existiert nicht");
-            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
-            pauseTransition.setOnFinished(event -> alert.close());
-            alert.show();
-            pauseTransition.play();
+        return false;
+    }
+
+    public void userNotExisting(int id) {
+        lbl_idNotExisting.setText("Mitarbeiter mit der ID " + id + " existiert nicht");
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+        pauseTransition.setOnFinished(event -> lbl_idNotExisting.setVisible(false));
+        lbl_idNotExisting.setVisible(true);
+        pauseTransition.play();
+    }
+
+    public void enableDeleteUserPopUp() {
+        if (checkUserExists()) {
+            anp_employeeBackground.setDisable(true);
+            anp_employeePopUp.setVisible(true);
+            anp_employeePopUp.setDisable(false);
+            connector.getNavbarController().disableNavBar();
+            tbs_settingsTab.setDisable(true);
+            lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
+        } else {
+            userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
+        }
+        emptyTextField();
+    }
+
+    public void disableDeleteUserPopUp() {
+        anp_employeeBackground.setDisable(false);
+        anp_employeePopUp.setVisible(false);
+        anp_employeePopUp.setDisable(true);
+        connector.getNavbarController().enableNavBar();
+        tbs_settingsTab.setDisable(false);
+        emptyTextField();
+    }
+
+
+    public void enableLogoutPopUp() {
+        anp_employeeBackground.setDisable(true);
+        anp_logoutPopUp.setVisible(true);
+        anp_employeePopUp.setDisable(false);
+        connector.getNavbarController().disableNavBar();
+        tbs_settingsTab.setDisable(true);
+        lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
+
+        userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
+    }
+
+    //TODO
+    public void changePassword() throws NoSuchAlgorithmException {
+        Users loggedUser = connector.getLoginController().getLoggedUser();
+        Encryptor encryptor = new Encryptor();
+
+
+        if(encryptor.encryptPassword(txf_oldPassword.getText()).equals(loggedUser.getPassword())){
+            if(txf_newPassword.getText().equals(txf_newPasswordRepeat.getText())){
+               btn_confirmChangePassword.setDisable(false);
+            }
+        }else{
+
         }
     }
+    //TODO
+    public void changePasswordButton(){
+
+    }
+
 
     public void logout() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -296,27 +382,26 @@ public class SettingsController {
         }
     }
 
-
-    /**
-     * This method adds an user and is linked to the add button of the
-     * user management tab
-     * TODO actually add user to db
-     * TODO add user to List and refresh TableView
-     */
-    @FXML
-    public void addUser() {
-        System.out.println("console test: add user button has been clicked");
+    public void refreshFullUserList() {
+        fullUserList = Utility.getFullUserList();
     }
 
-    /**
-     * This method removes an user and is linked to the delete button of the
-     * user management tab
-     * TODO actually delete user to db
-     * TODO remove user from List and refresh TableView
-     */
-    @FXML
-    public void deleteUser() {
-        System.out.println("console test: delete user button has been clicked");
+    public void emptyTextField() {
+        txf_userFirstName.setText("");
+        txf_userPassword.setText("");
+        txf_userIdDelete.setText("");
+    }
+
+    public void fillUserData(){
+        LoginController loginController = connector.getLoginController();
+        Users loggedUser = loginController.getLoggedUser();
+        lbl_loggedUserName.setText(loggedUser.getName());
+        lbl_loggedUserId.setText(String.valueOf(loggedUser.getUserid()));
+        if(loggedUser.getIsadmin()){
+            lbl_loggedUserIsAdmin.setText("Der User ist ein Admin");
+        }else {
+            lbl_loggedUserIsAdmin.setText("Der User ist kein Admin");
+        }
     }
 
     /**
@@ -325,6 +410,9 @@ public class SettingsController {
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public TabPane getOuterPane() {
+        fillUserData();
+        emptyTextField();
+        refreshFullUserList();
         viewForAdmins();
         fillTableView();
         return tbp_settingsTabView;

@@ -53,6 +53,14 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(settingsController.getOuterPane());
     }
 
+    public void disableNavBar() {
+        navbarPane.setDisable(true);
+    }
+
+    public void enableNavBar() {
+        navbarPane.setDisable(false);
+    }
+
     @FXML
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();

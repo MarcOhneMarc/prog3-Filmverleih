@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class LoginController {
@@ -35,7 +36,7 @@ public class LoginController {
     }
 
     @FXML
-    public void login(){
+    public void login() throws NoSuchAlgorithmException {
         NavbarController navbarController = connector.getNavbarController();
         LibraryController libraryController  = connector.getLibraryController();
 
@@ -75,13 +76,15 @@ public class LoginController {
      *  check if a user with the name/password exists
      *  we have to compare both textfields(PasswordField and TextField)(Line 79)
      */
-    public boolean checkUsers(){
+    public boolean checkUsers() throws NoSuchAlgorithmException {
+        Encryptor encryptor = new Encryptor();
         String loginName = txf_loginName.getText();
         String loginPassword = pwf_loginPasswordField.getText();
 
         List<Users> users = Utility.getFullUserList();
         for(Users user: users){
-            if(user.getName().equals(loginName) && (user.getPassword().equals(loginPassword) || user.getPassword().equals(txf_loginPassword.getText()))){
+            if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)) ||
+                    user.getPassword().equals(encryptor.encryptPassword(txf_loginPassword.getText())))){
                 loggedUser = user;
                 return true;
             }
