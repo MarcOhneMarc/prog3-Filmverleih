@@ -450,4 +450,76 @@ public class Utility {
         }
         return customersList.getLast().getCustomerid();
     }
+   public Boolean deleteUserInDB(Users user){
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("DELETE FROM Users WHERE userid = " + user.getUserid()).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method adds a new user to the database
+     * @param user the user that will be added to the database
+     * @return
+     */
+    public Boolean addUserToDB(Users user) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.save(user);//add user to db
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param newPassword of the password
+     * @param userId of the user
+     * @return
+     */
+    public Boolean UpdateUserPasswordInDB(String newPassword, int userId) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("UPDATE Users SET password =" + "'" +newPassword+ "'" + " WHERE userid = " + userId).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return true;
+    }
 }

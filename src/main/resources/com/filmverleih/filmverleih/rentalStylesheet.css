@@ -50,3 +50,13 @@
 #scp_rentalScrollPane {
     -fx-background-color: #111013;
 }
+
+#scp_rentalScrollPane .track,
+#scp_rentalScrollPane .track-background {
+    -fx-background-color: #191919;
+}
+
+#scp_rentalScrollPane .thumb {
+    -fx-background-color:  #949494;
+    -fx-background-radius: 12;
+}

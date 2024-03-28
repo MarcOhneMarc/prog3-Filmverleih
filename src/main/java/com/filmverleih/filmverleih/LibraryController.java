@@ -33,8 +33,8 @@ public class LibraryController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
-                                    EditMovieController,
-                                    Integer,
+                                    LoginController,
+                                    EditMovieController,                           
                                     Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -47,8 +47,8 @@ public class LibraryController {
                             SettingsController,
                             FilterController,
                             CartController,
-                            EditMovieController,
-                            Integer,
+                            LoginController,
+                            EditMovieController,             
                             Integer> connector) {
         this.connector = connector;
         this.cartController = connector.getCartController();
@@ -349,6 +349,7 @@ public class LibraryController {
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        MainApplication.borderPane.setRight(null);
         movieController.fillPage(movie);
 
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
