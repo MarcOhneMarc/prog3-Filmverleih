@@ -62,8 +62,6 @@ public class CartController {
     @FXML
     private TableColumn<Movies, String> tbc_Price;
     @FXML
-    private HBox hbx_CartTotal;
-    @FXML
     private Label lbl_CartTotalValue;
     @FXML
     private Label lbl_DateValue;
@@ -73,8 +71,6 @@ public class CartController {
     private Button btn_OrderCart;
     @FXML
     private VBox vbx_CartMovieCardsVBox;
-    @FXML
-    private ScrollPane scp_Cart;
     @FXML
     private AnchorPane acp_CartBackground;
     @FXML
@@ -92,8 +88,6 @@ public class CartController {
 
     //Registration PopUp FXML components
     @FXML
-    private TextField txf_PopUpCustomerID;
-    @FXML
     private TextField txf_PopUpCustomerSurName;
     @FXML
     private TextField txf_PopUpCustomerLastName;
@@ -109,8 +103,6 @@ public class CartController {
     private TextField txf_PopUpCustomerEMail;
     @FXML
     private Button btn_newCustomerPopupConfirm;
-    @FXML
-    private Button btn_newCustomerPopupCancel;
     @FXML
     private Label lbl_errorInvalidEmail;
     @FXML
@@ -134,15 +126,6 @@ public class CartController {
     @FXML
     private Label lbl_customerEmailValue;
 
-
-    /**
-     *This method fills in the movie-cards to the movie list on the left
-     */
-    public void fillMovieList() throws IOException {
-        for(Movies movie : fullMovieList){
-            addMovieToMovieList(movie);
-        }
-    }
 
     /**
      * This method adds one movie to the card view list
@@ -371,7 +354,6 @@ public class CartController {
     /**
      * This method gets the input from the new customer registration
      * TextFields needed for creating a new customer in the db
-     * TODO check if getLastAddedCustomerID is a valid way to get it
      */
     private void registerNewCustomer() {
         boolean addSuccessful = CustomersUtility.addCustomerToDB(
