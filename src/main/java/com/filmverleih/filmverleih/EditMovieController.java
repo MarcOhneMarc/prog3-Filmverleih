@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -708,7 +709,8 @@ public class EditMovieController {
                 this.changedType = "BR";
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("NumberFormatException; saveInfosAsNeededDataTypes: 018");
             saveInfoWorked = false;
         }
         return saveInfoWorked;

@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
 import javafx.animation.PauseTransition;
@@ -522,6 +523,9 @@ public class SettingsController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
+        LoggerUtility.logger.info("delete movie button was clicked: 023");
+        //Utility utility = new Utility();
+        //utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
         boolean movieIsDeleted;
         try {
             movieIsDeleted = MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
