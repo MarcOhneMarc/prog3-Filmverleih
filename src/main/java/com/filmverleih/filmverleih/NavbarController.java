@@ -145,6 +145,6 @@ public class NavbarController {
     }
 
     public BorderPane getBorderPane(){
-        return navbarPane;
+        return bpn_navbarOuterBorderPane;
     }
 }

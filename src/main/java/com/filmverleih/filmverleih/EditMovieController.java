@@ -22,8 +22,8 @@ public class EditMovieController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
+                                    LoginController,
                                     EditMovieController,
-                                    Integer,
                                     Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -36,8 +36,8 @@ public class EditMovieController {
                                                     SettingsController,
                                                     FilterController,
                                                     CartController,
+                                                    LoginController,
                                                     EditMovieController,
-                                                    Integer,
                                                     Integer> connector) {
         this.connector = connector;
     }

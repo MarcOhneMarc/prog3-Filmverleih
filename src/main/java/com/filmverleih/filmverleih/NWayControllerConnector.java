@@ -104,16 +104,12 @@ public class NWayControllerConnector<Q,R,S,T,U,V,W,X,Y,Z> {
      */
     public X getLoginController() {
         return loginController;
+    }
 
     public Y getEditMovieController() {
         return editMovieController;
 
     }
-
-    /**
-     * @return returns ninth controller (if present) currently unused
-     */
-    public Optional<Y> getController9() { return controller9; }
 
     /**
      * @return returns tenth controller (if present) currently unused

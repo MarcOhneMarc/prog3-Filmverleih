@@ -29,9 +29,9 @@ public class LoginController {
     @FXML
     private CheckBox cbx_showPassword;
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController, Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController, EditMovieController,Integer> connector;
 
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
     }
 
@@ -49,6 +49,7 @@ public class LoginController {
         if(checkUsers()) {
             MainApplication.borderPane.setTop(navbarController.getBorderPane());
             MainApplication.borderPane.setCenter(libraryController.getOuterPane());
+            MainApplication.borderPane.setRight(connector.getFilterController().getOuterPane());
             lbl_loginWrongCredentials.setVisible(false);
         }else{
             lbl_loginWrongCredentials.setText("Benutzername oder Passwort ist falsch");
