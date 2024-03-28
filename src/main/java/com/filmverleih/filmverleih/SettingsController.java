@@ -39,11 +39,6 @@ import static java.lang.String.valueOf;
  */
 public class SettingsController {
     //private NavbarController navbarController;
-
-    private List<Users> fullUserList = UserUtility.getFullUserList();
-    private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
-    private static final String ERR_USER_NULL = "Error: user is null";
-  
     private Users userToDelete;
 
 
@@ -528,7 +523,7 @@ public class SettingsController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
-        MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
+        MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
         LoggerUtility.logger.info("delete movie button was clicked: 023");
         //Utility utility = new Utility();
         //utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
