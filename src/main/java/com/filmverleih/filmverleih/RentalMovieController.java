@@ -89,8 +89,8 @@ public class RentalMovieController {
      * /TODO actually get customer info from db as soon as db is updated
      */
     public void insertCustomerInfo() {
-        Customers customer = CustomersUtility.getCustomerById(rentals.getCustomerid());
-        lbl_rentalMovieCustomer.setText(customer.getFirstname() + " " + customer.getLastname());
+        lbl_rentalMovieCustomer.setText(rentals.getCustomer().getFirstname() + " " +
+                rentals.getCustomer().getLastname());
         lbl_rentalMovieDate.setText(rentals.getStartdate());
         lbl_rentalMovieReturnDate.setText(rentals.getEnddate());
         lbl_rentalMovieStatus.setText("verliehen");

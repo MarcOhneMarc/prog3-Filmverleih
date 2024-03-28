@@ -260,7 +260,7 @@ public class LibraryController {
      */
     public void updateMovieList() {
         grp_libraryGrid.getChildren().clear();
-        List<Movies> allMovies = Utility.getFullMovieList();
+        List<Movies> allMovies = MoviesUtility.getFullMovieList();
         updateLibrary(allMovies);
     }
 

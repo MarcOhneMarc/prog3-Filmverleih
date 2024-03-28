@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -94,7 +96,7 @@ public class RentalController {
         List<Rentals> allRentals = RentalsUtility.getAllRentedMovies();
 
         updateRental(allRentals);
-        //sortMovies();
+        sortMovies();
     }
 
     /**
@@ -176,6 +178,54 @@ public class RentalController {
         adjustColumnCount();
     }
 
+    public void syncRentalWithDb() throws IOException {
+        List<Rentals> rentalsInDb = RentalsUtility.getAllRentedMovies();
+        List<Rentals> rentalsToAdd = new ArrayList<>(); // Collect movies to add
+        for (Rentals rentalInDb: rentalsInDb) {
+            boolean found = false;
+            for (Node node : grp_rentalGrid.getChildren()) {
+                Rentals rentalInLibrary = (Rentals) node.getUserData();
+                assert rentalInLibrary != null;
+                if (rentalInDb.getMovieid() == rentalInLibrary.getMovieid()) {
+                    if (!rentalInDb.equals(rentalInLibrary)) {
+                        removieMovieFromLibrary(rentalInLibrary);
+                    }
+                    found = true;
+                    break; // Found the movie in the library, no need to add
+                }
+            }
+            if (!found) {
+                rentalsToAdd.add(rentalInDb); // Collect movies to add
+            }
+        }
+
+        for (Rentals rentalToAdd : rentalsToAdd) {
+            addRentedMovieToRental(rentalToAdd); // Add collected movies to library
+        }
+
+        adjustColumnCount();
+    }
+
+    public void updateMovieInLibrary(Rentals rentalToUpdate) throws IOException {
+        removieMovieFromLibrary(rentalToUpdate);
+        addRentedMovieToRental(rentalToUpdate);
+        sortMovies();
+        filterMovies();
+    }
+
+    public void removieMovieFromLibrary(Rentals rentalToDelete) {
+        Iterator<Node> iterator = grp_rentalGrid.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node node = iterator.next();
+            Rentals rentalInLibrary = (Rentals) node.getUserData();
+            if (rentalInLibrary.equals(rentalToDelete)) {
+                iterator.remove(); // Use iterator to remove the node
+                adjustColumnCount();
+                return;
+            }
+        }
+    }
+
     /**
      * Calculates the number of columns that can fit within the GridPane based on its width
      * and the width of the images to be displayed.
@@ -213,7 +263,7 @@ public class RentalController {
                 childIndex++;
             }
         }
-        //sortMovies();
+        sortMovies();
     }
 
     /**

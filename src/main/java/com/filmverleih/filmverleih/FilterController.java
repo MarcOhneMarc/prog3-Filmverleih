@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -173,34 +174,40 @@ public class FilterController {
         Comparator<Rentals> comparator = null;
 
         switch (selectedOption) {
-            case "Name aufsteigend":
+            case "Rückhgabedatum aufsteigend":
+                comparator = Comparator.comparing(rental -> rental.getEnddate());
+                break;
+            case "Rückhgabedatum absteigend":
+                comparator = Comparator.comparing((Rentals rental) -> rental.getEnddate()).reversed();
+                break;
+            case "Film Name aufsteigend":
                 comparator = Comparator.comparing(rental -> rental.getMovie().getName());
                 break;
-            case "Name absteigend":
+            case "Film Name absteigend":
                 comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
                 break;
-            case "Jahr aufsteigend":
+            case "Film Jahr aufsteigend":
                 comparator = Comparator.comparingInt(rental -> rental.getMovie().getYear());
                 break;
-            case "Jahr absteigend":
+            case "Film Jahr absteigend":
                 comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
                 break;
-            case "Bewertung aufsteigend":
+            case "Film Bewertung aufsteigend":
                 comparator = Comparator.comparing(rental -> rental.getMovie().getRating());
                 break;
-            case "Bewertung absteigend":
+            case "Film Bewertung absteigend":
                 comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
                 break;
-            case "Länge aufsteigend":
+            case "Film Länge aufsteigend":
                 comparator = Comparator.comparingInt(rental -> rental.getMovie().getLength());
                 break;
-            case "Länge absteigend":
+            case "Film Länge absteigend":
                 comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
                 break;
-            case "FSK aufsteigend":
+            case "Film FSK aufsteigend":
                 comparator = Comparator.comparingInt(rental -> rental.getMovie().getFsk());
                 break;
-            case "FSK absteigend":
+            case "Film FSK absteigend":
                 comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
                 break;
         }
@@ -277,7 +284,8 @@ public class FilterController {
                     predicate = predicate.and(movie -> movie.getType().contains("BR"));
                 }
                 else {
-                    predicate = predicate.and(movie -> movie.getType().toLowerCase().contains(typeFilter.toLowerCase()));
+                    predicate = predicate.and(movie ->
+                            movie.getType().toLowerCase().contains(typeFilter.toLowerCase()));
                 }
             }
         }
@@ -338,9 +346,10 @@ public class FilterController {
         Predicate<Rentals> predicate = rental -> true;
 
         if (navbarController.searchbar != null && !navbarController.searchbar.getText().isEmpty()) {
-            predicate = predicate.and(rental -> CustomersUtility.getCustomerById(rental.getCustomerid()).getLastname()
-                    .toLowerCase().contains(searchBar.toLowerCase()) || CustomersUtility.getCustomerById(rental.getCustomerid()).getFirstname()
-                    .toLowerCase().contains(searchBar.toLowerCase()));
+            predicate = predicate.and(rental ->
+                    rental.getCustomer().getLastname().toLowerCase().contains(searchBar.toLowerCase()) ||
+                    rental.getCustomer().getFirstname().toLowerCase().contains(searchBar.toLowerCase())
+            );
         }
         if (!yearFilter.isEmpty()) {
             int intYear = Integer.parseInt(yearFilter);
@@ -371,7 +380,8 @@ public class FilterController {
                     predicate = predicate.and(rental -> rental.getMovie().getType().contains("BR"));
                 }
                 else {
-                    predicate = predicate.and(rental -> rental.getMovie().getType().toLowerCase().contains(typeFilter.toLowerCase()));
+                    predicate = predicate.and(rental ->
+                            rental.getMovie().getType().toLowerCase().contains(typeFilter.toLowerCase()));
                 }
             }
         }
@@ -409,11 +419,11 @@ public class FilterController {
         }
     }
 
-    public void sync() {
+    public void sync() throws IOException {
         if (isLibrary) {
             libraryController.syncLibraryWithDB();
         } else if (isRental) {
-            //rentalcontroller.syncLibraryWithDB();
+            rentalController.syncRentalWithDb();
         } else {
             return;
         }
@@ -485,6 +495,8 @@ public class FilterController {
         applyFilterConfig(rentalFilterConfig);
         cbx_sort.getItems().clear();
         cbx_sort.getItems().addAll(
+                "Rückhgabedatum aufsteigend",
+                "Rückhgabedatum absteigend",
                 "Name aufsteigend",
                 "Name absteigend",
                 "Jahr aufsteigend",
@@ -494,8 +506,7 @@ public class FilterController {
                 "Länge aufsteigend",
                 "Länge absteigend",
                 "FSK aufsteigend",
-                "FSK absteigend",
-                "RENTAL"
+                "FSK absteigend"
         );
 
         isRental = true;
