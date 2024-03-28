@@ -92,6 +92,7 @@ public class CustomersUtility {
         return true;
     }
 
+
     /**
      * This method gets a customer by its id
      * @param id the id of the customer
@@ -106,6 +107,7 @@ public class CustomersUtility {
         }
         return ret;
     }
+
     /**
      * This method checks whether a certain email address is already in the db
      * @param email the email that will be checked

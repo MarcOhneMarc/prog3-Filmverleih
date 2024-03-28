@@ -84,6 +84,8 @@ public class RentalMovieController {
         lbl_rentalMovieCustomerNr.setText(valueOf(rentals.getCustomerid()));
     }
 
+
+
     /**
      * This method gets the customer information for the rental and sets them to the according label
      */
@@ -113,7 +115,6 @@ public class RentalMovieController {
         if (rentalController != null) {
             rentalController.extendRental(hbx_rentalMovieCard, rentals);
         }
-
     }
 
     /**
@@ -126,3 +127,4 @@ public class RentalMovieController {
         }
     }
 }
+

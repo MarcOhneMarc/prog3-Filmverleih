@@ -4,23 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-conflicts behoben sync meetingpush init">
+    <list default="true" id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="asdasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -33,10 +25,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2dPMbY71TSTk8QRx0tkqEgiB8jF" />
+  <component name="ProjectId" id="2eKIgIacCBRIqJPH5E5reR2HJvr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -44,6 +33,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
@@ -158,114 +148,21 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="" />
-      <created>1709905334625</created>
+      <changelist id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="" />
+      <created>1711646955003</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1709905334625</updated>
-      <workItem from="1709905336159" duration="14656000" />
-      <workItem from="1710120482574" duration="323000" />
-      <workItem from="1710165751465" duration="59000" />
-      <workItem from="1710165832318" duration="786000" />
-      <workItem from="1710173132642" duration="2214000" />
-      <workItem from="1711131963034" duration="1015000" />
+      <updated>1711646955003</updated>
     </task>
-    <task id="LOCAL-00001" summary="BUG-changed Navbar Search Test to Prompt (Suche...)">
+    <task id="LOCAL-00001" summary="asdasd">
       <option name="closed" value="true" />
-      <created>1709905808228</created>
+      <created>1711647169542</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1709905808228</updated>
+      <updated>1711647169542</updated>
     </task>
-    <task id="LOCAL-00002" summary="BUG-loaded stylesheet in MainApplication start()-Method and set icon and title">
-      <option name="closed" value="true" />
-      <created>1709906647072</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1709906647072</updated>
-    </task>
-    <task id="LOCAL-00003" summary="FEAT-some SceneBuilding for Cart.fxml; committed interim results">
-      <option name="closed" value="true" />
-      <created>1709912737898</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1709912737898</updated>
-    </task>
-    <task id="LOCAL-00004" summary="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java">
-      <option name="closed" value="true" />
-      <created>1709916631169</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709916631169</updated>
-    </task>
-    <task id="LOCAL-00005" summary="FEAT-added some comments on CartController.java">
-      <option name="closed" value="true" />
-      <created>1709917455894</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1709917455894</updated>
-    </task>
-    <task id="LOCAL-00006" summary="FEAT-Meeting final changes">
-      <option name="closed" value="true" />
-      <created>1710175267906</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1710175267906</updated>
-    </task>
-    <task id="LOCAL-00007" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711196235558</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1711196235558</updated>
-    </task>
-    <task id="LOCAL-00008" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711198164076</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1711198164076</updated>
-    </task>
-    <task id="LOCAL-00009" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711319878137</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1711319878137</updated>
-    </task>
-    <task id="LOCAL-00010" summary="FEAT-Suchalgorithmus Laufzeitoptimierung">
-      <option name="closed" value="true" />
-      <created>1711369509933</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1711369509933</updated>
-    </task>
-    <task id="LOCAL-00011" summary="FEAT-Kommentare">
-      <option name="closed" value="true" />
-      <created>1711387234417</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1711387234417</updated>
-    </task>
-    <task id="LOCAL-00012" summary="FEAT-updateMovieList">
-      <option name="closed" value="true" />
-      <created>1711394077780</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1711394077780</updated>
-    </task>
+
     <task id="LOCAL-00013" summary="FEAT-init">
       <option name="closed" value="true" />
       <created>1711579401248</created>
@@ -332,32 +229,6 @@
     </task>
     <option name="localTasksCounter" value="21" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/tick-25" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="BUG-changed Navbar Search Test to Prompt (Suche...)" />

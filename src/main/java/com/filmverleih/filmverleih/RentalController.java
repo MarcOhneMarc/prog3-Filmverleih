@@ -2,6 +2,9 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+
 import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
@@ -18,6 +21,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -27,8 +31,9 @@ import java.util.function.Predicate;
  * the movie itself and customer / rental information
  * with options of reminding the customer, extending the rental
  * and returning the movie
+
  *
- * @author Hannes, Luka, Marc
+ * @author Hannes, Luka, Marc , Jonas
  */
 
 public class RentalController {
@@ -46,8 +51,8 @@ public class RentalController {
     GridPane grp_rentalGrid;
 
     private double windowWidth;
-    public Predicate<Movies> predicate;
-    public Comparator<Movies> comparator;
+    public Predicate<Rentals> predicate;
+    public Comparator<Rentals> comparator;
 
 
     /**
@@ -91,7 +96,7 @@ public class RentalController {
             }
         });
 
-        this.comparator = Comparator.comparing(Movies::getName);
+        this.comparator = Comparator.comparing(rental -> rental.getMovie().getName());
 
         //Load Rental View
         List<Rentals> allRentals = RentalsUtility.getAllRentedMovies();
@@ -108,20 +113,29 @@ public class RentalController {
      * @param movieList The list of Movies objects to be displayed or updated.
      */
     public void updateRental(List<Rentals> movieList) throws IOException {
-        for (Rentals movie: movieList) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
-            HBox rentalCard = loader.load();
-            RentalMovieController controller = loader.getController();
-            controller.setRentalController(this);
-
-            controller.insertMovieInfo(movie);
-            controller.insertCustomerInfo();
-
-            rentalCard.setUserData(movie);
-            GridPane.setMargin(rentalCard,  new Insets(20, 0, 0, 20));
-            grp_rentalGrid.add(rentalCard, 1, 1);
+        for (Rentals rentalMovie: movieList) {
+            addRentedMovieToRental(rentalMovie);
         }
         adjustColumnCount();
+    }
+
+    /**
+     * This method adds a Movie to the RentalView GridPane
+     * @param rental the Rented Movie which has to be added
+     * @throws IOException throws an Exception if the FXML couldn't be loaded.
+     */
+    private void addRentedMovieToRental(Rentals rental) throws IOException  {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
+        HBox rentalCard = loader.load();
+        RentalMovieController controller = loader.getController();
+        controller.setRentalController(this);
+
+        controller.insertMovieInfo(rental);
+        controller.insertCustomerInfo();
+
+        rentalCard.setUserData(rental);
+        GridPane.setMargin(rentalCard,  new Insets(20, 0, 0, 20));
+        grp_rentalGrid.add(rentalCard, 1, 1);
     }
 
     /**
@@ -135,11 +149,11 @@ public class RentalController {
                 .toList());
 
         hBoxes.sort((hBox1, hBox2) -> {
-            Rentals movie1 = (Rentals) hBox1.getUserData();
-            Rentals movie2 = (Rentals) hBox2.getUserData();
+            Rentals rental1 = (Rentals) hBox1.getUserData();
+            Rentals rental2 = (Rentals) hBox2.getUserData();
 
-            if (movie1 != null && movie2 != null) {
-                return this.comparator.compare(movie1.getMovie(), movie2.getMovie());
+            if (rental1 != null && rental2 != null) {
+                return this.comparator.compare(rental1, rental2);
             }
             return 0; // Wenn movie1 oder movie2 null ist, gibt es keinen Unterschied in der Reihenfolge
         });
@@ -157,6 +171,93 @@ public class RentalController {
             }
         }
     }
+
+    /**
+     * Filters the movie StackPane objects within the GridPane based on the provided predicate.
+     * Sets the visibility and manageability of each StackPane accordingly.
+     * Adjusts the column count after filtering.
+     */
+    public void filterMovies() {
+        grp_rentalGrid.getChildren().forEach(node -> {
+            if (node instanceof HBox hBox) {
+                Rentals rental = (Rentals) hBox.getUserData();
+                boolean isVisible = predicate.test(rental);
+                hBox.setVisible(isVisible);
+                hBox.setManaged(isVisible);
+            }
+        });
+        adjustColumnCount();
+    }
+
+    /**
+     * This method updates syncs the RentalView GridPane with the Rentals in the Database.
+     *
+     */
+    public void syncRentalWithDb() throws IOException {
+        List<Rentals> rentalsInDb = RentalsUtility.getAllRentedMovies();
+        List<Rentals> rentalsToAdd = new ArrayList<>(); // Collect movies to add
+        for (Rentals rentalInDb: rentalsInDb) {
+            boolean found = false;
+            for (Node node : grp_rentalGrid.getChildren()) {
+                Rentals rentalInLibrary = (Rentals) node.getUserData();
+                assert rentalInLibrary != null;
+                if (rentalInDb.getMovieid() == rentalInLibrary.getMovieid()) {
+                    if (!rentalInDb.equals(rentalInLibrary)) {
+                        removeRentalFromRentalView(rentalInLibrary);
+                    }
+                    found = true;
+                    break; // Found the movie in the library, no need to add
+                }
+            }
+            if (!found) {
+                rentalsToAdd.add(rentalInDb); // Collect movies to add
+            }
+        }
+
+        for (Rentals rentalToAdd : rentalsToAdd) {
+            addRentedMovieToRental(rentalToAdd); // Add collected movies to library
+        }
+        adjustColumnCount();
+    }
+
+    /**
+     * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
+     * The sorting is based on a comparator associated with the Movies objects.
+     */
+    public void sortMovies() {
+        List<HBox> hBoxes = new ArrayList<>(grp_rentalGrid.getChildren().stream()
+                .filter(node -> node instanceof HBox)
+                .map(node -> (HBox) node)
+                .toList());
+        adjustColumnCount();
+    }
+
+    /**
+     * This method updates a specific Rental in the RentalView GridPane.
+     * It deletes the rentalToUpdate in the Pane and adds the changed.
+     */
+    public void updateRentalInRentalView(Rentals rentalToUpdate) throws IOException {
+        removeRentalFromRentalView(rentalToUpdate);
+        addRentedMovieToRental(rentalToUpdate);
+        sortMovies();
+        filterMovies();
+    }
+
+    /**
+     * This Method removes a Rental from the RentalView
+     * @param rentalToDelete is the Rental in the GridPane which should get deleted.
+     */
+    public void removeRentalFromRentalView(Rentals rentalToDelete) {
+        Iterator<Node> iterator = grp_rentalGrid.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node node = iterator.next();
+            Rentals rentalInLibrary = (Rentals) node.getUserData();
+            if (rentalInLibrary.equals(rentalToDelete)) {
+                iterator.remove(); // Use iterator to remove the node
+                adjustColumnCount();
+                return;
+            }
+        }
 
     /**
      * Filters the movie StackPane objects within the GridPane based on the provided predicate.
@@ -212,7 +313,7 @@ public class RentalController {
                 childIndex++;
             }
         }
-        //sortMovies();
+        sortMovies();
     }
 
     /**
@@ -232,8 +333,8 @@ public class RentalController {
     /**
      * Method to extend a rental
      *  TODO Implement update Card Info with new End date
-     * @param hBox the rental card
-     * @param rental the rental to be extended
+     * @param hBox
+     * @param rental
      */
     public void extendRental(HBox hBox, Rentals rental) {
         LocalDate date = LocalDate.parse(rental.getEnddate());

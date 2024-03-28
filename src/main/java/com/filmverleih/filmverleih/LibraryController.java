@@ -15,11 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * This class represents the controller for the library view in the application.
@@ -56,13 +55,13 @@ public class LibraryController {
     }
 
     @FXML
-    private ScrollPane scrollPane; // pane to scroll in the grid (Child = gridPane)
+    private ScrollPane scp_libraryScrollPane; // pane to scroll in the grid (Child = gridPane)
 
     @FXML
     public AnchorPane outerAnchorPane;
 
     @FXML
-    private GridPane gridPane; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
+    private GridPane grp_libraryGrid; // pane to show the movie covers (Child = ImageView) (Parent = scrollPane)
 
     private CartController cartController;
     private double windowWidth;
@@ -76,24 +75,32 @@ public class LibraryController {
      */
     public void initialize() {
         // Set behavior of scrollPane
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scp_libraryScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scp_libraryScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Listener for change of window size
-        scrollPane.widthProperty().addListener(new ChangeListener<Number>() {
+        scp_libraryScrollPane.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 windowWidth = newValue.doubleValue();
-                gridPane.setMaxWidth(windowWidth);
-                gridPane.setPrefWidth(windowWidth);
-                gridPane.setMinWidth(windowWidth);
+                grp_libraryGrid.setMaxWidth(windowWidth);
+                grp_libraryGrid.setPrefWidth(windowWidth);
+                grp_libraryGrid.setMinWidth(windowWidth);
                 adjustColumnCount();
+            }
+        });
+
+        scp_libraryScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double windowHeight = newValue.doubleValue();
+                grp_libraryGrid.setMinHeight(windowHeight);
             }
         });
 
         List<Movies> allMovies = MoviesUtility.getFullMovieList(); //get all Movies From DB
         this.comparator = Comparator.comparing(Movies::getName);
-        updateMovies(allMovies);
+        updateLibrary(allMovies);
     }
 
     /**
@@ -104,7 +111,7 @@ public class LibraryController {
         List<StackPane> stackPanes = new ArrayList<>();
 
         // Fügen Sie alle StackPanes dem gridPane hinzu
-        for (Node node : gridPane.getChildren()) {
+        for (Node node : grp_libraryGrid.getChildren()) {
             if (node instanceof StackPane) {
                 stackPanes.add((StackPane) node);
             }
@@ -140,8 +147,8 @@ public class LibraryController {
             if (stackPane.isVisible() && stackPane.isManaged()) {
                 int row = index / numColumns;
                 int column = index % numColumns;
-                GridPane.setRowIndex(stackPane, row);
-                GridPane.setColumnIndex(stackPane, column);
+                grp_libraryGrid.setRowIndex(stackPane, row);
+                grp_libraryGrid.setColumnIndex(stackPane, column);
                 index++;
             }
         }
@@ -170,7 +177,7 @@ public class LibraryController {
      * Adjusts the column count after filtering.
      */
     public void filterMovies() {
-        gridPane.getChildren().forEach(node -> {
+        grp_libraryGrid.getChildren().forEach(node -> {
             if (node instanceof StackPane stackPane) {
                 boolean isVisible = stackPane.getChildren().stream()
                         .filter(child -> child instanceof ImageView || child instanceof Label)
@@ -191,77 +198,156 @@ public class LibraryController {
      *
      * @param movieList The list of Movies objects to be displayed or updated.
      */
-    public void updateMovies(List<Movies> movieList) {
+    public void updateLibrary(List<Movies> movieList) {
         for (Movies movie: movieList) {
-            String imgUrl = movie.getCover();
-
-            StackPane stackPane = new StackPane();
-            gridPane.add(stackPane, 1, 1);
-
-            StackPane stackPaneViewAddToCart = createAddToCartButton(movieList, stackPane, movie);
-
-            Node node = null;
-
-            if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
-            {
-                Label label = new Label(movie.getName());
-                label.setWrapText(true); // Enable text wrapping
-                label.setAlignment(Pos.CENTER); // Center align the text
-
-                // Set the size of the StackPane
-                label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
-                label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
-                label.getStyleClass().add("movieLabelLibrary");
-
-                node = label;
-            }
-            else {//put the Cover in the library
-                ImageView imageView = new ImageView();
-                imageView.setPreserveRatio(false);
-                imageView.setImage(new Image(imgUrl));
-                imageView.setFitWidth(200);
-                imageView.setFitHeight(300);
-
-                node = imageView;
-            }
-
-            node.setUserData(movie);
-
-            node.setOnMouseEntered(event -> stackPaneViewAddToCart.setOpacity(100));
-            node.setOnMouseExited(event -> stackPaneViewAddToCart.setOpacity(0));
-            node.setOnMouseClicked(event -> {
-                try {
-                    goToMovie(movie);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            stackPane.getChildren().add(node);
-            StackPane.setMargin(node, new Insets(20, 0, 0, 20));
-            stackPane.getChildren().add(stackPaneViewAddToCart);
+            addMovieToLibrary(movie);
         }
         adjustColumnCount();
     }
 
     /**
+     * This Method adds A Movie to the GridPane
+     *
+     * @param movie The movie to add.
+     */
+    private void addMovieToLibrary(Movies movie) {
+        String imgUrl = movie.getCover();
+
+        StackPane stackPane = new StackPane();
+        grp_libraryGrid.add(stackPane, 1, 1);
+
+        StackPane stackPaneViewAddToCart = createAddToCartButton(stackPane, movie);
+
+        Node node = null;
+
+        if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
+        {
+            Label label = new Label(movie.getName());
+            label.setWrapText(true); // Enable text wrapping
+            label.setAlignment(Pos.CENTER); // Center align the text
+
+            // Set the size of the StackPane
+            label.setMinSize(200, 300); // Mindestgröße des Labels auf 200x300 setzen
+            label.setMaxSize(200, 300); // Höchstgröße des Labels auf 200x300 setzen
+            label.getStyleClass().add("movieLabelLibrary");
+
+            node = label;
+        }
+        else {//put the Cover in the library
+            ImageView imageView = new ImageView();
+            imageView.setPreserveRatio(false);
+            imageView.setImage(new Image(imgUrl));
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(300);
+
+            node = imageView;
+        }
+
+        node.setUserData(movie);
+
+        node.setOnMouseEntered(event -> stackPaneViewAddToCart.setOpacity(100));
+        node.setOnMouseExited(event -> stackPaneViewAddToCart.setOpacity(0));
+        node.setOnMouseClicked(event -> {
+            try {
+                goToMovie(movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        stackPane.getChildren().add(node);
+        StackPane.setMargin(node, new Insets(20, 0, 0, 20));
+        stackPane.getChildren().add(stackPaneViewAddToCart);
+    }
+
+    /**
      * This method updates all Movies in case of changes
+     * TODO Jannis diese Methode bitte nicht mehr aufrufen und löschen. Ersetzen mit
+     * TODO addMovieToLibrary(addedMovie); if you added a Movie
+     * TODO updateMovieInLibrary(changedMovie) if you changed a Movie
+     * TODO removieMovieFromLibrary(deletedMovie) if you deleted a Movie
+     *
      */
     public void updateMovieList() {
-        gridPane.getChildren().clear();
+        grp_libraryGrid.getChildren().clear();
         List<Movies> allMovies = MoviesUtility.getFullMovieList();
-        updateMovies(allMovies);
+        updateLibrary(allMovies);
+    }
+
+    /**
+     * This method updates syncs the LibraryView GridPane with the movies in the Database.
+     *
+     */
+    public void syncLibraryWithDB() {
+        List<Movies> moviesInDb = MoviesUtility.getFullMovieList();
+        List<Movies> moviesToAdd = new ArrayList<>(); // Collect movies to add
+        for (Movies movieInDb: moviesInDb) {
+            boolean found = false;
+            for (Node node : grp_libraryGrid.getChildren()) {
+                if (node instanceof StackPane stackPane) {
+                    Movies movieInLibrary = getMovieFromStackPane(stackPane);
+                    assert movieInLibrary != null;
+                    if (movieInDb.getMovieid() == movieInLibrary.getMovieid()) {
+                        if (!movieInDb.equals(movieInLibrary)) {
+                            removeMovieFromLibrary(movieInLibrary.getMovieid());
+                        }
+                        found = true;
+                        break; // Found the movie in the library, no need to add
+                    }
+                }
+            }
+            if (!found) {
+                moviesToAdd.add(movieInDb); // Collect movies to add
+            }
+        }
+
+        for (Movies movieToAdd : moviesToAdd) {
+            addMovieToLibrary(movieToAdd); // Add collected movies to library
+        }
+
+        adjustColumnCount();
+    }
+
+
+    /**
+     * This method updates a specific Movie in the LibraryView GridPane.
+     * It deletes the movie in the Pane and adds the changed.
+     */
+
+    public void updateMovieInLibrary(Movies movieToUpdate) {
+        removeMovieFromLibrary(movieToUpdate.getMovieid());
+        addMovieToLibrary(movieToUpdate);
+        sortMovies();
+        filterMovies();
+    }
+
+    /**
+     * This Method removes a Movie from the Library
+     * @param movieToDelete is the MovieId of the Movie in the GridPane which should get deleted.
+     */
+    public void removeMovieFromLibrary(int movieToDelete) {
+        Iterator<Node> iterator = grp_libraryGrid.getChildren().iterator();
+        while (iterator.hasNext()) {
+            Node node = iterator.next();
+            if (node instanceof StackPane stackPane) {
+                Movies movieInLibrary = getMovieFromStackPane(stackPane);
+                if (movieToDelete == movieInLibrary.getMovieid()) {
+                    iterator.remove(); // Use iterator to remove the node
+                    adjustColumnCount();
+                    return;
+                }
+            }
+        }
     }
 
     /**
      * This method creates a StackPane that acts as a button to add a movie to cart
      * the params are used to ensure the functionality of the button
-     * @param AllMovies
-     * @param stackPane
-     * @param movie
-     * @return
+     * @param stackPane the StackPane with the Cover (as ImageView or Label) with the Button to add.
+     * @param movie the Movie in the ImageView or Label
+     * @return StackPane which is needed to add to the Library GridPane
      */
-    public StackPane createAddToCartButton(List<Movies> AllMovies, StackPane stackPane, Movies movie){
+    public StackPane createAddToCartButton(StackPane stackPane, Movies movie){
         StackPane stackPaneViewAddToCart = new StackPane();
         ImageView imageViewAddToCart = new ImageView();
         stackPaneViewAddToCart.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
@@ -308,7 +394,7 @@ public class LibraryController {
      * @return The number of columns that can fit within the GridPane.
      */
     private int calculateNumColumns() {
-        double gridWidth = gridPane.getWidth();
+        double gridWidth = grp_libraryGrid.getWidth();
         double imageWidth = 200+20;
         return Math.max(1, (int) (windowWidth / imageWidth));
     }
@@ -321,20 +407,20 @@ public class LibraryController {
     private void adjustColumnCount() {
         int numColumns = calculateNumColumns();
 
-        gridPane.getColumnConstraints().clear();
+        grp_libraryGrid.getColumnConstraints().clear();
         for (int i = 0; i < numColumns; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints();
             columnConstraints.setPercentWidth(100.0 / numColumns);
-            gridPane.getColumnConstraints().add(columnConstraints);
+            grp_libraryGrid.getColumnConstraints().add(columnConstraints);
         }
 
         int childIndex = 0;
-        for (Node child : gridPane.getChildren()) {
+        for (Node child : grp_libraryGrid.getChildren()) {
             if (child.isVisible() && child.isManaged()) {
                 int row = childIndex / numColumns;
                 int column = childIndex % numColumns;
-                GridPane.setRowIndex(child, row);
-                GridPane.setColumnIndex(child, column);
+                grp_libraryGrid.setRowIndex(child, row);
+                grp_libraryGrid.setColumnIndex(child, column);
                 childIndex++;
             }
         }
@@ -352,6 +438,7 @@ public class LibraryController {
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
         MainApplication.borderPane.setRight(null);
         movieController.fillPage(movie);
+        MainApplication.borderPane.setRight(null);
 
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)
     }
