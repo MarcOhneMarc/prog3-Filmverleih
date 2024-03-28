@@ -1,82 +1,263 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 <!--Why bib_textfield as styleclass, shouldn't it be txt_class_bibTextFields???-->
 
-<TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" stylesheets="@stylesheet.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
+<TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" stylesheets="@stylesheet.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
     <tabs>
         <Tab id="tabbb" fx:id="tbs_settingsTab" styleClass="tbs_settingsTab" text="Bibliothek">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="919.0" prefWidth="1920.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
-                    <children>
-                        <VBox fx:id="vbx_movieParamGrid" layoutX="60.0" layoutY="60.0" prefHeight="814.0" prefWidth="1699.0">
-                            <children>
-                                <GridPane fx:id="grp_movieParamSelect" hgap="20.0" prefHeight="741.0" prefWidth="1299.0" vgap="20.0">
-                                    <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    </rowConstraints>
-                                    <children>
-                                        <TextField fx:id="txf_movieID" promptText="ID" styleClass="bib_textfield" GridPane.rowIndex="1" />
-                                        <TextField fx:id="txf_movieName" promptText="Name" styleClass="bib_textfield" GridPane.rowIndex="2" />
-                                        <TextField fx:id="txf_movieYear" prefWidth="372.0" promptText="Jahr" styleClass="bib_textfield" GridPane.rowIndex="3" />
-                                        <TextField fx:id="txf_movieLength" promptText="Länge" styleClass="bib_textfield" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txf_movieFSK" promptText="FSK" styleClass="bib_textfield" GridPane.rowIndex="5" />
-                                        <TextField fx:id="txf_movieRating" promptText="Rating" styleClass="bib_textfield" GridPane.rowIndex="6" />
-                                        <TextField fx:id="txf_movieGenre1" promptText="Genre 1" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                        <TextField fx:id="txf_movieGenre2" promptText="Genre 2" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                        <TextField fx:id="txf_movieGenre3" promptText="Genre 3" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                        <TextField fx:id="txf_movieDirector1" promptText="Director 1*" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txf_movieDirector2" promptText="Director 2" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                        <TextField fx:id="txf_movieDirector3" promptText="Director 3" styleClass="bib_textfield" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                        <TextField fx:id="txf_movieCount" promptText="Anzahl" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                        <TextField fx:id="txf_movieStudio" promptText="Studio" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <TextField fx:id="txf_movieActors" promptText="Actors" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                        <TextField fx:id="txf_movieUndefined3" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                        <TextField fx:id="txf_movieUndefined4" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                                        <TextField fx:id="txf_movieUndefined5" styleClass="bib_textfield" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                                        <TextField fx:id="txf_movieLinkToCover" promptText="Link to Cover" styleClass="bib_textfield" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                                        <TextArea fx:id="txa_movieComment" prefHeight="51.0" prefWidth="228.0" promptText="Comment" styleClass="bib_comment" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="5" />
-                                        <Button fx:id="btn_addMovie" mnemonicParsing="false" onAction="#addMovie" styleClass="bib-button" text="Hinzufügen" textFill="WHITE" GridPane.rowIndex="8" />
-                                        <Label styleClass="lbl_class_SettingsLabel" text="Film löschen" GridPane.rowIndex="10" />
-                                        <TextField fx:id="txf_deleteMovieId" promptText="ID" styleClass="bib_textfield" GridPane.rowIndex="11" />
-                                        <Button fx:id="btn_deleteMovie" mnemonicParsing="false" onAction="#deleteMovie" styleClass="bib-button" text="Löschen" textFill="WHITE" GridPane.rowIndex="12" />
-                                        <Label prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_SettingsLabel" text="Film hinzufügen" />
-                                        <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-                                            <children>
-                                                <CheckBox fx:id="cbx_selDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
-                                                <CheckBox fx:id="cbx_selBlueRay" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Blu-Ray" textFill="WHITE" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </GridPane>
-                            </children>
-                        </VBox>
-                    </children>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="919.0" prefWidth="1920.0" styleClass="anp_class_settingTabs">
+               <children>
+                  <StackPane prefHeight="919.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane fx:id="acp_movieAddNodes" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <GridPane fx:id="grp_movieEditParamSelect" hgap="20.0" prefHeight="791.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="75.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="410.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="410.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="410.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="410.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                    <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+                                 </rowConstraints>
+                                 <children>
+                                    <TextField fx:id="txf_movieAddID" disable="true" prefWidth="200.0" promptText="ID" styleClass="txf_class_movieAdd" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txf_movieAddName" prefWidth="410.0" promptText="Name" styleClass="txf_class_movieAdd" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txf_movieAddYear" prefWidth="410.0" promptText="Jahr" styleClass="txf_class_movieAdd" GridPane.rowIndex="6" />
+                                    <TextField fx:id="txf_movieAddLength" prefWidth="410.0" promptText="Länge" styleClass="txf_class_movieAdd" GridPane.rowIndex="8" />
+                                    <TextField fx:id="txf_movieAddFSK" prefWidth="410.0" promptText="FSK" styleClass="txf_class_movieAdd" GridPane.rowIndex="10" />
+                                    <TextField fx:id="txf_movieAddRating" prefWidth="410.0" promptText="Rating" styleClass="txf_class_movieAdd" GridPane.rowIndex="12" />
+                                    <TextField fx:id="txf_movieAddGenre1" prefWidth="410.0" promptText="Genre 1" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txf_movieAddGenre2" prefWidth="410.0" promptText="Genre 2" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txf_movieAddGenre3" prefWidth="410.0" promptText="Genre 3" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="txf_movieAddDirector1" prefWidth="410.0" promptText="Director 1*" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <TextField fx:id="txf_movieAddDirector2" prefWidth="410.0" promptText="Director 2" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <TextField fx:id="txf_movieAddDirector3" prefWidth="410.0" promptText="Director 3" styleClass="txf_class_movieAdd" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <TextField fx:id="txf_movieAddCount" prefWidth="410.0" promptText="Anzahl" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txf_movieAddStudio" prefWidth="410.0" promptText="Studio" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txf_movieAddActors" prefWidth="410.0" promptText="Actors" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <TextField fx:id="txf_movieEditUndefined3" disable="true" prefWidth="410.0" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                    <TextField fx:id="txf_movieEditUndefined4" disable="true" prefWidth="410.0" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                    <TextField fx:id="txf_movieEditUndefined5" disable="true" prefWidth="410.0" styleClass="txf_class_movieAdd" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                                    <TextField fx:id="txf_movieAddLinkToCover" prefWidth="410.0" promptText="Link to Cover" styleClass="txf_class_movieAdd" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label fx:id="lbl_movieAddCaption" prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_movieAddCaptions" text="Film hinzufügen" />
+                                    <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes1" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="14">
+                                       <children>
+                                          <CheckBox fx:id="cbx_movieAddSelDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
+                                          <CheckBox fx:id="cbx_movieAddSelBluRay" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Blu-Ray" textFill="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="btn_confirmMovieAdd" mnemonicParsing="false" onAction="#confirmMovieAdd" prefHeight="50.0" prefWidth="220.0" text="Hinzufügen" GridPane.rowIndex="15">
+                                       <styleClass>
+                                          <String fx:value="btn_class_movieAddButtons" />
+                                          <String fx:value="btn_class_movieAddGreen" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="MovieID*" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddGenre1Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Genre 1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddNameTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Name*" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddYearTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Jahr*" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddLengthTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Länge*" GridPane.rowIndex="7">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddFskTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="FSK*" GridPane.rowIndex="9">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddRatingTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Rating*" GridPane.rowIndex="11">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddGenre2Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Genre 2" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddGenre3Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Genre 3" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddDirector1Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Director 1" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddDirector2Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Director 2" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddDirector3Title" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Director 3" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddCountTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Anzahl*" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Studio" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddActorsTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Actors" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddLinkToCoverTitle" alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Link to Cover" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label alignment="BOTTOM_LEFT" styleClass="lbl_class_movieAddTextFieldTitles" text="Comment" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="5.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label fx:id="lbl_movieAddSaveFeedback" alignment="TOP_LEFT" maxWidth="650.0" text="Label" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="15" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+                                    <TextArea fx:id="txa_movieAddComment" prefHeight="51.0" prefWidth="410.0" promptText="Comment" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7" />
+                                    <ImageView fx:id="igv_movieAddConstraintInfoButton" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#constraintInfoButtonClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                                       <image>
+                                          <Image url="@Questionmark-Icon.png" />
+                                       </image>
+                                    </ImageView>
+                                    <AnchorPane fx:id="acp_movieAddConstraintInfo" maxHeight="340.0" prefHeight="300.0" prefWidth="860.0" visible="false" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="13" GridPane.rowSpan="8" GridPane.valignment="TOP">
+                                       <children>
+                                          <Label layoutX="49.0" layoutY="27.0" styleClass="lbl_class_movieAddConstraintInfoTitle" text="Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                          <Label layoutX="26.0" layoutY="48.0" styleClass="lbl_class_movieAddConstraintInfos" text="Der Name darf nicht leer sein." AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Jahr" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfos" text="Das Jahr muss sich zwichen 1920 und 2024 befinden." AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="80.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Länge" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfos" text="Die Länge des Films in Minuten darf maximal 3 stellig sein." AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="120.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="FSK" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="140.0" />
+                                          <Label layoutX="21.0" layoutY="160.0" styleClass="lbl_class_movieAddConstraintInfos" text="Das FSK Alter muss 0, 6, 12, 16, oder 18 sein." AnchorPane.leftAnchor="21.0" AnchorPane.topAnchor="160.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Bewertung" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="180.0" />
+                                          <Label maxWidth="350.0" styleClass="lbl_class_movieAddConstraintInfos" text="Die Bewertung muss aus einer Ziffer gefolgt von einem &quot;.&quot; und noch einer Ziffer bestehen, z.B. 8.3." wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="200.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Genres" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="240.0" />
+                                          <Label maxWidth="350.0" styleClass="lbl_class_movieAddConstraintInfos" text="In der Genre eingabe dürfen keine Kommas enthalten sein. Zudem muss erst Genre 1 gefüllt sein, bevor Genre 2 gefüllt wird. Das selbe gilt für Genre 2 und 3." wrapText="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="260.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Directors" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="20.0" />
+                                          <Label maxWidth="350.0" styleClass="lbl_class_movieAddConstraintInfos" text="Für die Director eingaben gelten die selben Regeln wie für die Genre Eingaben." wrapText="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="40.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Anzahl" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="80.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfos" text="Die Anzahl Eingabe darf nicht leer sein und nur Ziffern enthalten" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="100.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Actors" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="120.0" />
+                                          <Label maxWidth="350.0" styleClass="lbl_class_movieAddConstraintInfos" text="Die Actor einzelnen Actor müssen mit einem &quot;, &quot; getrennt werden, z.B. Robert De Niro, Samuel L. Jackson" wrapText="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="140.0" />
+                                          <Label styleClass="lbl_class_movieAddConstraintInfoTitle" text="Link to Cover" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="180.0" />
+                                          <Label maxWidth="350.0" styleClass="lbl_class_movieAddConstraintInfos" text="Link to Cover muss ein vollständiger Link sein, der mit &quot;http://&quot; oder &quot;https://&quot; beginnt und mit &quot;.jpg&quot; oder &quot;.png&quot; endet" wrapText="true" AnchorPane.leftAnchor="410.0" AnchorPane.topAnchor="200.0" />
+                                       </children>
+                                       <GridPane.margin>
+                                          <Insets top="10.0" />
+                                       </GridPane.margin>
+                                    </AnchorPane>
+                                    <Label styleClass="lbl_class_movieAddCaptions" text="Film löschen" GridPane.rowIndex="17" />
+                                    <TextField fx:id="txf_deleteMovieId1" promptText="ID" styleClass="txf_class_movieAdd" GridPane.rowIndex="18" />
+                                    <Button fx:id="btn_deleteMovie1" mnemonicParsing="false" onAction="#openDeleteConfirmation" text="Löschen" textFill="WHITE" GridPane.rowIndex="19">
+                                       <styleClass>
+                                          <String fx:value="btn_class_movieAddButtons" />
+                                          <String fx:value="btn_class_movieAddRed" />
+                                       </styleClass>
+                                    </Button>
+                                    <Label fx:id="lbl_movieAddDeleteIdFeedback" text="Sie müssen eine Id eingeben." visible="false" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="acp_movieAddDeleteConfirmation" maxHeight="300.0" maxWidth="800.0" prefHeight="300.0" prefWidth="200.0" visible="false" StackPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="lbl_movieAddDeleteConfirmation" layoutX="57.0" layoutY="49.0" text="Möchten sie den Film wirklich löschen?" textAlignment="CENTER" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+                              <Button fx:id="btn_movieAddDeleteConfirm" layoutX="119.0" layoutY="157.0" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="50.0" prefWidth="200.0" text="Bestätigen" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="150.0">
+                                 <styleClass>
+                                    <String fx:value="btn_class_movieAddButtons" />
+                                    <String fx:value="btn_class_movieAddRed" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="btn_movieAddDeleteCancel" layoutX="543.0" layoutY="183.0" mnemonicParsing="false" onAction="#cancelMovieDeletion" prefHeight="50.0" prefWidth="200.0" text="Abbrechen" AnchorPane.bottomAnchor="75.0" AnchorPane.rightAnchor="150.0">
+                                 <styleClass>
+                                    <String fx:value="btn_class_movieAddButtons" />
+                                    <String fx:value="btn_class_movieAddGreen" />
+                                 </styleClass>
+                              </Button>
+                              <Label fx:id="lbl_movieAddDeleteFeedback" alignment="CENTER" maxWidth="403.0" text="label" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="198.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <stylesheets>
+                  <URL value="@stylesheet.css" />
+                  <URL value="@movieAddStylesheet.css" />
+               </stylesheets>
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab styleClass="tbs_settingsTab" text="Mitarbeiter">
+        <Tab fx:id="tab_settingsEmployee" styleClass="tbs_settingsTab" text="Mitarbeiter">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
                     <children>

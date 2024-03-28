@@ -35,7 +35,7 @@ public class MoviesUtility {
         return new ArrayList<Movies>();
     }
 
-    public Boolean newMovieInDB(String name, int year, String genre, int length, BigDecimal rating, int count, String type, String cover, String comment, String directors, String studio, String actors, int fsk, String movieType) {
+    public static Boolean newMovieInDB(String name, int year, String genre, int length, BigDecimal rating, int count, String type, String cover, String comment, String directors, String studio, String actors, int fsk) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -56,7 +56,6 @@ public class MoviesUtility {
                 newMovie.setStudio(studio);
                 newMovie.setActors(actors);
                 newMovie.setFsk(fsk);
-                newMovie.setType(movieType);
 
                 // Film zur Datenbank hinzufügen
                 session.save(newMovie);

@@ -176,9 +176,6 @@ public class EditMovieController {
             "Die Titel dieser wurden rot markiert.";
     private final String MOVIE_SAVE_WENT_WRONG = "Etwas ist schiefgelaufen, bitte versuchen Sie es erneut.";
 
-    private final double MAX_RATING = 10;
-    private final double MIN_RATING = 0;
-
     private int currentMovieId;
     private String currentMovieName;
     private int currentMovieYear;
@@ -214,9 +211,9 @@ public class EditMovieController {
     public void initialize(Movies movie) {
         this.movie = movie;
         txfStringUndoList.clear();
-        resetStylingAndDisables();
         movieDataGetter();
         splitGenreDirectorsToArray();
+        resetStylingAndDisables();
         txfListFiller();
         txfListenerInitializer();
         txaListenerInitializer();
@@ -592,22 +589,6 @@ public class EditMovieController {
             entriesAreValid = false;
         }
 
-        /*if (changedGenres != null) {
-            if (txf_movieEditGenre1.getText().isEmpty() && (!txf_movieEditGenre2.getText().isEmpty() || !txf_movieEditGenre3.getText().isEmpty())) {
-                lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            } else {
-                lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #949494");
-            }
-
-            if (txf_movieEditGenre2.getText().isEmpty() && !txf_movieEditGenre3.getText().isEmpty()) {
-                lbl_movieEditGenre2Title.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            } else {
-                lbl_movieEditGenre2Title.setStyle("-fx-text-fill: #949494");
-            }
-        }*/
-
         //Genre1Validator
         if (MovieEntryValidator.splitTextFieldIsValid(txf_movieEditGenre1.getText(), txf_movieEditGenre2.getText(), txf_movieEditGenre3.getText())) {
             lbl_movieEditGenre1Title.setStyle("-fx-text-fill: #949494");
@@ -631,23 +612,6 @@ public class EditMovieController {
             lbl_movieEditGenre3Title.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         }
-
-
-        /*if (changedDirectors != null) {
-            if (txf_movieEditDirector1.getText().isEmpty() && (!txf_movieEditDirector2.getText().isEmpty() || !txf_movieEditDirector3.getText().isEmpty())) {
-                lbl_movieEditDirector1Title.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            } else {
-                lbl_movieEditDirector1Title.setStyle("-fx-text-fill: #949494");
-            }
-
-            if (txf_movieEditDirector2.getText().isEmpty() && !txf_movieEditDirector3.getText().isEmpty()) {
-                lbl_movieEditDirector2Title.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            } else {
-                lbl_movieEditDirector2Title.setStyle("-fx-text-fill: #949494");
-            }
-        }*/
 
         //Director1Validator
         if (MovieEntryValidator.splitTextFieldIsValid(txf_movieEditDirector1.getText(), txf_movieEditDirector2.getText(), txf_movieEditDirector3.getText())) {
@@ -767,7 +731,7 @@ public class EditMovieController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
-        Boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
+        boolean movieIsDeleted = Utility.DeleteMovieInDB(movie.getMovieid());
         if (movieIsDeleted) {
             MovieController movieController = connector.getMovieController();
             movieController.feedbackMessage(MOVIE_DELETE_SUCCESSFUL, "-fx-text-fill: #FF4040");

@@ -27,20 +27,6 @@ public class MovieEntryValidator {
         return !(string2.isEmpty() && !string3.isEmpty());
     }
 
-    /*public static boolean director1IsValid(String changedDirectors, String directors1, String directors2, String directors3) {
-        if (changedDirectors != null) {
-            return !(directors1.isEmpty() && (!directors2.isEmpty() || !directors3.isEmpty()));
-        }
-        return true;
-    }
-
-    public static boolean director2IsValid(String changedDirectors, String directors2, String directors3) {
-        if (changedDirectors != null) {
-            return !(directors2.isEmpty() && !directors3.isEmpty());
-        }
-        return true;
-    }*/
-
     public static boolean listWithCommaIsValid(String actors) {
         return actors.matches("^(\\w+\\.?\\w*( \\w+\\.?\\w*)*(, \\w+\\.?\\w*( \\w+\\.?\\w*)*)*)?$");
     }
