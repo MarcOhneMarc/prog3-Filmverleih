@@ -132,9 +132,9 @@
       <list>
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.SettingsApplication" />
+        <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.SettingsApplication" />
-        <item itemvalue="Application.MainApplication" />
-        <item itemvalue="Application.MainApplication" />
+        <item itemvalue="Application.SettingsApplication" />
       </list>
     </recent_temporary>
   </component>
