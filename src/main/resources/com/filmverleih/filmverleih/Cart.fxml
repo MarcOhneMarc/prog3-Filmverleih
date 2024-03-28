@@ -42,7 +42,7 @@
                      </Label>
                      <HBox prefHeight="65.0" prefWidth="450.0">
                         <children>
-                           <TextField fx:id="txf_CartID" maxHeight="50.0" maxWidth="370.0" onKeyTyped="#checkIDEmpty" prefHeight="50.0" prefWidth="370.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                           <TextField fx:id="txf_CartID" maxHeight="50.0" maxWidth="370.0" prefHeight="50.0" prefWidth="370.0" promptText="ID" styleClass="txf_class_CartTextFields" />
                            <Button fx:id="btn_checkID" maxHeight="50.0" maxWidth="70.0" mnemonicParsing="false" onAction="#checkID" prefHeight="50.0" prefWidth="70.0" text="check ID">
                               <HBox.margin>
                                  <Insets left="10.0" />

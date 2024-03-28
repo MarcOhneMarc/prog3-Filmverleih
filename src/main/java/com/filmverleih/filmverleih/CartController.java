@@ -398,6 +398,9 @@ public class CartController {
         }
     }
 
+    /**
+     * This method sets the last added customer ID
+     */
     private void setLastAddedCustomerID() {
         this.lastAddedCustomerID = Utility.getLastAddedCustomerID();
     }
@@ -417,7 +420,6 @@ public class CartController {
                 txf_PopUpCustomerEMail.getText().isEmpty() ||
                 !validatePhone() ||
                 !validateEmail();
-
 
         btn_newCustomerPopupConfirm.setDisable(anyEmpty);
     }
@@ -486,6 +488,10 @@ public class CartController {
         }
     }
 
+    /**
+     * This method checks an ID whether it is already in the db and then enables the
+     * new customer registration pop up or sets the customer information card visible
+     */
     @FXML
     private void checkID() {
         boolean bool = CustomersUtility.checkDuplicateCustomerID(Integer.parseInt(txf_CartID.getText()));
@@ -497,6 +503,11 @@ public class CartController {
         }
     }
 
+    /**
+     * This method checks whether an entered ID is valid using a regex
+     * only for numbers in the integer range
+     * @return true if valid (matches), false if not valid (does not match)
+     */
     private boolean checkIDValid() {
          if (!txf_CartID.getText().matches("^[0-9]{1,9}$")) {
              lbl_errorNoID.setVisible(true);
@@ -507,11 +518,20 @@ public class CartController {
          }
     }
 
+    /**
+     * This method sets the customer information card after a new customer is registered
+     * in order to directly see his information card
+     */
     private void setCustomerInfoCardAfterRegistration() {
         setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
         acp_customerInfoCard.setVisible(true);
     }
 
+    /**
+     * This method sets customer info to the according labels for the customer
+     * info card
+     * @param customers the customer of which the information is set
+     */
     private void setCustomerInfo(Customers customers) {
         lbl_customerIDValue.setText(String.valueOf(customers.getCustomerid()));
         lbl_customerSurnameValue.setText(customers.getFirstname());
@@ -531,8 +551,28 @@ public class CartController {
     }
 
     /**
+     * This method checks whether the checkID button can be disabled or enabled
+     */
+    private void checkWhetherToEnableCheckIDButton() {
+        boolean anyWrong = !checkIDValid() || txf_CartID.getText().isEmpty();
+
+        lbl_errorNoID.setVisible(anyWrong);
+        btn_checkID.setDisable(anyWrong);
+    }
+
+    /**
+     * This method checks whether the order button can be disabled or enabled
+     */
+    private void checkWhetherToEnableOrderButton() {
+        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty();
+
+        btn_OrderCart.setDisable(anyWrong);
+    }
+
+    /**
      * This method initializes the CartController focussing on setting
-     * keyType events to the TextFields for phone and email
+     * up events and listeners necessary for preventing wrong input
+     * and empty orders
      */
     @FXML
     private void initialize() {
@@ -574,19 +614,6 @@ public class CartController {
                 }
             }
         });
-    }
-
-    private void checkWhetherToEnableCheckIDButton() {
-        boolean anyWrong = !checkIDValid() || txf_CartID.getText().isEmpty();
-
-        lbl_errorNoID.setVisible(anyWrong);
-        btn_checkID.setDisable(anyWrong);
-    }
-
-    private void checkWhetherToEnableOrderButton() {
-        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty();
-
-        btn_OrderCart.setDisable(anyWrong);
     }
 
     /**

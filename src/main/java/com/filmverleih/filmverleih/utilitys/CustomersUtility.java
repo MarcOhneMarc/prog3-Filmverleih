@@ -131,6 +131,11 @@ public class CustomersUtility {
         return false;
     }
 
+    /**
+     * This method gets a whole customer by its ID
+     * @param id the id of the wanted customer
+     * @return the customer that has the given ID, or null if not in db
+     */
     public static Customers getCustomersByID(int id) {
         for (Customers customers:getFullCustomerList()) {
             if (customers.getCustomerid() == id) return customers;
