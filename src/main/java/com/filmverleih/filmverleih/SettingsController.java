@@ -67,7 +67,7 @@ public class SettingsController {
 
     //components of the movie managing tab
     @FXML
-    private Tab tab_settingsEmployee;
+    private Tab mitarbeiterTab;
     @FXML
     private AnchorPane acp_movieAddNodes;
     @FXML
@@ -144,8 +144,6 @@ public class SettingsController {
     private CheckBox cbx_movieAddSelDVD;
     @FXML
     private CheckBox cbx_movieAddSelBluRay;
-    @FXML
-    private TextField txf_deleteMovieIdmovieID;
     @FXML
     private TextField txf_deleteMovieId1;
     @FXML
@@ -253,6 +251,10 @@ public class SettingsController {
         });
     }
 
+    /**
+     * Confirms the addition of a new movie to the database after validating the entry.
+     * Updates the user interface accordingly based on the success of the database update.
+     */
     public void confirmMovieAdd() {
         if(validEntryChecker()) {
             boolean dbUpdateSuccessful = MoviesUtility.newMovieInDB(
@@ -522,15 +524,25 @@ public class SettingsController {
         disableMovieConstraintInfo();
     }
 
+    /**
+     * Toggles the visibility of the movie constraint information panel.
+     * If the panel is currently visible, it is disabled; otherwise, it is enabled.
+     */
     public void constraintInfoButtonClick() {
         if(acp_movieAddConstraintInfo.isVisible()) {disableMovieConstraintInfo();}
         else {enableMovieConstraintInfo();}
     }
 
+    /**
+     * Sets AnchorPane with constraint infos visible
+     */
     private void enableMovieConstraintInfo() {
         acp_movieAddConstraintInfo.setVisible(true);
     }
 
+    /**
+     * Sets AnchorPane with constraint infos invisible
+     */
     private void disableMovieConstraintInfo() {
         acp_movieAddConstraintInfo.setVisible(false);
     }
@@ -570,7 +582,7 @@ public class SettingsController {
     private void enableAddNodes() {
         igv_movieAddConstraintInfoButton.setOpacity(1);
         acp_movieAddNodes.setDisable(false);
-        tab_settingsEmployee.setDisable(false);
+        mitarbeiterTab.setDisable(false);
         //connector.getNavbarController().enableNavBar(); TODO
     }
 
@@ -582,7 +594,7 @@ public class SettingsController {
     private void disableAddNodes() {
         igv_movieAddConstraintInfoButton.setOpacity(0.3);
         acp_movieAddNodes.setDisable(true);
-        tab_settingsEmployee.setDisable(true);
+        mitarbeiterTab.setDisable(true);
         //connector.getNavbarController().disableNavBar(); TODO
     }
 
@@ -603,51 +615,6 @@ public class SettingsController {
         acp_movieAddDeleteConfirmation.setDisable(true);
         acp_movieAddDeleteConfirmation.setVisible(false);
     }
-
-    /**
-     * test method to link the add button to the controller
-     * which prints a small verification message in the console
-     * that the add button has been clicked
-     */
-    public void addMovie() {
-        /*String movieType = "DVD";
-        Utility utility = new Utility();
-        System.out.println("console test: add movie button was clicked");
-        if (cbx_selBlueRay.isSelected()) {
-             movieType = "BlueRay";
-        };
-        utility.newMovieInDB(txf_movieName.getText(),
-                Integer.parseInt(txf_movieYear.getText()),
-                txf_movieGenre1.getText() + ", "
-                        + txf_movieGenre2.getText() + ", "
-                        + txf_movieGenre3.getText(),
-                Integer.parseInt(txf_movieLength.getText()),
-                BigDecimal.valueOf(Double.parseDouble(txf_movieRating.getText())),
-                Integer.parseInt(txf_movieCount.getText()),
-                txf_movieCount.getText(),
-                txf_movieLinkToCover.getText(),
-                txa_movieComment.getText(),
-                txf_movieDirector1.getText() + ", "
-                        + txf_movieDirector2.getText() + ", "
-                        + txf_movieDirector3.getText(),
-                txf_movieStudio.getText(),
-                txf_movieActors.getText(),
-                Integer.parseInt(txf_movieFSK.getText()), movieType);
-
-         */
-    }
-
-    /**
-     * test method to link the delete button to the controller
-     * which prints a small verification message in the console
-     * that the delete button has been clicked
-     */
-    /*@FXML
-    public void deleteMovie() {
-        System.out.println("console test: delete movie button was clicked");
-        Utility utility = new Utility();
-        utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
-    }*/
 
     /**
      * This method fills the TableView with users from

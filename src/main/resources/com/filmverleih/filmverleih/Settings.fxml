@@ -257,7 +257,7 @@
                 </AnchorPane>
             </content>
         </Tab>
-        <Tab fx:id="tab_settingsEmployee" styleClass="tbs_settingsTab" text="Mitarbeiter">
+        <Tab fx:id="mitarbeiterTab" styleClass="tbs_settingsTab" text="Mitarbeiter">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
                     <children>
