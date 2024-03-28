@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stp_cartOuterStackPane" prefHeight="990.0" prefWidth="1920" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
-   <AnchorPane fx:id="acp_CartBackground" prefHeight="990.0" prefWidth="1920.0">
+<StackPane fx:id="stp_cartOuterStackPane" prefHeight="990.0" prefWidth="1920" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
+   <AnchorPane fx:id="acp_CartBackground" prefHeight="990.0" prefWidth="1920.0" stylesheets="@customerPopUpStylesheet.css">
       <children>
          <HBox fx:id="hbx_CartMainHBox" alignment="CENTER" layoutX="500.0" layoutY="20.0" prefHeight="990.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -22,7 +22,7 @@
                </ScrollPane>
                <VBox fx:id="vbx_CartCustomerInfo" alignment="CENTER_LEFT" minWidth="450.0" prefHeight="200.0" prefWidth="100.0">
                   <children>
-                     <Label fx:id="lbl_CartCustomerInformation" text="Kundeninformationen" textFill="WHITE">
+                     <Label fx:id="lbl_CartCustomerInformation" text="Warenkorb" textFill="WHITE">
                         <font>
                            <Font size="40.0" />
                         </font>
@@ -30,8 +30,17 @@
                            <Insets />
                         </VBox.margin>
                      </Label>
-                     <TextField fx:id="txf_CartID" maxWidth="450.0" onKeyTyped="#checkIDEmpty" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
-                     <Label fx:id="lbl_errorNoID" text="Bitte ID eingeben!" textFill="#ff4040" visible="false" />
+                     <HBox prefHeight="65.0" prefWidth="450.0">
+                        <children>
+                           <TextField fx:id="txf_CartID" maxHeight="50.0" maxWidth="370.0" prefHeight="50.0" prefWidth="370.0" promptText="ID" styleClass="txf_class_CartTextFields" />
+                           <Button fx:id="btn_checkID" maxHeight="50.0" maxWidth="70.0" mnemonicParsing="false" onAction="#checkID" prefHeight="50.0" prefWidth="70.0" text="check ID">
+                              <HBox.margin>
+                                 <Insets left="10.0" />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                     <Label fx:id="lbl_errorNoID" text="ID ungültig!" textFill="#ff4040" visible="false" />
                      <TableView fx:id="tbv_CartItemsTable" maxWidth="450.0" prefHeight="200.0" prefWidth="450.0">
                         <columns>
                            <TableColumn fx:id="tbc_Movie" maxWidth="300.0" prefWidth="300.0" resizable="false" styleClass="tbc_class_TableColumns" text="Film" />
@@ -118,6 +127,9 @@
             </padding>
          </HBox>
       </children>
+      <StackPane.margin>
+         <Insets />
+      </StackPane.margin>
    </AnchorPane>
    <AnchorPane fx:id="acp_newCustomerPopup" disable="true" maxHeight="743.0" maxWidth="1011.0" prefHeight="743.0" prefWidth="1011.0" stylesheets="@customerPopUpStylesheet.css" visible="false" StackPane.alignment="CENTER">
       <children>
@@ -130,7 +142,6 @@
                </Label>
                <VBox fx:id="vbx_newCustomerFields" alignment="CENTER" prefHeight="500.0" prefWidth="450.0">
                   <children>
-                     <TextField fx:id="txf_PopUpCustomerID" disable="true" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="ID" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerSurName" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Vorname" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerLastName" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Nachname" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerStreet" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Straße" styleClass="txf_class_CartTextFields" />
@@ -138,6 +149,8 @@
                      <TextField fx:id="txf_PopUpCustomerCity" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Stadt" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerPhone" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="Telefon-Nr" styleClass="txf_class_CartTextFields" />
                      <TextField fx:id="txf_PopUpCustomerEMail" maxHeight="50.0" maxWidth="450.0" onKeyTyped="#checkWhetherToDisableNewCustomerButton" prefHeight="50.0" prefWidth="450.0" promptText="E-mail" styleClass="txf_class_CartTextFields" />
+                     <Label fx:id="lbl_errorInvalidPhone" text="Telefon-Nr nicht gültig!" textFill="#ff4040" visible="false" />
+                     <Label fx:id="lbl_errorInvalidEmail" text="E-mail nicht gültig!" textFill="#ff4040" visible="false" />
                   </children>
                </VBox>
                <HBox fx:id="hbx_customerPopUpButtonHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -149,5 +162,52 @@
             </children>
          </VBox>
       </children>
+   </AnchorPane>
+   <AnchorPane fx:id="acp_customerInfoCard" maxHeight="200.0" maxWidth="400.0" prefHeight="200.0" prefWidth="400.0" stylesheets="@customerPopUpStylesheet.css" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+      <children>
+         <VBox layoutX="37.0" layoutY="9.0" prefHeight="182.0" prefWidth="329.0">
+            <children>
+               <Label styleClass="lbl_classCustomerInfoLabels" text="Kundeninformationen">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Label>
+               <GridPane fx:id="grp_customerInfoGrid" alignment="BOTTOM_LEFT" maxHeight="160.0" maxWidth="330.0" prefHeight="160.0" prefWidth="330.0">
+                 <columnConstraints>
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="ID" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="Vorname" GridPane.rowIndex="1" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="Nachname" GridPane.rowIndex="2" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="Straße" GridPane.rowIndex="3" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="Stadt" GridPane.rowIndex="4" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="Telefon-Nr:" GridPane.rowIndex="5" />
+                     <Label fx:id="lbl_customerIDValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" />
+                     <Label fx:id="lbl_customerSurnameValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     <Label fx:id="lbl_customerLastNameValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     <Label fx:id="lbl_customerStreetValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     <Label fx:id="lbl_customerCityValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     <Label fx:id="lbl_customerPhoneValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                     <Label styleClass="lbl_classCustomerInfoLabels" text="E-mail" GridPane.rowIndex="6" />
+                     <Label fx:id="lbl_customerEmailValue" styleClass="lbl_classCustomerInfoLabels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  </children>
+               </GridPane>
+            </children>
+         </VBox>
+      </children>
+      <StackPane.margin>
+         <Insets bottom="20.0" right="20.0" />
+      </StackPane.margin>
    </AnchorPane>
 </StackPane>

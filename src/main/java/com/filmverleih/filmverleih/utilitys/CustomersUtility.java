@@ -92,6 +92,56 @@ public class CustomersUtility {
     }
 
     /**
+     * This method checks whether a certain email address is already in the db
+     * @param email the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateEmailInCustomer(String email) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getEmail().equals(email)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks whether a certain phone number is already in the db
+     * @param phone the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicatePhoneInCustomer(String phone) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getPhone().equals(phone)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks whether a certain customer db is already in the db
+     * @param id the id that will be checked
+     * @return true if id is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateCustomerID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method gets a whole customer by its ID
+     * @param id the id of the wanted customer
+     * @return the customer that has the given ID, or null if not in db
+     */
+    public static Customers getCustomersByID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return customers;
+        }
+        return null;
+    }
+
+    /**
      * This method returns the last added customer ID from the
      * customer table by getting the id of the last element of the
      * fullCustomersList();
