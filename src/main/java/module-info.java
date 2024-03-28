@@ -7,6 +7,8 @@ module com.filmverleih.filmverleih {
     requires jakarta.persistence;
     requires org.apache.commons.validator;
 
+    requires org.slf4j;
+
 
     opens com.filmverleih.filmverleih to javafx.fxml;
     exports com.filmverleih.filmverleih;

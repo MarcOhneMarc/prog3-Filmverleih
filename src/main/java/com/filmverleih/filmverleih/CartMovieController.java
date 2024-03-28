@@ -1,5 +1,6 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import com.filmverleih.filmverleih.entity.Movies;
@@ -66,7 +67,7 @@ public class CartMovieController {
      * This method removes the movie from cart
      */
     public void removeFromCart() {
-        System.out.println("console test: remove button has been clicked");
+        LoggerUtility.logger.info("movie has been removed from cart: 016");
 
         if (cartController != null) {
             cartController.removeMovieCard(hbx_CartMovie, movie);

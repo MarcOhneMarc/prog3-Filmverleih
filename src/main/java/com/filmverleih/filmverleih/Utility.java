@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
 import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,10 +47,12 @@ public class Utility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
         }
         return new ArrayList<Movies>();
     }
@@ -82,11 +85,14 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
             return false;
         }
         return true;
@@ -104,11 +110,15 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -188,11 +198,15 @@ public class Utility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -216,10 +230,14 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
         }
         return returnMovie;
     }
@@ -274,10 +292,14 @@ public class Utility {
                 return users;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                //e.printStackTrace();
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("old utility class");
+
         }
         return  new ArrayList<Users>();
     }
@@ -297,10 +319,14 @@ public class Utility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                //e.printStackTrace();
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("old utility class");
+
         }
         return  new ArrayList<Customers>();
     }
@@ -353,13 +379,17 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("customer registration went wrong Code: 77621");
+                //e.printStackTrace(); // replace with logger
+                //System.out.println("customer registration went wrong Code: 77621");
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("customer registration went wrong Code: 77620");
+            //e.printStackTrace(); // replace with logger
+            //System.out.println("customer registration went wrong Code: 77620");
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -391,13 +421,17 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("Order went wrong Code: 77619");
+                //e.printStackTrace(); // replace with logger
+                //System.out.println("Order went wrong Code: 77619");
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("Order went wrong Code: 77618");
+            //e.printStackTrace(); // replace with logger
+            //System.out.println("Order went wrong Code: 77618");
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -415,5 +449,77 @@ public class Utility {
             return 1;
         }
         return customersList.getLast().getCustomerid();
+    }
+   public Boolean deleteUserInDB(Users user){
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("DELETE FROM Users WHERE userid = " + user.getUserid()).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method adds a new user to the database
+     * @param user the user that will be added to the database
+     * @return
+     */
+    public Boolean addUserToDB(Users user) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.save(user);//add user to db
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param newPassword of the password
+     * @param userId of the user
+     * @return
+     */
+    public Boolean UpdateUserPasswordInDB(String newPassword, int userId) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("UPDATE Users SET password =" + "'" +newPassword+ "'" + " WHERE userid = " + userId).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return true;
     }
 }

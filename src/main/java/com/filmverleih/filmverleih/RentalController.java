@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -35,6 +36,8 @@ public class RentalController {
 
     @FXML
     Pane pane;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector;
+
     @FXML
     ScrollPane scp_rentalScrollPane;
     @FXML
@@ -42,13 +45,13 @@ public class RentalController {
 
     private double windowWidth = 1920;
 
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
-
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
+      
         this.connector = connector;
     }
 
@@ -74,7 +77,7 @@ public class RentalController {
 
         //Load Rental View
         //TODO change to not get all movies but only those that are rented from db
-        List<Movies> allMovies = Utility.getFullMovieList();
+        List<Movies> allMovies = MoviesUtility.getFullMovieList();
         for (int i = 0; i < allMovies.size(); i++) {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));

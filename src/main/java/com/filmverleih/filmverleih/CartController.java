@@ -1,20 +1,29 @@
 package com.filmverleih.filmverleih;
 
+
 import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.collections.FXCollections;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,16 +48,22 @@ public class CartController {
     private int lastAddedCustomerID;
     private List<Movies> fullMovieList = new ArrayList<>();
     private ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
+    private static final double FIXED_PRICE_OLD = 1.50;
+    private static final double FIXED_PRICE_NEW = 2.50;
+    private int days = 0;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    private DatePicker datePicker = new DatePicker();
+
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector;
+
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
     }
 
@@ -125,7 +140,19 @@ public class CartController {
     private Label lbl_customerPhoneValue;
     @FXML
     private Label lbl_customerEmailValue;
+    @FXML
+    private Label lbl_calendarDatePicker;
+    @FXML
+    private ImageView ivw_calendar;
 
+    /**
+     *This method fills in the movie-cards to the movie list on the left
+     */
+    public void fillMovieList() throws IOException {
+        for(Movies movie : fullMovieList){
+            addMovieToMovieList(movie);
+        }
+    }
 
     /**
      * This method adds one movie to the card view list
@@ -173,16 +200,26 @@ public class CartController {
         tbv_CartItemsTable.setItems(fullMovieListObservable);
 
         tbc_Movie.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        tbc_Price.setCellValueFactory(cellData -> new SimpleStringProperty(decimalFormat.format(FIXED_PRICE) + "€"));
+        tbc_Price.setCellValueFactory(cellData -> {
+            String thisYear = LocalDate.now().toString().split("-")[0];
+            if (cellData.getValue().getYear() < Integer.parseInt(thisYear)) return new SimpleStringProperty(decimalFormat.format(FIXED_PRICE_OLD) + "€");
+            else return new SimpleStringProperty(decimalFormat.format(FIXED_PRICE_NEW) + "€");
+        });
     }
 
     /**
      * This method calculates the total price for the items that
-     * are in the cart.
+     * are in the cart, by multiplying the date difference with the individual price of the movie (depending on releaseDate)
      * @return total price of the cart
      */
     private double calculateTotalPrice() {
-        return fullMovieList.size() * FIXED_PRICE;
+        double price = 0;
+        String thisYear = LocalDate.now().toString().split("-")[0];
+        for(Movies movie : fullMovieList){
+            if(movie.getYear() >= Integer.parseInt(thisYear)) price += FIXED_PRICE_NEW;
+            else price+=FIXED_PRICE_OLD;
+        }
+        return price*days;
     }
 
     /**
@@ -201,7 +238,7 @@ public class CartController {
      * @return local / current Date plus two weeks
      */
     private LocalDate calculateReturnDate() {
-        LocalDate returnDate = LocalDate.now().plusWeeks(1);
+        LocalDate returnDate = LocalDate.now().plusDays(1);
         return returnDate;
     }
 
@@ -219,13 +256,17 @@ public class CartController {
 
         lbl_DateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_ReturnDateValue.setAlignment(Pos.CENTER_RIGHT);
+        lbl_calendarDatePicker.setOnMouseClicked(e -> {
+            pickDate();
+        });
+        updateTotalPrice();
     }
 
     /**
      * This method updates the label of the total price
      */
     private void updateTotalPrice() {
-        lbl_CartTotalValue.setText(String.valueOf(calculateTotalPrice()) + "€");
+        lbl_CartTotalValue.setText((calculateTotalPrice()) + "€");
         lbl_CartTotalValue.setAlignment(Pos.CENTER_RIGHT);
     }
 
@@ -301,7 +342,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);
@@ -516,7 +557,36 @@ public class CartController {
         lbl_customerPhoneValue.setText(customers.getPhone());
         lbl_customerEmailValue.setText(customers.getEmail());
     }
+    
+    /**
+     * Handles the pick of a date to be the returnDate, recalculates PRICES by movie releaseDate, updates pricelist and finalprice
+     * TODO: BUGFIX - when no date (or the date that is already locked in) is selected, the datePicker does not reset itself to the calendar icon
+     */
+    public void pickDate(){
+        Callback<DatePicker,DateCell> dayCellFactory = param -> new DateCell(){
+            @Override
+            public void updateItem(LocalDate item, boolean empty){
+                super.updateItem(item,empty);
+                if(item.isBefore(LocalDate.now().plusDays(1))|| item.getDayOfWeek()== DayOfWeek.SUNDAY) setDisable(true);
+            }
+        };
+        lbl_calendarDatePicker.setGraphic(datePicker);
+        datePicker.setDayCellFactory(dayCellFactory);
+        datePicker.show();
+        datePicker.getEditor().setManaged(false);
+        datePicker.getEditor().setVisible(false);
+        datePicker.getEditor().setPrefSize(0,0);
+        datePicker.setOnAction(e -> {
+            LocalDate selected = datePicker.getValue();
+            lbl_ReturnDateValue.setText(selected.toString());
+            datePicker.hide();
+            lbl_calendarDatePicker.setGraphic(ivw_calendar);
+            days = (int) (selected.toEpochDay()-LocalDate.now().toEpochDay());
+            updateTotalPrice();
+        });
 
+    }
+  
     /**
      * This method updates the card by setting the order information labels
      * and checking whether the ID is empty
