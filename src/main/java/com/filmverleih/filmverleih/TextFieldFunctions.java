@@ -15,6 +15,11 @@ public class TextFieldFunctions {
         });
     }
 
+    /**
+     * Adds a duration checker to the specified TextField.
+     *
+     * @param textField The TextField to which the duration checker will be added.
+     */
     public static void addDurationChecker(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^\\d{0,3}$")) {
@@ -23,6 +28,11 @@ public class TextFieldFunctions {
         });
     }
 
+    /**
+     * Adds an FSK (Freiwillige Selbstkontrolle) checker to the specified TextField.
+     *
+     * @param textField The TextField to which the FSK checker will be added.
+     */
     public static void addFskChecker(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("^\\d{0,2}$")) {
@@ -31,6 +41,11 @@ public class TextFieldFunctions {
         });
     }
 
+    /**
+     * Adds a no comma checker to the specified TextField.
+     *
+     * @param textField The TextField to which the no comma checker will be added.
+     */
     public static void addNoCommaChecker(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches("^.*,+.*$")) {
