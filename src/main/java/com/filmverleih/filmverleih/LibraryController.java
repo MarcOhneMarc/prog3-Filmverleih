@@ -205,6 +205,11 @@ public class LibraryController {
         adjustColumnCount();
     }
 
+    /**
+     * This Method adds A Movie to the GridPane
+     *
+     * @param movie The movie to add.
+     */
     private void addMovieToLibrary(Movies movie) {
         String imgUrl = movie.getCover();
 
@@ -257,6 +262,11 @@ public class LibraryController {
 
     /**
      * This method updates all Movies in case of changes
+     * TODO Jannis diese Methode bitte nicht mehr aufrufen und löschen. Ersetzen mit
+     * TODO addMovieToLibrary(addedMovie); if you added a Movie
+     * TODO updateMovieInLibrary(changedMovie) if you changed a Movie
+     * TODO removieMovieFromLibrary(deletedMovie) if you deleted a Movie
+     *
      */
     public void updateMovieList() {
         grp_libraryGrid.getChildren().clear();
@@ -264,6 +274,10 @@ public class LibraryController {
         updateLibrary(allMovies);
     }
 
+    /**
+     * This method updates syncs the LibraryView GridPane with the movies in the Database.
+     *
+     */
     public void syncLibraryWithDB() {
         List<Movies> moviesInDb = MoviesUtility.getFullMovieList();
         List<Movies> moviesToAdd = new ArrayList<>(); // Collect movies to add
@@ -275,7 +289,7 @@ public class LibraryController {
                     assert movieInLibrary != null;
                     if (movieInDb.getMovieid() == movieInLibrary.getMovieid()) {
                         if (!movieInDb.equals(movieInLibrary)) {
-                            removieMovieFromLibrary(movieInLibrary.getMovieid());
+                            removeMovieFromLibrary(movieInLibrary.getMovieid());
                         }
                         found = true;
                         break; // Found the movie in the library, no need to add
@@ -294,14 +308,23 @@ public class LibraryController {
         adjustColumnCount();
     }
 
+
+    /**
+     * This method updates a specific Movie in the LibraryView GridPane.
+     * It deletes the movie in the Pane and adds the changed.
+     */
     public void updateMovieInLibrary(Movies movieToUpdate) {
-        removieMovieFromLibrary(movieToUpdate.getMovieid());
+        removeMovieFromLibrary(movieToUpdate.getMovieid());
         addMovieToLibrary(movieToUpdate);
         sortMovies();
         filterMovies();
     }
 
-    public void removieMovieFromLibrary(int movieToDelete) {
+    /**
+     * This Method removes a Movie from the Library
+     * @param movieToDelete is the MovieId of the Movie in the GridPane which should get deleted.
+     */
+    public void removeMovieFromLibrary(int movieToDelete) {
         Iterator<Node> iterator = grp_libraryGrid.getChildren().iterator();
         while (iterator.hasNext()) {
             Node node = iterator.next();
@@ -319,9 +342,9 @@ public class LibraryController {
     /**
      * This method creates a StackPane that acts as a button to add a movie to cart
      * the params are used to ensure the functionality of the button
-     * @param stackPane
-     * @param movie
-     * @return
+     * @param stackPane the StackPane with the Cover (as ImageView or Label) with the Button to add.
+     * @param movie the Movie in the ImageView or Label
+     * @return StackPane which is needed to add to the Library GridPane
      */
     public StackPane createAddToCartButton(StackPane stackPane, Movies movie){
         StackPane stackPaneViewAddToCart = new StackPane();

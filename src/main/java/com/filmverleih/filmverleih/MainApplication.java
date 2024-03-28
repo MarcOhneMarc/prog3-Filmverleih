@@ -5,16 +5,20 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
 
 /**
  * The MainApplication class creates the main frame where the navbar and the library are initially loaded in.
@@ -128,7 +132,7 @@ public class MainApplication extends Application {
 
         // Set stage properties
         stage.setTitle("Quantum-Vortex");
-        Image icon = new Image(getClass().getResourceAsStream("logo.png"));
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo.png")));
         stage.getIcons().add(icon);
         stage.setScene(scene);
         //stage.setMaximized(true);
@@ -137,9 +141,20 @@ public class MainApplication extends Application {
         VBox loadingScreenVBox = new VBox();
         ProgressBar loadingIndicator = new ProgressBar();
         loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+        loadingIndicator.setId("progress_Bar");
+        loadingIndicator.setPrefWidth(400);
+        loadingIndicator.setPrefHeight(12);
         loadingScreenVBox.setPrefSize(1920, 1080);
+        Image logoImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/quantumVortexLogo.png")));
+        ImageView logo = new ImageView(logoImage);
+        logo.setPreserveRatio(true);
+        logo.setFitWidth(400);
+        loadingScreenVBox.setSpacing(70);
+        loadingScreenVBox.getChildren().add(logo);
         loadingScreenVBox.getChildren().add(loadingIndicator);
         loadingScreenVBox.setAlignment(Pos.CENTER);
+        loadingScreenVBox.setPadding(new Insets(-150, 0, 0, 0)); // Hier wird die Padding-Eigenschaft geändert
+
         loadingScreenVBox.setStyle("-fx-background-color: #191919");
         borderPane.setCenter(loadingScreenVBox);
 

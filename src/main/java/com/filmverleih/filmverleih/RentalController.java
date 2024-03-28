@@ -113,6 +113,11 @@ public class RentalController {
         adjustColumnCount();
     }
 
+    /**
+     * This method adds a Movie to the RentalView GridPane
+     * @param rental the Rented Movie which has to be added
+     * @throws IOException throws an Exception if the FXML couldn't be loaded.
+     */
     private void addRentedMovieToRental(Rentals rental) throws IOException  {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
         HBox rentalCard = loader.load();
@@ -178,6 +183,10 @@ public class RentalController {
         adjustColumnCount();
     }
 
+    /**
+     * This method updates syncs the RentalView GridPane with the Rentals in the Database.
+     *
+     */
     public void syncRentalWithDb() throws IOException {
         List<Rentals> rentalsInDb = RentalsUtility.getAllRentedMovies();
         List<Rentals> rentalsToAdd = new ArrayList<>(); // Collect movies to add
@@ -188,7 +197,7 @@ public class RentalController {
                 assert rentalInLibrary != null;
                 if (rentalInDb.getMovieid() == rentalInLibrary.getMovieid()) {
                     if (!rentalInDb.equals(rentalInLibrary)) {
-                        removieMovieFromLibrary(rentalInLibrary);
+                        removeRentalFromRentalView(rentalInLibrary);
                     }
                     found = true;
                     break; // Found the movie in the library, no need to add
@@ -206,14 +215,22 @@ public class RentalController {
         adjustColumnCount();
     }
 
-    public void updateMovieInLibrary(Rentals rentalToUpdate) throws IOException {
-        removieMovieFromLibrary(rentalToUpdate);
+    /**
+     * This method updates a specific Rental in the RentalView GridPane.
+     * It deletes the rentalToUpdate in the Pane and adds the changed.
+     */
+    public void updateRentalInRentalView(Rentals rentalToUpdate) throws IOException {
+        removeRentalFromRentalView(rentalToUpdate);
         addRentedMovieToRental(rentalToUpdate);
         sortMovies();
         filterMovies();
     }
 
-    public void removieMovieFromLibrary(Rentals rentalToDelete) {
+    /**
+     * This Method removes a Rental from the RentalView
+     * @param rentalToDelete is the Rental in the GridPane which should get deleted.
+     */
+    public void removeRentalFromRentalView(Rentals rentalToDelete) {
         Iterator<Node> iterator = grp_rentalGrid.getChildren().iterator();
         while (iterator.hasNext()) {
             Node node = iterator.next();

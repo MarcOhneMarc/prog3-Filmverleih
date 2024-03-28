@@ -77,13 +77,13 @@ public class FilterController {
 
     public String searchBar;
 
-    private boolean isLibrary;
-    private Map<String, String> libraryFilterConfig;
-    private boolean isRental;
-    private Map<String, String> rentalFilterConfig;
+    private boolean isLibrary; // Checks if the Page who should get sorted is Library
+    private Map<String, String> libraryFilterConfig; // Saves the Filter and Search-configuration for the LibraryView
+    private boolean isRental; // Checks if the Page who should get sorted is Rental
+    private Map<String, String> rentalFilterConfig; // Saves the Filter and Search-configuration for the RentalView
 
     /**
-     * Initializes the FilterController.
+     * Initializes the FilterController with default values. And starts the change-listeners for the ComboBoxes.
      */
     @FXML
     private void initialize() {
@@ -115,6 +115,10 @@ public class FilterController {
         });
     }
 
+    /**
+     * This Method is Utilized by the Sort-ComboBox and checks if the Page to get sorted isLibrary, isRental or
+     * neither of them and sorts this particular Page.
+     */
     private void sortListBy(String selectedOption) {
         if (isLibrary) {
             sortMovieListBy(selectedOption);
@@ -126,43 +130,22 @@ public class FilterController {
     }
 
     /**
-     * Generates a comparator to sort with in the library or rental Page
+     * Generates a Comparator to Sort Movies in the LibraryView.
      */
     private void sortMovieListBy(String selectedOption) {
-        Comparator<Movies> comparator = null;
-
-        switch (selectedOption) {
-            case "Name aufsteigend":
-                comparator = Comparator.comparing(Movies::getName);
-                break;
-            case "Name absteigend":
-                comparator = Comparator.comparing(Movies::getName).reversed();
-                break;
-            case "Jahr aufsteigend":
-                comparator = Comparator.comparingInt(Movies::getYear);
-                break;
-            case "Jahr absteigend":
-                comparator = Comparator.comparingInt(Movies::getYear).reversed();
-                break;
-            case "Bewertung aufsteigend":
-                comparator = Comparator.comparing(Movies::getRating);
-                break;
-            case "Bewertung absteigend":
-                comparator = Comparator.comparing(Movies::getRating).reversed();
-                break;
-            case "Länge aufsteigend":
-                comparator = Comparator.comparingInt(Movies::getLength);
-                break;
-            case "Länge absteigend":
-                comparator = Comparator.comparingInt(Movies::getLength).reversed();
-                break;
-            case "FSK aufsteigend":
-                comparator = Comparator.comparingInt(Movies::getFsk);
-                break;
-            case "FSK absteigend":
-                comparator = Comparator.comparingInt(Movies::getFsk).reversed();
-                break;
-        }
+        Comparator<Movies> comparator = switch (selectedOption) {
+            case "Name aufsteigend" -> Comparator.comparing(Movies::getName);
+            case "Name absteigend" -> Comparator.comparing(Movies::getName).reversed();
+            case "Jahr aufsteigend" -> Comparator.comparingInt(Movies::getYear);
+            case "Jahr absteigend" -> Comparator.comparingInt(Movies::getYear).reversed();
+            case "Bewertung aufsteigend" -> Comparator.comparing(Movies::getRating);
+            case "Bewertung absteigend" -> Comparator.comparing(Movies::getRating).reversed();
+            case "Länge aufsteigend" -> Comparator.comparingInt(Movies::getLength);
+            case "Länge absteigend" -> Comparator.comparingInt(Movies::getLength).reversed();
+            case "FSK aufsteigend" -> Comparator.comparingInt(Movies::getFsk);
+            case "FSK absteigend" -> Comparator.comparingInt(Movies::getFsk).reversed();
+            default -> null;
+        };
 
         if (comparator != null) {
             libraryController.comparator = comparator;
@@ -170,47 +153,30 @@ public class FilterController {
         }
     }
 
+    /**
+     * Generates a Comparator to Sort Rentals in the RentalView.
+     */
     private void sortRentalListBy(String selectedOption) {
-        Comparator<Rentals> comparator = null;
-
-        switch (selectedOption) {
-            case "Rückhgabedatum aufsteigend":
-                comparator = Comparator.comparing(rental -> rental.getEnddate());
-                break;
-            case "Rückhgabedatum absteigend":
-                comparator = Comparator.comparing((Rentals rental) -> rental.getEnddate()).reversed();
-                break;
-            case "Film Name aufsteigend":
-                comparator = Comparator.comparing(rental -> rental.getMovie().getName());
-                break;
-            case "Film Name absteigend":
-                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
-                break;
-            case "Film Jahr aufsteigend":
-                comparator = Comparator.comparingInt(rental -> rental.getMovie().getYear());
-                break;
-            case "Film Jahr absteigend":
-                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
-                break;
-            case "Film Bewertung aufsteigend":
-                comparator = Comparator.comparing(rental -> rental.getMovie().getRating());
-                break;
-            case "Film Bewertung absteigend":
-                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
-                break;
-            case "Film Länge aufsteigend":
-                comparator = Comparator.comparingInt(rental -> rental.getMovie().getLength());
-                break;
-            case "Film Länge absteigend":
-                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
-                break;
-            case "Film FSK aufsteigend":
-                comparator = Comparator.comparingInt(rental -> rental.getMovie().getFsk());
-                break;
-            case "Film FSK absteigend":
-                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
-                break;
-        }
+        Comparator<Rentals> comparator = switch (selectedOption) {
+            case "Rückhgabedatum aufsteigend" -> Comparator.comparing(Rentals::getEnddate);
+            case "Rückhgabedatum absteigend" -> Comparator.comparing(Rentals::getEnddate).reversed();
+            case "Film Name aufsteigend" -> Comparator.comparing(rental -> rental.getMovie().getName());
+            case "Film Name absteigend" ->
+                    Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
+            case "Film Jahr aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getYear());
+            case "Film Jahr absteigend" ->
+                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
+            case "Film Bewertung aufsteigend" -> Comparator.comparing(rental -> rental.getMovie().getRating());
+            case "Film Bewertung absteigend" ->
+                    Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
+            case "Film Länge aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getLength());
+            case "Film Länge absteigend" ->
+                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
+            case "Film FSK aufsteigend" -> Comparator.comparingInt(rental -> rental.getMovie().getFsk());
+            case "Film FSK absteigend" ->
+                    Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
+            default -> null;
+        };
 
         if (comparator != null) {
             rentalController.comparator = comparator;
@@ -218,6 +184,10 @@ public class FilterController {
         }
     }
 
+    /**
+     * This Method is Utilized by the FilterButton and checks if the Page to get filtered isLibrary, isRental or
+     * neither of them and filters this particular Page.
+     */
     public void generateFilters() {
         if (isLibrary) {
             generateMovieFilters();
@@ -229,7 +199,7 @@ public class FilterController {
     }
 
     /**
-     * Generates a predicate to filter with in the library or rental Page
+     * Generates a Predicate to filter Movies in the LibraryView.
      */
     public void generateMovieFilters() {
         String yearFilter = txf_year.getText();
@@ -323,7 +293,7 @@ public class FilterController {
     }
 
     /**
-     * Generates a predicate to filter with in the library or rental Page
+     * Generates a Predicate to filter Movies in the RentalView.
      */
     public void generateRentalFilters() {
         String yearFilter = txf_year.getText();
@@ -419,6 +389,10 @@ public class FilterController {
         }
     }
 
+    /**
+     * This Method is Utilized by the Sync-Button and calls the specific Method needed to Sync the
+     * Library, Rental or neither of them with the Database.
+     */
     public void sync() throws IOException {
         if (isLibrary) {
             libraryController.syncLibraryWithDB();
@@ -430,7 +404,7 @@ public class FilterController {
     }
 
     /**
-     * Undos and Clears all Filter-Fields
+     * Clears and resets all Filter-Fields for the LibraryView and RentalView
      */
     public void resetFilters() {
         this.navbarController.searchbar.setText("");
@@ -450,13 +424,18 @@ public class FilterController {
             libraryController.predicate = movie -> true;
             libraryController.filterMovies();
         } else if (isRental) {
-            rentalController.predicate = movie -> true;
+            rentalController.predicate = rental -> true;
             rentalController.filterMovies();
         } else {
             return;
         }
     }
 
+    /**
+     * This Help-Method saves all Filter-Fields in a Map
+     *
+     * @return the Map with the saved Filter-Fields
+     */
     public Map<String, String> getConfigMap() {
         Map<String, String> config = new HashMap<>();
         config.put("year", txf_year.getText());
@@ -473,6 +452,12 @@ public class FilterController {
         return config;
     }
 
+    /**
+     * This Help-Method gets the saved previously saved FilterFields and resets the TextFields/ComboBoxed etc. to the
+     * saved Values.
+     *
+     * @param filterConfig the Map with the saved Filter-Fields
+     */
     public void applyFilterConfig(Map<String, String> filterConfig) {
         txf_year.setText(filterConfig.get("year"));
         txf_genre.setText(filterConfig.get("genre"));
@@ -487,6 +472,11 @@ public class FilterController {
         cbx_fsk.setValue(filterConfig.get("fsk"));
     }
 
+    /**
+     * Changes the view to rental mode if it's not already in that mode.
+     * It updates the filter configuration, clears and populates the sort items accordingly.
+     * Sets the flag isRental to true and isLibrary to false.
+     */
     public void changeToRental() {
         if (isRental) {
             return;
@@ -513,6 +503,11 @@ public class FilterController {
         isLibrary = false;
     }
 
+    /**
+     * Changes the view to library mode if it's not already in that mode.
+     * It updates the filter configuration, clears and populates the sort items accordingly.
+     * Sets the flag isRental to false and isLibrary to true.
+     */
     public void changeToLibrary() {
         if (isLibrary) {
             return;
@@ -539,7 +534,7 @@ public class FilterController {
 
     /**
      * Retrieves the outer pane of the filter interface.
-     * @return the outer pane (VBox)
+     * @return the outer pane (ScrollPane)
      */
     public ScrollPane getOuterPane(){
         return scp_filterScrollPane;
