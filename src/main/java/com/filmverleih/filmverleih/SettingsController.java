@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
+import com.filmverleih.filmverleih.utilitys.UserUtility;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -57,7 +58,7 @@ public class SettingsController {
         this.connector = connector;
     }
 
-    private List<Users> fullUserList = Utility.getFullUserList();
+    private List<Users> fullUserList = UserUtility.getFullUserList();
     private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
@@ -482,7 +483,7 @@ public class SettingsController {
     public void deleteMovie() {
         boolean movieIsDeleted;
         try {
-            movieIsDeleted = Utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
+            movieIsDeleted = MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
         } catch (NumberFormatException e) {
             movieIsDeleted = false;
         }
