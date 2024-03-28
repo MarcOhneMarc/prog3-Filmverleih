@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.entity.Movies;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -91,6 +92,20 @@ public class CustomersUtility {
         return true;
     }
 
+    /**
+     * This method gets a customer by its id
+     * @param id the id of the customer
+     * @return the customer with the id
+     */
+    public static Customers getCustomerById(int id)
+    {
+        Customers ret = new Customers();
+        for(Customers customer:getFullCustomerList())
+        {
+            if (customer.getCustomerid() == id) ret = customer;
+        }
+        return ret;
+    }
     /**
      * This method checks whether a certain email address is already in the db
      * @param email the email that will be checked

@@ -74,6 +74,14 @@ public class MoviesUtility {
         return true;
     }
 
+
+
+    /**
+     * A function to delete a movie from the database.
+     *
+     * @param  movDelID   the ID of the movie to be deleted
+     * @return           true if the movie was successfully deleted, false otherwise
+     */
     public static Boolean DeleteMovieInDB(int movDelID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -97,6 +105,32 @@ public class MoviesUtility {
     }
 
 
+    /**
+     * Update a movie in the database.
+     *
+     * @param  movUpID   the ID of the movie to be updated
+     * @return          true if the movie was successfully updated
+     */
+    public Boolean UpdateMovieInDB(int movUpID) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return true;
+    }
+
     Movies getMovieByUrl(String url)
     {
         Movies ret = new Movies();
@@ -106,6 +140,8 @@ public class MoviesUtility {
         }
         return ret;
     }
+
+
     Movies getMovieByName(String name)
     {
         Movies ret = new Movies();

@@ -1,22 +1,25 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * controller class for the rental view of the application
@@ -25,10 +28,9 @@ import java.util.List;
  * with options of reminding the customer, extending the rental
  * and returning the movie
  *
- * TODO connect Backend
- *
- * @author Hannes, Luka
+ * @author Hannes, Luka, Marc
  */
+
 public class RentalController {
 
     @FXML
@@ -43,7 +45,10 @@ public class RentalController {
     @FXML
     GridPane grp_rentalGrid;
 
-    private double windowWidth = 1920;
+    private double windowWidth;
+    public Predicate<Movies> predicate;
+    public Comparator<Movies> comparator;
+
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -71,63 +76,185 @@ public class RentalController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 windowWidth = newValue.doubleValue();
-                adjustColumnCount(newValue.doubleValue());
+                grp_rentalGrid.setMaxWidth(windowWidth);
+                grp_rentalGrid.setPrefWidth(windowWidth);
+                grp_rentalGrid.setMinWidth(windowWidth);
+                adjustColumnCount();
             }
         });
 
-        //Load Rental View
-        //TODO change to not get all movies but only those that are rented from db
-        List<Movies> allMovies = MoviesUtility.getFullMovieList();
-        for (int i = 0; i < allMovies.size(); i++) {
+        scp_rentalScrollPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                double windowHeight = newValue.doubleValue();
+                grp_rentalGrid.setMinHeight(windowHeight);
+            }
+        });
 
+        this.comparator = Comparator.comparing(Movies::getName);
+
+        //Load Rental View
+        List<Rentals> allRentals = RentalsUtility.getAllRentedMovies();
+
+        updateRental(allRentals);
+        sortMovies();
+    }
+
+    /**
+     * Updates the display of movies within the GridPane based on the provided list of movies.
+     * Each movie is represented by a StackPane containing either an ImageView with the movie cover image
+     * or a Label with the movie name if no cover image is available.
+     *
+     * @param movieList The list of Movies objects to be displayed or updated.
+     */
+    public void updateRental(List<Rentals> movieList) throws IOException {
+        for (Rentals movie: movieList) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
             HBox rentalCard = loader.load();
             RentalMovieController controller = loader.getController();
             controller.setRentalController(this);
 
-            controller.insertMovieInfo(allMovies.get(i));
+            controller.insertMovieInfo(movie);
             controller.insertCustomerInfo();
 
+            rentalCard.setUserData(movie);
             GridPane.setMargin(rentalCard,  new Insets(20, 0, 0, 20));
-            grp_rentalGrid.add(rentalCard, i, i / 4);
+            grp_rentalGrid.add(rentalCard, 1, 1);
         }
-
-        // Initialize the count of columns
-        adjustColumnCount(scp_rentalScrollPane.getWidth());
+        adjustColumnCount();
     }
 
-
     /**
-     * Adjusts the number of columns in the grid based on the width of the window.
-     * It ensures that the movie covers are displayed appropriately depending on the window size.
-     *
-     * @param windowWidth the width of the window
+     * Sorts the movie StackPane objects within the GridPane and rearranges them accordingly.
+     * The sorting is based on a comparator associated with the Movies objects.
      */
-    private void adjustColumnCount(double windowWidth) {
-        double cardWidth = 750 + 20; // Width of card plus margin
-        int numColumns = Math.max(1, (int) (windowWidth / cardWidth)); // Count of columns from windowWidth
+    public void sortMovies() {
+        List<HBox> hBoxes = new ArrayList<>(grp_rentalGrid.getChildren().stream()
+                .filter(node -> node instanceof HBox)
+                .map(node -> (HBox) node)
+                .toList());
 
-        int row = 0;
-        int column = 0;
-        for (Node child : grp_rentalGrid.getChildren()) {
-            GridPane.setRowIndex(child, row);
-            GridPane.setColumnIndex(child, column);
-            column++;
-            if (column == numColumns) {
-                column = 0;
-                row++;
+        hBoxes.sort((hBox1, hBox2) -> {
+            Rentals movie1 = (Rentals) hBox1.getUserData();
+            Rentals movie2 = (Rentals) hBox2.getUserData();
+
+            if (movie1 != null && movie2 != null) {
+                return this.comparator.compare(movie1.getMovie(), movie2.getMovie());
+            }
+            return 0; // Wenn movie1 oder movie2 null ist, gibt es keinen Unterschied in der Reihenfolge
+        });
+
+        int numColumns = calculateNumColumns();
+        int index = 0;
+
+        for (HBox hBox : hBoxes) {
+            if (hBox.isVisible() && hBox.isManaged()) {
+                int row = index / numColumns;
+                int column = index % numColumns;
+                grp_rentalGrid.setRowIndex(hBox, row);
+                grp_rentalGrid.setColumnIndex(hBox, column);
+                index++;
             }
         }
     }
 
     /**
+     * Filters the movie StackPane objects within the GridPane based on the provided predicate.
+     * Sets the visibility and manageability of each StackPane accordingly.
+     * Adjusts the column count after filtering.
+     */
+    public void filterMovies() {
+        grp_rentalGrid.getChildren().forEach(node -> {
+            if (node instanceof HBox hBox) {
+                Movies movie = (Movies) hBox.getUserData();
+                boolean isVisible = predicate.test(movie);
+                hBox.setVisible(isVisible);
+                hBox.setManaged(isVisible);
+            }
+        });
+        adjustColumnCount();
+    }
+
+    /**
+     * Calculates the number of columns that can fit within the GridPane based on its width
+     * and the width of the images to be displayed.
+     *
+     * @return The number of columns that can fit within the GridPane.
+     */
+    private int calculateNumColumns() {
+        double gridWidth = grp_rentalGrid.getWidth();
+        double imageWidth = 750+20;
+        return Math.max(1, (int) (windowWidth / imageWidth));
+    }
+
+    /**
+     * Adjusts the number of columns in the grid based on the width of the window.
+     * It ensures that the movie covers are displayed appropriately depending on the window size.
+     *
+     */
+    private void adjustColumnCount() {
+        int numColumns = calculateNumColumns();
+
+        grp_rentalGrid.getColumnConstraints().clear();
+        for (int i = 0; i < numColumns; i++) {
+            ColumnConstraints columnConstraints = new ColumnConstraints();
+            columnConstraints.setPercentWidth(100.0 / numColumns);
+            grp_rentalGrid.getColumnConstraints().add(columnConstraints);
+        }
+
+        int childIndex = 0;
+        for (Node child : grp_rentalGrid.getChildren()) {
+            if (child.isVisible() && child.isManaged()) {
+                int row = childIndex / numColumns;
+                int column = childIndex % numColumns;
+                grp_rentalGrid.setRowIndex(child, row);
+                grp_rentalGrid.setColumnIndex(child, column);
+                childIndex++;
+            }
+        }
+        //sortMovies();
+    }
+
+    /**
      * This method returns a rented movie and removes it from the rental view.
      * @param hBox the rental movie card which will be removed
-     * @param movie the movie that will be returned
+     * @param rental the rental that will be returned
      */
-    public void removeFromRental(HBox hBox, Movies movie) {
-        grp_rentalGrid.getChildren().remove(hBox);
-        adjustColumnCount(windowWidth);
+    public void removeFromRental(HBox hBox, Rentals rental) {
+        if (RentalsUtility.deleteRentalFromDB(rental.getMovieid(), rental.getCustomerid())) {
+            grp_rentalGrid.getChildren().remove(hBox);
+            adjustColumnCount();
+        } else {
+            System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+        }
+    }
+
+    /**
+     * Method to extend a rental
+     *  TODO Implement update Card Info with new End date
+     * @param hBox the rental card
+     * @param rental the rental to be extended
+     */
+    public void extendRental(HBox hBox, Rentals rental) {
+        LocalDate date = LocalDate.parse(rental.getEnddate());
+        LocalDate newDate = date.plusWeeks(1);
+        if (RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString())) {
+            rental.setEnddate(newDate.toString());
+        } else {
+            System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+        }
+    }
+
+    /**
+     * Method to remind a customer
+     * @param rental the rental to be reminded
+     */
+    public void remindCustomer(Rentals rental) {
+        if (WarningPdfGenerator.generatePdf(rental.getMovie().getName(), rental.getStartdate(), rental.getEnddate())) {
+            System.out.println("Das erstellen einer mahnung war erfolgreich");
+        } else {
+            System.out.println("Das erstellen einer mahnung ist fehlgeschlagen");
+        }
     }
 
     /**
