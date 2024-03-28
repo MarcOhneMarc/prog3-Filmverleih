@@ -5,8 +5,8 @@ module com.filmverleih.filmverleih {
     requires java.sql;
     requires java.naming;
     requires jakarta.persistence;
-            
-                            
+
+
     opens com.filmverleih.filmverleih to javafx.fxml;
     exports com.filmverleih.filmverleih;
     exports com.filmverleih.filmverleih.entity;

@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
-
  * The MainApplication class creates the main frame where the navbar and the library are initially loaded in.
  * It also provides methods to change the center and left sidebar content.
  */
@@ -34,7 +33,9 @@ public class MainApplication extends Application {
     private CartController cartController;
     private LoginController loginController;
     private Parent loginRoot;
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,Integer,Integer> connector;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector;
+    private Parent editMovieRoot;
+    private EditMovieController editMovieController;
     public static BorderPane borderPane; // the main frame of the application
     /**
      * Loads the fxml and pairs it with its respective controller
@@ -46,27 +47,38 @@ public class MainApplication extends Application {
             loader = Utility.loadFXML("Navbar.fxml");
             navbarRoot = loader.load();
             navbarController = loader.getController();
+
             loader  = Utility.loadFXML("Library.fxml");
             libraryRoot = loader.load();
             libraryController = loader.getController();
+
             loader = Utility.loadFXML("Movie.fxml");
             movieRoot = loader.load();
             movieController = loader.getController();
+
             loader = Utility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
+
             loader = Utility.loadFXML("Settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
+
             loader = Utility.loadFXML("Filter.fxml");
             filterRoot = loader.load();
             filterController = loader.getController();
+
             loader = Utility.loadFXML("Cart.fxml");
             cartRoot = loader.load();
             cartController = loader.getController();
+          
             loader = Utility.loadFXML("Login.fxml");
             loginRoot= loader.load();
             loginController = loader.getController();
+
+            loader = Utility.loadFXML("EditMovie.fxml");
+            editMovieRoot = loader.load();
+            editMovieController = loader.getController();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -87,6 +99,7 @@ public class MainApplication extends Application {
                           filterController,
                           cartController,
                           loginController);
+                          editMovieController);
         navbarController.setConnector(connector);
         libraryController.setConnector(connector);
         movieController.setConnector(connector);
@@ -95,6 +108,7 @@ public class MainApplication extends Application {
         filterController.setConnector(connector);
         cartController.setConnector(connector);
         loginController.setConnector(connector);
+        editMovieController.setConnector(connector);
     }
 
     public MainApplication() throws IOException {

@@ -1,0 +1,52 @@
+.acp_class_RentalBackground {
+    -fx-background-color: #393939;
+}
+
+.btn_class_rentalMovieButtons {
+    -fx-background-color: #5C5C5C;
+    -fx-background-radius: 12;
+}
+
+#hbx_rentalMovieCard {
+    -fx-background-color: #393939;
+}
+
+.lbl_class_rentalMovieCardLabels {
+    -fx-text-fill: #FFFFFF;
+}
+
+#vbx_rentalMovieCardButtonVbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+#pan_rentalMovieCardPane {
+    -fx-background-color: #5C5C5C;
+    -fx-background-radius: 12;
+    -fx-alignment: center;
+}
+
+#vbx_rentalMovieCardInfoVbox {
+    -fx-spacing: 10;
+}
+
+#btn_rentalMovieRemind:hover {
+    -fx-background-color: #FF4040;
+}
+
+#btn_rentalMovieExtend:hover {
+    -fx-background-color: #FFFF3D;
+    -fx-text-fill: #000000;
+}
+
+#btn_rentalMovieReturn:hover {
+    -fx-background-color: #518E21;
+}
+
+#anp_rentalOuterAnchorPane {
+    -fx-background-color: #111013;
+}
+
+#scp_rentalScrollPane {
+    -fx-background-color: #111013;
+}

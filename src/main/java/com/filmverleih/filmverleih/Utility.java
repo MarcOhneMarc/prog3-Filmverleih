@@ -1,7 +1,9 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.entity.Rentals;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.event.spi.EventSource;
+import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -89,7 +92,7 @@ public class Utility {
         return true;
     }
 
-    public Boolean DeleteMovieInDB(int movDelID) {
+    public static Boolean DeleteMovieInDB(int movDelID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -111,14 +114,104 @@ public class Utility {
         return true;
     }
 
-    public Boolean UpdateMovieInDB(int movUpID) {
+    /**
+     * Utility method to update a movie record in the database.
+     * @param movieid The ID of the movie to be updated.
+     * @param name The new name of the movie.
+     * @param year The new year of the movie.
+     * @param length The new length of the movie.
+     * @param fsk The new FSK rating of the movie.
+     * @param rating The new rating of the movie.
+     * @param genres The new genres of the movie.
+     * @param directors The new directors of the movie.
+     * @param count The new count of the movie.
+     * @param studio The new studio of the movie.
+     * @param actors The new actors of the movie.
+     * @param cover The new cover of the movie.
+     * @param comment The new comment of the movie.
+     * @param type The new type of the movie.
+     * @return True if the update was successful, false otherwise.
+     */
+    public static Boolean UpdateMovieInDB(int movieid,
+                                    String name,
+                                    int year,
+                                    int length,
+                                    int fsk,
+                                    BigDecimal rating,
+                                    String genres,
+                                    String directors,
+                                    int count,
+                                    String studio,
+                                    String actors,
+                                    String cover,
+                                    String comment,
+                                    String type) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
+                Query query = session.createQuery("UPDATE Movies SET name = :name" +
+                        ", year = :year" +
+                        ", length = :length" +
+                        ", fsk = :fsk" +
+                        ", rating = :rating" +
+                        ", genre = :genre" +
+                        ", directors = :directors" +
+                        ", count = :count" +
+                        ", studio = :studio" +
+                        ", actors = :actors" +
+                        ", cover = :cover" +
+                        ", comment = :comment" +
+                        ", type = :type" +
+                        " WHERE movieid = :movieid");
+
+                query.setParameter("name", name);
+                query.setParameter("year", year);
+                query.setParameter("length", length);
+                query.setParameter("fsk", fsk);
+                query.setParameter("rating", rating);
+                query.setParameter("genre", genres);
+                query.setParameter("directors", directors);
+                query.setParameter("count", count);
+                query.setParameter("studio", studio);
+                query.setParameter("actors", actors);
+                query.setParameter("cover", cover);
+                query.setParameter("comment", comment);
+                query.setParameter("type", type);
+                query.setParameter("movieid", movieid);
+
+                query.executeUpdate();
+
+                transaction.commit();
+
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Utility method to retrieve a movie from the database by its ID.
+     * @param movieId The ID of the movie to retrieve.
+     * @return The movie object corresponding to the given ID, or null if no such movie is found.
+     */
+    public static Movies getMovieById(int movieId) {
+        Movies returnMovie = null;
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
 
                 transaction.commit();
             } catch (Exception e) {
@@ -128,7 +221,7 @@ public class Utility {
         } catch (Exception e) {
             e.printStackTrace(); // replace with logger
         }
-        return true;
+        return returnMovie;
     }
     Movies getMovieByUrl(String url)
     {
@@ -167,7 +260,7 @@ public class Utility {
 
 
     /**
-     * This method provides a List of all User from the Table Users
+     * This method provides a List of all User from the table Users
      * @return a list with all users
      */
     public static List<Users> getFullUserList() {
@@ -190,11 +283,140 @@ public class Utility {
     }
 
     /**
-     * This method deletes a user from the database
-     * @param user
-     * @return
+     * This method provides a List of all Customer from the table customers
+     * @return a List with all customers
      */
-    public Boolean deleteUserInDB(Users user){
+    public static List<Customers> getFullCustomerList() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Customers> customers = session.createQuery("FROM Customers ", Customers.class).getResultList();
+                transaction.commit();
+                return customers;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  new ArrayList<Customers>();
+    }
+
+    /**
+     * This method checks if a customer is already registered in the db
+     * using the customerID and checking its occurrence
+     * @param id the customerID that will be checked
+     * @return true if customer is registered, false if not
+     */
+    public static Boolean checkCustomerDuplicate(int id) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getCustomerid() == id ) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method adds a customer to db into the customers table
+     * @param //customerId the id of the customer
+     * @param firstName the firstname of the customer
+     * @param lastName the lastname of the customer
+     * @param street the street where the customer lives
+     * @param postalCode the postalCode where the customer lives
+     * @param city the city where the customer lives
+     * @param phone the phone number of the customer
+     * @param email the email address of the customer
+     * @return true if adding was successful, false if not
+     */
+    public static Boolean addCustomerToDB(String firstName, String lastName, String street, String postalCode, String city, String phone, String email) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                Customers customers = new Customers();
+                //customers.setCustomerid(customerId);
+                customers.setFirstname(firstName);
+                customers.setLastname(lastName);
+                customers.setStreet(street);
+                customers.setPostalcode(postalCode);
+                customers.setCity(city);
+                customers.setPhone(phone);
+                customers.setEmail(email);
+
+                // add customer to db
+                session.save(customers);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                System.out.println("customer registration went wrong Code: 77621");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            System.out.println("customer registration went wrong Code: 77620");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method adds a rental to db into the rentals table
+     * @param movieID the id of the rented movie
+     * @param customerID the id of the customer
+     * @param startdate the star date of the rental
+     * @param enddate the return date of the rental
+     * @return true if adding was successful, false if not
+     */
+    public static Boolean addRentalToDB(int movieID, int customerID, String startdate, String enddate) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                Rentals rental = new Rentals();
+                rental.setMovieid(movieID);
+                rental.setCustomerid(customerID);
+                rental.setStartdate(startdate);
+                rental.setEnddate(enddate);
+
+                // add rental to db
+                session.save(rental);
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                System.out.println("Order went wrong Code: 77619");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            System.out.println("Order went wrong Code: 77618");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method returns the last added customer ID from the
+     * customer table by getting the id of the last element of the
+     * fullCustomersList();
+     * @return the last added customerID
+     */
+    public static int getLastAddedCustomerID() {
+        List<Customers> customersList = getFullCustomerList();
+        if (customersList.isEmpty()) {
+            return 1;
+        }
+        return customersList.getLast().getCustomerid();
+    }
+   public Boolean deleteUserInDB(Users user){
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
