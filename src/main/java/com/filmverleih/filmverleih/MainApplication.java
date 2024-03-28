@@ -124,67 +124,26 @@ public class MainApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        // Set up the border pane and scene
-        borderPane = new BorderPane();
-        Scene scene = new Scene(borderPane);
+        //fire-up scenes
+        loadRootsAndControllers();
+        connectControllers();
+        borderPane = new BorderPane(); // the main frame of the application
+        Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
+        borderPane.setTop(navbarRoot);
+        borderPane.setCenter(libraryRoot);
+        borderPane.setRight(filterRoot);
+
         String css = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);
 
-        // Set stage properties
         stage.setTitle("Quantum-Vortex");
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("logo.png")));
+
+        Image icon = new Image(getClass().getResourceAsStream("logo.png"));
         stage.getIcons().add(icon);
+
         stage.setScene(scene);
-        //stage.setMaximized(true);
-
-        // Create a loading indicator
-        VBox loadingScreenVBox = new VBox();
-        ProgressBar loadingIndicator = new ProgressBar();
-        loadingIndicator.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
-        loadingIndicator.setId("progress_Bar");
-        loadingIndicator.setPrefWidth(400);
-        loadingIndicator.setPrefHeight(12);
-        loadingScreenVBox.setPrefSize(1920, 1080);
-        Image logoImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("icons/quantumVortexLogo.png")));
-        ImageView logo = new ImageView(logoImage);
-        logo.setPreserveRatio(true);
-        logo.setFitWidth(400);
-        loadingScreenVBox.setSpacing(70);
-        loadingScreenVBox.getChildren().add(logo);
-        loadingScreenVBox.getChildren().add(loadingIndicator);
-        loadingScreenVBox.setAlignment(Pos.CENTER);
-        loadingScreenVBox.setPadding(new Insets(-150, 0, 0, 0)); // Hier wird die Padding-Eigenschaft geändert
-
-        loadingScreenVBox.setStyle("-fx-background-color: #191919");
-        borderPane.setCenter(loadingScreenVBox);
-
-        // Show the stage
+        stage.setMaximized(true);
         stage.show();
-
-        // Load resources and initialize scene in a background thread
-        Task<Void> initializationTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                // Load roots and controllers
-                loadRootsAndControllers();
-                connectControllers();
-
-                // Update UI in JavaFX Application Thread
-                Platform.runLater(() -> {
-                    // Once everything is loaded, replace the loading indicator with the actual content
-                    borderPane.setCenter(null); // Remove the loading indicator
-                    borderPane.setTop(navbarRoot);
-                    borderPane.setRight(filterRoot);
-                    borderPane.setCenter(libraryRoot);
-                });
-                return null;
-            }
-        };
-
-        // Start the initialization task
-        Thread thread = new Thread(initializationTask);
-        thread.setDaemon(true);
-        thread.start();
     }
 
     /**
