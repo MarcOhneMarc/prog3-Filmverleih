@@ -90,6 +90,12 @@
     -fx-background-color: #393939;
 }
 
+.anp_class_settingTabDeleteEmployee {
+    -fx-background-color: #393939;
+    -fx-border-radius: 12px;
+    -fx-border-color: white;
+}
+
 .btn_class_navBarBtns {
     -fx-background-color: #FFFF8D;
     -fx-background-radius: 12;

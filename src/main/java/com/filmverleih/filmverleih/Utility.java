@@ -189,6 +189,11 @@ public class Utility {
         return  new ArrayList<Users>();
     }
 
+    /**
+     * This method deletes a user from the database
+     * @param user
+     * @return
+     */
     public Boolean deleteUserInDB(Users user){
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -211,6 +216,11 @@ public class Utility {
         return true;
     }
 
+    /**
+     * This method adds a new user to the database
+     * @param user the user that will be added to the database
+     * @return
+     */
     public Boolean addUserToDB(Users user) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -227,6 +237,32 @@ public class Utility {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param newPassword of the password
+     * @param userId of the user
+     * @return
+     */
+    public Boolean UpdateUserPasswordInDB(String newPassword, int userId) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("UPDATE Users SET password =" + "'" +newPassword+ "'" + " WHERE userid = " + userId).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
         }
         return true;
     }

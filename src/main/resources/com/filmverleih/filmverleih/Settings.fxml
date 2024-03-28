@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -25,7 +24,7 @@
 
 <TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" stylesheets="@stylesheet.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
     <tabs>
-      <Tab text="Mein Profil">
+      <Tab fx:id="tbs_profileTab" text="Mein Profil">
          <content>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
@@ -43,9 +42,9 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <TextField fx:id="txf_oldPassword" promptText="Passwort" styleClass="bib_textfield" />
-                                    <TextField fx:id="txf_newPassword" promptText="Neues Passwort" styleClass="bib_textfield" GridPane.rowIndex="1" />
-                                    <TextField fx:id="txf_newPasswordRepeat" promptText="Neues Passwort wiederholen" styleClass="bib_textfield" GridPane.rowIndex="2" />
+                                    <TextField fx:id="txf_oldPassword" onKeyTyped="#checkPasswordMatch" promptText="Passwort" styleClass="bib_textfield" />
+                                    <TextField fx:id="txf_newPassword" onKeyTyped="#checkPasswordMatch" promptText="Neues Passwort" styleClass="bib_textfield" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txf_newPasswordRepeat" onKeyTyped="#checkPasswordMatch" promptText="Neues Passwort wiederholen" styleClass="bib_textfield" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>
@@ -84,7 +83,17 @@
                               <Font size="40.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btn_confirmChangePassword" disable="true" layoutX="998.0" layoutY="563.0" mnemonicParsing="false" onAction="#changePasswordButton" text="Bestätigen" />
+                        <Button fx:id="btn_confirmChangePassword" disable="true" layoutX="989.0" layoutY="589.0" mnemonicParsing="false" onAction="#changePasswordButton" text="Bestätigen" />
+                        <Label fx:id="lbl_passwordsDontMatch" layoutX="997.0" layoutY="544.0" text="Passwörter stimmen nicht überein" textFill="RED" visible="false">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbl_passwordChanged" layoutX="997.0" layoutY="667.0" text="Passwort wurde geändert" textFill="#22dd28" visible="false">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </children>
@@ -184,7 +193,6 @@
          <content>
             <StackPane prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" />
                   <AnchorPane fx:id="anp_employeeBackground" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anp_class_settingTabs" stylesheets="@stylesheet.css">
                      <children>
                         <VBox layoutX="881.0" layoutY="104.0" prefHeight="639.0" prefWidth="837.0">
@@ -250,34 +258,15 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anp_employeePopUp" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
+                  <AnchorPane fx:id="anp_employeePopUp" disable="true" maxHeight="300.0" maxWidth="640.0" prefHeight="300.0" prefWidth="200.0" styleClass="anp_class_settingTabDeleteEmployee" visible="false">
                      <children>
-                        <Pane id="pane_deleteEmployee" fx:id="pane_deleteEmployee" layoutX="644.0" layoutY="224.0" prefHeight="278.0" prefWidth="452.0" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="650.0">
-                           <children>
-                              <Label fx:id="lbl_deleteEmployee" alignment="CENTER" contentDisplay="CENTER" layoutY="73.0" prefHeight="63.0" prefWidth="620.0" textFill="WHITE">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="btn_deleteEmployee" layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#deleteUser" styleClass="button-settings-delete" text="Ja" />
-                              <Button fx:id="btn_cancelDeletionEmployee" layoutX="400.0" layoutY="150.0" mnemonicParsing="false" onAction="#disableDeleteUserPopUp" styleClass="button-settings-delete" text="Nein" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="anp_logoutPopUp" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
-                     <children>
-                        <Pane layoutX="644.0" layoutY="224.0" prefHeight="278.0" prefWidth="452.0" AnchorPane.leftAnchor="650.0" AnchorPane.rightAnchor="650.0">
-                           <children>
-                              <Label layoutY="73.0" prefHeight="63.0" prefWidth="620.0" text="Möchten Sie sich abmelden?" textFill="WHITE">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="btn_acceptLogout" layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#deleteUser" styleClass="button-settings-delete" text="Ja" />
-                              <Button fx:id="btn_cancelLogout" layoutX="400.0" layoutY="150.0" mnemonicParsing="false" onAction="#disableDeleteUserPopUp" styleClass="button-settings-delete" text="Nein" />
-                           </children>
-                        </Pane>
+                        <Label fx:id="lbl_deleteEmployee" alignment="CENTER" contentDisplay="CENTER" layoutY="72.0" prefHeight="56.0" prefWidth="640.0" textFill="WHITE">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_deleteEmployee" layoutX="130.0" layoutY="168.0" mnemonicParsing="false" onAction="#deleteUser" styleClass="button-settings-delete" text="Ja" />
+                        <Button fx:id="btn_cancelDeletionEmployee" layoutX="450.0" layoutY="168.0" mnemonicParsing="false" onAction="#disableDeleteUserPopUp" styleClass="button-settings-delete" text="Nein" />
                      </children>
                   </AnchorPane>
                </children>

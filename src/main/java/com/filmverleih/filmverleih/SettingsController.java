@@ -51,6 +51,9 @@ public class SettingsController {
     private Tab tbs_settingsTab;
     @FXML
     private Tab tbs_mitarbeiterTab;
+    @FXML
+    private Tab tbs_profileTab;
+
 
     //components of the movie managing tab
     @FXML
@@ -143,6 +146,10 @@ public class SettingsController {
     @FXML
     Label lbl_loggedUserIsAdmin;
     @FXML
+    Label lbl_passwordsDontMatch;
+    @FXML
+    Label lbl_passwordChanged;
+    @FXML
     TextField txf_oldPassword;
     @FXML
     TextField txf_newPassword;
@@ -231,6 +238,10 @@ public class SettingsController {
     }
 
 
+    /**
+     * This method changes the view for each user depending on his rights
+     * Admins have access to Employee Tab
+     */
     public void viewForAdmins() {
 
         Users loggedUser = connector.getLoginController().getLoggedUser();
@@ -254,6 +265,7 @@ public class SettingsController {
     /**
      * This method adds a user to the user management TableView
      * and to the db
+     * @throws IllegalArgumentException
      */
     @FXML
     public void addUserToTableView() throws NoSuchAlgorithmException {
@@ -294,6 +306,10 @@ public class SettingsController {
     }
 
 
+    /**
+     * This method checks for a user with the same id as the id in the TextField
+     * @return true if the user exists and false if the user doesn't exist
+     */
     public boolean checkUserExists() {
         int id = Integer.parseInt(txf_userIdDelete.getText());
         for (Users user : Utility.getFullUserList()) {
@@ -308,6 +324,12 @@ public class SettingsController {
         return false;
     }
 
+    /**
+     * This method prints a text for the Employee to see that the
+     * user he is trying to delete doesn't exist
+     * The text will be shown for 3 seconds
+     * @param id
+     */
     public void userNotExisting(int id) {
         lbl_idNotExisting.setText("Mitarbeiter mit der ID " + id + " existiert nicht");
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
@@ -316,6 +338,14 @@ public class SettingsController {
         pauseTransition.play();
     }
 
+    /**
+     * If the user exists:
+     * - a pop-up message will be shown on the screen so the Employee can choose
+     * - if he really wants to remove the user
+     * If the user doesn't exist:
+     * - a message will be printed saying that the user he is trying to delete
+     * - doesn't exist
+     */
     public void enableDeleteUserPopUp() {
         if (checkUserExists()) {
             anp_employeeBackground.setDisable(true);
@@ -323,6 +353,7 @@ public class SettingsController {
             anp_employeePopUp.setDisable(false);
             connector.getNavbarController().disableNavBar();
             tbs_settingsTab.setDisable(true);
+            tbs_profileTab.setDisable(true);
             lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
         } else {
             userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
@@ -330,16 +361,45 @@ public class SettingsController {
         emptyTextField();
     }
 
+    /**
+     * This method changes from the pop-up view back to the employee view
+     */
     public void disableDeleteUserPopUp() {
         anp_employeeBackground.setDisable(false);
         anp_employeePopUp.setVisible(false);
         anp_employeePopUp.setDisable(true);
         connector.getNavbarController().enableNavBar();
         tbs_settingsTab.setDisable(false);
+        tbs_profileTab.setDisable(false);
         emptyTextField();
     }
 
+    /**
+     * This method checks if the old password is right and then it checks
+     * if both the new password fields are equal.
+     */
+    public void checkPasswordMatch() {
+        if (!txf_oldPassword.getText().isBlank()) {
+            if (txf_newPassword.getText().isBlank()) {
+                btn_confirmChangePassword.setDisable(true);
+            } else {
+                if (txf_newPassword.getText().equals(txf_newPasswordRepeat.getText())) {
+                    btn_confirmChangePassword.setDisable(false);
+                    lbl_passwordsDontMatch.setVisible(false);
+                } else {
+                    lbl_passwordsDontMatch.setText("Passwörter stimmen nicht überein");
+                    lbl_passwordsDontMatch.setVisible(true);
+                    btn_confirmChangePassword.setDisable(true);
+                }
+            }
+        } else {
+            lbl_passwordsDontMatch.setText("Altes Passwort eingeben");
+            lbl_passwordsDontMatch.setVisible(true);
+            btn_confirmChangePassword.setDisable(true);
+        }
+    }
 
+    //TODO
     public void enableLogoutPopUp() {
         anp_employeeBackground.setDisable(true);
         anp_logoutPopUp.setVisible(true);
@@ -351,26 +411,34 @@ public class SettingsController {
         userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
     }
 
-    //TODO
-    public void changePassword() throws NoSuchAlgorithmException {
+    /**
+     * This method allows the user to change his password by clicking a button
+     * the user can only change his password if the old password is right.
+     * @throws NoSuchAlgorithmException
+     */
+    public void changePasswordButton() throws NoSuchAlgorithmException {
         Users loggedUser = connector.getLoginController().getLoggedUser();
         Encryptor encryptor = new Encryptor();
 
 
-        if(encryptor.encryptPassword(txf_oldPassword.getText()).equals(loggedUser.getPassword())){
-            if(txf_newPassword.getText().equals(txf_newPasswordRepeat.getText())){
-               btn_confirmChangePassword.setDisable(false);
-            }
-        }else{
-
+        if (encryptor.encryptPassword(txf_oldPassword.getText()).equals(loggedUser.getPassword())) {
+            String hashedPassword = encryptor.encryptPassword(txf_newPassword.getText());
+            loggedUser.setPassword(hashedPassword);
+            lbl_passwordChanged.setVisible(true);
+            Utility utility = new Utility();
+            utility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
+        } else {
+            lbl_passwordsDontMatch.setText("Falsches Passwort eingegeben");
+            lbl_passwordsDontMatch.setVisible(true);
         }
     }
-    //TODO
-    public void changePasswordButton(){
-
-    }
 
 
+    /**
+     * This method allows the user to log out.
+     * If the user decides to log out then he will be sent back
+     * to the login menu where he can log in again
+     */
     public void logout() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Möchten Sie sich abmelden?");
@@ -382,32 +450,43 @@ public class SettingsController {
         }
     }
 
+    /**
+     * This method refreshes the users list.
+     * It is used when logging out so we make sure that
+     * the list is always updated.
+     */
     public void refreshFullUserList() {
         fullUserList = Utility.getFullUserList();
     }
 
+    /**
+     * This method empties the text fields.
+     */
     public void emptyTextField() {
         txf_userFirstName.setText("");
         txf_userPassword.setText("");
         txf_userIdDelete.setText("");
     }
 
-    public void fillUserData(){
+    /**
+     * This method fills the user data in the profile tab.
+     * ID and Name of the user.
+     * user is Admin or not.
+     */
+    public void fillUserData() {
         LoginController loginController = connector.getLoginController();
         Users loggedUser = loginController.getLoggedUser();
         lbl_loggedUserName.setText(loggedUser.getName());
         lbl_loggedUserId.setText(String.valueOf(loggedUser.getUserid()));
-        if(loggedUser.getIsadmin()){
+        if (loggedUser.getIsadmin()) {
             lbl_loggedUserIsAdmin.setText("Der User ist ein Admin");
-        }else {
+        } else {
             lbl_loggedUserIsAdmin.setText("Der User ist kein Admin");
         }
     }
 
     /**
-     * TODO remove fillTableView() from here and find a better suiting place for its calling
-     *
-     * @return passes the main frame if the scene to the Controller it is called from
+     * This method gives us the view of the Settings tab
      */
     public TabPane getOuterPane() {
         fillUserData();

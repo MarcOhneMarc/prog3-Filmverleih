@@ -35,6 +35,12 @@ public class LoginController {
         this.connector = connector;
     }
 
+    /**
+     * This login method first checks if username/password is right
+     * if they are right then the user will be allowed to enter the program
+     * if not then he will have to try again
+     * @throws NoSuchAlgorithmException
+     */
     @FXML
     public void login() throws NoSuchAlgorithmException {
         NavbarController navbarController = connector.getNavbarController();
@@ -58,6 +64,10 @@ public class LoginController {
 
     }
 
+    /**
+     * This method allows the user to show or hide the password he typed in
+     * by using a checkbox
+     */
     @FXML
     public void changeVisibility(){
         if(cbx_showPassword.isSelected()){
