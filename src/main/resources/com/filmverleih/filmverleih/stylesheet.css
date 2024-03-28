@@ -74,6 +74,16 @@
     -fx-text-fill: white;
 }
 
+#scrollPane .track,
+#scrollPane .track-background {
+    -fx-background-color: #191919;
+}
+
+#scrollPane .thumb {
+    -fx-background-color:  #949494;
+    -fx-background-radius: 12;
+}
+
 
 #hbx_navBar {
     -fx-background-color: #5C5C5C;
@@ -334,6 +344,11 @@
     -fx-border-color: #191919;
 }
 
+#scp_Cart:focused {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
 #scp_Cart .track,
 #scp_Cart .track-background {
     -fx-background-color: #191919;
@@ -341,6 +356,7 @@
 
 #scp_Cart .thumb {
     -fx-background-color:  #949494;
+    -fx-background-radius: 12;
 }
 
 #tbv_CartItemsTable {
@@ -363,6 +379,7 @@
 
 #tbv_CartItemsTable .virtual-flow .scroll-bar:vertical .thumb{
     -fx-background-color:  #949494;
+    -fx-background-radius: 12;
 }
 
 .tbc_class_TableColumns {

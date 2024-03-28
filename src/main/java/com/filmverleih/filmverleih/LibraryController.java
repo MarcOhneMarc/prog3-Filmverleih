@@ -349,6 +349,7 @@ public class LibraryController {
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        MainApplication.borderPane.setRight(null);
         movieController.fillPage(movie);
 
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)

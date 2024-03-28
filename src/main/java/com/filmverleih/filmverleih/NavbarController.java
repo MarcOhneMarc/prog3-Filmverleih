@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
@@ -15,6 +16,14 @@ import java.io.IOException;
 public class NavbarController {
     @FXML
     public TextField searchbar;
+    @FXML
+    private Button btn_navBarLibrary;
+    @FXML
+    private Button btn_navBarRental;
+    @FXML
+    private Button btn_navBarCart;
+    @FXML
+    private Button btn_navBarSettings;
 
     private FilterController filterController;
 
@@ -48,6 +57,7 @@ public class NavbarController {
             filterController.searchBar = newValue;
             filterController.generateFilters();
         });
+        btn_navBarLibrary.setStyle("-fx-background-color: #FFFF8D");
     }
 
   
@@ -64,6 +74,8 @@ public class NavbarController {
         MainApplication.borderPane.setCenter(libraryController.getOuterPane());
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
+        resetStyling();
+        btn_navBarLibrary.setStyle("-fx-background-color: #FFFF8D");
         filterController.isLibrary = true;
         filterController.isRental = false;
     }
@@ -81,6 +93,8 @@ public class NavbarController {
         FilterController filterController  = connector.getFilterController();
         MainApplication.borderPane.setRight(filterController.getOuterPane());
         showSearchbar();
+        resetStyling();
+        btn_navBarRental.setStyle("-fx-background-color: #FFFF8D");
         filterController.isRental = true;
         filterController.isLibrary = false;
 
@@ -96,7 +110,8 @@ public class NavbarController {
     public void changeToSettings() throws IOException {
         SettingsController settingsController = connector.getSettingsController();
         MainApplication.borderPane.setCenter(settingsController.getOuterPane());
-
+        resetStyling();
+        btn_navBarSettings.setStyle("-fx-background-color: #FFFF8D");
         MainApplication.borderPane.setRight(null);
         hideSearchbar();
     }
@@ -111,9 +126,18 @@ public class NavbarController {
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
         MainApplication.borderPane.setCenter(cartController.getOuterPane());
-
+        resetStyling();
+        btn_navBarCart.setStyle("-fx-background-color: #FFFF8D");
         MainApplication.borderPane.setRight(null);
         hideSearchbar();
+    }
+
+
+    private void resetStyling() {
+        btn_navBarLibrary.setStyle("-fx-background-color: #FFFF3D");
+        btn_navBarRental.setStyle("-fx-background-color: #FFFF3D");
+        btn_navBarCart.setStyle("-fx-background-color: #FFFF3D");
+        btn_navBarSettings.setStyle("-fx-background-color: #FFFF3D");
     }
 
     private void showSearchbar() {
