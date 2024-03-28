@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/pdfGentators/WarningPdfGenerator.java" afterDir="false" />
+    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-conflicts behoben sync meetingpush init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Rentals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Rentals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/CustomersUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/CustomersUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/RentalMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/RentalMovie.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="tick-59" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,29 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainApplication.executor": "Run",
-    "Application.SettingsApplication.executor": "Run",
-    "Application.warningPdfGenerator.executor": "Run",
-    "JPA.DatabaseSchemaImportDialog": "d94254d5-1e14-4bd8-b185-5d6cc26f59e7",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "tick-86-87",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih",
-    "last_opened_file_path": "C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SettingsApplication.executor&quot;: &quot;Run&quot;,
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;d94254d5-1e14-4bd8-b185-5d6cc26f59e7&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -83,6 +74,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jonas\Desktop\Git\src\main\resources\com\filmverleih\filmverleih\icons" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.filmverleih.filmverleih" />
     </key>
@@ -94,7 +88,7 @@
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
-      <module name="JavaFX-Tutorial" />
+      <module name="Filmverleih" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
@@ -147,8 +141,10 @@
         <item itemvalue="Application.MainApplication" />
         <item itemvalue="Application.WarningPdfGenerator" />
         <item itemvalue="Application.SettingsApplication" />
-        <item itemvalue="Application.SettingsApplication" />
+
         <item itemvalue="Application.MainApplication" />
+        <item itemvalue="Application.SettingsApplication" />
+        <item itemvalue="Application.SettingsApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -270,7 +266,71 @@
       <option name="project" value="LOCAL" />
       <updated>1711394077780</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="FEAT-init">
+      <option name="closed" value="true" />
+      <created>1711579401248</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1711579401248</updated>
+    </task>
+    <task id="LOCAL-00014" summary="FEAT-real rental added">
+      <option name="closed" value="true" />
+      <created>1711588899841</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1711588899841</updated>
+    </task>
+    <task id="LOCAL-00015" summary="FEAT-added Sync">
+      <option name="closed" value="true" />
+      <created>1711591086561</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1711591086561</updated>
+    </task>
+    <task id="LOCAL-00016" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711592726398</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1711592726398</updated>
+    </task>
+    <task id="LOCAL-00017" summary="FEAT-Final Changes + Comments">
+      <option name="closed" value="true" />
+      <created>1711626802548</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1711626802548</updated>
+    </task>
+    <task id="LOCAL-00018" summary="FEAT-Bugfix benennung sortierkriterien">
+      <option name="closed" value="true" />
+      <created>1711628332264</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1711628332264</updated>
+    </task>
+    <task id="LOCAL-00019" summary="FEAT-sync">
+      <option name="closed" value="true" />
+      <created>1711628593004</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1711628593004</updated>
+    </task>
+    <task id="LOCAL-00020" summary="FEAT-conflicts behoben sync meetingpush init">
+      <option name="closed" value="true" />
+      <created>1711637441741</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1711637441741</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,11 +366,21 @@
     <MESSAGE value="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java" />
     <MESSAGE value="FEAT-added some comments on CartController.java" />
     <MESSAGE value="FEAT-Meeting final changes" />
-    <MESSAGE value="FEAT-sync" />
     <MESSAGE value="FEAT-Suchalgorithmus Laufzeitoptimierung" />
     <MESSAGE value="FEAT-Kommentare" />
     <MESSAGE value="FEAT-updateMovieList" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-updateMovieList" />
+    <MESSAGE value="FEAT-init" />
+    <MESSAGE value="FEAT-real rental added" />
+    <MESSAGE value="FEAT-added Sync" />
+    <MESSAGE value="FEAT-Final Changes + Comments" />
+    <MESSAGE value="FEAT-Bugfix benennung sortierkriterien" />
+    <MESSAGE value="FEAT-sync" />
+    <MESSAGE value="FEAT-conflicts behoben sync meetingpush init" />
+    <option name="LAST_COMMIT_MESSAGE" value="FEAT-conflicts behoben sync meetingpush init" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -97,7 +98,7 @@ public class RentalMovieController {
      * This method removes the rental card from the rental view
      */
     public void removeFromRental() {
-        System.out.println("console test: return button has been clicked");
+        LoggerUtility.logger.info("movie has been returned; return button clicked: 019");
         if (rentalController != null) {
             rentalController.removeFromRental(hbx_rentalMovieCard, rentals);
         }
@@ -112,6 +113,7 @@ public class RentalMovieController {
         if (rentalController != null) {
             rentalController.extendRental(hbx_rentalMovieCard, rentals);
         }
+
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.FXMLUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,11 +33,22 @@ public class MainApplication extends Application {
     private FilterController filterController;
     private Parent cartRoot;
     private CartController cartController;
+    private LoginController loginController;
+    private Parent loginRoot;
+    private NWayControllerConnector<
+            NavbarController,
+            LibraryController,
+            MovieController,
+            RentalController,
+            SettingsController,
+            FilterController,
+            CartController,
+            LoginController,
+            EditMovieController,
+            Integer> connector;
     private Parent editMovieRoot;
     private EditMovieController editMovieController;
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
     public static BorderPane borderPane; // the main frame of the application
-
     /**
      * Loads the fxml and pairs it with its respective controller
      *
@@ -43,36 +56,42 @@ public class MainApplication extends Application {
     private void loadRootsAndControllers() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader = Utility.loadFXML("Navbar.fxml");
+            loader = FXMLUtility.loadFXML("Navbar.fxml");
             navbarRoot = loader.load();
             navbarController = loader.getController();
 
-            loader  = Utility.loadFXML("Library.fxml");
+            loader  = FXMLUtility.loadFXML("Library.fxml");
             libraryRoot = loader.load();
             libraryController = loader.getController();
 
-            loader = Utility.loadFXML("Movie.fxml");
+            loader = FXMLUtility.loadFXML("Movie.fxml");
             movieRoot = loader.load();
             movieController = loader.getController();
 
-            loader = Utility.loadFXML("Rental.fxml");
+            loader = FXMLUtility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
 
-            loader = Utility.loadFXML("Settings.fxml");
+            loader = FXMLUtility.loadFXML("Settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
 
-            loader = Utility.loadFXML("Filter.fxml");
+            loader = FXMLUtility.loadFXML("Filter.fxml");
             filterRoot = loader.load();
             filterController = loader.getController();
 
-            loader = Utility.loadFXML("Cart.fxml");
+            loader = FXMLUtility.loadFXML("Cart.fxml");
             cartRoot = loader.load();
             cartController = loader.getController();
+          
+            loader = Utility.loadFXML("Login.fxml");
+            loginRoot= loader.load();
+            loginController = loader.getController();
+
             loader = Utility.loadFXML("EditMovie.fxml");
             editMovieRoot = loader.load();
             editMovieController = loader.getController();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,7 +110,9 @@ public class MainApplication extends Application {
                           settingsController,
                           filterController,
                           cartController,
-                          editMovieController);
+                          loginController,
+                          editMovieController
+                        );
         navbarController.setConnector(connector);
         libraryController.setConnector(connector);
         movieController.setConnector(connector);
@@ -99,6 +120,7 @@ public class MainApplication extends Application {
         settingsController.setConnector(connector);
         filterController.setConnector(connector);
         cartController.setConnector(connector);
+        loginController.setConnector(connector);
         editMovieController.setConnector(connector);
     }
 
@@ -120,9 +142,9 @@ public class MainApplication extends Application {
         connectControllers();
         borderPane = new BorderPane(); // the main frame of the application
         Scene scene = new Scene(borderPane); // creates a new scene with the borderpane
-        borderPane.setTop(navbarRoot);
-        borderPane.setCenter(libraryRoot);
-        borderPane.setRight(filterRoot);
+        loginController.getLbl_loginWrongCredentials().setVisible(false);
+        loginController.getTxf_loginPassword().setVisible(false);
+        borderPane.setCenter(loginRoot);
 
         String css = this.getClass().getResource("stylesheet.css").toExternalForm();
         scene.getStylesheets().add(css);
@@ -135,6 +157,8 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
+        LoggerUtility.logger.info("Application started...");
     }
 
     /**

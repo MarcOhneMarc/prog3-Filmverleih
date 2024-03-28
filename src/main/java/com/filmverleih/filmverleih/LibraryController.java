@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -33,8 +34,8 @@ public class LibraryController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
-                                    EditMovieController,
-                                    Integer,
+                                    LoginController,
+                                    EditMovieController,                           
                                     Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -47,8 +48,8 @@ public class LibraryController {
                             SettingsController,
                             FilterController,
                             CartController,
-                            EditMovieController,
-                            Integer,
+                            LoginController,
+                            EditMovieController,             
                             Integer> connector) {
         this.connector = connector;
         this.cartController = connector.getCartController();
@@ -90,7 +91,7 @@ public class LibraryController {
             }
         });
 
-        List<Movies> allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        List<Movies> allMovies = MoviesUtility.getFullMovieList(); //get all Movies From DB
         this.comparator = Comparator.comparing(Movies::getName);
         updateMovies(allMovies);
     }
@@ -248,7 +249,7 @@ public class LibraryController {
      */
     public void updateMovieList() {
         gridPane.getChildren().clear();
-        List<Movies> allMovies = Utility.getFullMovieList();
+        List<Movies> allMovies = MoviesUtility.getFullMovieList();
         updateMovies(allMovies);
     }
 
@@ -349,6 +350,7 @@ public class LibraryController {
     public void goToMovie(Movies movie) throws IOException {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
+        MainApplication.borderPane.setRight(null);
         movieController.fillPage(movie);
 
         //MainApplication.setCenter(outerPane) (idea for rework of setters in MainApp)

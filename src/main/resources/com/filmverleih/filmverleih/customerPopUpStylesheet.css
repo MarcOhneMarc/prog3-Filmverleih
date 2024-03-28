@@ -29,3 +29,22 @@
 #hbx_customerPopUpButtonHBox {
     -fx-spacing: 20;
 }
+
+#acp_customerInfoCard {
+    -fx-background-color: #518E21;
+    -fx-background-radius: 12;
+}
+
+#grp_customerInfoGrid {
+    -fx-background-color: #518E21;
+}
+
+.lbl_classCustomerInfoLabels {
+    -fx-text-fill: #FFFFFF;
+}
+
+#btn_checkID {
+    -fx-background-color: #518E21;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 12;
+}
