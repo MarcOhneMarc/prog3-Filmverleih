@@ -1,10 +1,8 @@
 package com.filmverleih.filmverleih.entity;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,6 +20,9 @@ public class Rentals {
     @Basic
     @Column(name = "enddate", nullable = true, length = 10)
     private String enddate;
+    @OneToOne
+    @JoinColumn(name = "movieid", referencedColumnName = "movieid", nullable = false)
+    private Movies movie;
 
     public int getMovieid() {
         return movieid;
@@ -66,5 +67,13 @@ public class Rentals {
     @Override
     public int hashCode() {
         return Objects.hash(movieid, customerid, startdate, enddate);
+    }
+
+    public Movies getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movies movie) {
+        this.movie = movie;
     }
 }

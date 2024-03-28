@@ -1,6 +1,9 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -111,10 +114,20 @@ public class FilterController {
         });
     }
 
+    private void sortListBy(String selectedOption) {
+        if (isLibrary) {
+            sortMovieListBy(selectedOption);
+        } else if (isRental) {
+            sortRentalListBy(selectedOption);
+        } else {
+            return;
+        }
+    }
+
     /**
      * Generates a comparator to sort with in the library or rental Page
      */
-    private void sortListBy(String selectedOption) {
+    private void sortMovieListBy(String selectedOption) {
         Comparator<Movies> comparator = null;
 
         switch (selectedOption) {
@@ -151,22 +164,67 @@ public class FilterController {
         }
 
         if (comparator != null) {
-            if (isLibrary) {
-                libraryController.comparator = comparator;
-                libraryController.sortMovies();
-            } else if (isRental) {
-                rentalController.comparator = comparator;
-                rentalController.sortMovies();
-            } else {
-                return;
-            }
+            libraryController.comparator = comparator;
+            libraryController.sortMovies();
+        }
+    }
+
+    private void sortRentalListBy(String selectedOption) {
+        Comparator<Rentals> comparator = null;
+
+        switch (selectedOption) {
+            case "Name aufsteigend":
+                comparator = Comparator.comparing(rental -> rental.getMovie().getName());
+                break;
+            case "Name absteigend":
+                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getName()).reversed();
+                break;
+            case "Jahr aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getYear());
+                break;
+            case "Jahr absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getYear()).reversed();
+                break;
+            case "Bewertung aufsteigend":
+                comparator = Comparator.comparing(rental -> rental.getMovie().getRating());
+                break;
+            case "Bewertung absteigend":
+                comparator = Comparator.comparing((Rentals rental) -> rental.getMovie().getRating()).reversed();
+                break;
+            case "Länge aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getLength());
+                break;
+            case "Länge absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getLength()).reversed();
+                break;
+            case "FSK aufsteigend":
+                comparator = Comparator.comparingInt(rental -> rental.getMovie().getFsk());
+                break;
+            case "FSK absteigend":
+                comparator = Comparator.comparingInt((Rentals rental) -> rental.getMovie().getFsk()).reversed();
+                break;
+        }
+
+        if (comparator != null) {
+            rentalController.comparator = comparator;
+            rentalController.sortMovies();
+        }
+    }
+
+    public void generateFilters() {
+        if (isLibrary) {
+            generateMovieFilters();
+        } else if (isRental) {
+            generateRentalFilters();
+        } else {
+            return;
         }
     }
 
     /**
      * Generates a predicate to filter with in the library or rental Page
      */
-    public void generateFilters() {
+    public void generateMovieFilters() {
         String yearFilter = txf_year.getText();
         String genreFilter = txf_genre.getText();
         String minLengthFilter = txf_minLength.getText();
@@ -251,15 +309,103 @@ public class FilterController {
         }
 
         if (!(predicate == null)) {
-            if (isLibrary) {
-                libraryController.predicate = predicate;
-                libraryController.filterMovies();
-            } else if (isRental) {
-                rentalController.predicate = predicate;
-                rentalController.filterMovies();
-            } else {
-                return;
+            libraryController.predicate = predicate;
+            libraryController.filterMovies();
+        }
+    }
+
+    /**
+     * Generates a predicate to filter with in the library or rental Page
+     */
+    public void generateRentalFilters() {
+        String yearFilter = txf_year.getText();
+        String genreFilter = txf_genre.getText();
+        String minLengthFilter = txf_minLength.getText();
+        String maxLengthFilter = txf_maxLength.getText();
+        double ratingFilter = sld_rating.getValue();
+        String typeFilter;
+        if (cbx_type.getValue().equals("Blu-Ray")) {
+            typeFilter = "BR";
+        } else {
+            typeFilter = cbx_type.getValue();
+        }
+        String commentFilter = txf_comment.getText();
+        String directorFilter = txf_director.getText();
+        String studioFilter = txf_studio.getText();
+        String actorFilter = txf_actor.getText();
+        String fskFilter = cbx_fsk.getValue();
+
+        Predicate<Rentals> predicate = rental -> true;
+
+        if (navbarController.searchbar != null && !navbarController.searchbar.getText().isEmpty()) {
+            predicate = predicate.and(rental -> CustomersUtility.getCustomerById(rental.getCustomerid()).getLastname()
+                    .toLowerCase().contains(searchBar.toLowerCase()) || CustomersUtility.getCustomerById(rental.getCustomerid()).getFirstname()
+                    .toLowerCase().contains(searchBar.toLowerCase()));
+        }
+        if (!yearFilter.isEmpty()) {
+            int intYear = Integer.parseInt(yearFilter);
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getYear() == intYear);
+        }
+        if (!genreFilter.isEmpty()) {
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getGenre().toLowerCase().contains(genreFilter.toLowerCase()));
+        }
+        if (!minLengthFilter.isEmpty() || !maxLengthFilter.isEmpty()) {
+            predicate = predicate.and(rental -> {
+                int length = rental.getMovie().getLength();
+                boolean minLengthCheck = minLengthFilter.isEmpty() || length >= Integer.parseInt(minLengthFilter);
+                boolean maxLengthCheck = maxLengthFilter.isEmpty() || length <= Integer.parseInt(maxLengthFilter);
+                return minLengthCheck && maxLengthCheck;
+            });
+        }
+        if (cbx_ratingEmpty.isSelected()) {
+            Double roundedValue = Double.valueOf(Math.round(ratingFilter * 10.0) / 10.0);
+            predicate = predicate.and(rental ->
+                    Double.valueOf(rental.getMovie().getRating().toString()) > roundedValue);
+        }
+
+        if (!typeFilter.isEmpty()) {
+            if (!typeFilter.equals("keine Auswahl")) {
+                if (typeFilter.equals("Blu-Ray")) {
+                    predicate = predicate.and(rental -> rental.getMovie().getType().contains("BR"));
+                }
+                else {
+                    predicate = predicate.and(rental -> rental.getMovie().getType().toLowerCase().contains(typeFilter.toLowerCase()));
+                }
             }
+        }
+
+        if (!commentFilter.isEmpty()) {
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getComment().toLowerCase().contains(commentFilter.toLowerCase()));
+        }
+        if (!directorFilter.isEmpty()) {
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getDirectors().toLowerCase().contains(directorFilter.toLowerCase()));
+        }
+        if (!studioFilter.isEmpty()) {
+            System.out.println(studioFilter);
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getStudio().toLowerCase().contains(studioFilter.toLowerCase()));
+        }
+        if (!actorFilter.isEmpty()) {
+            System.out.println(actorFilter);
+            predicate = predicate.and(rental ->
+                    rental.getMovie().getActors().toLowerCase().contains(actorFilter.toLowerCase()));
+        }
+        if (!fskFilter.isEmpty()) {
+            if (!fskFilter.equals("keine Auswahl")) {
+                int fsk = Integer.parseInt(fskFilter);
+                predicate = predicate.and(rental ->
+                        rental.getMovie().getFsk() == fsk);
+            }
+        }
+
+        if (!(predicate == null)) {
+            rentalController.predicate = predicate;
+            rentalController.filterMovies();
+
         }
     }
 

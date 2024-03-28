@@ -92,4 +92,15 @@ public class CustomersUtility {
         }
         return true;
     }
+
+    public static Customers getCustomerById(int id)
+    {
+        Customers ret = new Customers();
+        for(Customers customer:getFullCustomerList())
+        {
+            if (customer.getCustomerid() == id) ret = customer;
+        }
+        return ret;
+    }
+
 }

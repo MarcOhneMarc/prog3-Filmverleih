@@ -94,7 +94,7 @@ public class LibraryController {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 double windowHeight = newValue.doubleValue();
-                grp_libraryGrid.setMinHeight(windowHeight-90);
+                grp_libraryGrid.setMinHeight(windowHeight);
             }
         });
 

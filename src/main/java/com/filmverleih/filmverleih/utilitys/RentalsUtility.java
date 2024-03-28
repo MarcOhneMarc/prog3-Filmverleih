@@ -51,6 +51,28 @@ public class RentalsUtility {
         return true;
     }
 
+    public static List<Rentals> getAllRentedMovies() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
+                transaction.commit();
+                for (Rentals rental: rentals) {
+                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate() + " " + rental.getMovie().getName());
+                }
+                return rentals;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return new ArrayList<Rentals>();
+    }
+
     /**
      * This method returns the last added customer ID from the
      * customer table by getting the id of the last element of the
@@ -63,5 +85,45 @@ public class RentalsUtility {
             return 1;
         }
         return customersList.getLast().getCustomerid();
+    }
+
+    public static boolean deleteRentalFromDB(int movieid, int customerid) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.createQuery("DELETE FROM Rentals WHERE movieid = " + movieid + " AND customerid = " + customerid).executeUpdate();
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean extendRentalinDB(int movieid, int customerid,  String enddate) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.createQuery("UPDATE Rentals SET enddate = '" + enddate + "' WHERE movieid = " + movieid + " AND customerid = " + customerid).executeUpdate();
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
     }
 }
