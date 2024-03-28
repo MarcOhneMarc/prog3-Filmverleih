@@ -26,10 +26,10 @@ public class UserUtility {
                 return users;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 013");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed: 014");
         }
         return  new ArrayList<Users>();
     }

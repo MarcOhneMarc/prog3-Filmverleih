@@ -1,5 +1,9 @@
 package com.filmverleih.filmverleih;
 
+
+import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -49,13 +53,14 @@ public class CartController {
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector;
+
 
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
     }
 
@@ -297,9 +302,9 @@ public class CartController {
     @FXML
     public void orderCart() {
 
-       if(Utility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+       if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
-               boolean addSuccessful = Utility.addRentalToDB(
+               boolean addSuccessful = RentalsUtility.addRentalToDB(
                        fullMovieList.get(i).getMovieid(),
                        Integer.parseInt(txf_CartID.getText()),
                        calculateCurrentDate().toString(),
@@ -323,7 +328,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        System.out.println("The movie " + movie.getName() + " has already been rented to costumer");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);
@@ -377,7 +382,7 @@ public class CartController {
      * TODO check if getLastAddedCustomerID is a valid way to get it
      */
     private void registerNewCustomer() {
-        boolean addSuccessful = Utility.addCustomerToDB(
+        boolean addSuccessful = CustomersUtility.addCustomerToDB(
                 txf_PopUpCustomerSurName.getText(),
                 txf_PopUpCustomerLastName.getText(),
                 txf_PopUpCustomerStreet.getText(),
@@ -388,7 +393,7 @@ public class CartController {
         );
 
         if (addSuccessful) {
-            txf_CartID.setText(String.valueOf(Utility.getLastAddedCustomerID()));
+            txf_CartID.setText(String.valueOf(CustomersUtility.getLastAddedCustomerID()));
         }
     }
 

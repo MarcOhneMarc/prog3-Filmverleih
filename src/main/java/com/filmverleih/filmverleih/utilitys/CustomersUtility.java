@@ -25,10 +25,10 @@ public class CustomersUtility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("getFullCostumerList went wrong, could not transact: 001");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed: 002");
         }
         return  new ArrayList<Customers>();
     }
@@ -81,15 +81,27 @@ public class CustomersUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("customer registration went wrong Code: 77621");
+                LoggerUtility.logger.warn("customer registration went wrong, could not transact: 003");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("customer registration went wrong Code: 77620");
+            LoggerUtility.logger.warn("build session failed: 004");
             return false;
         }
         return true;
+    }
+
+    /**
+     * This method returns the last added customer ID from the
+     * customer table by getting the id of the last element of the
+     * fullCustomersList();
+     * @return the last added customerID
+     */
+    public static int getLastAddedCustomerID() {
+        List<Customers> customersList = getFullCustomerList();
+        if (customersList.isEmpty()) {
+            return 1;
+        }
+        return customersList.getLast().getCustomerid();
     }
 }

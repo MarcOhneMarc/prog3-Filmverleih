@@ -6,6 +6,8 @@ module com.filmverleih.filmverleih {
     requires java.naming;
     requires jakarta.persistence;
 
+    requires org.slf4j;
+
 
     opens com.filmverleih.filmverleih to javafx.fxml;
     exports com.filmverleih.filmverleih;
