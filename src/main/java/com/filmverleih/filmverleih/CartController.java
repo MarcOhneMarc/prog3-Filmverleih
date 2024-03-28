@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.validator.routines.EmailValidator;
+import javafx.collections.ListChangeListener;
 
 import java.time.LocalDate;
 import java.text.DecimalFormat;
@@ -41,6 +42,7 @@ public class CartController {
     private int lastAddedCustomerID;
     private boolean checkIDButtonClicked = false;
     private List<Movies> fullMovieList = new ArrayList<>(); //List that must contain the movies in cart
+    private ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
@@ -187,7 +189,7 @@ public class CartController {
      * It uses the name of the movie and its price.
      */
     public void fillTableView() {
-        ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
+        //ObservableList<Movies> fullMovieListObservable = FXCollections.observableArrayList();
         for (Movies movie : fullMovieList) {
             fullMovieListObservable.add(movie);
         }
@@ -434,6 +436,7 @@ public class CartController {
      */
     @FXML
     public void checkIDEmpty() {
+        /*
         if (txf_CartID.getText().isBlank()) {
             btn_checkID.setDisable(true);
             btn_OrderCart.setDisable(true);
@@ -449,6 +452,8 @@ public class CartController {
                 lbl_errorEmptyCart.setVisible(true);
             }
         }
+
+         */
     }
 
     /**
@@ -526,6 +531,18 @@ public class CartController {
         }
     }
 
+    private boolean checkIDValid() {
+         if (!txf_CartID.getText().matches("^[0-9]{1,9}$")) {
+             //btn_checkID.setDisable(true);
+             //lbl_errorNoID.setVisible(true);
+             return false;
+         } else {
+             //btn_checkID.setDisable(false);
+             //lbl_errorNoID.setVisible(false);
+             return true;
+         }
+    }
+
     private void setCustomerInfoCardAfterRegistration() {
         setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
         acp_customerInfoCard.setVisible(true);
@@ -549,7 +566,7 @@ public class CartController {
      */
     public void updateCart() {
         setOrderInformationLabels();
-        checkIDEmpty();
+        //checkIDEmpty();
     }
 
     /**
@@ -558,6 +575,12 @@ public class CartController {
      */
     @FXML
     private void initialize() {
+        fillObservableMovieList();
+        setLastAddedCustomerID();
+        updateCart();
+        btn_checkID.setDisable(true);
+        btn_OrderCart.setDisable(true);
+
         txf_PopUpCustomerPhone.setOnKeyTyped(event -> {
             validatePhone();
             checkWhetherToDisableNewCustomerButton();
@@ -569,28 +592,49 @@ public class CartController {
         });
 
         txf_CartID.setOnKeyTyped(event -> {
-            checkIDEmpty();
+            checkWhetherToEnableCheckIDButton();
+            checkWhetherToEnableOrderButton();
             acp_customerInfoCard.setVisible(false);
-            checkIDButtonClicked = false;
             btn_OrderCart.setDisable(true);
+            //checkIDButtonClicked = false;
         });
 
         btn_checkID.setOnAction(event -> {
-            checkIDButtonClicked = true;
-            checkIDEmpty();
+            //checkIDButtonClicked = true;
+            btn_OrderCart.setDisable(fullMovieList.isEmpty());
             checkID();
         });
 
-
-        setLastAddedCustomerID();
-        updateCart();
+        fullMovieListObservable.addListener((ListChangeListener<Movies>) change -> {
+            while (change.next()) {
+                if (change.getList().isEmpty()) {
+                    btn_OrderCart.setDisable(true);
+                } else {
+                    checkWhetherToEnableOrderButton();
+                }
+            }
+        });
     }
+
+    private void checkWhetherToEnableCheckIDButton() {
+        boolean anyWrong = !checkIDValid() || txf_CartID.getText().isEmpty();
+
+        lbl_errorNoID.setVisible(anyWrong);
+        btn_checkID.setDisable(anyWrong);
+    }
+
+    private void checkWhetherToEnableOrderButton() {
+        //boolean anyWrong = checkIDButtonClicked || fullMovieList.isEmpty();
+        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty();
+
+        btn_OrderCart.setDisable(anyWrong);
+    }
+
 
     /**
      * @return passes the main frame if the scene to the Controller it is called from
      */
     public StackPane getOuterPane() {
-        //updateCart();
         return stp_cartOuterStackPane;
     }
 }
