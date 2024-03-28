@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -18,12 +19,16 @@ public class NavbarController {
     private FilterController filterController;
 
     //Instantiate Controller-Connector for Navbar-Library-Connection
-    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+    @FXML
+    private BorderPane navbarPane;
+    private NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController, EditMovieController,Integer> connector;
+
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
+
         this.connector = connector;
         this.filterController = connector.getFilterController();
     }
@@ -101,6 +106,7 @@ public class NavbarController {
      *
      * @throws IOException If an I/O error occurs while switching the view.
      */
+
     @FXML
     public void changeToCart() throws IOException {
         CartController cartController = connector.getCartController();
@@ -136,5 +142,9 @@ public class NavbarController {
 
     public BorderPane getOuterPane() {
         return bpn_navbarOuterBorderPane;
+    }
+
+    public BorderPane getBorderPane(){
+        return navbarPane;
     }
 }

@@ -1,15 +1,20 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Users;
+import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -25,19 +30,31 @@ public class SettingsController {
     private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
 
+    private Users userToDelete;
 
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector;
+
+    NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, EditMovieController, Integer> connector;
+
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
+     *
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, EditMovieController,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController, LibraryController, MovieController, RentalController, SettingsController, FilterController, CartController, LoginController, EditMovieController, Integer> connector) {
+      
         this.connector = connector;
     }
 
     //outer pane
     @FXML
     private TabPane tbp_settingsTabView;
+    @FXML
+    private Tab tbs_settingsTab;
+    @FXML
+    private Tab tbs_mitarbeiterTab;
+    @FXML
+    private Tab tbs_profileTab;
+
 
     //components of the movie managing tab
     @FXML
@@ -86,6 +103,26 @@ public class SettingsController {
     private CheckBox cbx_selBlueRay;
     @FXML
     private TextField txf_deleteMovieId;
+    @FXML
+    private Label lbl_deleteMovie;
+    @FXML
+    private Button btn_deleteMovie;
+    @FXML
+    private AnchorPane anp_employeeBackground;
+    @FXML
+    private AnchorPane anp_employeePopUp;
+    @FXML
+    private AnchorPane anp_logoutPopUp;
+    @FXML
+    private Button btn_acceptLogout;
+    @FXML
+    private Button btn_cancelLogout;
+    @FXML
+    private Label lbl_deleteEmployee;
+    @FXML
+    private Button btn_deleteEmployee;
+    @FXML
+    private Button btn_cancelDeletionEmployee;
 
 
     //components of the employee managing tab
@@ -94,7 +131,7 @@ public class SettingsController {
     @FXML
     TextField txf_userFirstName;
     @FXML
-    TextField txf_userSurname;
+    TextField txf_userPassword;
     @FXML
     TextField txf_userIdDelete;
     @FXML
@@ -104,7 +141,28 @@ public class SettingsController {
     @FXML
     Button btn_deleteUser;
     @FXML
+    Label lbl_loggedUserName;
+    @FXML
+    Label lbl_loggedUserId;
+    @FXML
+    Label lbl_loggedUserIsAdmin;
+    @FXML
+    Label lbl_passwordsDontMatch;
+    @FXML
+    Label lbl_passwordChanged;
+    @FXML
+    TextField txf_oldPassword;
+    @FXML
+    TextField txf_newPassword;
+    @FXML
+    TextField txf_newPasswordRepeat;
+    @FXML
+    Button btn_confirmChangePassword;
+
+    @FXML
     CheckBox cbx_selAdminUser;
+    @FXML
+    Label lbl_idNotExisting;
     @FXML
     TableView<Users> tbv_userTable;
     @FXML
@@ -113,8 +171,6 @@ public class SettingsController {
     TableColumn<Users, String> tbc_userName;
     @FXML
     TableColumn<Users, Boolean> tbc_userIsAdmin;
-
-
 
 
     /**
@@ -128,8 +184,9 @@ public class SettingsController {
         Utility utility = new Utility();
         System.out.println("console test: add movie button was clicked");
         if (cbx_selBlueRay.isSelected()) {
-             movieType = "BlueRay";
-        };
+            movieType = "BlueRay";
+        }
+        ;
         utility.newMovieInDB(txf_movieName.getText(),
                 Integer.parseInt(txf_movieYear.getText()),
                 txf_movieGenre1.getText() + ", "
@@ -181,60 +238,262 @@ public class SettingsController {
         tbc_userIsAdmin.setCellValueFactory((cellData -> new SimpleBooleanProperty(cellData.getValue().getIsadmin())));
     }
 
+
+    /**
+     * This method changes the view for each user depending on his rights
+     * Admins have access to Employee Tab
+     */
+    public void viewForAdmins() {
+
+        Users loggedUser = connector.getLoginController().getLoggedUser();
+        lbl_idNotExisting.setVisible(false);
+        if (loggedUser.getIsadmin()) {
+            fillTableView();
+            if (!tbp_settingsTabView.getTabs().contains(tbs_mitarbeiterTab)) {
+                tbp_settingsTabView.getTabs().add(tbs_mitarbeiterTab);
+            }
+            txf_deleteMovieId.setVisible(true);
+            lbl_deleteMovie.setVisible(true);
+            btn_deleteMovie.setVisible(true);
+        } else {
+            tbp_settingsTabView.getTabs().remove(tbs_mitarbeiterTab);
+            txf_deleteMovieId.setVisible(false);
+            lbl_deleteMovie.setVisible(false);
+            btn_deleteMovie.setVisible(false);
+        }
+    }
+
     /**
      * This method adds a user to the user management TableView
-     * @param user the user that will be added
+     * and to the db
+     * @throws IllegalArgumentException
      */
-    public void addUserToTableView(Users user) {
+    @FXML
+    public void addUserToTableView() throws NoSuchAlgorithmException {
+        Encryptor encryptor = new Encryptor();
+        String name = txf_userFirstName.getText();
+        String password = txf_userPassword.getText();
+        boolean isAdmin = cbx_selAdminUser.isSelected();
+        String hashedPassword = encryptor.encryptPassword(password);
+
+        Users user = new Users();
+        user.setName(name);
+        user.setIsadmin(isAdmin);
+        user.setPassword(hashedPassword);
+
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
+            Utility utility = new Utility();
+            utility.addUserToDB(user);
             fullUserListObservable.add(user);
             tbv_userTable.refresh();
         }
     }
 
     /**
-     * This method removes a user to the user management TableView
-     * @param user the user that will be removed
+     * This method removes a user from the user management TableView
+     * and from the db
      */
-    public void removeUserFromTableView(Users user) {
-        if (user == null) {
-            throw new IllegalArgumentException(ERR_USER_NULL);
-        } else {
-            fullUserListObservable.remove(user);
+
+    public void deleteUser() {
+        if (userToDelete != null) {
+            disableDeleteUserPopUp();
+            Utility utility = new Utility();
+            utility.deleteUserInDB(userToDelete);
+            fullUserListObservable.remove(userToDelete);
             tbv_userTable.refresh();
         }
     }
 
+
     /**
-     * This method adds an user and is linked to the add button of the
-     * user management tab
-     * TODO actually add user to db
-     * TODO add user to List and refresh TableView
+     * This method checks for a user with the same id as the id in the TextField
+     * @return true if the user exists and false if the user doesn't exist
      */
-    @FXML
-    public void addUser() {
-        System.out.println("console test: add user button has been clicked");
+    public boolean checkUserExists() {
+        int id = Integer.parseInt(txf_userIdDelete.getText());
+        for (Users user : Utility.getFullUserList()) {
+            if (user == null) {
+                throw new IllegalArgumentException(ERR_USER_NULL);
+            }
+            if (user.getUserid() == id) {
+                userToDelete = user;
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * This method removes an user and is linked to the delete button of the
-     * user management tab
-     * TODO actually delete user to db
-     * TODO remove user from List and refresh TableView
+     * This method prints a text for the Employee to see that the
+     * user he is trying to delete doesn't exist
+     * The text will be shown for 3 seconds
+     * @param id
      */
-    @FXML
-    public void deleteUser() {
-        System.out.println("console test: delete user button has been clicked");
+    public void userNotExisting(int id) {
+        lbl_idNotExisting.setText("Mitarbeiter mit der ID " + id + " existiert nicht");
+        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+        pauseTransition.setOnFinished(event -> lbl_idNotExisting.setVisible(false));
+        lbl_idNotExisting.setVisible(true);
+        pauseTransition.play();
     }
 
     /**
-     * TODO remove fillTableView() from here and find a better suiting place for its calling
-     * @return passes the main frame if the scene to the Controller it is called from
+     * If the user exists:
+     * - a pop-up message will be shown on the screen so the Employee can choose
+     * - if he really wants to remove the user
+     * If the user doesn't exist:
+     * - a message will be printed saying that the user he is trying to delete
+     * - doesn't exist
      */
-    public TabPane getOuterPane()
-    {
+    public void enableDeleteUserPopUp() {
+        if (checkUserExists()) {
+            anp_employeeBackground.setDisable(true);
+            anp_employeePopUp.setVisible(true);
+            anp_employeePopUp.setDisable(false);
+            connector.getNavbarController().disableNavBar();
+            tbs_settingsTab.setDisable(true);
+            tbs_profileTab.setDisable(true);
+            lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
+        } else {
+            userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
+        }
+        emptyTextField();
+    }
+
+    /**
+     * This method changes from the pop-up view back to the employee view
+     */
+    public void disableDeleteUserPopUp() {
+        anp_employeeBackground.setDisable(false);
+        anp_employeePopUp.setVisible(false);
+        anp_employeePopUp.setDisable(true);
+        connector.getNavbarController().enableNavBar();
+        tbs_settingsTab.setDisable(false);
+        tbs_profileTab.setDisable(false);
+        emptyTextField();
+    }
+
+    /**
+     * This method checks if the old password is right and then it checks
+     * if both the new password fields are equal.
+     */
+    public void checkPasswordMatch() {
+        if (!txf_oldPassword.getText().isBlank()) {
+            if (txf_newPassword.getText().isBlank()) {
+                btn_confirmChangePassword.setDisable(true);
+            } else {
+                if (txf_newPassword.getText().equals(txf_newPasswordRepeat.getText())) {
+                    btn_confirmChangePassword.setDisable(false);
+                    lbl_passwordsDontMatch.setVisible(false);
+                } else {
+                    lbl_passwordsDontMatch.setText("Passwörter stimmen nicht überein");
+                    lbl_passwordsDontMatch.setVisible(true);
+                    btn_confirmChangePassword.setDisable(true);
+                }
+            }
+        } else {
+            lbl_passwordsDontMatch.setText("Altes Passwort eingeben");
+            lbl_passwordsDontMatch.setVisible(true);
+            btn_confirmChangePassword.setDisable(true);
+        }
+    }
+
+    //TODO
+    public void enableLogoutPopUp() {
+        anp_employeeBackground.setDisable(true);
+        anp_logoutPopUp.setVisible(true);
+        anp_employeePopUp.setDisable(false);
+        connector.getNavbarController().disableNavBar();
+        tbs_settingsTab.setDisable(true);
+        lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
+
+        userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
+    }
+
+    /**
+     * This method allows the user to change his password by clicking a button
+     * the user can only change his password if the old password is right.
+     * @throws NoSuchAlgorithmException
+     */
+    public void changePasswordButton() throws NoSuchAlgorithmException {
+        Users loggedUser = connector.getLoginController().getLoggedUser();
+        Encryptor encryptor = new Encryptor();
+
+
+        if (encryptor.encryptPassword(txf_oldPassword.getText()).equals(loggedUser.getPassword())) {
+            String hashedPassword = encryptor.encryptPassword(txf_newPassword.getText());
+            loggedUser.setPassword(hashedPassword);
+            lbl_passwordChanged.setVisible(true);
+            Utility utility = new Utility();
+            utility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
+        } else {
+            lbl_passwordsDontMatch.setText("Falsches Passwort eingegeben");
+            lbl_passwordsDontMatch.setVisible(true);
+        }
+    }
+
+
+    /**
+     * This method allows the user to log out.
+     * If the user decides to log out then he will be sent back
+     * to the login menu where he can log in again
+     */
+    public void logout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Möchten Sie sich abmelden?");
+        alert.setTitle("Logout");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            connector.getLoginController().setLoggedUserToNull();
+            MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
+            MainApplication.borderPane.setTop(null);
+        }
+    }
+
+    /**
+     * This method refreshes the users list.
+     * It is used when logging out so we make sure that
+     * the list is always updated.
+     */
+    public void refreshFullUserList() {
+        fullUserList = Utility.getFullUserList();
+    }
+
+    /**
+     * This method empties the text fields.
+     */
+    public void emptyTextField() {
+        txf_userFirstName.setText("");
+        txf_userPassword.setText("");
+        txf_userIdDelete.setText("");
+    }
+
+    /**
+     * This method fills the user data in the profile tab.
+     * ID and Name of the user.
+     * user is Admin or not.
+     */
+    public void fillUserData() {
+        LoginController loginController = connector.getLoginController();
+        Users loggedUser = loginController.getLoggedUser();
+        lbl_loggedUserName.setText(loggedUser.getName());
+        lbl_loggedUserId.setText(String.valueOf(loggedUser.getUserid()));
+        if (loggedUser.getIsadmin()) {
+            lbl_loggedUserIsAdmin.setText("Der User ist ein Admin");
+        } else {
+            lbl_loggedUserIsAdmin.setText("Der User ist kein Admin");
+        }
+    }
+
+    /**
+     * This method gives us the view of the Settings tab
+     */
+    public TabPane getOuterPane() {
+        fillUserData();
+        emptyTextField();
+        refreshFullUserList();
+        viewForAdmins();
         fillTableView();
         return tbp_settingsTabView;
     }

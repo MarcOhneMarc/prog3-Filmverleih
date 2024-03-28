@@ -33,8 +33,8 @@ public class LibraryController {
                                     SettingsController,
                                     FilterController,
                                     CartController,
-                                    EditMovieController,
-                                    Integer,
+                                    LoginController,
+                                    EditMovieController,                           
                                     Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
@@ -47,8 +47,8 @@ public class LibraryController {
                             SettingsController,
                             FilterController,
                             CartController,
-                            EditMovieController,
-                            Integer,
+                            LoginController,
+                            EditMovieController,             
                             Integer> connector) {
         this.connector = connector;
         this.cartController = connector.getCartController();
