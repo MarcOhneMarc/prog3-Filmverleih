@@ -1,5 +1,6 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.utilitys.FXMLUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.application.Application;
@@ -55,31 +56,31 @@ public class MainApplication extends Application {
     private void loadRootsAndControllers() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader = Utility.loadFXML("Navbar.fxml");
+            loader = FXMLUtility.loadFXML("Navbar.fxml");
             navbarRoot = loader.load();
             navbarController = loader.getController();
 
-            loader  = Utility.loadFXML("Library.fxml");
+            loader  = FXMLUtility.loadFXML("Library.fxml");
             libraryRoot = loader.load();
             libraryController = loader.getController();
 
-            loader = Utility.loadFXML("Movie.fxml");
+            loader = FXMLUtility.loadFXML("Movie.fxml");
             movieRoot = loader.load();
             movieController = loader.getController();
 
-            loader = Utility.loadFXML("Rental.fxml");
+            loader = FXMLUtility.loadFXML("Rental.fxml");
             rentalRoot = loader.load();
             rentalController = loader.getController();
 
-            loader = Utility.loadFXML("Settings.fxml");
+            loader = FXMLUtility.loadFXML("Settings.fxml");
             settingsRoot = loader.load();
             settingsController = loader.getController();
 
-            loader = Utility.loadFXML("Filter.fxml");
+            loader = FXMLUtility.loadFXML("Filter.fxml");
             filterRoot = loader.load();
             filterController = loader.getController();
 
-            loader = Utility.loadFXML("Cart.fxml");
+            loader = FXMLUtility.loadFXML("Cart.fxml");
             cartRoot = loader.load();
             cartController = loader.getController();
           

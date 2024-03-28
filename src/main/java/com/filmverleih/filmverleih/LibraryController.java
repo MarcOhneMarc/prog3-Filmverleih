@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -90,7 +91,7 @@ public class LibraryController {
             }
         });
 
-        List<Movies> allMovies = Utility.getFullMovieList(); //get all Movies From DB
+        List<Movies> allMovies = MoviesUtility.getFullMovieList(); //get all Movies From DB
         this.comparator = Comparator.comparing(Movies::getName);
         updateMovies(allMovies);
     }
@@ -248,7 +249,7 @@ public class LibraryController {
      */
     public void updateMovieList() {
         gridPane.getChildren().clear();
-        List<Movies> allMovies = Utility.getFullMovieList();
+        List<Movies> allMovies = MoviesUtility.getFullMovieList();
         updateMovies(allMovies);
     }
 

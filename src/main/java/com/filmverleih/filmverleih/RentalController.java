@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -76,7 +77,7 @@ public class RentalController {
 
         //Load Rental View
         //TODO change to not get all movies but only those that are rented from db
-        List<Movies> allMovies = Utility.getFullMovieList();
+        List<Movies> allMovies = MoviesUtility.getFullMovieList();
         for (int i = 0; i < allMovies.size(); i++) {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));

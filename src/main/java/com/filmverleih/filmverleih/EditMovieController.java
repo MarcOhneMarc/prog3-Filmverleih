@@ -735,7 +735,7 @@ public class EditMovieController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
-        boolean movieIsDeleted = MoviesUtility.DeleteMovieInDB(movie.getMovieid());
+        Boolean movieIsDeleted = MoviesUtility.DeleteMovieInDB(movie.getMovieid());
         if (movieIsDeleted) {
             MovieController movieController = connector.getMovieController();
             movieController.feedbackMessage(MOVIE_DELETE_SUCCESSFUL, "-fx-text-fill: #FF4040");

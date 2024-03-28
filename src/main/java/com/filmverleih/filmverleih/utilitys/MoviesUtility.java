@@ -36,6 +36,7 @@ public class MoviesUtility {
         return new ArrayList<Movies>();
     }
 
+
     public static Boolean newMovieInDB(String name, int year, String genre, int length, BigDecimal rating, int count, String type, String cover, String comment, String directors, String studio, String actors, int fsk) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -240,5 +241,115 @@ public class MoviesUtility {
             }
         }
     };
+
+    /**
+     * Utility method to update a movie record in the database.
+     * @param movieid The ID of the movie to be updated.
+     * @param name The new name of the movie.
+     * @param year The new year of the movie.
+     * @param length The new length of the movie.
+     * @param fsk The new FSK rating of the movie.
+     * @param rating The new rating of the movie.
+     * @param genres The new genres of the movie.
+     * @param directors The new directors of the movie.
+     * @param count The new count of the movie.
+     * @param studio The new studio of the movie.
+     * @param actors The new actors of the movie.
+     * @param cover The new cover of the movie.
+     * @param comment The new comment of the movie.
+     * @param type The new type of the movie.
+     * @return True if the update was successful, false otherwise.
+     */
+    public static Boolean UpdateMovieInDB(int movieid,
+                                          String name,
+                                          int year,
+                                          int length,
+                                          int fsk,
+                                          BigDecimal rating,
+                                          String genres,
+                                          String directors,
+                                          int count,
+                                          String studio,
+                                          String actors,
+                                          String cover,
+                                          String comment,
+                                          String type) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                Query query = session.createQuery("UPDATE Movies SET name = :name" +
+                        ", year = :year" +
+                        ", length = :length" +
+                        ", fsk = :fsk" +
+                        ", rating = :rating" +
+                        ", genre = :genre" +
+                        ", directors = :directors" +
+                        ", count = :count" +
+                        ", studio = :studio" +
+                        ", actors = :actors" +
+                        ", cover = :cover" +
+                        ", comment = :comment" +
+                        ", type = :type" +
+                        " WHERE movieid = :movieid");
+
+                query.setParameter("name", name);
+                query.setParameter("year", year);
+                query.setParameter("length", length);
+                query.setParameter("fsk", fsk);
+                query.setParameter("rating", rating);
+                query.setParameter("genre", genres);
+                query.setParameter("directors", directors);
+                query.setParameter("count", count);
+                query.setParameter("studio", studio);
+                query.setParameter("actors", actors);
+                query.setParameter("cover", cover);
+                query.setParameter("comment", comment);
+                query.setParameter("type", type);
+                query.setParameter("movieid", movieid);
+
+                query.executeUpdate();
+
+                transaction.commit();
+
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Utility method to retrieve a movie from the database by its ID.
+     * @param movieId The ID of the movie to retrieve.
+     * @return The movie object corresponding to the given ID, or null if no such movie is found.
+     */
+    public static Movies getMovieById(int movieId) {
+        Movies returnMovie = null;
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return returnMovie;
+    }
 
 }
