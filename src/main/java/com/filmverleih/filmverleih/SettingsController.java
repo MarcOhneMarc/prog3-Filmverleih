@@ -19,7 +19,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
@@ -457,9 +459,15 @@ public class SettingsController {
         }
 
         //LinkToCoverValidator
-        if (MovieEntryValidator.linkToCoverIsValid(txf_movieAddLinkToCover.getText())) {
-            lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
-        } else {
+        try {
+            if (MovieEntryValidator.linkToCoverIsValid(txf_movieAddLinkToCover.getText())) {
+                lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
+            } else {
+                lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
+                entriesAreValid = false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
             lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         }

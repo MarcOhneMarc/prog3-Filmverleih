@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
@@ -657,10 +658,16 @@ public class EditMovieController {
             entriesAreValid = false;
         }
 
-        //LinkToCoverValidator
-        if (MovieEntryValidator.linkToCoverIsValid(txf_movieEditLinkToCover.getText())) {
-            lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
-        } else {
+        try {
+            //LinkToCoverValidator
+            if (MovieEntryValidator.linkToCoverIsValid(txf_movieEditLinkToCover.getText())) {
+                lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
+            } else {
+                lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
+                entriesAreValid = false;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
             lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         }
