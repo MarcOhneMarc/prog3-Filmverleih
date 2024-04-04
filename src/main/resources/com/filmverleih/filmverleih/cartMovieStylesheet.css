@@ -1,0 +1,81 @@
+.hbx_class_CartValueHBoxes {
+    -fx-spacing: 30;
+}
+
+#hbx_CartMovie {
+    -fx-background-color: #393939;
+}
+
+#lbl_CartMovieCardFsk {
+    -fx-background-color: #518E21;
+    -fx-font-size: 17;
+    -fx-text-fill: #FFFFFF;
+}
+
+
+
+
+
+
+#hbx_CartMainHBox {
+
+    -fx-background-color: #191919;
+}
+
+.lbl_class_CartMovieLabels {
+    -fx-text-fill: #FFFFFF;
+}
+#lbl_CartMovieTitle {
+    -fx-font-size: 32;
+}
+
+#hbx_CartMovieRatingDuration {
+    -fx-spacing: 10;
+}
+
+.lbl_class_CartMovieInfo{
+    -fx-font-size: 17;
+}
+
+#lbl_CartMovieRating {
+    -fx-background-color: #5C5C5C;
+}
+
+#btn_CartDeleteMovie {
+    -fx-background-color: #FF4040;
+    -fx-background-radius: 12;
+    -fx-font-size: 24;
+}
+
+#vbx_CartMovieRightVBox {
+    -fx-spacing: 5;
+}
+
+
+
+#igv_CartMovieImage {
+    -fx-effect: dropshadow(gaussian, #191919, 10, 0.5, 2, 0);
+}
+
+
+
+
+.btn_class_libraryAddMovieToCartButton {
+    -fx-background-color: #5C5C5C;
+    -fx-background-radius: 12;
+    -fx-border-color: #191919;
+    -fx-border-insets: -1;
+    -fx-border-width: 2;
+    -fx-border-radius: 12;
+}
+
+#pan_paneCartIconBackground {
+    -fx-background-color: #518E21;
+
+
+}
+
+#scp_Cart {
+    -fx-background: #191919;
+    -fx-border-color: #191919;
+}

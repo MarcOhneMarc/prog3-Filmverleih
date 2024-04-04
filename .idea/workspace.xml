@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartMovieStylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartStylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/libraryStylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/navbarStylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/rentalMovieStylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/settingsStylesheet.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_02_2024_22_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_17_02_2024_22_57__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Rental.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Cart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Cart.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,10 +58,7 @@
     &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;d94254d5-1e14-4bd8-b185-5d6cc26f59e7&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-
-    &quot;git-widget-placeholder&quot;: &quot;tick-22&quot;,
-
-
+    &quot;git-widget-placeholder&quot;: &quot;tick-90&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
@@ -93,7 +92,7 @@
   <component name="RunManager" selected="Application.MainApplication">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
-      <module name="JavaFX-Tutorial" />
+      <module name="Filmverleih" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
@@ -141,7 +140,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
       </set>
     </attachedChunks>
   </component>
@@ -159,6 +158,10 @@
       <workItem from="1710165832318" duration="786000" />
       <workItem from="1710173132642" duration="2214000" />
       <workItem from="1711131963034" duration="1015000" />
+      <workItem from="1711881537700" duration="2017000" />
+      <workItem from="1711989947525" duration="1318000" />
+      <workItem from="1712171351024" duration="4209000" />
+      <workItem from="1712246561390" duration="2482000" />
     </task>
     <task id="LOCAL-00001" summary="BUG-changed Navbar Search Test to Prompt (Suche...)">
       <option name="closed" value="true" />
@@ -296,6 +299,7 @@
     <MESSAGE value="FEAT-Suchalgorithmus Laufzeitoptimierung" />
     <MESSAGE value="FEAT-Kommentare" />
     <MESSAGE value="FEAT-updateMovieList" />
-    <option name="LAST_COMMIT_MESSAGE" value="FEAT-updateMovieList" />
+    <MESSAGE value="asdasd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
   </component>
 </project>
