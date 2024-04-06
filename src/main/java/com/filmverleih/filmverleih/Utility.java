@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
 import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.event.spi.EventSource;
+import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,10 +47,12 @@ public class Utility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
         }
         return new ArrayList<Movies>();
     }
@@ -81,17 +85,20 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
             return false;
         }
         return true;
     }
 
-    public Boolean DeleteMovieInDB(int movDelID) {
+    public static Boolean DeleteMovieInDB(int movDelID) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
@@ -103,34 +110,136 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
     }
 
-    public Boolean UpdateMovieInDB(int movUpID) {
+    /**
+     * Utility method to update a movie record in the database.
+     * @param movieid The ID of the movie to be updated.
+     * @param name The new name of the movie.
+     * @param year The new year of the movie.
+     * @param length The new length of the movie.
+     * @param fsk The new FSK rating of the movie.
+     * @param rating The new rating of the movie.
+     * @param genres The new genres of the movie.
+     * @param directors The new directors of the movie.
+     * @param count The new count of the movie.
+     * @param studio The new studio of the movie.
+     * @param actors The new actors of the movie.
+     * @param cover The new cover of the movie.
+     * @param comment The new comment of the movie.
+     * @param type The new type of the movie.
+     * @return True if the update was successful, false otherwise.
+     */
+    public static Boolean UpdateMovieInDB(int movieid,
+                                    String name,
+                                    int year,
+                                    int length,
+                                    int fsk,
+                                    BigDecimal rating,
+                                    String genres,
+                                    String directors,
+                                    int count,
+                                    String studio,
+                                    String actors,
+                                    String cover,
+                                    String comment,
+                                    String type) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
+                Query query = session.createQuery("UPDATE Movies SET name = :name" +
+                        ", year = :year" +
+                        ", length = :length" +
+                        ", fsk = :fsk" +
+                        ", rating = :rating" +
+                        ", genre = :genre" +
+                        ", directors = :directors" +
+                        ", count = :count" +
+                        ", studio = :studio" +
+                        ", actors = :actors" +
+                        ", cover = :cover" +
+                        ", comment = :comment" +
+                        ", type = :type" +
+                        " WHERE movieid = :movieid");
+
+                query.setParameter("name", name);
+                query.setParameter("year", year);
+                query.setParameter("length", length);
+                query.setParameter("fsk", fsk);
+                query.setParameter("rating", rating);
+                query.setParameter("genre", genres);
+                query.setParameter("directors", directors);
+                query.setParameter("count", count);
+                query.setParameter("studio", studio);
+                query.setParameter("actors", actors);
+                query.setParameter("cover", cover);
+                query.setParameter("comment", comment);
+                query.setParameter("type", type);
+                query.setParameter("movieid", movieid);
+
+                query.executeUpdate();
+
+                transaction.commit();
+
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
+                return false;
+            }
+        } catch (Exception e) {
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Utility method to retrieve a movie from the database by its ID.
+     * @param movieId The ID of the movie to retrieve.
+     * @return The movie object corresponding to the given ID, or null if no such movie is found.
+     */
+    public static Movies getMovieById(int movieId) {
+        Movies returnMovie = null;
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
 
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                //e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            //e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("old utility class");
+
         }
-        return true;
+        return returnMovie;
     }
     Movies getMovieByUrl(String url)
     {
@@ -183,10 +292,14 @@ public class Utility {
                 return users;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                //e.printStackTrace();
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("old utility class");
+
         }
         return  new ArrayList<Users>();
     }
@@ -206,10 +319,14 @@ public class Utility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                //e.printStackTrace();
+                LoggerUtility.logger.warn("old utility class");
+
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            LoggerUtility.logger.warn("old utility class");
+
         }
         return  new ArrayList<Customers>();
     }
@@ -262,13 +379,17 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("customer registration went wrong Code: 77621");
+                //e.printStackTrace(); // replace with logger
+                //System.out.println("customer registration went wrong Code: 77621");
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("customer registration went wrong Code: 77620");
+            //e.printStackTrace(); // replace with logger
+            //System.out.println("customer registration went wrong Code: 77620");
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -300,13 +421,17 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("Order went wrong Code: 77619");
+                //e.printStackTrace(); // replace with logger
+                //System.out.println("Order went wrong Code: 77619");
+                LoggerUtility.logger.warn("old utility class");
+
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("Order went wrong Code: 77618");
+            //e.printStackTrace(); // replace with logger
+            //System.out.println("Order went wrong Code: 77618");
+            LoggerUtility.logger.warn("old utility class");
+
             return false;
         }
         return true;
@@ -324,5 +449,77 @@ public class Utility {
             return 1;
         }
         return customersList.getLast().getCustomerid();
+    }
+   public Boolean deleteUserInDB(Users user){
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("DELETE FROM Users WHERE userid = " + user.getUserid()).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method adds a new user to the database
+     * @param user the user that will be added to the database
+     * @return
+     */
+    public Boolean addUserToDB(Users user) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.save(user);//add user to db
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param newPassword of the password
+     * @param userId of the user
+     * @return
+     */
+    public Boolean UpdateUserPasswordInDB(String newPassword, int userId) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+
+                session.createQuery("UPDATE Users SET password =" + "'" +newPassword+ "'" + " WHERE userid = " + userId).executeUpdate();
+
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return true;
     }
 }

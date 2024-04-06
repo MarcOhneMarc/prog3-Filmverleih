@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RentalsUtility {
@@ -37,16 +39,37 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("Order went wrong Code: 77619");
+                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact: 011");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("Order went wrong Code: 77618");
+            LoggerUtility.logger.warn("build session failed: 012");
             return false;
         }
         return true;
+    }
+
+    /**
+     * This method returns all rentals from db
+     * @return list of all rentals
+     */
+    public static List<Rentals> getAllRentedMovies() {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
+                transaction.commit();
+                return rentals;
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+        }
+        return new ArrayList<Rentals>();
     }
 
     /**
@@ -61,5 +84,60 @@ public class RentalsUtility {
             return 1;
         }
         return customersList.getLast().getCustomerid();
+    }
+
+
+    /**
+     * This method deletes a rental from db
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @return true if deleting was successful, false if not
+     */
+    public static boolean deleteRentalFromDB(int movieid, int customerid) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.createQuery("DELETE FROM Rentals WHERE movieid = " + movieid + " AND customerid = " + customerid).executeUpdate();
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * This method extends the rental
+     * @param movieid the id of the movie
+     * @param customerid the id of the customer
+     * @param enddate the end date of the rental
+     * @return true if extending was successful, false if not
+     */
+    public static boolean extendRentalinDB(int movieid, int customerid,  String enddate) {
+        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+             Session session = sessionFactory.openSession()) {
+            Transaction transaction = null;
+            try {
+                transaction = session.beginTransaction();
+                session.createQuery("UPDATE Rentals SET enddate = '" + enddate + "' WHERE movieid = " + movieid + " AND customerid = " + customerid).executeUpdate();
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) transaction.rollback();
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // replace with logger
+            return false;
+        }
+        return true;
     }
 }

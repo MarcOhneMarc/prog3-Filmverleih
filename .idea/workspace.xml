@@ -4,35 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="FEAT-Meeting final changes">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartMovieStylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartStylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/libraryStylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/navbarStylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/rentalMovieStylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/settingsStylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" afterDir="false" />
+
+    <list default="true" id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="asdasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Cart.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Cart.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="tick-59" />
+        <entry key="$PROJECT_DIR$" value="tick-78" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,10 +30,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="2dPMbY71TSTk8QRx0tkqEgiB8jF" />
+  <component name="ProjectId" id="2eKIgIacCBRIqJPH5E5reR2HJvr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -51,244 +38,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.MainApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SettingsApplication.executor&quot;: &quot;Run&quot;,
-    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;d94254d5-1e14-4bd8-b185-5d6cc26f59e7&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;tick-90&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/juk3b0x/Documents/BFD/3. Semester/Programmierung 3/workspace/prog3-Filmverleih/src/main/java/com/filmverleih/filmverleih&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Luka/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
-    ]
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.filmverleih.filmverleih" />
-    </key>
-    <key name="ImportMappingsDialog.RecentPackages">
-      <recent name="com.filmverleih.filmverleih.entity" />
-      <recent name="" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.MainApplication">
-    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
-      <module name="Filmverleih" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SettingsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.SettingsApplication" />
-      <module name="JavaFX-Tutorial" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.filmverleih.filmverleih.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.MainApplication" />
-        <item itemvalue="Application.SettingsApplication" />
-        <item itemvalue="Application.SettingsApplication" />
-        <item itemvalue="Application.MainApplication" />
-        <item itemvalue="Application.MainApplication" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
-      </set>
-    </attachedChunks>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d2ab7b60-5df4-4e55-9ed9-ec4ee4816fbb" name="Changes" comment="" />
-      <created>1709905334625</created>
+      <changelist id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="" />
+      <created>1711646955003</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1709905334625</updated>
-      <workItem from="1709905336159" duration="14656000" />
-      <workItem from="1710120482574" duration="323000" />
-      <workItem from="1710165751465" duration="59000" />
-      <workItem from="1710165832318" duration="786000" />
-      <workItem from="1710173132642" duration="2214000" />
-      <workItem from="1711131963034" duration="1015000" />
-      <workItem from="1711881537700" duration="2017000" />
-      <workItem from="1711989947525" duration="1318000" />
-      <workItem from="1712171351024" duration="4209000" />
-      <workItem from="1712246561390" duration="2482000" />
+
+      <updated>1711646955003</updated>
+
     </task>
-    <task id="LOCAL-00001" summary="BUG-changed Navbar Search Test to Prompt (Suche...)">
+    <task id="LOCAL-00001" summary="asdasd">
       <option name="closed" value="true" />
-      <created>1709905808228</created>
+      <created>1711647169542</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1709905808228</updated>
+      <updated>1711647169542</updated>
     </task>
-    <task id="LOCAL-00002" summary="BUG-loaded stylesheet in MainApplication start()-Method and set icon and title">
-      <option name="closed" value="true" />
-      <created>1709906647072</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1709906647072</updated>
-    </task>
-    <task id="LOCAL-00003" summary="FEAT-some SceneBuilding for Cart.fxml; committed interim results">
-      <option name="closed" value="true" />
-      <created>1709912737898</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1709912737898</updated>
-    </task>
-    <task id="LOCAL-00004" summary="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java">
-      <option name="closed" value="true" />
-      <created>1709916631169</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709916631169</updated>
-    </task>
-    <task id="LOCAL-00005" summary="FEAT-added some comments on CartController.java">
-      <option name="closed" value="true" />
-      <created>1709917455894</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1709917455894</updated>
-    </task>
-    <task id="LOCAL-00006" summary="FEAT-Meeting final changes">
-      <option name="closed" value="true" />
-      <created>1710175267906</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1710175267906</updated>
-    </task>
-    <task id="LOCAL-00007" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711196235558</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1711196235558</updated>
-    </task>
-    <task id="LOCAL-00008" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711198164076</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1711198164076</updated>
-    </task>
-    <task id="LOCAL-00009" summary="FEAT-sync">
-      <option name="closed" value="true" />
-      <created>1711319878137</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1711319878137</updated>
-    </task>
-    <task id="LOCAL-00010" summary="FEAT-Suchalgorithmus Laufzeitoptimierung">
-      <option name="closed" value="true" />
-      <created>1711369509933</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1711369509933</updated>
-    </task>
-    <task id="LOCAL-00011" summary="FEAT-Kommentare">
-      <option name="closed" value="true" />
-      <created>1711387234417</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1711387234417</updated>
-    </task>
-    <task id="LOCAL-00012" summary="FEAT-updateMovieList">
-      <option name="closed" value="true" />
-      <created>1711394077780</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1711394077780</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/tick-25" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
+
     <MESSAGE value="BUG-changed Navbar Search Test to Prompt (Suche...)" />
     <MESSAGE value="BUG-loaded stylesheet in MainApplication start()-Method and set icon and title" />
     <MESSAGE value="FEAT-some SceneBuilding for Cart.fxml; committed interim results" />
@@ -301,5 +81,13 @@
     <MESSAGE value="FEAT-updateMovieList" />
     <MESSAGE value="asdasd" />
     <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
+
+    <MESSAGE value="asdasd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+
   </component>
 </project>

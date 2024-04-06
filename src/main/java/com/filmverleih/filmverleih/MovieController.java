@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
@@ -16,15 +17,17 @@ import static java.lang.String.valueOf;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class MovieController {
-    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, Integer,Integer,Integer> connector;
+    NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector;
     /**
      * sets NWayControllerConnector as active connector for this controller, called from MainApplication
      * @param connector the controller passed by MainApplication
      */
-    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,Integer,Integer,Integer> connector) {
+    public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController,LoginController,EditMovieController,Integer> connector) {
+      
         this.connector = connector;
     }
 
@@ -59,6 +62,12 @@ public class MovieController {
     private Label lbl_idValueMovieScene;
     @FXML
     private Label lbl_countValueMovieScene;
+    @FXML
+    private Label lbl_feedbackMessageMovieScene;
+    @FXML
+    private Button btn_addToCartMovieScene;
+    @FXML
+    private ImageView igv_editMovieMovieScene;
 
     private Movies movie;
 
@@ -69,9 +78,16 @@ public class MovieController {
     public void fillPage(Movies movie)
     {
         this.movie = movie;
-        if(!movie.getCover().isEmpty()) {
-            igv_coverMovieScene.setImage(new Image(movie.getCover()));
+        String linkToCover = movie.getCover();
+        clearFeedbackMessage();
+        enableEditAndCartButtons();
+
+        if (MovieEntryValidator.linkToCoverIsValid(linkToCover) && !linkToCover.isEmpty()) {
+            igv_coverMovieScene.setImage(new Image(linkToCover));
+        } else {
+            igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
         }
+
         lbl_nameMovieScene.setText(movie.getName());
         lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
         if (movie.getName().length() > 40) {
@@ -109,6 +125,51 @@ public class MovieController {
 
         //if (!cover.isBlank()||!cover.isEmpty()) ivw_Cover.setImage(new Image(cover));
         //else ivw_Cover.setImage(new Image("file:com/filmverleih/filmverleih/icons/profil.png"));
+    }
+
+    /**
+     * This method sets feedback message with specified style.
+     *
+     * @param message The message to be displayed
+     * @param style The style to be applied to the message
+     */
+    public void feedbackMessage(String message, String style) {
+        lbl_feedbackMessageMovieScene.setVisible(true);
+        lbl_feedbackMessageMovieScene.setText(message);
+        lbl_feedbackMessageMovieScene.setStyle(style);
+    }
+
+    /**
+     * This method clears the feedback message.
+     */
+    public void clearFeedbackMessage(){
+        lbl_feedbackMessageMovieScene.setVisible(false);
+    }
+
+    /**
+     * This method disables edit and cart buttons.
+     */
+    public void disableEditAndCartButtons() {
+        btn_addToCartMovieScene.setDisable(true);
+        igv_editMovieMovieScene.setDisable(true);
+    }
+
+    /**
+     * This method enables edit and cart buttons.
+     */
+    public void enableEditAndCartButtons() {
+        btn_addToCartMovieScene.setDisable(false);
+        igv_editMovieMovieScene.setDisable(false);
+    }
+
+    /**
+     * This method sets the center of the main application border pane to the edit movie view,
+     * initializes the edit movie controller with the given movie, and displays the edit interface.
+     */
+    public void changeToEdit() {
+        EditMovieController editMovieController = connector.getEditMovieController();
+        MainApplication.borderPane.setCenter(editMovieController.getOuterPane());
+        editMovieController.initialize(movie);
     }
 
     /**

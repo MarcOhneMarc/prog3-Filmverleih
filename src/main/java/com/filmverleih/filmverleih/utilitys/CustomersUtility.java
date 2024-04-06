@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.entity.Movies;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,10 +26,10 @@ public class CustomersUtility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("getFullCostumerList went wrong, could not transact: 001");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed: 002");
         }
         return  new ArrayList<Customers>();
     }
@@ -81,15 +82,93 @@ public class CustomersUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-                System.out.println("customer registration went wrong Code: 77621");
+                LoggerUtility.logger.warn("customer registration went wrong, could not transact: 003");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-            System.out.println("customer registration went wrong Code: 77620");
+            LoggerUtility.logger.warn("build session failed: 004");
             return false;
         }
         return true;
+    }
+
+
+    /**
+     * This method gets a customer by its id
+     * @param id the id of the customer
+     * @return the customer with the id
+     */
+    public static Customers getCustomerById(int id)
+    {
+        Customers ret = new Customers();
+        for(Customers customer:getFullCustomerList())
+        {
+            if (customer.getCustomerid() == id) ret = customer;
+        }
+        return ret;
+    }
+
+    /**
+     * This method checks whether a certain email address is already in the db
+     * @param email the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateEmailInCustomer(String email) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getEmail().equals(email)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks whether a certain phone number is already in the db
+     * @param phone the email that will be checked
+     * @return true if email is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicatePhoneInCustomer(String phone) {
+        for(Customers customers:getFullCustomerList())
+        {
+            if (customers.getPhone().equals(phone)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks whether a certain customer db is already in the db
+     * @param id the id that will be checked
+     * @return true if id is duplicated, false if not (usable)
+     */
+    public static boolean checkDuplicateCustomerID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method gets a whole customer by its ID
+     * @param id the id of the wanted customer
+     * @return the customer that has the given ID, or null if not in db
+     */
+    public static Customers getCustomersByID(int id) {
+        for (Customers customers:getFullCustomerList()) {
+            if (customers.getCustomerid() == id) return customers;
+        }
+        return null;
+    }
+
+    /**
+     * This method returns the last added customer ID from the
+     * customer table by getting the id of the last element of the
+     * fullCustomersList();
+     * @return the last added customerID
+     */
+    public static int getLastAddedCustomerID() {
+        List<Customers> customersList = getFullCustomerList();
+        if (customersList.isEmpty()) {
+            return 1;
+        }
+        return customersList.getLast().getCustomerid();
     }
 }

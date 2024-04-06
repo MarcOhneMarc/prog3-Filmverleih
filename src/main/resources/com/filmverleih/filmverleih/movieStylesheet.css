@@ -21,10 +21,6 @@
     -fx-background-radius: 12;
 }
 
-#txa_commentMovieScene .content{
-    -fx-background-color: #191919;
-}
-
 #btn_addToCartMovieScene {
     -fx-background-color: #518E21;
     -fx-background-radius: 12;
@@ -41,4 +37,24 @@
 
 #hbx_genreMovieScene {
     -fx-spacing: 10;
+}
+
+#txa_commentMovieScene {
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+#txa_commentMovieScene:focused {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+#txa_commentMovieScene .content{
+    -fx-background-color: #191919;
+    -fx-background-radius: 0;
+}
+
+
+#lbl_feedbackMessageMovieScene {
+    -fx-font-size: 22;
 }

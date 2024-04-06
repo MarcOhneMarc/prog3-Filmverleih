@@ -7,9 +7,9 @@
 
 <AnchorPane fx:id="outerAnchorPane" prefHeight="990.0" prefWidth="1580.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.LibraryController">
     <children>
-        <ScrollPane fx:id="scrollPane" styleClass="backgroundLibrary" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ScrollPane fx:id="scp_libraryScrollPane" styleClass="backgroundLibrary" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <content>
-                <GridPane fx:id="gridPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundLibrary" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+                <GridPane fx:id="grp_libraryGrid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundLibrary" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
                <padding>
                   <Insets right="40.0" />
                </padding></GridPane>

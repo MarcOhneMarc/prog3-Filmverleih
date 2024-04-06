@@ -1,0 +1,90 @@
+#acp_EditMovieBackground {
+    -fx-background-color: #191919;
+}
+
+.txf_class_movieEdit {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+    -fx-font-size: 22;
+    -fx-text-fill: #FFFFFF;
+}
+
+#txa_movieEditComment .content{
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+#txa_movieEditComment {
+    -fx-font-size: 17;
+    -fx-background: #191919;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+#txa_movieEditComment .scroll-bar:vertical,
+#txa_movieEditComment .scroll-bar:vertical .track,
+#txa_movieEditComment .scroll-bar:vertical .track-background {
+    -fx-background-color: #191919;
+}
+
+#txa_movieEditComment .scroll-bar:vertical .thumb {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+#lbl_movieEditCaption {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 32;
+}
+
+.btn_class_movieEditButtons {
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 12;
+    -fx-font-size: 22;
+}
+
+#btn_confirmMovieEdit,
+#btn_movieEditDeleteCancel{
+    -fx-background-color: #518E21;
+}
+
+#btn_cancelMovieEdit,
+#btn_deleteMovieEdit,
+#btn_movieEditDeleteConfirm{
+    -fx-background-color: #FF4040;
+}
+
+#lbl_movieEditDeleteConfirmation {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 40;
+}
+
+#acp_movieEditDeleteConfirmation {
+    -fx-background-color: #393939;
+}
+
+#lbl_movieEditDeleteFeedback {
+    -fx-text-fill: #FF4040;
+    -fx-font-size: 16;
+}
+
+.lbl_class_movieEditTextFieldTitles {
+    -fx-text-fill: #949494;
+}
+
+#lbl_movieEditSaveFeedback {
+    -fx-font-size: 22;
+}
+
+#acp_movieEditConstraintInfo {
+    -fx-background-color: #393939;
+}
+
+.lbl_class_movieEditConstraintInfoTitle {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+.lbl_class_movieEditConstraintInfos {
+    -fx-text-fill: #FFF;
+}
