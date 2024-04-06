@@ -58,21 +58,3 @@
 #lbl_feedbackMessageMovieScene {
     -fx-font-size: 22;
 }
-
-.scroll-pane {
-    -fx-background: #191919;
-    -fx-border-color: #191919;
-    -fx-background-color: #191919;
-    -fx-focus-color: transparent;
-    -fx-text-box-border: transparent;
-}
-
-.scroll-pane .track,
-.scroll-pane .track-background {
-    -fx-background-color: #191919;
-}
-
-.scroll-pane .thumb {
-    -fx-background-color:  #949494;
-    -fx-background-radius: 12;
-}
