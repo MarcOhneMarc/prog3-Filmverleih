@@ -5,26 +5,8 @@
     -fx-text-fill: #FFF;
 }
 
-#txa_movieAddComment .content{
-    -fx-background-color: #949494;
-    -fx-background-radius: 12;
-}
 
-#txa_movieAddComment {
-    -fx-text-fill: #FFF;
-    -fx-font-size: 17;
-    -fx-background: #363636;
-    -fx-focus-color: transparent;
-    -fx-text-box-border: transparent;
-}
-
-#txa_movieAddComment .scroll-bar:vertical,
-#txa_movieAddComment .scroll-bar:vertical .track,
-#txa_movieAddComment .scroll-bar:vertical .track-background {
-    -fx-background-color: #363636;
-}
-
-#txa_movieAddComment .scroll-bar:vertical .thumb {
+.scroll-bar:vertical .thumb {
     -fx-background-color: #949494;
     -fx-background-radius: 12;
 }
@@ -81,4 +63,28 @@
 
 #acp_movieAddDeleteConfirmation {
     -fx-background-color: #191919;
+}
+
+#txa_movieAddComment .content{
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+#txa_movieAddComment {
+    -fx-text-fill: #FFF;
+    -fx-font-size: 17;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #393939;
+    -fx-background-color: #393939;
+    -fx-border-color: #393939;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:vertical .track,
+.scroll-bar:vertical .track-background {
+    -fx-background-color: #363636;
 }
