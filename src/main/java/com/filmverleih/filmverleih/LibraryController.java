@@ -220,7 +220,7 @@ public class LibraryController {
 
         Node node = null;
 
-        if (imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
+        if (!MovieEntryValidator.linkToCoverIsValid(imgUrl) || imgUrl.isEmpty())//imgUrl.isEmpty() || imgUrl.isBlank()) //If Movie has no img-URL create a Label instead
         {
             Label label = new Label(movie.getName());
             label.setWrapText(true); // Enable text wrapping

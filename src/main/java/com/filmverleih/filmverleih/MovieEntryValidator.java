@@ -1,5 +1,11 @@
 package com.filmverleih.filmverleih;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class MovieEntryValidator {
     /**
      * Checks if the given string is not empty.
@@ -83,6 +89,15 @@ public class MovieEntryValidator {
      * @return true if the link is valid or empty, otherwise false.
      */
     public static boolean linkToCoverIsValid(String linkToCover) {
-        return linkToCover.isEmpty() || linkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$");
+        try {
+            if (!linkToCover.isEmpty() && linkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
+                Image image = ImageIO.read(new URL(linkToCover));
+                return image != null;
+            } else return linkToCover.isEmpty();
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

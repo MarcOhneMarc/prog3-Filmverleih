@@ -17,6 +17,7 @@ import static java.lang.String.valueOf;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class MovieController {
@@ -77,11 +78,16 @@ public class MovieController {
     public void fillPage(Movies movie)
     {
         this.movie = movie;
+        String linkToCover = movie.getCover();
         clearFeedbackMessage();
         enableEditAndCartButtons();
-        if(!movie.getCover().isEmpty()) {
-            igv_coverMovieScene.setImage(new Image(movie.getCover()));
+
+        if (MovieEntryValidator.linkToCoverIsValid(linkToCover) && !linkToCover.isEmpty()) {
+            igv_coverMovieScene.setImage(new Image(linkToCover));
+        } else {
+            igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
         }
+
         lbl_nameMovieScene.setText(movie.getName());
         lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
         if (movie.getName().length() > 40) {

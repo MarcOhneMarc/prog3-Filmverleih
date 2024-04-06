@@ -166,7 +166,7 @@
                                     <Label fx:id="lbl_movieAddCaption" prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_movieAddCaptions" text="Film hinzufügen" />
                                     <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes1" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="14">
                                        <children>
-                                          <CheckBox fx:id="cbx_movieAddSelDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
+                                          <CheckBox fx:id="cbx_movieAddSelDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" selected="true" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
                                           <CheckBox fx:id="cbx_movieAddSelBluRay" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Blu-Ray" textFill="WHITE" />
                                        </children>
                                     </HBox>
