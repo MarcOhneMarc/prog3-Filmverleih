@@ -4,12 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" afterDir="false" />
+
     <list default="true" id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="asdasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +38,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -48,7 +52,9 @@
       <created>1711646955003</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+
       <updated>1711646955003</updated>
+
     </task>
     <task id="LOCAL-00001" summary="asdasd">
       <option name="closed" value="true" />
@@ -62,11 +68,26 @@
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+
+    <MESSAGE value="BUG-changed Navbar Search Test to Prompt (Suche...)" />
+    <MESSAGE value="BUG-loaded stylesheet in MainApplication start()-Method and set icon and title" />
+    <MESSAGE value="FEAT-some SceneBuilding for Cart.fxml; committed interim results" />
+    <MESSAGE value="FEAT-added CartController.java and Cart.fxml to NWayControllerConnector.java and every other Controller as well as NavbarController.java" />
+    <MESSAGE value="FEAT-added some comments on CartController.java" />
+    <MESSAGE value="FEAT-Meeting final changes" />
+    <MESSAGE value="FEAT-sync" />
+    <MESSAGE value="FEAT-Suchalgorithmus Laufzeitoptimierung" />
+    <MESSAGE value="FEAT-Kommentare" />
+    <MESSAGE value="FEAT-updateMovieList" />
+    <MESSAGE value="asdasd" />
+    <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
+
     <MESSAGE value="asdasd" />
     <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+
   </component>
 </project>
