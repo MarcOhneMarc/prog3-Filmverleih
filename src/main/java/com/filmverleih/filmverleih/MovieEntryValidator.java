@@ -88,10 +88,16 @@ public class MovieEntryValidator {
      * @param linkToCover The link to the cover to be checked.
      * @return true if the link is valid or empty, otherwise false.
      */
-    public static boolean linkToCoverIsValid(String linkToCover) throws IOException {
-        if (!linkToCover.isEmpty() && linkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
-            Image image = ImageIO.read(new URL(linkToCover));
-            return image != null;
-        } else return linkToCover.isEmpty();
+    public static boolean linkToCoverIsValid(String linkToCover) {
+        try {
+            if (!linkToCover.isEmpty() && linkToCover.matches("^(http://|https://)[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&/=]*((\\.jpg)|(\\.png)))$")) {
+                Image image = ImageIO.read(new URL(linkToCover));
+                return image != null;
+            } else return linkToCover.isEmpty();
+        } catch (MalformedURLException e) {
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
     }
 }

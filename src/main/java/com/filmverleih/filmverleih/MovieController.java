@@ -81,17 +81,13 @@ public class MovieController {
         String linkToCover = movie.getCover();
         clearFeedbackMessage();
         enableEditAndCartButtons();
-        try {
-            if (MovieEntryValidator.linkToCoverIsValid(linkToCover) && !linkToCover.isEmpty()) {
-                igv_coverMovieScene.setImage(new Image(linkToCover));
-            } else {
-                igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
-            }
-        } catch (MalformedURLException e) {
-            igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
-        } catch (IOException e) {
+
+        if (MovieEntryValidator.linkToCoverIsValid(linkToCover) && !linkToCover.isEmpty()) {
+            igv_coverMovieScene.setImage(new Image(linkToCover));
+        } else {
             igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
         }
+
         lbl_nameMovieScene.setText(movie.getName());
         lbl_nameMovieScene.setStyle("-fx-font-size: " + (100 - movie.getName().length()));
         if (movie.getName().length() > 40) {

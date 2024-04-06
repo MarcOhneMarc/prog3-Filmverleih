@@ -658,16 +658,10 @@ public class EditMovieController {
             entriesAreValid = false;
         }
 
-        try {
-            //LinkToCoverValidator
-            if (MovieEntryValidator.linkToCoverIsValid(txf_movieEditLinkToCover.getText())) {
-                lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
-            } else {
-                lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //LinkToCoverValidator
+        if (MovieEntryValidator.linkToCoverIsValid(txf_movieEditLinkToCover.getText())) {
+            lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
+        } else {
             lbl_movieEditLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         }

@@ -459,15 +459,9 @@ public class SettingsController {
         }
 
         //LinkToCoverValidator
-        try {
-            if (MovieEntryValidator.linkToCoverIsValid(txf_movieAddLinkToCover.getText())) {
-                lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
-            } else {
-                lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
-                entriesAreValid = false;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (MovieEntryValidator.linkToCoverIsValid(txf_movieAddLinkToCover.getText())) {
+            lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #949494");
+        } else {
             lbl_movieAddLinkToCoverTitle.setStyle("-fx-text-fill: #FF4040");
             entriesAreValid = false;
         }
