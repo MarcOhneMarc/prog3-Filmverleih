@@ -325,6 +325,7 @@ public class CartController {
                        setDuplicateRentalLabel(fullMovieList.get(i));
                    } else {
                        MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+                       connector.getLibraryController().updateMovieInLibrary(MoviesUtility.getMovieById(fullMovieList.get(i).getMovieid()));
 
                        vbx_CartMovieCardsVBox.getChildren().remove(i);
                        removeMovieFromCart(fullMovieList.get(i));
