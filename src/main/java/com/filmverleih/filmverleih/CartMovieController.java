@@ -64,6 +64,11 @@ public class CartMovieController {
         lbl_CartMovieCardFsk.setText("FSK " + movie.getFsk());
     }
 
+    /**
+     * This method sets the color of the FSK-Label to the according FSK rating,
+     * 0 = white, 6 = yellow, 12 = green, 16 = blue, 18 = red, default = grey
+     * @param movie the movie of which the fsk label colour will be set
+     */
     private void setFskLabelColour(Movies movie) {
         int fsk = movie.getFsk();
         switch (fsk) {
@@ -83,7 +88,7 @@ public class CartMovieController {
                 lbl_CartMovieCardFsk.setStyle("-fx-background-color: #FF4040");
                 break;
             default:
-
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #5C5C5C");
         }
     }
 
