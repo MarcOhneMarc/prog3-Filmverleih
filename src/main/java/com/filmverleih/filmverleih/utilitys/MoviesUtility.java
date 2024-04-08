@@ -291,4 +291,82 @@ public class MoviesUtility {
         return -1;
     }
 
+    /**
+     * This method increases the movie count of a certain movie
+     * for example when it is returned to the store
+     * @param id the movieID of the movie of which the count is increased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean increaseMovieCountByID(int id) {
+        int movieCount = getMovieCountByID(id);
+
+        if (movieCount != -1) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount + 1);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    e.printStackTrace(); // replace with logger
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } else {
+            System.out.println("MovieCount is -1 -> movie not found");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method decreases the movie count of a certain movie
+     * for example when it is rented
+     * @param id the movieID of the movie of which the count is decreased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean decreaseMovieCountByID(int id) {
+        int movieCount = getMovieCountByID(id);
+
+        if (movieCount != -1 && movieCount > 0) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount - 1);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    e.printStackTrace(); // replace with logger
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // replace with logger
+                return false;
+            }
+        } else {
+            System.out.println("MovieCount is -1 -> movie not found or count would be negative");
+            return false;
+        }
+        return true;
+    }
+
 }
