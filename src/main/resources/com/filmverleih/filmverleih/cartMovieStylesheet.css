@@ -9,7 +9,9 @@
 #lbl_CartMovieCardFsk {
     -fx-background-color: #518E21;
     -fx-font-size: 17;
-    -fx-text-fill: #FFFFFF;
+    /*-fx-text-fill: #FFFFFF;*/
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
 }
 
 

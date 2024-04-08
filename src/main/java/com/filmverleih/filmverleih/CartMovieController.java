@@ -56,11 +56,35 @@ public class CartMovieController {
         if(!imageUrl.isEmpty()) {
             igv_CartMovieImage.setImage(new Image(movie.getCover()));
         }
+        setFskLabelColour(movie);
         lbl_CartMovieTitle.setText(movie.getName());
         lbl_CartMovieRating.setText(movie.getRating() + "/10 ☆");
         lbl_CartMovieDuration.setText(movie.getLength() + " min");
         lbl_CartMovieYear.setText(valueOf(movie.getYear()));
         lbl_CartMovieCardFsk.setText("FSK " + movie.getFsk());
+    }
+
+    private void setFskLabelColour(Movies movie) {
+        int fsk = movie.getFsk();
+        switch (fsk) {
+            case 0:
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #FFFFFF");
+                break;
+            case 6:
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #FFFF3D");
+                break;
+            case 12:
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #518E21");
+                break;
+            case 16:
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #1CABD7");
+                break;
+            case 18:
+                lbl_CartMovieCardFsk.setStyle("-fx-background-color: #FF4040");
+                break;
+            default:
+
+        }
     }
 
     /**
