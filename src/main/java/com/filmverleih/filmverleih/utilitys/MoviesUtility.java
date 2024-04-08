@@ -278,4 +278,17 @@ public class MoviesUtility {
         return returnMovie;
     }
 
+    /**
+     * This method returns the movie count of a certain movie
+     * defined by its movieID
+     * @param id the id of the movie which count will be returned
+     * @return the count of the movie (how many are rentable)
+     */
+    public static int getMovieCountByID(int id) {
+        for(Movies movie:getFullMovieList()) {
+            if (movie.getMovieid() == id) return movie.getCount();
+        }
+        return -1;
+    }
+
 }
