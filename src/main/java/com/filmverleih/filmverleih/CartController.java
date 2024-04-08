@@ -3,24 +3,19 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -328,6 +323,8 @@ public class CartController {
                if (!addSuccessful) {
                     setDuplicateRentalLabel(fullMovieList.get(i));
                } else {
+                   MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+
                    vbx_CartMovieCardsVBox.getChildren().remove(i);
                    removeMovieFromCart(fullMovieList.get(i));
                    acp_customerInfoCard.setVisible(false);

@@ -310,6 +310,7 @@ public class MoviesUtility {
 
                     Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
                     query.setParameter("count", movieCount + 1);
+                    query.setParameter("movieid", id);
 
                     query.executeUpdate();
                     transaction.commit();
@@ -324,7 +325,7 @@ public class MoviesUtility {
                 return false;
             }
         } else {
-            System.out.println("MovieCount is -1 -> movie not found");
+            System.out.println("MovieCount is -1 -> movie not found"); // replace with logger
             return false;
         }
         return true;
@@ -333,11 +334,12 @@ public class MoviesUtility {
     /**
      * This method decreases the movie count of a certain movie
      * for example when it is rented
-     * @param id the movieID of the movie of which the count is decreased
+     * @param movie the movie of which the count is decreased
      * @return true if successful, false if unsuccessful
      */
-    public static Boolean decreaseMovieCountByID(int id) {
-        int movieCount = getMovieCountByID(id);
+    public static Boolean decreaseMovieCount(Movies movie) {
+        int movieCount = movie.getCount();
+        int movieID = movie.getMovieid();
 
         if (movieCount != -1 && movieCount > 0) {
 
@@ -349,6 +351,7 @@ public class MoviesUtility {
 
                     Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
                     query.setParameter("count", movieCount - 1);
+                    query.setParameter("movieid", movieID);
 
                     query.executeUpdate();
                     transaction.commit();
@@ -363,7 +366,7 @@ public class MoviesUtility {
                 return false;
             }
         } else {
-            System.out.println("MovieCount is -1 -> movie not found or count would be negative");
+            System.out.println("MovieCount is -1 -> movie not found or count would be negative"); // replace with logger
             return false;
         }
         return true;

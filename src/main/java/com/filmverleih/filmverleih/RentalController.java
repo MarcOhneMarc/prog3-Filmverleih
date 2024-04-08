@@ -294,6 +294,8 @@ public class RentalController {
      */
     public void removeFromRental(HBox hBox, Rentals rental) {
         if (RentalsUtility.deleteRentalFromDB(rental.getMovieid(), rental.getCustomerid())) {
+            MoviesUtility.increaseMovieCountByID(rental.getMovieid());
+
             grp_rentalGrid.getChildren().remove(hBox);
             adjustColumnCount();
         } else {
