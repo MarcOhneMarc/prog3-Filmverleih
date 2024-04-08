@@ -315,20 +315,26 @@ public class CartController {
 
        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
-               boolean addSuccessful = RentalsUtility.addRentalToDB(
-                       fullMovieList.get(i).getMovieid(),
-                       Integer.parseInt(txf_CartID.getText()),
-                       calculateCurrentDate().toString(),
-                       calculateReturnDate().toString());
-               if (!addSuccessful) {
-                    setDuplicateRentalLabel(fullMovieList.get(i));
-               } else {
-                   MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+               if (fullMovieList.get(i).getCount() > 0) {
+                   boolean addSuccessful = RentalsUtility.addRentalToDB(
+                           fullMovieList.get(i).getMovieid(),
+                           Integer.parseInt(txf_CartID.getText()),
+                           calculateCurrentDate().toString(),
+                           calculateReturnDate().toString());
+                   if (!addSuccessful) {
+                       setDuplicateRentalLabel(fullMovieList.get(i));
+                   } else {
+                       MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
 
-                   vbx_CartMovieCardsVBox.getChildren().remove(i);
-                   removeMovieFromCart(fullMovieList.get(i));
-                   acp_customerInfoCard.setVisible(false);
+                       vbx_CartMovieCardsVBox.getChildren().remove(i);
+                       removeMovieFromCart(fullMovieList.get(i));
+                       acp_customerInfoCard.setVisible(false);
+                   }
+               } else {
+                   lbl_errorDuplicateRentalMessage.setText("Es sind bereits alle Exemplare des Films " + fullMovieList.get(i).getName() + " ausgeliehen!");
+                   lbl_errorDuplicateRentalMessage.setVisible(true);
                }
+
            }
        }
        updateCart();
