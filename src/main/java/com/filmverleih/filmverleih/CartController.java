@@ -572,12 +572,11 @@ public class CartController {
     
     /**
      * Handles the pick of a date to be the returnDate, recalculates PRICES by movie releaseDate, updates pricelist and finalprice
-     * TODO: BUGFIX - when no date (or the date that is already locked in) is selected, the datePicker does not reset itself to the calendar icon
      */
     public void pickDate(){
-        calendarOpen = true;
-        btn_OrderCart.setDisable(true);
-        DatePicker datePicker = new DatePicker();
+        calendarOpen = true; // boolean to handle action when someone tries to escape calendar without pciking a date
+        btn_OrderCart.setDisable(true); // while calendar is open, cart cannot be finished/ordered
+        DatePicker datePicker = new DatePicker(); // creates a customized calendar with disabled sundays and past days
         Callback<DatePicker,DateCell> dayCellFactory = param -> new DateCell(){
             @Override
             public void updateItem(LocalDate item, boolean empty){
@@ -585,22 +584,22 @@ public class CartController {
                 if(item.isBefore(LocalDate.now().plusDays(1))|| item.getDayOfWeek()== DayOfWeek.SUNDAY) setDisable(true);
             }
         };
-        lbl_calendarDatePicker.setGraphic(datePicker);
-        datePicker.setOpacity(0);
+        lbl_calendarDatePicker.setGraphic(datePicker); //sets the Calendar to be displayed next to Icon
+        datePicker.setOpacity(0); //makes button and textfield invisible
         datePicker.setDayCellFactory(dayCellFactory);
         datePicker.show();
         datePicker.getEditor().setPrefSize(0,0);
-        EventHandler op = datePicker.getOnHidden();
+        EventHandler op = datePicker.getOnHidden(); //save the hiding behaviour of the calendar for later purpose
         datePicker.setOnHidden(e -> {
-            if (datePicker.getValue() == null) datePicker.show();
+            if (datePicker.getValue() == null) datePicker.show(); //overide hiding behaviour, if no date was picked
         });
         datePicker.setOnAction(e -> {
             LocalDate selectedfinal = datePicker.getValue();
-                datePicker.setOnHidden(op);
-                lbl_ReturnDateValue.setText(selectedfinal.toString());
+                datePicker.setOnHidden(op); //revert to normal behaviour when a vaid date has beeen picked
+                lbl_ReturnDateValue.setText(selectedfinal.toString()); //update returndate
                 datePicker.hide();
                 lbl_calendarDatePicker.setGraphic(ivw_calendar);
-                days = (int) (selectedfinal.toEpochDay() - LocalDate.now().toEpochDay());
+                days = (int) (selectedfinal.toEpochDay() - LocalDate.now().toEpochDay()); //get rental days
                 updateTotalPrice();
                 calendarOpen = false;
                 btn_OrderCart.setDisable(false);
