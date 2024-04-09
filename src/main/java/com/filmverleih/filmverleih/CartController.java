@@ -105,6 +105,8 @@ public class CartController {
     @FXML
     private Label lbl_errorEmptyCart;
     @FXML
+    private Label lbl_errorReturnDate;
+    @FXML
     private Button btn_checkID;
 
     //Registration PopUp FXML components
@@ -244,7 +246,7 @@ public class CartController {
      * @return local / current Date plus two weeks
      */
     private LocalDate calculateReturnDate() {
-        LocalDate returnDate = LocalDate.now().plusDays(1);
+        LocalDate returnDate = LocalDate.parse(lbl_ReturnDateValue.getText());
         return returnDate;
     }
 
@@ -258,14 +260,17 @@ public class CartController {
     private void setOrderInformationLabels() {
         updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
-        lbl_ReturnDateValue.setText(calculateReturnDate().toString());
-
+        lbl_ReturnDateValue.setText(calculateCurrentDate().plusDays(5).toString());
         lbl_DateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_ReturnDateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_calendarDatePicker.setOnMouseClicked(e -> {
             pickDate();
         });
         updateTotalPrice();
+        if (calculateReturnDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
+            lbl_errorReturnDate.setVisible(true);
+            btn_OrderCart.setDisable(true);
+        }
     }
 
     /**
@@ -522,6 +527,7 @@ public class CartController {
         } else {
             setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
             acp_customerInfoCard.setVisible(true);
+            updateCart();
         }
     }
 
@@ -598,6 +604,7 @@ public class CartController {
                 updateTotalPrice();
                 calendarOpen = false;
                 btn_OrderCart.setDisable(false);
+                lbl_errorReturnDate.setVisible(false);
         });
     }
   

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stp_cartOuterStackPane" prefHeight="990.0" prefWidth="1920" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
+<StackPane fx:id="stp_cartOuterStackPane" prefHeight="990.0" prefWidth="1920" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.CartController">
    <AnchorPane fx:id="acp_CartBackground" prefHeight="990.0" prefWidth="1920.0" stylesheets="@customerPopUpStylesheet.css">
       <children>
          <HBox fx:id="hbx_CartMainHBox" alignment="CENTER" layoutX="500.0" layoutY="20.0" prefHeight="990.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="0.0">
@@ -98,7 +98,7 @@
                                  <String fx:value="lbl_class_HBoxRight" />
                               </styleClass>
                            </Label>
-                           <Label fx:id="lbl_calendarDatePicker" stylesheets="@calendarStylesheet.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#pickDate" prefHeight="30.0" prefWidth="30.0" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                           <Label fx:id="lbl_calendarDatePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#pickDate" prefHeight="30.0" prefWidth="30.0" stylesheets="@calendarStylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                               <graphic>
                                  <ImageView fx:id="ivw_calendar" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -116,6 +116,7 @@
                      </Button>
                      <Label fx:id="lbl_errorEmptyCart" text="Der Einkaufswagen ist leer!" textFill="#ff4040" visible="false" />
                      <Label fx:id="lbl_errorDuplicateRentalMessage" text="Error: duplicated rental" textFill="#ff4040" visible="false" />
+                     <Label fx:id="lbl_errorReturnDate" text="Rückgabedatum ungültig" textFill="#ff4040" visible="false" />
                   </children>
                   <HBox.margin>
                      <Insets />
