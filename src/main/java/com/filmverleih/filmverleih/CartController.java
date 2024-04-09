@@ -5,9 +5,13 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -53,7 +57,8 @@ public class CartController {
     private static final double FIXED_PRICE_NEW = 2.50;
     private int days = 0;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    private DatePicker datePicker = new DatePicker();
+    private boolean calendarOpen = false;
+
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
@@ -317,7 +322,7 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
-
+       if (calendarOpen) return;
        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
                boolean addSuccessful = RentalsUtility.addRentalToDB(
@@ -564,6 +569,9 @@ public class CartController {
      * TODO: BUGFIX - when no date (or the date that is already locked in) is selected, the datePicker does not reset itself to the calendar icon
      */
     public void pickDate(){
+        calendarOpen = true;
+        btn_OrderCart.setDisable(true);
+        DatePicker datePicker = new DatePicker();
         Callback<DatePicker,DateCell> dayCellFactory = param -> new DateCell(){
             @Override
             public void updateItem(LocalDate item, boolean empty){
@@ -572,20 +580,25 @@ public class CartController {
             }
         };
         lbl_calendarDatePicker.setGraphic(datePicker);
+        datePicker.setOpacity(0);
         datePicker.setDayCellFactory(dayCellFactory);
         datePicker.show();
-        datePicker.getEditor().setManaged(false);
-        datePicker.getEditor().setVisible(false);
         datePicker.getEditor().setPrefSize(0,0);
-        datePicker.setOnAction(e -> {
-            LocalDate selected = datePicker.getValue();
-            lbl_ReturnDateValue.setText(selected.toString());
-            datePicker.hide();
-            lbl_calendarDatePicker.setGraphic(ivw_calendar);
-            days = (int) (selected.toEpochDay()-LocalDate.now().toEpochDay());
-            updateTotalPrice();
+        EventHandler op = datePicker.getOnHidden();
+        datePicker.setOnHidden(e -> {
+            if (datePicker.getValue() == null) datePicker.show();
         });
-
+        datePicker.setOnAction(e -> {
+            LocalDate selectedfinal = datePicker.getValue();
+                datePicker.setOnHidden(op);
+                lbl_ReturnDateValue.setText(selectedfinal.toString());
+                datePicker.hide();
+                lbl_calendarDatePicker.setGraphic(ivw_calendar);
+                days = (int) (selectedfinal.toEpochDay() - LocalDate.now().toEpochDay());
+                updateTotalPrice();
+                calendarOpen = false;
+                btn_OrderCart.setDisable(false);
+        });
     }
   
     /**
