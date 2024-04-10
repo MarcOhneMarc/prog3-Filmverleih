@@ -325,6 +325,7 @@ public class CartController {
                        setDuplicateRentalLabel(fullMovieList.get(i));
                    } else {
                        MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+                       LoggerUtility.logger.info("Rented: " + fullMovieList.get(i).getName());
                        connector.getLibraryController().updateMovieInLibrary(MoviesUtility.getMovieById(fullMovieList.get(i).getMovieid()));
 
                        vbx_CartMovieCardsVBox.getChildren().remove(i);
@@ -332,6 +333,7 @@ public class CartController {
                        acp_customerInfoCard.setVisible(false);
                    }
                } else {
+                   LoggerUtility.logger.warn("All copies of the movie " + fullMovieList.get(i).getName() + "are currently rented; renting not possible");
                    lbl_errorDuplicateRentalMessage.setText("Es sind bereits alle Exemplare des Films " + fullMovieList.get(i).getName() + " ausgeliehen!");
                    lbl_errorDuplicateRentalMessage.setVisible(true);
                }

@@ -317,15 +317,15 @@ public class MoviesUtility {
 
                 } catch (Exception e) {
                     if (transaction != null) transaction.rollback();
-                    e.printStackTrace(); // replace with logger
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
                     return false;
                 }
             } catch (Exception e) {
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("build session failed (increasing movie count");
                 return false;
             }
         } else {
-            System.out.println("MovieCount is -1 -> movie not found"); // replace with logger
+            LoggerUtility.logger.warn("Movie not found; ID: " + id);
             return false;
         }
         return true;
@@ -358,15 +358,15 @@ public class MoviesUtility {
 
                 } catch (Exception e) {
                     if (transaction != null) transaction.rollback();
-                    e.printStackTrace(); // replace with logger
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
                     return false;
                 }
             } catch (Exception e) {
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("build session failed (decreasing movie count");
                 return false;
             }
         } else {
-            System.out.println("MovieCount is -1 -> movie not found or count would be negative"); // replace with logger
+            LoggerUtility.logger.warn("Movie not found or not enough copies available for rental: " + movie.getName());
             return false;
         }
         return true;
