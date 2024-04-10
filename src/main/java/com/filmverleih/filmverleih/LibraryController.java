@@ -65,7 +65,7 @@ public class LibraryController {
 
     private CartController cartController;
     private double windowWidth;
-    public Predicate<Movies> predicate;
+    public Predicate<Movies> predicate = movie -> true;
     public Comparator<Movies> comparator;
 
     /**
