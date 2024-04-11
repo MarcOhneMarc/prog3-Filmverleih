@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
@@ -308,8 +309,8 @@ public class EditMovieController {
         txf_movieEditLinkToCover.setText(currentLinkToCover);
         txa_movieEditComment.setText(currentMovieComment);
         txa_movieEditComment.setWrapText(true);
-        if(currentMovieType.equals("DVD")) {cbx_movieEditSelDVD.setSelected(true);}
-        if(currentMovieType.equals("BR")) {cbx_movieEditSelBluRay.setSelected(true);}
+        if(currentMovieType.equals("DVD")) {cbx_movieEditSelDVD.setSelected(true); cbx_movieEditSelBluRay.setSelected(false);}
+        if(currentMovieType.equals("BR")) {cbx_movieEditSelBluRay.setSelected(true); cbx_movieEditSelDVD.setSelected(false);}
     }
 
     /**
@@ -519,7 +520,8 @@ public class EditMovieController {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_SUCCESSFUL);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #518E21");
                 lbl_movieEditSaveFeedback.setVisible(true);
-                connector.getLibraryController().updateMovieList();
+                this.movie = MoviesUtility.getMovieById(currentMovieId);
+                connector.getLibraryController().updateMovieInLibrary(this.movie);
             } else {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
@@ -724,7 +726,7 @@ public class EditMovieController {
     public void cancelMovieEdit() {
         MovieController movieController = connector.getMovieController();
         MainApplication.borderPane.setCenter(movieController.getOuterPane());
-        movieController.fillPage(MoviesUtility.getMovieById(movie.getMovieid()));
+        movieController.fillPage(this.movie);
     }
 
     /**
@@ -740,8 +742,9 @@ public class EditMovieController {
             MovieController movieController = connector.getMovieController();
             movieController.feedbackMessage(MOVIE_DELETE_SUCCESSFUL, "-fx-text-fill: #FF4040");
             movieController.disableEditAndCartButtons();
+            enableEditNodes();
             MainApplication.borderPane.setCenter(movieController.getOuterPane());
-            connector.getLibraryController().updateMovieList();
+            connector.getLibraryController().removeMovieFromLibrary(currentMovieId);
         } else {
             lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieEditDeleteFeedback.setVisible(true);

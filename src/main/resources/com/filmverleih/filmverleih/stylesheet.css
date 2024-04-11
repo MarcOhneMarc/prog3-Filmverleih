@@ -1,3 +1,23 @@
+.scroll-pane{
+    -fx-background: #191919;
+    -fx-background-color: #191919;
+    -fx-border-color: #191919;
+    -fx-focus-color: transparent;
+    -fx-text-box-border: transparent;
+}
+
+.scroll-pane,
+.scroll-pane .track,
+.scroll-pane .track-background {
+    -fx-background-color: #191919;
+}
+
+.scroll-pane .thumb {
+    -fx-background-color: #949494;
+    -fx-background-radius: 12;
+}
+
+
 .button{
     -fx-cursor: hand;
     -fx-background-color: #FFFF3D;
@@ -212,6 +232,8 @@
 
 #anchorPane {
     -fx-background-image:url("cinema.png");
+    /*-fx-background-repeat: no-repeat;
+    -fx-background-size: cover;*/
 }
 
 #vbx_movieParamGrid {
@@ -475,7 +497,7 @@
 }
 
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: black;
+    -fx-background-color: #191919;
 }
 
 .tab-pane {
@@ -508,5 +530,3 @@
     -fx-background-color: #8520EA;
     -fx-background-radius: 4, 4, 4, 4;
 }
-
-

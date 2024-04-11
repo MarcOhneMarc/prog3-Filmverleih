@@ -5,7 +5,21 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane fx:id="bpn_borderPaneMovieScene" prefHeight="990.0" prefWidth="1920.0" stylesheets="@movieStylesheet.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.MovieController">
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
@@ -15,7 +29,11 @@
                         <ImageView fx:id="igv_coverMovieScene" fitHeight="450.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
                         <VBox maxHeight="450.0" prefHeight="200.0" prefWidth="680.0">
                             <children>
-                                <Label fx:id="lbl_nameMovieScene" text="Label" />
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" vbarPolicy="NEVER">
+                           <content>
+                                      <Label fx:id="lbl_nameMovieScene" text="Label" />
+                           </content>
+                        </ScrollPane>
                         <GridPane>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,7 +52,7 @@
                                 <HBox fx:id="hbx_yearFskDurationMovieScene" prefHeight="40.0" prefWidth="200.0" />
                                 <GridPane>
                                     <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="80.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     </columnConstraints>
                                     <rowConstraints>
@@ -46,12 +64,12 @@
                                         <Label styleClass="lbl_class_movieSceneLabels" text="Schauspieler:" GridPane.rowIndex="1" />
                               <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                  <content>
-                                              <Label fx:id="lbl_directorsMovieScene" alignment="TOP_LEFT" maxHeight="100.0" maxWidth="300.0" styleClass="lbl_class_movieSceneLabels" text="Label" wrapText="true" />
+                                              <Label fx:id="lbl_directorsMovieScene" alignment="TOP_LEFT" maxWidth="350.0" styleClass="lbl_class_movieSceneLabels" text="Label" wrapText="true" />
                                  </content>
                               </ScrollPane>
                               <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <content>
-                                              <Label fx:id="lbl_actorsMovieScene" alignment="TOP_LEFT" maxHeight="200.0" maxWidth="300.0" styleClass="lbl_class_movieSceneLabels" text="Label" wrapText="true" />
+                                              <Label fx:id="lbl_actorsMovieScene" alignment="TOP_LEFT" maxWidth="350.0" styleClass="lbl_class_movieSceneLabels" text="Label" wrapText="true" />
                                  </content>
                               </ScrollPane>
                                     </children>
@@ -60,10 +78,14 @@
                         </VBox>
                     </children>
                 </HBox>
-                <HBox maxWidth="900.0" prefHeight="40.0" prefWidth="900.0">
+                <HBox alignment="CENTER_LEFT" maxWidth="900.0" minHeight="60.0" prefHeight="75.0" prefWidth="900.0">
                     <children>
                         <Label fx:id="lbl_ratingMovieScene" minWidth="125.0" prefWidth="150.0" styleClass="lbl_class_movieSceneLabels" text="Label" />
-                        <HBox fx:id="hbx_genreMovieScene" prefHeight="100.0" prefWidth="800.0" />
+                  <ScrollPane prefHeight="60.0" prefWidth="800.0" vbarPolicy="NEVER">
+                     <content>
+                              <HBox fx:id="hbx_genreMovieScene" alignment="CENTER_LEFT" prefHeight="50.0" />
+                     </content>
+                  </ScrollPane>
                     </children>
                 </HBox>
             <TextArea fx:id="txa_commentMovieScene" editable="false" maxWidth="900.0" prefWidth="900.0" styleClass="lbl_class_movieSceneLabels" />
@@ -125,4 +147,8 @@
          </children>
       </GridPane>
    </bottom>
+   <stylesheets>
+      <URL value="@stylesheet.css" />
+      <URL value="@movieStylesheet.css" />
+   </stylesheets>
 </BorderPane>

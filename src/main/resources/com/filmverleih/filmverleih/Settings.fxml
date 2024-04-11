@@ -26,7 +26,7 @@
 
 <!--Why bib_textfield as styleclass, shouldn't it be txt_class_bibTextFields???-->
 
-<TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" stylesheets="@stylesheet.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
+<TabPane id="tab" fx:id="tbp_settingsTabView" prefHeight="990.0" prefWidth="1920.0" styleClass="tbp_settingsTabView" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.SettingsController">
     <tabs>
       <Tab fx:id="tbs_profileTab" text="Mein Profil">
          <content>
@@ -109,7 +109,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="919.0" prefWidth="1920.0" styleClass="anp_class_settingTabs">
                <children>
-                  <StackPane prefHeight="919.0" prefWidth="1920.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <StackPane prefHeight="919.0" prefWidth="1920.0" stylesheets="@movieAddStylesheet.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane fx:id="acp_movieAddNodes" prefHeight="200.0" prefWidth="200.0">
                            <children>
@@ -166,7 +166,7 @@
                                     <Label fx:id="lbl_movieAddCaption" prefHeight="54.0" prefWidth="241.0" styleClass="lbl_class_movieAddCaptions" text="Film hinzufügen" />
                                     <HBox fx:id="hbx_dvdOrBlueRayCheckBoxes1" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="14">
                                        <children>
-                                          <CheckBox fx:id="cbx_movieAddSelDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
+                                          <CheckBox fx:id="cbx_movieAddSelDVD" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" selected="true" styleClass="bib-checkbox" text="DVD" textFill="WHITE" />
                                           <CheckBox fx:id="cbx_movieAddSelBluRay" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" styleClass="bib-checkbox" text="Blu-Ray" textFill="WHITE" />
                                        </children>
                                     </HBox>
@@ -262,7 +262,7 @@
                                        </GridPane.margin>
                                     </Label>
                                     <Label fx:id="lbl_movieAddSaveFeedback" alignment="TOP_LEFT" maxWidth="650.0" text="Label" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="15" GridPane.rowSpan="2" GridPane.valignment="TOP" />
-                                    <TextArea fx:id="txa_movieAddComment" prefHeight="51.0" prefWidth="410.0" promptText="Comment" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7" />
+                                    <TextArea fx:id="txa_movieAddComment" prefHeight="51.0" prefWidth="410.0" promptText="Comment" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="7" />
                                     <ImageView fx:id="igv_movieAddConstraintInfoButton" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#constraintInfoButtonClick" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="12">
                                        <image>
                                           <Image url="@Questionmark-Icon.png" />
@@ -342,10 +342,6 @@
                             </styleClass>
                         </Button>
                </children>
-               <stylesheets>
-                  <URL value="@stylesheet.css" />
-                  <URL value="@movieAddStylesheet.css" />
-               </stylesheets>
                 </AnchorPane>
             </content>
         </Tab>
@@ -434,4 +430,8 @@
           </content>
        </Tab>
     </tabs>
+   <stylesheets>
+      <URL value="@stylesheet.css" />
+      <URL value="@movieAddStylesheet.css" />
+   </stylesheets>
 </TabPane>
