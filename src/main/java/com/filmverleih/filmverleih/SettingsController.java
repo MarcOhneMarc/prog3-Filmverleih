@@ -7,6 +7,7 @@ import com.filmverleih.filmverleih.utilitys.UserUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
+import jakarta.persistence.NoResultException;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -166,6 +167,7 @@ public class SettingsController {
 
     private final String MOVIE_DELETE_SUCCESSFUL = "Der Film wurde erfolgreich entfernt.";
     private final String MOVIE_DELETE_FAILED = "Es ist etwas schiefgelaufen! Versuchen Sie es bitte erneut.";
+    private final String MOVIE_DOES_NOT_EXIST = "Der angegebene Film existiert nicht.";
     private final String MOVIE_SAVE_SUCCESSFUL = "Die Daten wurden erfolgreich gespeichert.";
     private final String MOVIE_SAVE_FAILED = "Manche Textfelder stimmen nicht mit den Anforderungen überein. " +
             "Die Titel dieser wurden rot markiert.";
@@ -525,19 +527,21 @@ public class SettingsController {
      * If the deletion fails, it displays an error message and disables the delete confirmation button.
      */
     public void deleteMovie() {
-        MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
-        LoggerUtility.logger.info("delete movie button was clicked: 023");
         //Utility utility = new Utility();
         //utility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId.getText()));
         boolean movieIsDeleted;
         try {
             movieIsDeleted = MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
+            LoggerUtility.logger.info("delete movie button was clicked: 023");
         } catch (NumberFormatException e) {
             movieIsDeleted = false;
         }
         if (movieIsDeleted) {
+            connector.getLibraryController().removeMovieFromLibrary(Integer.parseInt(txf_deleteMovieId1.getText()));
             lbl_movieAddDeleteFeedback.setText(MOVIE_DELETE_SUCCESSFUL);
             lbl_movieAddDeleteFeedback.setStyle("-fx-text-fill: #FF4040");
+            lbl_movieAddDeleteFeedback.setVisible(true);
+            btn_movieAddDeleteConfirm.setDisable(true);
         } else {
             lbl_movieAddDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieAddDeleteFeedback.setVisible(true);
@@ -566,8 +570,8 @@ public class SettingsController {
         lbl_movieAddCountTitle.setStyle("-fx-text-fill: #949494");
         lbl_movieAddActorsTitle.setStyle("-fx-text-fill: #949494");
         lbl_movieAddDeleteFeedback.setVisible(false);
-        lbl_movieAddSaveFeedback.setVisible(false);
         btn_movieAddDeleteConfirm.setDisable(false);
+        lbl_movieAddSaveFeedback.setVisible(false);
         enableAddNodes();
         disableDeleteConfirmation();
         disableMovieConstraintInfo();
@@ -601,8 +605,8 @@ public class SettingsController {
      * This method disables the nodes related to adding and enables the delete confirmation.
      */
     public void openDeleteConfirmation() {
-        if (txf_deleteMovieId1 != null) {
-            if (!txf_deleteMovieId1.getText().isEmpty()) {
+        if (txf_deleteMovieId1.getText() != null) {
+            if (!txf_deleteMovieId1.getText().isEmpty() && MoviesUtility.getMovieById(Integer.parseInt(txf_deleteMovieId1.getText())) != null) {
                 lbl_movieAddDeleteIdFeedback.setVisible(false);
                 disableAddNodes();
                 enableDeleteConfirmation();
@@ -632,7 +636,7 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(1);
         acp_movieAddNodes.setDisable(false);
         tbs_mitarbeiterTab.setDisable(false);
-        //connector.getNavbarController().enableNavBar(); TODO
+        //connector.getNavbarController().enableNavBar(); //TODO
     }
 
     /**
@@ -644,7 +648,7 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(0.3);
         acp_movieAddNodes.setDisable(true);
         tbs_mitarbeiterTab.setDisable(true);
-        //connector.getNavbarController().disableNavBar(); TODO
+        //connector.getNavbarController().disableNavBar(); //TODO
     }
 
     /**

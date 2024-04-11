@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import jakarta.persistence.NoResultException;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -268,6 +269,8 @@ public class MoviesUtility {
                 returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
 
                 transaction.commit();
+            } catch (NoResultException e) {
+                return null;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
                 e.printStackTrace(); // replace with logger
