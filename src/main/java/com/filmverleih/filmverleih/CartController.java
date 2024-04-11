@@ -258,9 +258,7 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
-        updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
-        lbl_ReturnDateValue.setText(calculateCurrentDate().plusDays(5).toString());
         lbl_DateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_ReturnDateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_calendarDatePicker.setOnMouseClicked(e -> {
@@ -602,7 +600,7 @@ public class CartController {
                 days = (int) (selectedfinal.toEpochDay() - LocalDate.now().toEpochDay()); //get rental days
                 updateTotalPrice();
                 calendarOpen = false;
-                btn_OrderCart.setDisable(false);
+                checkWhetherToEnableOrderButton();
                 lbl_errorReturnDate.setVisible(false);
         });
     }
@@ -629,7 +627,7 @@ public class CartController {
      * This method checks whether the order button can be disabled or enabled
      */
     private void checkWhetherToEnableOrderButton() {
-        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty();
+        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty() || calendarOpen;
 
         btn_OrderCart.setDisable(anyWrong);
     }
@@ -642,6 +640,7 @@ public class CartController {
     @FXML
     private void initialize() {
         setLastAddedCustomerID();
+        lbl_ReturnDateValue.setText(calculateCurrentDate().plusDays(1).toString());
         updateCart();
         btn_checkID.setDisable(true);
         btn_OrderCart.setDisable(true);
