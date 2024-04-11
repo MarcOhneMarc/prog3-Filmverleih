@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.beans.property.ObjectProperty;
@@ -14,17 +15,12 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -328,18 +324,29 @@ public class CartController {
        if (calendarOpen) return;
        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
-               boolean addSuccessful = RentalsUtility.addRentalToDB(
-                       fullMovieList.get(i).getMovieid(),
-                       Integer.parseInt(txf_CartID.getText()),
-                       calculateCurrentDate().toString(),
-                       calculateReturnDate().toString());
-               if (!addSuccessful) {
-                    setDuplicateRentalLabel(fullMovieList.get(i));
+               if (fullMovieList.get(i).getCount() > 0) {
+                   boolean addSuccessful = RentalsUtility.addRentalToDB(
+                           fullMovieList.get(i).getMovieid(),
+                           Integer.parseInt(txf_CartID.getText()),
+                           calculateCurrentDate().toString(),
+                           calculateReturnDate().toString());
+                   if (!addSuccessful) {
+                       setDuplicateRentalLabel(fullMovieList.get(i));
+                   } else {
+                       MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+                       LoggerUtility.logger.info("Rented: " + fullMovieList.get(i).getName());
+                       connector.getLibraryController().updateMovieInLibrary(MoviesUtility.getMovieById(fullMovieList.get(i).getMovieid()));
+
+                       vbx_CartMovieCardsVBox.getChildren().remove(i);
+                       removeMovieFromCart(fullMovieList.get(i));
+                       acp_customerInfoCard.setVisible(false);
+                   }
                } else {
-                   vbx_CartMovieCardsVBox.getChildren().remove(i);
-                   removeMovieFromCart(fullMovieList.get(i));
-                   acp_customerInfoCard.setVisible(false);
+                   LoggerUtility.logger.warn("All copies of the movie " + fullMovieList.get(i).getName() + " are currently rented; renting not possible");
+                   lbl_errorDuplicateRentalMessage.setText("Es sind bereits alle Exemplare des Films " + fullMovieList.get(i).getName() + " ausgeliehen!");
+                   lbl_errorDuplicateRentalMessage.setVisible(true);
                }
+
            }
        }
        updateCart();

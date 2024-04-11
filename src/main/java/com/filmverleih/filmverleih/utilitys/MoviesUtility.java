@@ -278,4 +278,98 @@ public class MoviesUtility {
         return returnMovie;
     }
 
+    /**
+     * This method returns the movie count of a certain movie
+     * defined by its movieID
+     * @param id the id of the movie which count will be returned
+     * @return the count of the movie (how many are rentable)
+     */
+    public static int getMovieCountByID(int id) {
+        for(Movies movie:getFullMovieList()) {
+            if (movie.getMovieid() == id) return movie.getCount();
+        }
+        return -1;
+    }
+
+    /**
+     * This method increases the movie count of a certain movie
+     * for example when it is returned to the store
+     * @param id the movieID of the movie of which the count is increased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean increaseMovieCountByID(int id) {
+        int movieCount = getMovieCountByID(id);
+
+        if (movieCount != -1) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount + 1);
+                    query.setParameter("movieid", id);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
+                    return false;
+                }
+            } catch (Exception e) {
+                LoggerUtility.logger.warn("build session failed (increasing movie count");
+                return false;
+            }
+        } else {
+            LoggerUtility.logger.warn("Movie not found; ID: " + id);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method decreases the movie count of a certain movie
+     * for example when it is rented
+     * @param movie the movie of which the count is decreased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean decreaseMovieCount(Movies movie) {
+        int movieCount = movie.getCount();
+        int movieID = movie.getMovieid();
+
+        if (movieCount != -1 && movieCount > 0) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount - 1);
+                    query.setParameter("movieid", movieID);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
+                    return false;
+                }
+            } catch (Exception e) {
+                LoggerUtility.logger.warn("build session failed (decreasing movie count");
+                return false;
+            }
+        } else {
+            LoggerUtility.logger.warn("Movie not found or not enough copies available for rental: " + movie.getName());
+            return false;
+        }
+        return true;
+    }
+
 }
