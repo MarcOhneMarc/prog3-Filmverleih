@@ -158,20 +158,7 @@ public class MovieController {
      * initializes the edit movie controller with the given movie, and displays the edit interface.
      */
     public void changeToEdit() {
-        if (connector.getLoginController().getLoggedUser().getIsadmin() == false){
-            bpn_borderPaneMovieScene.setDisable(true);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            DialogPane dialogPane = alert.getDialogPane();
-            dialogPane.getStylesheets().add(
-                    getClass().getResource("DialogAndAlertStylesheet.css").toExternalForm());
-            dialogPane.getStyleClass().add("dialog-pane");
-            alert.setTitle("Fehlende Berechtigung");
-            alert.setHeaderText("Sie können keine Filme bearbeiten oder löschen, wenden Sie sich an einen Administrator!");
-            if(alert.showAndWait().get() == ButtonType.OK) {
-                bpn_borderPaneMovieScene.setDisable(false);
-            }
-            return;
-        }
+        bpn_borderPaneMovieScene.setDisable(false);
         EditMovieController editMovieController = connector.getEditMovieController();
         MainApplication.borderPane.setCenter(editMovieController.getOuterPane());
         editMovieController.initialize(movie);
