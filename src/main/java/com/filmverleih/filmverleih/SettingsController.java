@@ -324,15 +324,18 @@ public class SettingsController {
                 lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #518E21");
                 lbl_movieAddSaveFeedback.setVisible(true);
                 connector.getLibraryController().updateMovieList();
+                LoggerUtility.logger.info("Movie has been saved successfully...");
             } else {
                 lbl_movieAddSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #FF4040");
                 lbl_movieAddSaveFeedback.setVisible(true);
+                LoggerUtility.logger.info("Saving movie went wrong...");
             }
         } else {
             lbl_movieAddSaveFeedback.setText(MOVIE_SAVE_FAILED);
             lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #FF4040");
             lbl_movieAddSaveFeedback.setVisible(true);
+            LoggerUtility.logger.info("Saving movie went wrong; wrong inputs...");
         }
     }
 
@@ -542,10 +545,12 @@ public class SettingsController {
             lbl_movieAddDeleteFeedback.setStyle("-fx-text-fill: #FF4040");
             lbl_movieAddDeleteFeedback.setVisible(true);
             btn_movieAddDeleteConfirm.setDisable(true);
+            LoggerUtility.logger.info("movie has been deleted successfully...");
         } else {
             lbl_movieAddDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieAddDeleteFeedback.setVisible(true);
             btn_movieAddDeleteConfirm.setDisable(true);
+            LoggerUtility.logger.info("delete movie failed...");
         }
     }
 

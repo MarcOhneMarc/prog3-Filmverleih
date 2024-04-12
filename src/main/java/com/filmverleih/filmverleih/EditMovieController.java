@@ -533,6 +533,7 @@ public class EditMovieController {
             lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_FAILED);
             lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
             lbl_movieEditSaveFeedback.setVisible(true);
+            LoggerUtility.logger.info("Saving movie changes went wrong; wrong inputs...");
         }
     }
 

@@ -46,6 +46,7 @@ public class RentalsUtility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental added successfully: " + movieID + ", " + customerID);
         return true;
     }
 
@@ -110,6 +111,7 @@ public class RentalsUtility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental deleted successfully: " + movieid + ", " + customerid);
         return true;
     }
 
@@ -138,6 +140,7 @@ public class RentalsUtility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental extended successfully: " + movieid + ", " + customerid);
         return true;
     }
 }

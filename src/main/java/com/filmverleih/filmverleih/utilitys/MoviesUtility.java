@@ -250,6 +250,7 @@ public class MoviesUtility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("movie updated successfully: " + movieid + ", " + name);
         return true;
     }
 
