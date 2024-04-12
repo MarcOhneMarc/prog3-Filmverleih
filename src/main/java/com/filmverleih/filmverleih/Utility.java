@@ -440,11 +440,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("deleteUserInDB went wrong, could not transact");
+                LoggerUtility.logger.warn("deleteUserInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -465,11 +465,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("addUserToDB went wrong, could not transact");
+                LoggerUtility.logger.warn("addUserToDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -493,10 +493,10 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("updateUserPassword went wrong, could not transact");
+                LoggerUtility.logger.warn("updateUserPassword went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return true;
     }
