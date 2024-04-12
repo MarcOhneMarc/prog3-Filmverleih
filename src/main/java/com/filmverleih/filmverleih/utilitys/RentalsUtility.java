@@ -64,10 +64,10 @@ public class RentalsUtility {
                 return rentals;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getAllRentedMovies went wrong, could not transact: 011");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 012");
         }
         return new ArrayList<Rentals>();
     }
@@ -103,11 +103,11 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("deleteRentalFromDB went wrong, could not transact: 011");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 012");
             return false;
         }
         return true;
@@ -131,11 +131,11 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("extendRentalInDB went wrong, could not transact: 011");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 012");
             return false;
         }
         return true;

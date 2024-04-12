@@ -65,11 +65,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("newMovieInDB went wrong, could not transact: 007");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 006");
             return false;
         }
         return true;
@@ -124,10 +124,10 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact: 007");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 008");
         }
         return true;
     }
@@ -243,11 +243,11 @@ public class MoviesUtility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact: 007");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 008");
             return false;
         }
         return true;
@@ -273,10 +273,10 @@ public class MoviesUtility {
                 return null;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getMovieByID went wrong, could not transact: 007");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 008");
         }
         return returnMovie;
     }
