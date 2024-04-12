@@ -96,7 +96,7 @@ public class CartMovieController {
      * This method removes the movie from cart
      */
     public void removeFromCart() {
-        LoggerUtility.logger.info("movie has been removed from cart: 016");
+        LoggerUtility.logger.info("movie has been removed from cart");
 
         if (cartController != null) {
             cartController.removeMovieCard(hbx_CartMovie, movie);

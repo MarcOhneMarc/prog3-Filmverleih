@@ -358,7 +358,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);

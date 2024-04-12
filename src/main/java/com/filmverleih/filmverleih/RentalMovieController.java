@@ -100,7 +100,7 @@ public class RentalMovieController {
      * This method removes the rental card from the rental view
      */
     public void removeFromRental() {
-        LoggerUtility.logger.info("movie has been returned; return button clicked: 019");
+        LoggerUtility.logger.info("movie has been returned; return button clicked");
         if (rentalController != null) {
             rentalController.removeFromRental(hbx_rentalMovieCard, rentals);
         }

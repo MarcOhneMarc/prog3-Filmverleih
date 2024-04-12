@@ -29,10 +29,10 @@ public class MoviesUtility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 005");
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact");
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 006");
+            LoggerUtility.logger.warn("build session failed");
         }
         return new ArrayList<Movies>();
     }
@@ -65,11 +65,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("newMovieInDB went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("newMovieInDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 006");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -95,11 +95,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -127,7 +127,7 @@ public class MoviesUtility {
                 LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact: 007");
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed");
         }
         return true;
     }
@@ -243,11 +243,11 @@ public class MoviesUtility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -273,10 +273,10 @@ public class MoviesUtility {
                 return null;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getMovieByID went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("getMovieByID went wrong, could not transact");
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed");
         }
         return returnMovie;
     }

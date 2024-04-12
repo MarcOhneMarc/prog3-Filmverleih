@@ -532,7 +532,7 @@ public class SettingsController {
         boolean movieIsDeleted;
         try {
             movieIsDeleted = MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
-            LoggerUtility.logger.info("delete movie button was clicked: 023");
+            LoggerUtility.logger.info("delete movie button was clicked");
         } catch (NumberFormatException e) {
             movieIsDeleted = false;
         }

@@ -711,7 +711,7 @@ public class EditMovieController {
                 this.changedType = "BR";
             }
         } catch (NumberFormatException e) {
-            LoggerUtility.logger.warn("NumberFormatException; saveInfosAsNeededDataTypes: 018");
+            LoggerUtility.logger.warn("NumberFormatException; saveInfosAsNeededDataTypes");
             saveInfoWorked = false;
         }
         return saveInfoWorked;

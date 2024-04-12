@@ -39,11 +39,11 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact: 011");
+                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 012");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -64,10 +64,10 @@ public class RentalsUtility {
                 return rentals;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getAllRentedMovies went wrong, could not transact: 011");
+                LoggerUtility.logger.warn("getAllRentedMovies went wrong, could not transact");
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 012");
+            LoggerUtility.logger.warn("build session failed");
         }
         return new ArrayList<Rentals>();
     }
@@ -103,11 +103,11 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("deleteRentalFromDB went wrong, could not transact: 011");
+                LoggerUtility.logger.warn("deleteRentalFromDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 012");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -131,11 +131,11 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("extendRentalInDB went wrong, could not transact: 011");
+                LoggerUtility.logger.warn("extendRentalInDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 012");
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
