@@ -530,3 +530,8 @@
     -fx-background-color: #8520EA;
     -fx-background-radius: 4, 4, 4, 4;
 }
+
+.btn_class_rentalMovieButtons {
+    -fx-background-color: #5C5C5C;
+    -fx-background-radius: 12;
+}
