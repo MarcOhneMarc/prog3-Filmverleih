@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/CartMovie.fxml" afterDir="false" />
-
     <list default="true" id="704066e8-f9cd-4a08-ba7c-1b73f166b2a1" name="Changes" comment="asdasd">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/EmployeesController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Hello.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsApplication.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +18,7 @@ ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Ca
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="tick-78" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,13 +34,24 @@ ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Ca
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
+      <module name="Filmverleih" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -52,9 +59,7 @@ ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Ca
       <created>1711646955003</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-
       <updated>1711646955003</updated>
-
     </task>
     <task id="LOCAL-00001" summary="asdasd">
       <option name="closed" value="true" />
@@ -68,7 +73,6 @@ ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Ca
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
-
     <MESSAGE value="BUG-changed Navbar Search Test to Prompt (Suche...)" />
     <MESSAGE value="BUG-loaded stylesheet in MainApplication start()-Method and set icon and title" />
     <MESSAGE value="FEAT-some SceneBuilding for Cart.fxml; committed interim results" />
@@ -80,14 +84,11 @@ ange beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Ca
     <MESSAGE value="FEAT-Kommentare" />
     <MESSAGE value="FEAT-updateMovieList" />
     <MESSAGE value="asdasd" />
-    <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
-
     <MESSAGE value="asdasd" />
     <option name="LAST_COMMIT_MESSAGE" value="asdasd" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
-
   </component>
 </project>
