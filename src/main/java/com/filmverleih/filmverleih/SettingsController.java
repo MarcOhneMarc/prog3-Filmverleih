@@ -513,7 +513,7 @@ public class SettingsController {
                 this.changedType = "BR";
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("saving info as needed data type went wrong; NumberFormatException: " + e.getMessage());
             saveInfoWorked = false;
         }
         return saveInfoWorked;

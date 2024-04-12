@@ -111,7 +111,7 @@ public class RentalMovieController {
      *
      */
     public void extendRental() {
-        System.out.println("console test: extend button has been clicked");
+        LoggerUtility.logger.info("extend button has been clicked");
         if (rentalController != null) {
             rentalController.extendRental(hbx_rentalMovieCard, rentals);
         }
@@ -121,7 +121,7 @@ public class RentalMovieController {
      * This method reminds the customer of his rental
      */
     public void remindCustomer() {
-        System.out.println("console test: remind button has been clicked");
+        LoggerUtility.logger.info("remind button has been clicked");
         if (rentalController != null) {
             rentalController.remindCustomer(rentals);
         }

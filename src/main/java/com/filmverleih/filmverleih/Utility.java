@@ -47,11 +47,9 @@ public class Utility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
                 LoggerUtility.logger.warn("old utility class");
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
             LoggerUtility.logger.warn("old utility class");
         }
         return new ArrayList<Movies>();
@@ -85,13 +83,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
                 LoggerUtility.logger.warn("old utility class");
 
                 return false;
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
             LoggerUtility.logger.warn("old utility class");
             return false;
         }
@@ -110,13 +106,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
                 LoggerUtility.logger.warn("old utility class");
 
                 return false;
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
             LoggerUtility.logger.warn("old utility class");
 
             return false;
@@ -198,13 +192,11 @@ public class Utility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
                 LoggerUtility.logger.warn("old utility class");
 
                 return false;
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
             LoggerUtility.logger.warn("old utility class");
 
             return false;
@@ -230,12 +222,10 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
                 LoggerUtility.logger.warn("old utility class");
 
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
             LoggerUtility.logger.warn("old utility class");
 
         }
@@ -292,12 +282,10 @@ public class Utility {
                 return users;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace();
                 LoggerUtility.logger.warn("old utility class");
 
             }
         } catch (Exception e) {
-            //e.printStackTrace();
             LoggerUtility.logger.warn("old utility class");
 
         }
@@ -319,12 +307,10 @@ public class Utility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace();
                 LoggerUtility.logger.warn("old utility class");
 
             }
         } catch (Exception e) {
-            //e.printStackTrace();
             LoggerUtility.logger.warn("old utility class");
 
         }
@@ -379,15 +365,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
-                //System.out.println("customer registration went wrong Code: 77621");
                 LoggerUtility.logger.warn("old utility class");
 
                 return false;
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
-            //System.out.println("customer registration went wrong Code: 77620");
             LoggerUtility.logger.warn("old utility class");
 
             return false;
@@ -421,15 +403,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                //e.printStackTrace(); // replace with logger
-                //System.out.println("Order went wrong Code: 77619");
                 LoggerUtility.logger.warn("old utility class");
 
                 return false;
             }
         } catch (Exception e) {
-            //e.printStackTrace(); // replace with logger
-            //System.out.println("Order went wrong Code: 77618");
             LoggerUtility.logger.warn("old utility class");
 
             return false;
@@ -462,11 +440,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("deleteUserInDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -487,11 +465,11 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace();
+                LoggerUtility.logger.warn("addUserToDB went wrong, could not transact");
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("build session failed");
             return false;
         }
         return true;
@@ -515,10 +493,10 @@ public class Utility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("updateUserPassword went wrong, could not transact");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed");
         }
         return true;
     }
