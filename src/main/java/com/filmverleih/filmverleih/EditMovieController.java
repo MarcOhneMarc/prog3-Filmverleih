@@ -522,10 +522,12 @@ public class EditMovieController {
                 lbl_movieEditSaveFeedback.setVisible(true);
                 this.movie = MoviesUtility.getMovieById(currentMovieId);
                 connector.getLibraryController().updateMovieInLibrary(this.movie);
+                LoggerUtility.logger.info("Movie has been edited and saved successfully...");
             } else {
                 lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieEditSaveFeedback.setStyle("-fx-text-fill: #FF4040");
                 lbl_movieEditSaveFeedback.setVisible(true);
+                LoggerUtility.logger.info("Saving movie changes went wrong...");
             }
         } else {
             lbl_movieEditSaveFeedback.setText(MOVIE_SAVE_FAILED);
@@ -744,10 +746,12 @@ public class EditMovieController {
             enableEditNodes();
             MainApplication.borderPane.setCenter(movieController.getOuterPane());
             connector.getLibraryController().removeMovieFromLibrary(currentMovieId);
+            LoggerUtility.logger.info("movie has been deleted successfully...");
         } else {
             lbl_movieEditDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieEditDeleteFeedback.setVisible(true);
             btn_movieEditDeleteConfirm.setDisable(true);
+            LoggerUtility.logger.info("delete movie failed...");
         }
     }
 

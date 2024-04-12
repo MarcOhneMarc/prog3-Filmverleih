@@ -898,6 +898,7 @@ public class SettingsController {
             connector.getLoginController().setLoggedUserToNull();
             MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
             MainApplication.borderPane.setTop(null);
+            LoggerUtility.logger.info("Logout successful...");
         }
     }
 
