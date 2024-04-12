@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CustomersUtility {
     /**
@@ -50,7 +51,6 @@ public class CustomersUtility {
 
     /**
      * This method adds a customer to db into the customers table
-     * @param //customerId the id of the customer
      * @param firstName the firstname of the customer
      * @param lastName the lastname of the customer
      * @param street the street where the customer lives
@@ -68,7 +68,6 @@ public class CustomersUtility {
                 transaction = session.beginTransaction();
 
                 Customers customers = new Customers();
-                //customers.setCustomerid(customerId);
                 customers.setFirstname(firstName);
                 customers.setLastname(lastName);
                 customers.setStreet(street);
@@ -89,6 +88,7 @@ public class CustomersUtility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("customer added successfully...");
         return true;
     }
 

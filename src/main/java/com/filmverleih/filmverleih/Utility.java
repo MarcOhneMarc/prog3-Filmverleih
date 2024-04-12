@@ -447,7 +447,7 @@ public class Utility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
-        LoggerUtility.logger.info("User deleted successfully...");
+        LoggerUtility.logger.info("User deleted successfully: " + user.getUserid());
         return true;
     }
 
@@ -473,7 +473,7 @@ public class Utility {
             LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
-        LoggerUtility.logger.info("User added successfully...");
+        LoggerUtility.logger.info("User added successfully: " + user.getUserid());
         return true;
     }
 

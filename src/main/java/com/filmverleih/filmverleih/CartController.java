@@ -33,6 +33,7 @@ import javafx.collections.ListChangeListener;
 
 import java.time.LocalDate;
 import java.text.DecimalFormat;
+import java.util.logging.Logger;
 
 /**
  * controller class for the cart frame of the application
@@ -533,6 +534,7 @@ public class CartController {
             setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
             acp_customerInfoCard.setVisible(true);
             updateCart();
+            LoggerUtility.logger.info("id checked successfully; customer is registered...");
         }
     }
 
