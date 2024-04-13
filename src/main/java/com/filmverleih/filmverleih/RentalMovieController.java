@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
+
 import static java.lang.String.valueOf;
 
 /**
@@ -108,10 +110,10 @@ public class RentalMovieController {
      * This method extends the movie rental
      *
      */
-    public void extendRental() {
+    public void extendRental() throws IOException {
         LoggerUtility.logger.info("extend button has been clicked");
         if (rentalController != null) {
-            rentalController.extendRental(hbx_rentalMovieCard, rentals);
+            rentalController.extendRental(rentals);
         }
     }
 

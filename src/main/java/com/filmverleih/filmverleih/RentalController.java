@@ -48,7 +48,7 @@ public class RentalController {
     GridPane grp_rentalGrid;
 
     private double windowWidth;
-    public Predicate<Rentals> predicate;
+    public Predicate<Rentals> predicate = rental -> true;
     public Comparator<Rentals> comparator;
 
 
@@ -211,7 +211,7 @@ public class RentalController {
         }
 
         for (Rentals rentalToAdd : rentalsToAdd) {
-            addRentedMovieToRental(rentalToAdd); // Add collected movies to library
+            updateRentalInRentalView(rentalToAdd);
         }
         adjustColumnCount();
     }
@@ -304,14 +304,14 @@ public class RentalController {
     /**
      * Method to extend a rental
      *  TODO Implement update Card Info with new End date
-     * @param hBox
      * @param rental
      */
-    public void extendRental(HBox hBox, Rentals rental) {
+    public void extendRental(Rentals rental) throws IOException {
         LocalDate date = LocalDate.parse(rental.getEnddate());
         LocalDate newDate = date.plusWeeks(1);
         if (RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString())) {
             rental.setEnddate(newDate.toString());
+            updateRentalInRentalView(rental);
         } else {
             LoggerUtility.logger.warn("could extend rental; movieID: " + rental.getMovie().getMovieid() + " customerID: " + rental.getCustomerid());
         }

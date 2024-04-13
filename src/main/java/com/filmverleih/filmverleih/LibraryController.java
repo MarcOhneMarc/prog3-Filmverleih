@@ -303,7 +303,7 @@ public class LibraryController {
         }
 
         for (Movies movieToAdd : moviesToAdd) {
-            addMovieToLibrary(movieToAdd); // Add collected movies to library
+            updateMovieInLibrary(movieToAdd); // Add collected movies to library
         }
 
         adjustColumnCount();
