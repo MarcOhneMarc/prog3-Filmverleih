@@ -276,41 +276,6 @@ public class LibraryController {
     }
 
     /**
-     * This method updates syncs the LibraryView GridPane with the movies in the Database.
-     *
-     */
-    public void syncLibraryWithDB() {
-        List<Movies> moviesInDb = MoviesUtility.getFullMovieList();
-        List<Movies> moviesToAdd = new ArrayList<>(); // Collect movies to add
-        for (Movies movieInDb: moviesInDb) {
-            boolean found = false;
-            for (Node node : grp_libraryGrid.getChildren()) {
-                if (node instanceof StackPane stackPane) {
-                    Movies movieInLibrary = getMovieFromStackPane(stackPane);
-                    assert movieInLibrary != null;
-                    if (movieInDb.getMovieid() == movieInLibrary.getMovieid()) {
-                        if (!movieInDb.equals(movieInLibrary)) {
-                            removeMovieFromLibrary(movieInLibrary.getMovieid());
-                        }
-                        found = true;
-                        break; // Found the movie in the library, no need to add
-                    }
-                }
-            }
-            if (!found) {
-                moviesToAdd.add(movieInDb); // Collect movies to add
-            }
-        }
-
-        for (Movies movieToAdd : moviesToAdd) {
-            updateMovieInLibrary(movieToAdd); // Add collected movies to library
-        }
-
-        adjustColumnCount();
-    }
-
-
-    /**
      * This method updates a specific Movie in the LibraryView GridPane.
      * It deletes the movie in the Pane and adds the changed.
      */

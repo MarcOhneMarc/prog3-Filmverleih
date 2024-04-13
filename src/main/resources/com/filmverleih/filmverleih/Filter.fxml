@@ -20,12 +20,6 @@
       <AnchorPane id="scp_background" maxWidth="340.0" minHeight="0.0" minWidth="340.0" prefWidth="340.0">
          <VBox id="vbx_FilterBackground" fx:id="vbx_FilterBackground" alignment="TOP_CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Sync Library">
-                  <font>
-                     <Font size="29.0" />
-                  </font>
-               </Label>
-               <Button alignment="CENTER" mnemonicParsing="false" onAction="#sync" prefHeight="35.0" prefWidth="355.0" text="sync" textAlignment="CENTER" />
                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="320.0" text="Sort">
                   <font>
                      <Font size="29.0" />

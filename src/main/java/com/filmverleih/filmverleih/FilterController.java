@@ -426,20 +426,6 @@ public class FilterController {
     }
 
     /**
-     * This Method is Utilized by the Sync-Button and calls the specific Method needed to Sync the
-     * Library, Rental or neither of them with the Database.
-     */
-    public void sync() throws IOException {
-        if (isLibrary) {
-            libraryController.syncLibraryWithDB();
-        } else if (isRental) {
-            rentalController.syncRentalWithDb();
-        } else {
-            return;
-        }
-    }
-
-    /**
      * Clears and resets all Filter-Fields for the LibraryView and RentalView
      */
     public void resetFilters() {

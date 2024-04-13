@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
@@ -317,7 +318,7 @@ public class CartController {
      * the db with all needed attributes
      */
     @FXML
-    public void orderCart() {
+    public void orderCart() throws IOException {
        if (calendarOpen) return;
        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
@@ -334,6 +335,8 @@ public class CartController {
                        LoggerUtility.logger.info("Rented: " + fullMovieList.get(i).getName());
                        connector.getLibraryController().updateMovieInLibrary(MoviesUtility.getMovieById(fullMovieList.get(i).getMovieid()));
 
+                       Rentals rentals = RentalsUtility.getRentalById(Integer.parseInt(txf_CartID.getText()), fullMovieList.get(i).getMovieid());
+                       connector.getRentalController().addRentedMovieToRental(rentals);
                        vbx_CartMovieCardsVBox.getChildren().remove(i);
                        removeMovieFromCart(fullMovieList.get(i));
                        acp_customerInfoCard.setVisible(false);

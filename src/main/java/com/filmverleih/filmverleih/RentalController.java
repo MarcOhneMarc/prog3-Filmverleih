@@ -121,7 +121,7 @@ public class RentalController {
      * @param rental the Rented Movie which has to be added
      * @throws IOException throws an Exception if the FXML couldn't be loaded.
      */
-    private void addRentedMovieToRental(Rentals rental) throws IOException  {
+    public void addRentedMovieToRental(Rentals rental) throws IOException  {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("RentalMovie.fxml"));
         HBox rentalCard = loader.load();
         RentalMovieController controller = loader.getController();
@@ -182,37 +182,6 @@ public class RentalController {
                 hBox.setManaged(isVisible);
             }
         });
-        adjustColumnCount();
-    }
-
-    /**
-     * This method updates syncs the RentalView GridPane with the Rentals in the Database.
-     *
-     */
-    public void syncRentalWithDb() throws IOException {
-        List<Rentals> rentalsInDb = RentalsUtility.getAllRentedMovies();
-        List<Rentals> rentalsToAdd = new ArrayList<>(); // Collect movies to add
-        for (Rentals rentalInDb: rentalsInDb) {
-            boolean found = false;
-            for (Node node : grp_rentalGrid.getChildren()) {
-                Rentals rentalInLibrary = (Rentals) node.getUserData();
-                assert rentalInLibrary != null;
-                if (rentalInDb.getMovieid() == rentalInLibrary.getMovieid()) {
-                    if (!rentalInDb.equals(rentalInLibrary)) {
-                        removeRentalFromRentalView(rentalInLibrary);
-                    }
-                    found = true;
-                    break; // Found the movie in the library, no need to add
-                }
-            }
-            if (!found) {
-                rentalsToAdd.add(rentalInDb); // Collect movies to add
-            }
-        }
-
-        for (Rentals rentalToAdd : rentalsToAdd) {
-            updateRentalInRentalView(rentalToAdd);
-        }
         adjustColumnCount();
     }
 
