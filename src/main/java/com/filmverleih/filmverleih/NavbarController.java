@@ -131,7 +131,9 @@ public class NavbarController {
         hideSearchbar();
     }
 
-
+    /**
+     * Resets the styling of the navbar buttons
+     */
     private void resetStyling() {
         btn_navBarLibrary.setStyle("-fx-background-color: #FFFF3D");
         btn_navBarRental.setStyle("-fx-background-color: #FFFF3D");

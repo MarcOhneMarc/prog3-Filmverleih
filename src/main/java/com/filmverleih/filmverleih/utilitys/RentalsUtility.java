@@ -13,6 +13,9 @@ import org.hibernate.cfg.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for Rentals
+ */
 public class RentalsUtility {
     /**
      * This method adds a rental to db into the rentals table

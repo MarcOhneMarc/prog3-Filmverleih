@@ -3,6 +3,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Users;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
+import com.filmverleih.filmverleih.utilitys.UserUtility;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,9 @@ import javafx.util.Duration;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+/**
+ * This class represents the controller for the login view
+ */
 public class LoginController {
 
     @FXML
@@ -34,6 +38,10 @@ public class LoginController {
 
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController, EditMovieController,Integer> connector;
 
+    /**
+     * sets NWayControllerConnector as active connector for this controller, called from MainApplication
+     * @param connector the controller passed by MainApplication
+     */
     public void setConnector(NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector) {
         this.connector = connector;
     }
@@ -103,7 +111,7 @@ public class LoginController {
         } else {
             txf_loginPassword.setText(pwf_loginPasswordField.getText());
         }
-        List<Users> users = Utility.getFullUserList();
+        List<Users> users = UserUtility.getFullUserList();
         for(Users user: users){
             if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)))){
                 loggedUser = user;

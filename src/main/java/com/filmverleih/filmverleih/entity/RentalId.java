@@ -4,6 +4,9 @@ package com.filmverleih.filmverleih.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ *  IDClass class for Rental
+ */
 public class RentalId implements Serializable {
     private int movieid;
 

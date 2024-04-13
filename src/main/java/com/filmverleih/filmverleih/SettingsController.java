@@ -252,7 +252,9 @@ public class SettingsController {
     TableColumn<Users, Boolean> tbc_userIsAdmin;
 
 
-
+    /**
+     * Initializes the controller class.
+     */
     public void initialize() {
         addOnlyNumbersConstraint();
         checkBoxAddEventHandler();
@@ -734,8 +736,7 @@ public class SettingsController {
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
         } else {
-            Utility utility = new Utility();
-            utility.addUserToDB(user);
+            UserUtility.addUserToDB(user);
             fullUserListObservable.add(user);
             tbv_userTable.refresh();
         }
@@ -749,8 +750,7 @@ public class SettingsController {
     public void deleteUser() {
         if (userToDelete != null) {
             disableDeleteUserPopUp();
-            Utility utility = new Utility();
-            utility.deleteUserInDB(userToDelete);
+            UserUtility.deleteUserInDB(userToDelete);
             fullUserListObservable.remove(userToDelete);
             tbv_userTable.refresh();
         }
@@ -763,7 +763,7 @@ public class SettingsController {
      */
     public boolean checkUserExists() {
         int id = Integer.parseInt(txf_userIdDelete.getText());
-        for (Users user : Utility.getFullUserList()) {
+        for (Users user : UserUtility.getFullUserList()) {
             if (user == null) {
                 throw new IllegalArgumentException(ERR_USER_NULL);
             }
@@ -868,8 +868,7 @@ public class SettingsController {
             }else {
                 loggedUser.setPassword(hashedPassword);
                 lbl_passwordChanged.setVisible(true);
-                Utility utility = new Utility();
-                utility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
+                UserUtility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
             }
         } else {
             lbl_passwordsDontMatch.setText("Falsches Passwort eingegeben");
@@ -883,7 +882,7 @@ public class SettingsController {
      * the list is always updated.
      */
     public void refreshFullUserList() {
-        fullUserList = Utility.getFullUserList();
+        fullUserList = UserUtility.getFullUserList();
     }
 
     /**

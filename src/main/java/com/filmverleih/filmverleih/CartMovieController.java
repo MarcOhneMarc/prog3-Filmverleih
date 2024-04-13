@@ -41,7 +41,10 @@ public class CartMovieController {
     @FXML
     private Label lbl_CartMovieCardFsk;
 
-
+    /**
+     * This method sets the cart controller
+     * @param cartController the cart controller
+     */
     public void setCartController(CartController cartController) {
         this.cartController = cartController;
     }

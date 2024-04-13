@@ -18,7 +18,13 @@ import java.util.ArrayList;
 
 import static java.lang.String.valueOf;
 
+/**
+ * controller class for the edit movie view
+ *
+ * @author Jannis
+ */
 public class EditMovieController {
+
     private NWayControllerConnector<NavbarController,
                                     LibraryController,
                                     MovieController,
@@ -212,6 +218,10 @@ public class EditMovieController {
     private String changedType;
 
 
+    /**
+     * initializes the controller with the given movie
+     * @param movie the movie
+     */
     public void initialize(Movies movie) {
         this.movie = movie;
         txfStringUndoList.clear();
@@ -240,6 +250,12 @@ public class EditMovieController {
             this.directorsArray = currentMovieDirectors.split(", ");
         }
     }
+
+    /**
+     * Checks if the logged in user is an admin.
+     * If the user is not an admin, the delete button is disabled.
+     * If the user is an admin, the delete button is enabled.
+     */
     private void checkAdmin(){
         if (!connector.getLoginController().getLoggedUser().getIsadmin()) {
             btn_deleteMovieEdit.setDisable(true);
@@ -799,15 +815,27 @@ public class EditMovieController {
         disableMovieConstraintInfo();
     }
 
+    /**
+     * Toggles the visibility of the constraint info.
+     * This method toggles the visibility of the constraint info.
+     */
     public void constraintInfoButtonClick() {
         if(acp_movieEditConstraintInfo.isVisible()) {disableMovieConstraintInfo();}
         else {enableMovieConstraintInfo();}
     }
 
+    /**
+     * Toggles the visibility of the constraint info.
+     * This method toggles the visibility of the constraint info.
+     */
     private void enableMovieConstraintInfo() {
         acp_movieEditConstraintInfo.setVisible(true);
     }
 
+    /**
+     * Toggles the visibility of the constraint info.
+     * This method toggles the visibility of the constraint info.
+     */
     private void disableMovieConstraintInfo() {
         acp_movieEditConstraintInfo.setVisible(false);
     }
@@ -883,7 +911,7 @@ public class EditMovieController {
         acp_movieEditDeleteConfirmation.setDisable(true);
         acp_movieEditDeleteConfirmation.setVisible(false);
     }
-
+    
     public StackPane getOuterPane() {
         return stp_movieEditBackStackPane;
     }

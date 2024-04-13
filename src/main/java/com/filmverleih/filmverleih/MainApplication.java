@@ -93,11 +93,11 @@ public class MainApplication extends Application {
             cartRoot = loader.load();
             cartController = loader.getController();
           
-            loader = Utility.loadFXML("Login.fxml");
+            loader = FXMLUtility.loadFXML("Login.fxml");
             loginRoot= loader.load();
             loginController = loader.getController();
 
-            loader = Utility.loadFXML("EditMovie.fxml");
+            loader = FXMLUtility.loadFXML("EditMovie.fxml");
             editMovieRoot = loader.load();
             editMovieController = loader.getController();
 
@@ -133,6 +133,10 @@ public class MainApplication extends Application {
         editMovieController.setConnector(connector);
     }
 
+    /**
+     * Constructor for MainApplication
+     * @throws IOException if an error occurs
+     */
     public MainApplication() throws IOException {
     }
     //fire-up all the scene related stuff

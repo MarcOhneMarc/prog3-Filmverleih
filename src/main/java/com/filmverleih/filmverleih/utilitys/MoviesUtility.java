@@ -16,8 +16,15 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility clas for Movies
+ */
 public class MoviesUtility {
 
+    /**
+     * Get all movies from the database
+     * @return the list of all movies
+     */
     public static List<Movies> getFullMovieList() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -37,7 +44,24 @@ public class MoviesUtility {
         return new ArrayList<Movies>();
     }
 
-
+    /**
+     * Create a new movie in the database
+     *
+     * @param name Movie name
+     * @param year Movie year
+     * @param genre Movie genre
+     * @param length Movie length
+     * @param rating Movie rating
+     * @param count Movie count of Samples
+     * @param type Movie type
+     * @param cover Movie cover Link
+     * @param comment Movie comment
+     * @param directors Movie directors
+     * @param studio Movie studio
+     * @param actors Movie actors
+     * @param fsk Movie fsk
+     * @return True if successful, false otherwise
+     */
     public static Boolean newMovieInDB(String name, int year, String genre, int length, BigDecimal rating, int count, String type, String cover, String comment, String directors, String studio, String actors, int fsk) {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -132,6 +156,11 @@ public class MoviesUtility {
         return true;
     }
 
+    /**
+     * Get a movie from the database by its cover
+     * @param url Movie cover Link
+     * @return Movie
+     */
     Movies getMovieByUrl(String url)
     {
         Movies ret = new Movies();
@@ -142,7 +171,11 @@ public class MoviesUtility {
         return ret;
     }
 
-
+    /**
+     * Get a movie from the database by its name
+     * @param name Movie name
+     * @return Movie
+     */
     Movies getMovieByName(String name)
     {
         Movies ret = new Movies();
@@ -152,6 +185,10 @@ public class MoviesUtility {
         }
         return ret;
     }
+
+    /**
+     * mouseHandler for all movie cards
+     */
     EventHandler mouseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {

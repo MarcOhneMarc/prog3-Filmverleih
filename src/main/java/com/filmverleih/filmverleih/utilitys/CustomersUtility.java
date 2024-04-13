@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * Utility clas for Customers
+ */
 public class CustomersUtility {
     /**
      * This method provides a List of all Customer from the table customers
