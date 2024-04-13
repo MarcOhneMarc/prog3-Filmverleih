@@ -2,6 +2,7 @@ package com.filmverleih.filmverleih;
 
 
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,12 +54,14 @@ public class LoginController {
             MainApplication.borderPane.setCenter(libraryController.getOuterPane());
             MainApplication.borderPane.setRight(connector.getFilterController().getOuterPane());
             lbl_loginWrongCredentials.setVisible(false);
+            LoggerUtility.logger.info("Login successful...");
         }else{
             lbl_loginWrongCredentials.setText("Benutzername oder Passwort ist falsch");
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
             pauseTransition.setOnFinished(event -> lbl_loginWrongCredentials.setVisible(false));
             lbl_loginWrongCredentials.setVisible(true);
             pauseTransition.play();
+            LoggerUtility.logger.info("Login failed...");
         }
 
         txf_loginName.setText("");

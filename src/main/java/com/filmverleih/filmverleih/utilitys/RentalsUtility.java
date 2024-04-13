@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -39,13 +40,14 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact: 011");
+                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 012");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental added successfully: " + movieID + ", " + customerID);
         return true;
     }
 
@@ -60,14 +62,17 @@ public class RentalsUtility {
             try {
                 transaction = session.beginTransaction();
                 List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
+                for (Rentals rental : rentals) {
+                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate());
+                }
                 transaction.commit();
                 return rentals;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getAllRentedMovies went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return new ArrayList<Rentals>();
     }
@@ -103,13 +108,14 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("deleteRentalFromDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental deleted successfully: " + movieid + ", " + customerid);
         return true;
     }
 
@@ -131,13 +137,14 @@ public class RentalsUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("extendRentalInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("Rental extended successfully: " + movieid + ", " + customerid);
         return true;
     }
 }
