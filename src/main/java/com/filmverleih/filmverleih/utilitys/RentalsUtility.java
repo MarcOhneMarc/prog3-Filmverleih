@@ -63,7 +63,7 @@ public class RentalsUtility {
                 transaction = session.beginTransaction();
                 List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
                 for (Rentals rental : rentals) {
-                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate());
+                    LoggerUtility.logger.info(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate());
                 }
                 transaction.commit();
                 return rentals;

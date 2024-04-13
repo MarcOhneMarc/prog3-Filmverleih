@@ -325,9 +325,9 @@ public class RentalController {
      */
     public void remindCustomer(Rentals rental) {
         if (WarningPdfGenerator.generatePdf(rental.getMovie().getName(), rental.getStartdate(), rental.getEnddate())) {
-            LoggerUtility.logger.info("creating a reminder pdf has been successful");
+            LoggerUtility.logger.info("customer reminded successfully...");
         } else {
-            LoggerUtility.logger.info("creating a reminder pdf went wrong");
+            LoggerUtility.logger.info("customer could not be reminded...");
         }
     }
 

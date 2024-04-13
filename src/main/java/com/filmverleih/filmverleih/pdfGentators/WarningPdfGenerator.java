@@ -3,6 +3,8 @@ package com.filmverleih.filmverleih.pdfGentators;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -94,10 +96,10 @@ public class WarningPdfGenerator {
             // Öffne das Dokument automatisch
             Desktop.getDesktop().open(outputFile);
 
-            System.out.println("Mahnung wurde erfolgreich generiert.");
+                LoggerUtility.logger.info("Remind pdf created successfully...");
                 return true;
         } catch (IOException e) {
-            System.err.println("Fehler beim Generieren der Mahnung: " + e.getMessage());
+                LoggerUtility.logger.info("Remind pdf could not be created...");
             return false;
         }
     }
