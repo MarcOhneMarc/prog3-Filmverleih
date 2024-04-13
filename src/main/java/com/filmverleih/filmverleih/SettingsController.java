@@ -48,6 +48,7 @@ public class SettingsController {
     private List<Users> fullUserList = UserUtility.getFullUserList();
     private ObservableList<Users> fullUserListObservable = FXCollections.observableArrayList();
     private static final String ERR_USER_NULL = "Error: user is null";
+    private static final String ERR_USERNAME_OCCUPIED = "Username bereits vergeben!";
 
     //outer pane
     @FXML
@@ -720,9 +721,21 @@ public class SettingsController {
         user.setIsadmin(isAdmin);
         user.setPassword(hashedPassword);
 
+        for(Users users : UserUtility.getFullUserList()){
+            if (name.equals(users.getName())){
+                lbl_idNotExisting.setText(ERR_USERNAME_OCCUPIED);
+                PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
+                pauseTransition.setOnFinished(event -> lbl_idNotExisting.setVisible(false));
+                lbl_idNotExisting.setVisible(true);
+                pauseTransition.play();
+                LoggerUtility.logger.warn("Username "+ name + " already in Database");
+                return;
+            }
+        }
         if (user == null) {
             throw new IllegalArgumentException(ERR_USER_NULL);
-        } else {
+        }
+        else {
             UserUtility.addUserToDB(user);
             fullUserListObservable.add(user);
             tbv_userTable.refresh();
