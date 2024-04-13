@@ -65,7 +65,7 @@ public class LibraryController {
 
     private CartController cartController;
     private double windowWidth;
-    public Predicate<Movies> predicate;
+    public Predicate<Movies> predicate = movie -> true;
     public Comparator<Movies> comparator;
 
     /**
@@ -130,7 +130,7 @@ public class LibraryController {
         int numColumns = calculateNumColumns();
         int index = 0;
 
-        /* Print all Movies Sorted
+        /* Print all Movies Sorted for development purpose only
         for (StackPane stackPane : stackPanes) {
             for (Node child : stackPane.getChildren()) {
                 if (child instanceof ImageView || child instanceof Label) {

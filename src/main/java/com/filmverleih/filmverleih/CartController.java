@@ -3,24 +3,24 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.collections.ObservableList;
 import com.filmverleih.filmverleih.entity.Movies;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -33,6 +33,7 @@ import javafx.collections.ListChangeListener;
 
 import java.time.LocalDate;
 import java.text.DecimalFormat;
+import java.util.logging.Logger;
 
 /**
  * controller class for the cart frame of the application
@@ -53,7 +54,8 @@ public class CartController {
     private static final double FIXED_PRICE_NEW = 2.50;
     private int days = 0;
     private DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    private DatePicker datePicker = new DatePicker();
+    private boolean calendarOpen = false;
+
 
     private static final String ERR_MOVIE_NULL = "Error: movie is null";
 
@@ -99,6 +101,8 @@ public class CartController {
     private Label lbl_errorNoID;
     @FXML
     private Label lbl_errorEmptyCart;
+    @FXML
+    private Label lbl_errorReturnDate;
     @FXML
     private Button btn_checkID;
 
@@ -239,7 +243,7 @@ public class CartController {
      * @return local / current Date plus two weeks
      */
     private LocalDate calculateReturnDate() {
-        LocalDate returnDate = LocalDate.now().plusDays(1);
+        LocalDate returnDate = LocalDate.parse(lbl_ReturnDateValue.getText());
         return returnDate;
     }
 
@@ -251,16 +255,17 @@ public class CartController {
      * -returnDate
      */
     private void setOrderInformationLabels() {
-        updateTotalPrice();
         lbl_DateValue.setText(calculateCurrentDate().toString());
-        lbl_ReturnDateValue.setText(calculateReturnDate().toString());
-
         lbl_DateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_ReturnDateValue.setAlignment(Pos.CENTER_RIGHT);
         lbl_calendarDatePicker.setOnMouseClicked(e -> {
             pickDate();
         });
         updateTotalPrice();
+        if (calculateReturnDate().getDayOfWeek() == DayOfWeek.SUNDAY) {
+            lbl_errorReturnDate.setVisible(true);
+            btn_OrderCart.setDisable(true);
+        }
     }
 
     /**
@@ -317,20 +322,32 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
-        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+       if (calendarOpen) return;
+       if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
-               boolean addSuccessful = RentalsUtility.addRentalToDB(
-                       fullMovieList.get(i).getMovieid(),
-                       Integer.parseInt(txf_CartID.getText()),
-                       calculateCurrentDate().toString(),
-                       calculateReturnDate().toString());
-               if (!addSuccessful) {
-                    setDuplicateRentalLabel(fullMovieList.get(i));
+               if (fullMovieList.get(i).getCount() > 0) {
+                   boolean addSuccessful = RentalsUtility.addRentalToDB(
+                           fullMovieList.get(i).getMovieid(),
+                           Integer.parseInt(txf_CartID.getText()),
+                           calculateCurrentDate().toString(),
+                           calculateReturnDate().toString());
+                   if (!addSuccessful) {
+                       setDuplicateRentalLabel(fullMovieList.get(i));
+                   } else {
+                       MoviesUtility.decreaseMovieCount(fullMovieList.get(i));
+                       LoggerUtility.logger.info("Rented: " + fullMovieList.get(i).getName());
+                       connector.getLibraryController().updateMovieInLibrary(MoviesUtility.getMovieById(fullMovieList.get(i).getMovieid()));
+
+                       vbx_CartMovieCardsVBox.getChildren().remove(i);
+                       removeMovieFromCart(fullMovieList.get(i));
+                       acp_customerInfoCard.setVisible(false);
+                   }
                } else {
-                   vbx_CartMovieCardsVBox.getChildren().remove(i);
-                   removeMovieFromCart(fullMovieList.get(i));
-                   acp_customerInfoCard.setVisible(false);
+                   LoggerUtility.logger.warn("All copies of the movie " + fullMovieList.get(i).getName() + " are currently rented; renting not possible");
+                   lbl_errorDuplicateRentalMessage.setText("Es sind bereits alle Exemplare des Films " + fullMovieList.get(i).getName() + " ausgeliehen!");
+                   lbl_errorDuplicateRentalMessage.setVisible(true);
                }
+
            }
        }
        updateCart();
@@ -342,7 +359,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);
@@ -516,6 +533,8 @@ public class CartController {
         } else {
             setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
             acp_customerInfoCard.setVisible(true);
+            updateCart();
+            LoggerUtility.logger.info("id checked successfully; customer is registered...");
         }
     }
 
@@ -560,9 +579,11 @@ public class CartController {
     
     /**
      * Handles the pick of a date to be the returnDate, recalculates PRICES by movie releaseDate, updates pricelist and finalprice
-     * TODO: BUGFIX - when no date (or the date that is already locked in) is selected, the datePicker does not reset itself to the calendar icon
      */
     public void pickDate(){
+        calendarOpen = true; // boolean to handle action when someone tries to escape calendar without pciking a date
+        btn_OrderCart.setDisable(true); // while calendar is open, cart cannot be finished/ordered
+        DatePicker datePicker = new DatePicker(); // creates a customized calendar with disabled sundays and past days
         Callback<DatePicker,DateCell> dayCellFactory = param -> new DateCell(){
             @Override
             public void updateItem(LocalDate item, boolean empty){
@@ -570,21 +591,27 @@ public class CartController {
                 if(item.isBefore(LocalDate.now().plusDays(1))|| item.getDayOfWeek()== DayOfWeek.SUNDAY) setDisable(true);
             }
         };
-        lbl_calendarDatePicker.setGraphic(datePicker);
+        lbl_calendarDatePicker.setGraphic(datePicker); //sets the Calendar to be displayed next to Icon
+        datePicker.setOpacity(0); //makes button and textfield invisible
         datePicker.setDayCellFactory(dayCellFactory);
         datePicker.show();
-        datePicker.getEditor().setManaged(false);
-        datePicker.getEditor().setVisible(false);
         datePicker.getEditor().setPrefSize(0,0);
-        datePicker.setOnAction(e -> {
-            LocalDate selected = datePicker.getValue();
-            lbl_ReturnDateValue.setText(selected.toString());
-            datePicker.hide();
-            lbl_calendarDatePicker.setGraphic(ivw_calendar);
-            days = (int) (selected.toEpochDay()-LocalDate.now().toEpochDay());
-            updateTotalPrice();
+        EventHandler op = datePicker.getOnHidden(); //save the hiding behaviour of the calendar for later purpose
+        datePicker.setOnHidden(e -> {
+            if (datePicker.getValue() == null) datePicker.show(); //overide hiding behaviour, if no date was picked
         });
-
+        datePicker.setOnAction(e -> {
+            LocalDate selectedfinal = datePicker.getValue();
+                datePicker.setOnHidden(op); //revert to normal behaviour when a vaid date has beeen picked
+                lbl_ReturnDateValue.setText(selectedfinal.toString()); //update returndate
+                datePicker.hide();
+                lbl_calendarDatePicker.setGraphic(ivw_calendar);
+                days = (int) (selectedfinal.toEpochDay() - LocalDate.now().toEpochDay()); //get rental days
+                updateTotalPrice();
+                calendarOpen = false;
+                checkWhetherToEnableOrderButton();
+                lbl_errorReturnDate.setVisible(false);
+        });
     }
   
     /**
@@ -609,7 +636,7 @@ public class CartController {
      * This method checks whether the order button can be disabled or enabled
      */
     private void checkWhetherToEnableOrderButton() {
-        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty();
+        boolean anyWrong = btn_checkID.isDisable() || fullMovieList.isEmpty() || calendarOpen;
 
         btn_OrderCart.setDisable(anyWrong);
     }
@@ -622,6 +649,7 @@ public class CartController {
     @FXML
     private void initialize() {
         setLastAddedCustomerID();
+        lbl_ReturnDateValue.setText(calculateCurrentDate().plusDays(1).toString());
         updateCart();
         btn_checkID.setDisable(true);
         btn_OrderCart.setDisable(true);

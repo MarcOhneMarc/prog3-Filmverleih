@@ -3,10 +3,7 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -167,6 +164,7 @@ public class MovieController {
      * initializes the edit movie controller with the given movie, and displays the edit interface.
      */
     public void changeToEdit() {
+        bpn_borderPaneMovieScene.setDisable(false);
         EditMovieController editMovieController = connector.getEditMovieController();
         MainApplication.borderPane.setCenter(editMovieController.getOuterPane());
         editMovieController.initialize(movie);

@@ -1,6 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Movies;
+import jakarta.persistence.NoResultException;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -28,10 +29,10 @@ public class MoviesUtility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 005");
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 006");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return new ArrayList<Movies>();
     }
@@ -64,11 +65,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("newMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -94,11 +95,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -123,10 +124,10 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return true;
     }
@@ -242,13 +243,14 @@ public class MoviesUtility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("movie updated successfully: " + movieid + ", " + name);
         return true;
     }
 
@@ -268,14 +270,110 @@ public class MoviesUtility {
                 returnMovie = session.createQuery("FROM Movies WHERE movieid =" + movieId, Movies.class).getSingleResult();
 
                 transaction.commit();
+            } catch (NoResultException e) {
+                return null;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getMovieByID went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return returnMovie;
+    }
+
+    /**
+     * This method returns the movie count of a certain movie
+     * defined by its movieID
+     * @param id the id of the movie which count will be returned
+     * @return the count of the movie (how many are rentable)
+     */
+    public static int getMovieCountByID(int id) {
+        for(Movies movie:getFullMovieList()) {
+            if (movie.getMovieid() == id) return movie.getCount();
+        }
+        return -1;
+    }
+
+    /**
+     * This method increases the movie count of a certain movie
+     * for example when it is returned to the store
+     * @param id the movieID of the movie of which the count is increased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean increaseMovieCountByID(int id) {
+        int movieCount = getMovieCountByID(id);
+
+        if (movieCount != -1) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount + 1);
+                    query.setParameter("movieid", id);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact:\n" + e.getMessage());
+                    return false;
+                }
+            } catch (Exception e) {
+                LoggerUtility.logger.warn("build session failed (increasing movie count):\n" + e.getMessage());
+                return false;
+            }
+        } else {
+            LoggerUtility.logger.warn("Movie not found; ID: " + id);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * This method decreases the movie count of a certain movie
+     * for example when it is rented
+     * @param movie the movie of which the count is decreased
+     * @return true if successful, false if unsuccessful
+     */
+    public static Boolean decreaseMovieCount(Movies movie) {
+        int movieCount = movie.getCount();
+        int movieID = movie.getMovieid();
+
+        if (movieCount != -1 && movieCount > 0) {
+
+            try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+                 Session session = sessionFactory.openSession()) {
+                Transaction transaction = null;
+                try {
+                    transaction = session.beginTransaction();
+
+                    Query query = session.createQuery("UPDATE Movies SET count = :count WHERE movieid = :movieid");
+                    query.setParameter("count", movieCount - 1);
+                    query.setParameter("movieid", movieID);
+
+                    query.executeUpdate();
+                    transaction.commit();
+
+                } catch (Exception e) {
+                    if (transaction != null) transaction.rollback();
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact:\n" + e.getMessage());
+                    return false;
+                }
+            } catch (Exception e) {
+                LoggerUtility.logger.warn("build session failed (decreasing movie count):\n" + e.getMessage());
+                return false;
+            }
+        } else {
+            LoggerUtility.logger.warn("Movie not found or not enough copies available for rental: " + movie.getName());
+            return false;
+        }
+        return true;
     }
 
 }
