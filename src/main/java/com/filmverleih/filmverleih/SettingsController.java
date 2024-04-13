@@ -1,37 +1,24 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Users;
-import com.filmverleih.filmverleih.utilitys.MoviesUtility;
-import com.filmverleih.filmverleih.utilitys.UserUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
-import jakarta.persistence.NoResultException;
 import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
-import static java.lang.String.valueOf;
 
 /**
  * controller class for the settings frame of the application

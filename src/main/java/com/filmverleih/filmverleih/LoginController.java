@@ -5,14 +5,13 @@ import com.filmverleih.filmverleih.entity.Users;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.UserUtility;
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;

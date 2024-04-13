@@ -1,17 +1,16 @@
 package com.filmverleih.filmverleih.pdfGentators;
 
-import java.awt.Desktop;
-import java.io.File;
-import java.io.IOException;
-
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import java.awt.Color;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Class for generating a warning pdf for a rental
@@ -77,7 +76,7 @@ public class WarningPdfGenerator {
                 contentStream.lineTo(550, 660);
                 contentStream.stroke();
 
-                File file = new File("src/main/resources/com/filmverleih/filmverleih/logo.png");
+                File file = new File("src/main/resources/com/filmverleih/filmverleih/icons/logo.png");
                 PDImageXObject logo = PDImageXObject.createFromFileByContent(file, document);
                 float logoWidth = logo.getWidth() * 0.3f; // Skalierungsfaktor von 0.3
                 float logoHeight = logo.getHeight() * 0.3f; // Skalierungsfaktor von 0.3

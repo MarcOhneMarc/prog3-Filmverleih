@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="155.0" fitWidth="320.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@logo.png" />
+                  <Image url="@icons/logo.png" />
                </image>
             </ImageView>
             <TextField fx:id="txf_loginName" alignment="CENTER" prefHeight="51.0" prefWidth="320.0" promptText="Benutzername" styleClass="bib_textfieldLogin">

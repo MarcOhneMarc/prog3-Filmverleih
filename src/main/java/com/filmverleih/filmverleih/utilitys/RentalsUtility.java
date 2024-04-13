@@ -1,10 +1,7 @@
 package com.filmverleih.filmverleih.utilitys;
 
 import com.filmverleih.filmverleih.entity.Customers;
-import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
-import com.filmverleih.filmverleih.utilitys.CustomersUtility;
-import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

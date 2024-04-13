@@ -2,38 +2,34 @@ package com.filmverleih.filmverleih;
 
 
 import com.filmverleih.filmverleih.entity.Customers;
+import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
-import com.filmverleih.filmverleih.utilitys.LoggerUtility;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.event.Event;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.collections.ObservableList;
-import com.filmverleih.filmverleih.entity.Movies;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.validator.routines.EmailValidator;
-import javafx.collections.ListChangeListener;
-
-import java.time.LocalDate;
-import java.text.DecimalFormat;
-import java.util.logging.Logger;
 
 /**
  * controller class for the cart frame of the application

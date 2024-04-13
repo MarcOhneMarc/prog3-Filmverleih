@@ -1,12 +1,10 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
-import com.filmverleih.filmverleih.utilitys.*;
-
 import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
-import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import com.filmverleih.filmverleih.utilitys.MoviesUtility;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

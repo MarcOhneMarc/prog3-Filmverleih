@@ -3,19 +3,19 @@ package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
-import static java.lang.String.valueOf;
-
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.util.List;
+
+import static java.lang.String.valueOf;
 
 public class MovieController {
     NWayControllerConnector<NavbarController,LibraryController,MovieController,RentalController,SettingsController,FilterController,CartController, LoginController,EditMovieController,Integer> connector;
@@ -82,7 +82,7 @@ public class MovieController {
         if (MovieEntryValidator.linkToCoverIsValid(linkToCover) && !linkToCover.isEmpty()) {
             igv_coverMovieScene.setImage(new Image(linkToCover));
         } else {
-            igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("DefaultCover.png")));
+            igv_coverMovieScene.setImage(new Image(getClass().getResourceAsStream("icons/DefaultCover.png")));
         }
 
         lbl_nameMovieScene.setText(movie.getName());

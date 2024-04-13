@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -351,7 +352,7 @@ public class LibraryController {
         StackPane stackPaneViewAddToCart = new StackPane();
         ImageView imageViewAddToCart = new ImageView();
         stackPaneViewAddToCart.getStyleClass().add("btn_class_libraryAddMovieToCartButton");
-        imageViewAddToCart.setImage(new Image(getClass().getResourceAsStream("shoppingcart.png")));
+        imageViewAddToCart.setImage(new Image(getClass().getResourceAsStream("icons/shoppingcart.png")));
         StackPane.setMargin(stackPaneViewAddToCart, new Insets(0, 10, 10, 0));
         stackPane.setAlignment(Pos.BOTTOM_RIGHT);
         stackPaneViewAddToCart.setAlignment(Pos.CENTER);

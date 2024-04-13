@@ -1,9 +1,10 @@
 package com.filmverleih.filmverleih;
 
+import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import com.filmverleih.filmverleih.entity.Movies;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;

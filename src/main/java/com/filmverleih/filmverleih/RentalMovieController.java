@@ -1,9 +1,7 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
-import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

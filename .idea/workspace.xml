@@ -5,25 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bb6d04f-0516-4f51-8e29-af856904444b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/CartMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/CartMovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/EditMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/EditMovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Encryptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Encryptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/FilterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LibraryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/NavbarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SetMovTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/RentalMovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/Utility.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Customers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Customers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/RentalId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/RentalId.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Rentals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/entity/Rentals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/pdfGentators/WarningPdfGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/pdfGentators/WarningPdfGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/CustomersUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/CustomersUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/FXMLUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/FXMLUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/MoviesUtility.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/RentalsUtility.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/UserUtility.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/filmverleih/filmverleih/utilitys/UserUtility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/DefaultCover.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/DefaultCover.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/DialogAndAlertStylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/EditMovie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/EditMovie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Hello.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Movie.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Navbar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Navbar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Questionmark-Icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/Questionmark-Icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/Settings.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/X-Icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/X-Icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartMovieStylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cartMovieStylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/cinema.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/cinema.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/libraryStylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/logout-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/logout-icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/navbarStylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/rentalMovieStylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/schaltflache-bearbeiten.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/schaltflache-bearbeiten.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/settingsStylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/shoppingcart.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/shoppingcart.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/testcover/beemovie.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/undo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons/undo.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,9 +79,17 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/com/filmverleih/filmverleih/icons" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.filmverleih.filmverleih.MainApplication" />
@@ -96,7 +125,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713016750972</updated>
-      <workItem from="1713016753024" duration="906000" />
+      <workItem from="1713016753024" duration="2587000" />
     </task>
     <servers />
   </component>

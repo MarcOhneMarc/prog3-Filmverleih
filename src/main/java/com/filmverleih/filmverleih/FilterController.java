@@ -1,15 +1,12 @@
 package com.filmverleih.filmverleih;
 
-import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
-import com.filmverleih.filmverleih.utilitys.CustomersUtility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
