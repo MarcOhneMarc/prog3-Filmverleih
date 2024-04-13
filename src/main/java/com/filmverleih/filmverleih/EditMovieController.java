@@ -225,6 +225,7 @@ public class EditMovieController {
         addOnlyNumbersConstraint();
         undoButtonAddEventHandler();
         checkBoxAddEventHandler();
+        checkAdmin();
     }
 
     /**
@@ -237,6 +238,16 @@ public class EditMovieController {
         }
         if(currentMovieDirectors != null) {
             this.directorsArray = currentMovieDirectors.split(", ");
+        }
+    }
+    private void checkAdmin(){
+        if (!connector.getLoginController().getLoggedUser().getIsadmin()) {
+            btn_deleteMovieEdit.setDisable(true);
+            btn_deleteMovieEdit.setVisible(false);
+        }
+        else {
+            btn_deleteMovieEdit.setVisible(true);
+            btn_deleteMovieEdit.setDisable(false);
         }
     }
 
