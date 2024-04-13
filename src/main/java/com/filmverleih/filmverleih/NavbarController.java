@@ -1,13 +1,12 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -147,7 +146,16 @@ public class NavbarController {
     public void logout() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Möchten Sie sich abmelden?");
-        alert.setTitle("Logout");
+        DialogPane dialogPane = alert.getDialogPane();
+        Stage stage = (Stage) dialogPane.getScene().getWindow();
+        stage.initStyle(StageStyle.UNDECORATED);
+        Button confirmButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+        Button cancelButton = (Button) dialogPane.lookupButton(ButtonType.CANCEL);
+        confirmButton.setStyle("-fx-background-color: #518E21; -fx-text-fill: #FFF;");
+        cancelButton.setStyle("-fx-background-color: #FF4040;-fx-text-fill: #FFF;");
+        dialogPane.getStylesheets().add(getClass().getResource("alert.css").toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane");
+        alert.setGraphic(null);
         if (alert.showAndWait().get() == ButtonType.OK) {
             connector.getLoginController().setLoggedUserToNull();
             MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
