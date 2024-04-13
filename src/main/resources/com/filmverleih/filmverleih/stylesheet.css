@@ -230,7 +230,7 @@
     -fx-font-weight: normal;
 }
 
-#anchorPane {
+#bpn_login {
     -fx-background-image:url("cinema.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;

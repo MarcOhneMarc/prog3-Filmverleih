@@ -303,7 +303,7 @@
                                           <String fx:value="btn_class_movieAddRed" />
                                        </styleClass>
                                     </Button>
-                                    <Label fx:id="lbl_movieAddDeleteIdFeedback" text="Sie müssen eine Id eingeben." visible="false" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                                    <Label fx:id="lbl_movieAddDeleteIdFeedback" text="Sie müssen eine gültge eingeben." visible="false" GridPane.columnIndex="1" GridPane.rowIndex="18" />
                                  </children>
                               </GridPane>
                            </children>

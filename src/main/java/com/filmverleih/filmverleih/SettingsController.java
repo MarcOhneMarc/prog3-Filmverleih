@@ -254,7 +254,6 @@ public class SettingsController {
 
 
     public void initialize() {
-        resetStylingAndDisables();
         addOnlyNumbersConstraint();
         checkBoxAddEventHandler();
     }
@@ -635,7 +634,7 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(1);
         acp_movieAddNodes.setDisable(false);
         tbs_mitarbeiterTab.setDisable(false);
-        //connector.getNavbarController().enableNavBar(); //TODO
+        connector.getNavbarController().enableNavBar(); //TODO
     }
 
     /**
@@ -647,7 +646,7 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(0.3);
         acp_movieAddNodes.setDisable(true);
         tbs_mitarbeiterTab.setDisable(true);
-        //connector.getNavbarController().disableNavBar(); //TODO
+        connector.getNavbarController().disableNavBar(); //TODO
     }
 
     /**
@@ -926,6 +925,7 @@ public class SettingsController {
         viewForAdmins();
         fillTableView();
         initialize();
+        resetStylingAndDisables();
         return tbp_settingsTabView;
     }
 }

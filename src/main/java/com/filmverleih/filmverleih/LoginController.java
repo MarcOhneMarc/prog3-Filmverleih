@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -25,7 +26,7 @@ public class LoginController {
     @FXML
     private Label lbl_loginWrongCredentials;
     @FXML
-    private StackPane loginPane;
+    private BorderPane bpn_login;
     @FXML
     private PasswordField pwf_loginPasswordField;
     @FXML
@@ -124,8 +125,9 @@ public class LoginController {
         return lbl_loginWrongCredentials;
     }
 
-    public StackPane getPane(){
-        return loginPane;
+    public BorderPane getPane(){
+        return bpn_login;
+
     }
 
     public TextField getTxf_loginPassword(){
