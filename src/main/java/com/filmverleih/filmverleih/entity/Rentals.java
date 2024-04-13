@@ -2,17 +2,20 @@ package com.filmverleih.filmverleih.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
+@IdClass(RentalId.class)
 public class Rentals {
 
     @Id
-    @Column(name = "movieid", nullable = false)
+    @Column(name = "movieid")
     private int movieid;
-    @Basic
-    @Column(name = "customerid", nullable = false)
+    @Id
+    @Column(name = "customerid")
     private int customerid;
     @Basic
     @Column(name = "startdate", nullable = true, length = 10)
@@ -20,13 +23,13 @@ public class Rentals {
     @Basic
     @Column(name = "enddate", nullable = true, length = 10)
     private String enddate;
-    @OneToOne
-    @JoinColumn(name = "movieid", referencedColumnName = "movieid", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "movieid", referencedColumnName = "movieid", nullable = false, insertable=false, updatable=false)
     private Movies movie;
-
-    @ManyToOne(optional=false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "customerid", referencedColumnName = "customerid", nullable = false, insertable=false, updatable=false)
     private Customers customer;
+
 
     public int getMovieid() {
         return movieid;

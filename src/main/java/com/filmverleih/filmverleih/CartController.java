@@ -317,8 +317,7 @@ public class CartController {
      */
     @FXML
     public void orderCart() {
-
-       if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
+        if(CustomersUtility.checkCustomerDuplicate(Integer.parseInt(txf_CartID.getText()))) {
            for (int i = 0; i < fullMovieList.size(); i++) {
                boolean addSuccessful = RentalsUtility.addRentalToDB(
                        fullMovieList.get(i).getMovieid(),
