@@ -4,6 +4,7 @@ import com.filmverleih.filmverleih.entity.Customers;
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
 import com.filmverleih.filmverleih.utilitys.CustomersUtility;
+import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -61,6 +62,9 @@ public class RentalsUtility {
             try {
                 transaction = session.beginTransaction();
                 List<Rentals> rentals = session.createQuery("FROM Rentals" , Rentals.class).getResultList();
+                for (Rentals rental : rentals) {
+                    System.out.println(rental.getMovieid() + " " + rental.getCustomerid() + " " + rental.getStartdate() + " " + rental.getEnddate());
+                }
                 transaction.commit();
                 return rentals;
             } catch (Exception e) {
