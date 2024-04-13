@@ -328,19 +328,6 @@
                         </AnchorPane>
                      </children>
                   </StackPane>
-                  <Button fx:id="btn_logoutUser" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" styleClass="deleteButtonColor" text="Logout">
-                        <styleClass>
-                            <String fx:value="bib-button" />
-                            <String fx:value="deleteButtonColor" />
-                        </styleClass>
-                  </Button>
-                        <Button fx:id="btn_logoutLibrary" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" onAction="#logout" styleClass="deleteButtonColor" text="Logout">
-                            <styleClass>
-                                <String fx:value="bib-button" />
-                                <String fx:value="deleteButtonColor" />
-                        <String fx:value="btnRed" />
-                            </styleClass>
-                        </Button>
                </children>
                 </AnchorPane>
             </content>
@@ -405,13 +392,6 @@
                                <Cursor fx:constant="DEFAULT" />
                             </cursor>
                          </TableView>
-                         <Button fx:id="btn_logout" layoutX="1797.0" layoutY="18.0" mnemonicParsing="false" onAction="#logout" text="Logout">
-                            <styleClass>
-                               <String fx:value="bib-button" />
-                               <String fx:value="deleteButtonColor" />
-                               <String fx:value="btnRed" />
-                            </styleClass>
-                         </Button>
                       </children>
                    </AnchorPane>
                    <AnchorPane fx:id="anp_employeePopUp" disable="true" maxHeight="300.0" maxWidth="640.0" prefHeight="300.0" prefWidth="200.0" styleClass="anp_class_settingTabDeleteEmployee" visible="false">

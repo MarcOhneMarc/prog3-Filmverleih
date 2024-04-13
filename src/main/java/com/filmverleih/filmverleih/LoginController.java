@@ -2,12 +2,14 @@ package com.filmverleih.filmverleih;
 
 
 import com.filmverleih.filmverleih.entity.Users;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 
@@ -47,17 +49,20 @@ public class LoginController {
         NavbarController navbarController = connector.getNavbarController();
         LibraryController libraryController  = connector.getLibraryController();
 
+
         if(checkUsers()) {
             MainApplication.borderPane.setTop(navbarController.getBorderPane());
             MainApplication.borderPane.setCenter(libraryController.getOuterPane());
             MainApplication.borderPane.setRight(connector.getFilterController().getOuterPane());
             lbl_loginWrongCredentials.setVisible(false);
+            LoggerUtility.logger.info("Login successful...");
         }else{
             lbl_loginWrongCredentials.setText("Benutzername oder Passwort ist falsch");
             PauseTransition pauseTransition = new PauseTransition(Duration.seconds(3));
             pauseTransition.setOnFinished(event -> lbl_loginWrongCredentials.setVisible(false));
             lbl_loginWrongCredentials.setVisible(true);
             pauseTransition.play();
+            LoggerUtility.logger.info("Login failed...");
         }
 
         txf_loginName.setText("");
@@ -93,10 +98,14 @@ public class LoginController {
         String loginName = txf_loginName.getText();
         String loginPassword = pwf_loginPasswordField.getText();
 
+        if (cbx_showPassword.isSelected()) {
+            loginPassword = txf_loginPassword.getText();
+        } else {
+            txf_loginPassword.setText(pwf_loginPasswordField.getText());
+        }
         List<Users> users = Utility.getFullUserList();
         for(Users user: users){
-            if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)) ||
-                    user.getPassword().equals(encryptor.encryptPassword(txf_loginPassword.getText())))){
+            if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)))){
                 loggedUser = user;
                 return true;
             }
@@ -118,6 +127,7 @@ public class LoginController {
 
     public BorderPane getPane(){
         return bpn_login;
+
     }
 
     public TextField getTxf_loginPassword(){

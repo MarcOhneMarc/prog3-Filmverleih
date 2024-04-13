@@ -197,12 +197,6 @@ public class SettingsController {
     @FXML
     private AnchorPane anp_employeePopUp;
     @FXML
-    private AnchorPane anp_logoutPopUp;
-    @FXML
-    private Button btn_acceptLogout;
-    @FXML
-    private Button btn_cancelLogout;
-    @FXML
     private Label lbl_deleteEmployee;
     @FXML
     private Button btn_deleteEmployee;
@@ -323,15 +317,18 @@ public class SettingsController {
                 lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #518E21");
                 lbl_movieAddSaveFeedback.setVisible(true);
                 connector.getLibraryController().updateMovieList();
+                LoggerUtility.logger.info("Movie has been saved successfully...");
             } else {
                 lbl_movieAddSaveFeedback.setText(MOVIE_SAVE_WENT_WRONG);
                 lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #FF4040");
                 lbl_movieAddSaveFeedback.setVisible(true);
+                LoggerUtility.logger.info("Saving movie went wrong...");
             }
         } else {
             lbl_movieAddSaveFeedback.setText(MOVIE_SAVE_FAILED);
             lbl_movieAddSaveFeedback.setStyle("-fx-text-fill: #FF4040");
             lbl_movieAddSaveFeedback.setVisible(true);
+            LoggerUtility.logger.info("Saving movie went wrong; wrong inputs...");
         }
     }
 
@@ -512,7 +509,7 @@ public class SettingsController {
                 this.changedType = "BR";
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            LoggerUtility.logger.warn("saving info as needed data type went wrong; NumberFormatException: " + e.getMessage());
             saveInfoWorked = false;
         }
         return saveInfoWorked;
@@ -531,7 +528,7 @@ public class SettingsController {
         boolean movieIsDeleted;
         try {
             movieIsDeleted = MoviesUtility.DeleteMovieInDB(Integer.parseInt(txf_deleteMovieId1.getText()));
-            LoggerUtility.logger.info("delete movie button was clicked: 023");
+            LoggerUtility.logger.info("delete movie button was clicked");
         } catch (NumberFormatException e) {
             movieIsDeleted = false;
         }
@@ -541,10 +538,12 @@ public class SettingsController {
             lbl_movieAddDeleteFeedback.setStyle("-fx-text-fill: #FF4040");
             lbl_movieAddDeleteFeedback.setVisible(true);
             btn_movieAddDeleteConfirm.setDisable(true);
+            LoggerUtility.logger.info("movie has been deleted successfully...");
         } else {
             lbl_movieAddDeleteFeedback.setText(MOVIE_DELETE_FAILED);
             lbl_movieAddDeleteFeedback.setVisible(true);
             btn_movieAddDeleteConfirm.setDisable(true);
+            LoggerUtility.logger.info("delete movie failed...");
         }
     }
 
@@ -849,18 +848,6 @@ public class SettingsController {
         }
     }
 
-    //TODO
-    public void enableLogoutPopUp() {
-        anp_employeeBackground.setDisable(true);
-        anp_logoutPopUp.setVisible(true);
-        anp_employeePopUp.setDisable(false);
-        connector.getNavbarController().disableNavBar();
-        tbs_settingsTab.setDisable(true);
-        lbl_deleteEmployee.setText("Möchten Sie den Mitarbeiter mit der ID " + userToDelete.getUserid() + " löschen?");
-
-        userNotExisting(Integer.parseInt(txf_userIdDelete.getText()));
-    }
-
     /**
      * This method allows the user to change his password by clicking a button
      * the user can only change his password if the old password is right.
@@ -873,30 +860,18 @@ public class SettingsController {
 
         if (encryptor.encryptPassword(txf_oldPassword.getText()).equals(loggedUser.getPassword())) {
             String hashedPassword = encryptor.encryptPassword(txf_newPassword.getText());
-            loggedUser.setPassword(hashedPassword);
-            lbl_passwordChanged.setVisible(true);
-            Utility utility = new Utility();
-            utility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
+            if(hashedPassword.equals(loggedUser.getPassword())){
+                lbl_passwordsDontMatch.setText("Das neue Passwort darf nicht das alte Passwort sein");
+                lbl_passwordsDontMatch.setVisible(true);
+            }else {
+                loggedUser.setPassword(hashedPassword);
+                lbl_passwordChanged.setVisible(true);
+                Utility utility = new Utility();
+                utility.UpdateUserPasswordInDB(hashedPassword, loggedUser.getUserid());
+            }
         } else {
             lbl_passwordsDontMatch.setText("Falsches Passwort eingegeben");
             lbl_passwordsDontMatch.setVisible(true);
-        }
-    }
-
-
-    /**
-     * This method allows the user to log out.
-     * If the user decides to log out then he will be sent back
-     * to the login menu where he can log in again
-     */
-    public void logout() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText("Möchten Sie sich abmelden?");
-        alert.setTitle("Logout");
-        if (alert.showAndWait().get() == ButtonType.OK) {
-            connector.getLoginController().setLoggedUserToNull();
-            MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
-            MainApplication.borderPane.setTop(null);
         }
     }
 
@@ -916,6 +891,11 @@ public class SettingsController {
         txf_userFirstName.setText("");
         txf_userPassword.setText("");
         txf_userIdDelete.setText("");
+        txf_newPassword.setText("");
+        txf_oldPassword.setText("");
+        txf_newPasswordRepeat.setText("");
+        lbl_passwordsDontMatch.setVisible(false);
+        lbl_passwordChanged.setVisible(false);
     }
 
     /**

@@ -1,5 +1,8 @@
 package com.filmverleih.filmverleih;
 import com.filmverleih.filmverleih.entity.Movies;
+import com.filmverleih.filmverleih.entity.Rentals;
+import com.filmverleih.filmverleih.utilitys.LoggerUtility;
+import com.filmverleih.filmverleih.utilitys.RentalsUtility;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,130 +21,31 @@ import java.util.Scanner;
  *  Copyright by Torvalds
  */
 public class SetMovTest {
-
     public static void main(String[] args) {
-        SetMovTest test = new SetMovTest();
-        boolean menue = true;
-        Scanner scanner = new Scanner(System.in);
-        while (menue){
-            System.out.println("Was willste machen: 1 Liste Ausgeben  2 Test Film Hinzufügen 3 Delete 4 Update  5 Exit");
-            int inp = scanner.nextInt();
-            if (inp == 1){
-                List<Movies> movieList = test.getFullMovieList();
-                for (Movies movie : movieList) {
-                    System.out.println(movie.toSting());
-                }
-            } else if (inp == 2) {
-                test.newMovieInDB();
-            } else if (inp == 3) {
-                System.out.println("Was soll gelöscht werden? ");
-                int delID = scanner.nextInt();
-                test.DeleteMovieInDB(delID);
-            } else if (inp == 4) {
-                System.out.println("Was soll aktualisiert werden? ");
-                int upID = scanner.nextInt();
-                test.UpdateMovieInDB(upID);
-            } else if (inp == 5) {
-                menue = false;
-            }
-        }
-    }
 
-
-     public List<Movies> getFullMovieList() {
-        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = null;
-            try {
-                transaction = session.beginTransaction();
-                List<Movies> movies = session.createQuery("FROM Movies ", Movies.class).getResultList();
-                transaction.commit();
-                return movies;
-            } catch (Exception e) {
-                if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-        }
-        return new ArrayList<Movies>();
-    }
-
-    public List<Movies> newMovieInDB() {
         try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = null;
             try {
                 transaction = session.beginTransaction();
 
-                Movies newMovie = new Movies();
-                newMovie.setName("Titanische Künste");
-                newMovie.setYear(1997);
-                newMovie.setGenre("Romance, Drama");
-                newMovie.setLength(195);
-                newMovie.setRating(BigDecimal.valueOf(7.5));
-                newMovie.setCount(1);
-                newMovie.setType("DVD");
-                newMovie.setCover("titanic.jpg");
-                newMovie.setComment("A classic romantic drama film.");
-                newMovie.setDirectors("James Cameron");
-                newMovie.setStudio("20th Century Fox");
-                newMovie.setActors("Leonardo DiCaprio, Kate Winslet");
-                newMovie.setFsk(16);
+                Rentals rental = new Rentals();
+                rental.setMovieid(20);
+                rental.setCustomerid(1);
+                rental.setStartdate("20-02-2024");
+                rental.setEnddate("25-02-2024");
 
-                // Film zur Datenbank hinzufügen
-                session.save(newMovie);
-
+                // add rental to db
+                session.save(rental);
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("addRentalToDB went wrong, could not transact: 011");
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed: 012");
         }
-        return new ArrayList<Movies>();
+
     }
-
-    public List<Movies> DeleteMovieInDB(int movDelID) {
-        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = null;
-            try {
-                transaction = session.beginTransaction();
-
-                session.createQuery("DELETE FROM Movies WHERE movieid = " + movDelID).executeUpdate();
-
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-        }
-        return new ArrayList<Movies>();
-    }
-
-    public List<Movies> UpdateMovieInDB(int movUpID) {
-        try (SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            Transaction transaction = null;
-            try {
-                transaction = session.beginTransaction();
-
-                session.createQuery("UPDATE Movies SET name = 'Titanische Könste Updtaet' WHERE movieid = " + movUpID).executeUpdate();
-
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
-        }
-        return new ArrayList<Movies>();
-    }
-
 
 }

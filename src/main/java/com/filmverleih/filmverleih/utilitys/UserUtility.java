@@ -26,10 +26,10 @@ public class UserUtility {
                 return users;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 013");
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 014");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return  new ArrayList<Users>();
     }

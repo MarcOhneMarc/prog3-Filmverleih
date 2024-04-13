@@ -33,6 +33,7 @@ import javafx.collections.ListChangeListener;
 
 import java.time.LocalDate;
 import java.text.DecimalFormat;
+import java.util.logging.Logger;
 
 /**
  * controller class for the cart frame of the application
@@ -358,7 +359,7 @@ public class CartController {
      * @param movie the movie that could not be rented
      */
     public void setDuplicateRentalLabel(Movies movie) {
-        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer: 015");
+        LoggerUtility.logger.warn("The movie " + movie.getName() + " has already been rented to costumer");
         lbl_errorDuplicateRentalMessage.setText(movie.getName() + " befindet sich bereits in Leihgabe an den Kunden!");
         lbl_errorDuplicateRentalMessage.setWrapText(true);
         lbl_errorDuplicateRentalMessage.setVisible(true);
@@ -533,6 +534,7 @@ public class CartController {
             setCustomerInfo(CustomersUtility.getCustomersByID(Integer.parseInt(txf_CartID.getText())));
             acp_customerInfoCard.setVisible(true);
             updateCart();
+            LoggerUtility.logger.info("id checked successfully; customer is registered...");
         }
     }
 
