@@ -2,8 +2,7 @@ package com.filmverleih.filmverleih;
 
 import com.filmverleih.filmverleih.entity.Movies;
 import com.filmverleih.filmverleih.entity.Rentals;
-import com.filmverleih.filmverleih.utilitys.MoviesUtility;
-import com.filmverleih.filmverleih.utilitys.RentalsUtility;
+import com.filmverleih.filmverleih.utilitys.*;
 
 import com.filmverleih.filmverleih.pdfGentators.WarningPdfGenerator;
 import com.filmverleih.filmverleih.utilitys.RentalsUtility;
@@ -300,7 +299,7 @@ public class RentalController {
             grp_rentalGrid.getChildren().remove(hBox);
             adjustColumnCount();
         } else {
-            System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+            LoggerUtility.logger.warn("could not remove movie from rental; movieID: " + rental.getMovie().getMovieid() + " customerID: " + rental.getCustomerid());
         }
     }
 
@@ -316,7 +315,7 @@ public class RentalController {
         if (RentalsUtility.extendRentalinDB(rental.getMovieid(), rental.getCustomerid(), newDate.toString())) {
             rental.setEnddate(newDate.toString());
         } else {
-            System.out.println("Das entfernen von dem Film aus dem Rental ist fehlgeschlagen");
+            LoggerUtility.logger.warn("could extend rental; movieID: " + rental.getMovie().getMovieid() + " customerID: " + rental.getCustomerid());
         }
     }
 
@@ -326,9 +325,9 @@ public class RentalController {
      */
     public void remindCustomer(Rentals rental) {
         if (WarningPdfGenerator.generatePdf(rental.getMovie().getName(), rental.getStartdate(), rental.getEnddate())) {
-            System.out.println("Das erstellen einer mahnung war erfolgreich");
+            LoggerUtility.logger.info("creating a reminder pdf has been successful");
         } else {
-            System.out.println("Das erstellen einer mahnung ist fehlgeschlagen");
+            LoggerUtility.logger.info("creating a reminder pdf went wrong");
         }
     }
 

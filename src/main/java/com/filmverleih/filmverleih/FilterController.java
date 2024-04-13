@@ -312,12 +312,10 @@ public class FilterController {
                     movie.getDirectors().toLowerCase().contains(directorFilter.toLowerCase()));
         }
         if (!studioFilter.isEmpty()) {
-            System.out.println(studioFilter);
             predicate = predicate.and(movie ->
                     movie.getStudio().toLowerCase().contains(studioFilter.toLowerCase()));
         }
         if (!actorFilter.isEmpty()) {
-            System.out.println(actorFilter);
             predicate = predicate.and(movie ->
                     movie.getActors().toLowerCase().contains(actorFilter.toLowerCase()));
         }
@@ -408,12 +406,10 @@ public class FilterController {
                     rental.getMovie().getDirectors().toLowerCase().contains(directorFilter.toLowerCase()));
         }
         if (!studioFilter.isEmpty()) {
-            System.out.println(studioFilter);
             predicate = predicate.and(rental ->
                     rental.getMovie().getStudio().toLowerCase().contains(studioFilter.toLowerCase()));
         }
         if (!actorFilter.isEmpty()) {
-            System.out.println(actorFilter);
             predicate = predicate.and(rental ->
                     rental.getMovie().getActors().toLowerCase().contains(actorFilter.toLowerCase()));
         }

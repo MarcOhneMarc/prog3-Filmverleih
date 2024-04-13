@@ -29,10 +29,10 @@ public class MoviesUtility {
                 return movies;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact: 005");
+                LoggerUtility.logger.warn("getFullUserList went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 006");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return new ArrayList<Movies>();
     }
@@ -65,11 +65,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("newMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -95,11 +95,11 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact: 007");
+                LoggerUtility.logger.warn("deleteMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 008");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
         return true;
@@ -124,10 +124,10 @@ public class MoviesUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return true;
     }
@@ -243,13 +243,14 @@ public class MoviesUtility {
 
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("UpdateMovieInDB went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("movie updated successfully: " + movieid + ", " + name);
         return true;
     }
 
@@ -273,10 +274,10 @@ public class MoviesUtility {
                 return null;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                e.printStackTrace(); // replace with logger
+                LoggerUtility.logger.warn("getMovieByID went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replace with logger
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return returnMovie;
     }
@@ -320,11 +321,11 @@ public class MoviesUtility {
 
                 } catch (Exception e) {
                     if (transaction != null) transaction.rollback();
-                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact:\n" + e.getMessage());
                     return false;
                 }
             } catch (Exception e) {
-                LoggerUtility.logger.warn("build session failed (increasing movie count");
+                LoggerUtility.logger.warn("build session failed (increasing movie count):\n" + e.getMessage());
                 return false;
             }
         } else {
@@ -361,11 +362,11 @@ public class MoviesUtility {
 
                 } catch (Exception e) {
                     if (transaction != null) transaction.rollback();
-                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact");
+                    LoggerUtility.logger.warn("increasing movie count went wrong, could not transact:\n" + e.getMessage());
                     return false;
                 }
             } catch (Exception e) {
-                LoggerUtility.logger.warn("build session failed (decreasing movie count");
+                LoggerUtility.logger.warn("build session failed (decreasing movie count):\n" + e.getMessage());
                 return false;
             }
         } else {

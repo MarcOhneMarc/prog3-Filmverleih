@@ -9,6 +9,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CustomersUtility {
     /**
@@ -26,10 +27,10 @@ public class CustomersUtility {
                 return customers;
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("getFullCostumerList went wrong, could not transact: 001");
+                LoggerUtility.logger.warn("getFullCostumerList went wrong, could not transact:\n" + e.getMessage());
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 002");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
         }
         return  new ArrayList<Customers>();
     }
@@ -50,7 +51,6 @@ public class CustomersUtility {
 
     /**
      * This method adds a customer to db into the customers table
-     * @param //customerId the id of the customer
      * @param firstName the firstname of the customer
      * @param lastName the lastname of the customer
      * @param street the street where the customer lives
@@ -68,7 +68,6 @@ public class CustomersUtility {
                 transaction = session.beginTransaction();
 
                 Customers customers = new Customers();
-                //customers.setCustomerid(customerId);
                 customers.setFirstname(firstName);
                 customers.setLastname(lastName);
                 customers.setStreet(street);
@@ -82,13 +81,14 @@ public class CustomersUtility {
                 transaction.commit();
             } catch (Exception e) {
                 if (transaction != null) transaction.rollback();
-                LoggerUtility.logger.warn("customer registration went wrong, could not transact: 003");
+                LoggerUtility.logger.warn("customer registration went wrong, could not transact:\n" + e.getMessage());
                 return false;
             }
         } catch (Exception e) {
-            LoggerUtility.logger.warn("build session failed: 004");
+            LoggerUtility.logger.warn("build session failed:\n" + e.getMessage());
             return false;
         }
+        LoggerUtility.logger.info("customer added successfully...");
         return true;
     }
 
