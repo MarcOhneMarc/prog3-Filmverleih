@@ -634,7 +634,8 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(1);
         acp_movieAddNodes.setDisable(false);
         tbs_mitarbeiterTab.setDisable(false);
-        connector.getNavbarController().enableNavBar(); //TODO
+        tbs_profileTab.setDisable(false);
+        connector.getNavbarController().enableNavBar();
     }
 
     /**
@@ -646,7 +647,8 @@ public class SettingsController {
         igv_movieAddConstraintInfoButton.setOpacity(0.3);
         acp_movieAddNodes.setDisable(true);
         tbs_mitarbeiterTab.setDisable(true);
-        connector.getNavbarController().disableNavBar(); //TODO
+        tbs_profileTab.setDisable(true);
+        connector.getNavbarController().disableNavBar();
     }
 
     /**
