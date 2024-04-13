@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 
@@ -23,7 +24,7 @@ public class LoginController {
     @FXML
     private Label lbl_loginWrongCredentials;
     @FXML
-    private AnchorPane loginPane;
+    private StackPane loginPane;
     @FXML
     private PasswordField pwf_loginPasswordField;
     @FXML
@@ -45,6 +46,7 @@ public class LoginController {
     public void login() throws NoSuchAlgorithmException {
         NavbarController navbarController = connector.getNavbarController();
         LibraryController libraryController  = connector.getLibraryController();
+
 
         if(checkUsers()) {
             MainApplication.borderPane.setTop(navbarController.getBorderPane());
@@ -92,10 +94,14 @@ public class LoginController {
         String loginName = txf_loginName.getText();
         String loginPassword = pwf_loginPasswordField.getText();
 
+        if (cbx_showPassword.isSelected()) {
+            loginPassword = txf_loginPassword.getText();
+        } else {
+            txf_loginPassword.setText(pwf_loginPasswordField.getText());
+        }
         List<Users> users = Utility.getFullUserList();
         for(Users user: users){
-            if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)) ||
-                    user.getPassword().equals(encryptor.encryptPassword(txf_loginPassword.getText())))){
+            if(user.getName().equals(loginName) && (user.getPassword().equals(encryptor.encryptPassword(loginPassword)))){
                 loggedUser = user;
                 return true;
             }
@@ -115,7 +121,7 @@ public class LoginController {
         return lbl_loginWrongCredentials;
     }
 
-    public AnchorPane getPane(){
+    public StackPane getPane(){
         return loginPane;
     }
 

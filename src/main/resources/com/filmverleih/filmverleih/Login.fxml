@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -9,36 +10,47 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPane" fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="990.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.LoginController">
+
+<StackPane fx:id="loginPane" maxHeight="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.filmverleih.filmverleih.LoginController">
    <children>
-      <TextField fx:id="txf_loginName" alignment="CENTER" layoutX="822.0" layoutY="504.0" prefHeight="51.0" prefWidth="298.0" promptText="Benutzername" styleClass="bib_textfieldLogin">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <PasswordField fx:id="pwf_loginPasswordField" alignment="CENTER" layoutX="822.0" layoutY="578.0" prefHeight="51.0" prefWidth="298.0" promptText="Passwort" styleClass="bib_textfieldLogin">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </PasswordField>
-      <TextField fx:id="txf_loginPassword" alignment="CENTER" layoutX="822.0" layoutY="578.0" prefHeight="51.0" prefWidth="298.0" promptText="Passwort" styleClass="bib_textfieldLogin">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <Button fx:id="btn_login" layoutX="822.0" layoutY="655.0" mnemonicParsing="false" onAction="#login" prefHeight="51.0" prefWidth="298.0" text="Login">
-         <styleClass>
-            <String fx:value="loginButton" />
-            <String fx:value="btnYellow" />
-         </styleClass></Button>
-      <ImageView fitHeight="147.0" fitWidth="302.0" layoutX="819.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@logo.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="lbl_loginWrongCredentials" alignment="CENTER" contentDisplay="CENTER" layoutX="822.0" layoutY="750.0" prefHeight="51.0" prefWidth="298.0" styleClass="lbl_class_LoginLabelWrongCredentials" />
-      <CheckBox id="cbx_showPassword" fx:id="cbx_showPassword" layoutX="1007.0" layoutY="714.0" mnemonicParsing="false" onAction="#changeVisibility" text="Show Password" />
+      <AnchorPane id="anchorPane" fx:id="loginPaneBackground" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane maxHeight="600.0" maxWidth="600.0" minHeight="0.0" minWidth="0.0" prefHeight="854.0" prefWidth="616.0">
+         <children>
+            <TextField fx:id="txf_loginName" alignment="CENTER" layoutX="150.0" layoutY="283.0" prefHeight="51.0" prefWidth="298.0" promptText="Benutzername" styleClass="bib_textfieldLogin">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="pwf_loginPasswordField" alignment="CENTER" layoutX="150.0" layoutY="350.0" prefHeight="51.0" prefWidth="298.0" promptText="Passwort" styleClass="bib_textfieldLogin">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </PasswordField>
+            <TextField fx:id="txf_loginPassword" alignment="CENTER" layoutX="150.0" layoutY="350.0" prefHeight="51.0" prefWidth="298.0" promptText="Passwort" styleClass="bib_textfieldLogin">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btn_login" layoutX="150.0" layoutY="442.0" mnemonicParsing="false" onAction="#login" prefHeight="51.0" prefWidth="298.0" text="Login">
+               <styleClass>
+                  <String fx:value="loginButton" />
+                  <String fx:value="btnYellow" />
+               </styleClass>
+            </Button>
+            <ImageView fitHeight="147.0" fitWidth="302.0" layoutX="144.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logo.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lbl_loginWrongCredentials" alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="550.0" prefHeight="51.0" prefWidth="298.0" styleClass="lbl_class_LoginLabelWrongCredentials" />
+            <CheckBox id="cbx_showPassword" fx:id="cbx_showPassword" layoutX="334.0" layoutY="504.0" mnemonicParsing="false" onAction="#changeVisibility" text="Show Password" />
+         </children>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
