@@ -1,0 +1,45 @@
+
+.dialog-pane{
+    -fx-border-color:#949494;
+    -fx-background-color:black;
+    -fx-border-width:0px;
+}
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+    -fx-background-color:black;
+}
+
+.dialog-pane > .content.label {
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+    -fx-background-color: black;
+    -fx-text-fill:#FF4040;
+    -fx-font-size:22.0px;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+    -fx-background-color: black;
+    -fx-text-fill: #FF4040;
+}
+
+.dialog-pane:header .header-panel .label{
+    -fx-background-color: black;
+    -fx-text-fill: #FF4040;
+    -fx-background-radius:10px;
+    -fx-font-size:22.0px;
+}
+
+/**Costumization of Buttons**/
+.dialog-pane .button.confirm-button{
+    -fx-background-color: #518E21;
+    -fx-text-fill: #FFF;
+}
+.dialog-pane > .button.cancel-button{
+    -fx-background-color: #FF4040;
+    -fx-text-fill: #FFF;
+}
+
+.dialog-pane .button:hover{
+    -fx-effect: dropshadow( three-pass-box, yellow, 10.0, 0.0, 0.0, 0.0);
+}
