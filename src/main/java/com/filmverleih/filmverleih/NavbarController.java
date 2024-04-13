@@ -1,6 +1,8 @@
 package com.filmverleih.filmverleih;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 
 import javafx.scene.control.Button;
@@ -136,6 +138,22 @@ public class NavbarController {
         btn_navBarRental.setStyle("-fx-background-color: #FFFF3D");
         btn_navBarCart.setStyle("-fx-background-color: #FFFF3D");
         btn_navBarSettings.setStyle("-fx-background-color: #FFFF3D");
+    }
+
+    /**
+     * This is the logout method
+     * The user will be redirected to the login screen
+     */
+    public void logout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Möchten Sie sich abmelden?");
+        alert.setTitle("Logout");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            connector.getLoginController().setLoggedUserToNull();
+            MainApplication.borderPane.setCenter(connector.getLoginController().getPane());
+            MainApplication.borderPane.setTop(null);
+            MainApplication.borderPane.setRight(null);
+        }
     }
 
     private void showSearchbar() {
